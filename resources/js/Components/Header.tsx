@@ -18,80 +18,105 @@ import {
     TooltipTrigger,
 } from "@/shadcn/ui/tooltip";
 import {
-    File,
     Home,
     LineChart,
-    ListFilter,
-    MoreHorizontal,
     Package,
     Package2,
     PanelLeft,
-    PlusCircle,
     Search,
     Settings,
     ShoppingCart,
     Users2,
 } from "lucide-react";
-import {
-    Breadcrumb,
-    BreadcrumbItem,
-    BreadcrumbLink,
-    BreadcrumbList,
-    BreadcrumbPage,
-    BreadcrumbSeparator,
-} from "@/shadcn/ui/breadcrumb";
 
 export default function Header({ auth }: PageProps<{}>) {
+    const handleToggleDarkMode = () => {
+        document.documentElement.classList.toggle("dark");
+    };
     return (
         <div className="flex min-h-screen w-full flex-col bg-muted/40">
             <aside className="fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex">
                 <nav className="flex flex-col items-center gap-4 px-2 py-4">
-                    <Link
-                        href="#"
-                        className="group flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:h-8 md:w-8 md:text-base"
-                    >
-                        <Package2 className="h-4 w-4 transition-all group-hover:scale-110" />
-                        <span className="sr-only">Acme Inc</span>
-                    </Link>
                     <TooltipProvider>
                         <Tooltip>
                             <TooltipTrigger asChild>
                                 <Link
                                     href="#"
-                                    className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                                    className="flex h-9 w-9 items-center justify-center bg-accent text-accent-foreground rounded-lg transition-colors hover:text-foreground md:h-8 md:w-8"
                                 >
                                     <Home className="h-5 w-5" />
-                                    <span className="sr-only">Dashboard</span>
+                                    <span className="sr-only">Главная</span>
                                 </Link>
                             </TooltipTrigger>
                             <TooltipContent side="right">
-                                Dashboard
+                                Главная
+                            </TooltipContent>
+                        </Tooltip>
+                        <Tooltip>
+                            <Tooltip>
+                                <TooltipTrigger asChild>
+                                    <Button
+                                        className="flex h-9 w-9 items-center justify-center rounded-lg transition-colors hover:text-foreground md:h-8 md:w-8"
+                                        onClick={handleToggleDarkMode}
+                                    >
+                                        <img
+                                            src={
+                                                document.documentElement.classList.contains(
+                                                    "dark"
+                                                )
+                                                    ? "/img/svg/moon.svg"
+                                                    : "/img/svg/sun.svg"
+                                            }
+                                            alt={
+                                                document.documentElement.classList.contains(
+                                                    "dark"
+                                                )
+                                                    ? "moon"
+                                                    : "sun"
+                                            }
+                                            className=""
+                                        />
+                                        <span className="sr-only">
+                                            Сменить тему
+                                        </span>
+                                    </Button>
+                                </TooltipTrigger>
+                                <TooltipContent side="right">
+                                    Сменить тему
+                                </TooltipContent>
+                            </Tooltip>
+                            <TooltipContent side="right">
+                                Главная
                             </TooltipContent>
                         </Tooltip>
                         <Tooltip>
                             <TooltipTrigger asChild>
                                 <Link
                                     href="#"
-                                    className="flex h-9 w-9 items-center justify-center rounded-lg transition-colors hover:text-foreground md:h-8 md:w-8"
+                                    className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
                                 >
                                     <ShoppingCart className="h-5 w-5" />
-                                    <span className="sr-only">Orders</span>
+                                    <span className="sr-only">Категории</span>
                                 </Link>
                             </TooltipTrigger>
-                            <TooltipContent side="right">Orders</TooltipContent>
+                            <TooltipContent side="right">
+                                Категории
+                            </TooltipContent>
                         </Tooltip>
                         <Tooltip>
                             <TooltipTrigger asChild>
                                 <Link
                                     href="#"
-                                    className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent text-accent-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                                    className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
                                 >
                                     <Package className="h-5 w-5" />
-                                    <span className="sr-only">Products</span>
+                                    <span className="sr-only">
+                                        Случайные аниме
+                                    </span>
                                 </Link>
                             </TooltipTrigger>
                             <TooltipContent side="right">
-                                Products
+                                Случайные аниме
                             </TooltipContent>
                         </Tooltip>
                         <Tooltip>
@@ -101,12 +126,10 @@ export default function Header({ auth }: PageProps<{}>) {
                                     className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
                                 >
                                     <Users2 className="h-5 w-5" />
-                                    <span className="sr-only">Customers</span>
+                                    <span className="sr-only">Друзья</span>
                                 </Link>
                             </TooltipTrigger>
-                            <TooltipContent side="right">
-                                Customers
-                            </TooltipContent>
+                            <TooltipContent side="right">Друзья</TooltipContent>
                         </Tooltip>
                         <Tooltip>
                             <TooltipTrigger asChild>
@@ -133,11 +156,11 @@ export default function Header({ auth }: PageProps<{}>) {
                                     className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
                                 >
                                     <Settings className="h-5 w-5" />
-                                    <span className="sr-only">Settings</span>
+                                    <span className="sr-only">Настройки</span>
                                 </Link>
                             </TooltipTrigger>
                             <TooltipContent side="right">
-                                Settings
+                                Настройки
                             </TooltipContent>
                         </Tooltip>
                     </TooltipProvider>
@@ -203,25 +226,6 @@ export default function Header({ auth }: PageProps<{}>) {
                             </nav>
                         </SheetContent>
                     </Sheet>
-                    <Breadcrumb className="hidden md:flex">
-                        <BreadcrumbList>
-                            <BreadcrumbItem>
-                                <BreadcrumbLink asChild>
-                                    <Link href="#">Dashboard</Link>
-                                </BreadcrumbLink>
-                            </BreadcrumbItem>
-                            <BreadcrumbSeparator />
-                            <BreadcrumbItem>
-                                <BreadcrumbLink asChild>
-                                    <Link href="#">Products</Link>
-                                </BreadcrumbLink>
-                            </BreadcrumbItem>
-                            <BreadcrumbSeparator />
-                            <BreadcrumbItem>
-                                <BreadcrumbPage>All Products</BreadcrumbPage>
-                            </BreadcrumbItem>
-                        </BreadcrumbList>
-                    </Breadcrumb>
                     <div className="relative ml-auto flex-1 md:grow-0">
                         <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
                         <Input
@@ -230,25 +234,36 @@ export default function Header({ auth }: PageProps<{}>) {
                             className="w-full rounded-lg bg-background pl-8 md:w-[200px] lg:w-[320px]"
                         />
                     </div>
-                    <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                            <Button
-                                variant="outline"
-                                size="icon"
-                                className="overflow-hidden rounded-full"
-                            >
-                                Текст
-                            </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end">
-                            <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                            <DropdownMenuSeparator />
-                            <DropdownMenuItem>Settings</DropdownMenuItem>
-                            <DropdownMenuItem>Support</DropdownMenuItem>
-                            <DropdownMenuSeparator />
-                            <DropdownMenuItem>Logout</DropdownMenuItem>
-                        </DropdownMenuContent>
-                    </DropdownMenu>
+                    {auth.user ? (
+                        <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                                <Button
+                                    variant="outline"
+                                    size="icon"
+                                    className="overflow-hidden rounded-full"
+                                >
+                                    <img
+                                        src="/img/defaultAvatar.png"
+                                        alt="Default Avatar"
+                                        className="w-full h-full object-cover rounded-full"
+                                    />
+                                </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent align="end">
+                                <DropdownMenuLabel>
+                                    Мой аккаунт
+                                </DropdownMenuLabel>
+                                <DropdownMenuSeparator />
+                                <DropdownMenuItem>Настройки</DropdownMenuItem>
+                                <DropdownMenuSeparator />
+                                <DropdownMenuItem>Выйти</DropdownMenuItem>
+                            </DropdownMenuContent>
+                        </DropdownMenu>
+                    ) : (
+                        <Button asChild>
+                            <Link href={route("login")}>Вход</Link>
+                        </Button>
+                    )}
                 </header>
             </div>
         </div>

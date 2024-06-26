@@ -1,134 +1,150 @@
 import {
     Card,
     CardContent,
-    CardDescription,
     CardFooter,
     CardHeader,
     CardTitle,
 } from "@/shadcn/ui/card";
 import { Button } from "@/shadcn/ui/button";
-import { Input } from "@/shadcn/ui/input";
+import { useEffect, FormEventHandler } from "react";
 import { Label } from "@/shadcn/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/shadcn/ui/tabs";
+import { Head, Link, useForm } from "@inertiajs/react";
+import { Input } from "@/shadcn/ui/input";
 
 export default function Header() {
+    const { data, setData, post, processing, errors, reset } = useForm({
+        name: "",
+        email: "",
+        password: "",
+        password_confirmation: "",
+    });
+
+    useEffect(() => {
+        return () => {
+            reset("password", "password_confirmation");
+        };
+    }, []);
+
+    const submit: FormEventHandler = (e) => {
+        e.preventDefault();
+
+        post(route("register"));
+    };
     return (
         <div className="flex justify-center items-center h-screen">
             <Tabs defaultValue="account" className="w-[400px]">
                 <TabsList className="grid w-full grid-cols-2">
-                    <TabsTrigger value="account">Account</TabsTrigger>
-                    <TabsTrigger value="password">Password</TabsTrigger>
+                    <TabsTrigger value="account">Вход</TabsTrigger>
+                    <TabsTrigger value="password">Регистрация</TabsTrigger>
                 </TabsList>
                 <TabsContent value="account">
                     <Card>
                         <CardHeader>
-                            <CardTitle>Account</CardTitle>
-                            <CardDescription>
-                                Make changes to your account here. Click save
-                                when you're done.
-                            </CardDescription>
+                            <CardTitle>Вход</CardTitle>
                         </CardHeader>
                         <CardContent className="space-y-2">
                             <div className="space-y-1">
-                                <Label htmlFor="name">Name</Label>
-                                <Input id="name" defaultValue="Pedro Duarte" />
+                                <Label htmlFor="email">Email</Label>
+                                <Input id="email" name="email" />
                             </div>
                             <div className="space-y-1">
-                                <Label htmlFor="username">Username</Label>
-                                <Input id="username" defaultValue="@peduarte" />
+                                <Label htmlFor="password">Password</Label>
+                                <Input id="password" name="password" />
                             </div>
                         </CardContent>
                         <CardFooter>
-                            <Button>Save changes</Button>
+                            <Button type="submit">Войти</Button>
                         </CardFooter>
                     </Card>
                 </TabsContent>
                 <TabsContent value="password">
                     <Card>
-                        <CardHeader>
-                            <CardTitle>Password</CardTitle>
-                            <CardDescription>
-                                Change your password here. After saving, you'll
-                                be logged out.
-                            </CardDescription>
-                        </CardHeader>
-                        <CardContent className="space-y-2">
-                            <div className="space-y-1">
-                                <Label htmlFor="current">
-                                    Current password
-                                </Label>
-                                <Input id="current" type="password" />
-                            </div>
-                            <div className="space-y-1">
-                                <Label htmlFor="new">New password</Label>
-                                <Input id="new" type="password" />
-                            </div>
-                        </CardContent>
-                        <CardFooter>
-                            <Button>Save password</Button>
-                        </CardFooter>
+                        <form onSubmit={submit}>
+                            <CardHeader>
+                                <CardTitle>Регистрация</CardTitle>
+                            </CardHeader>
+                            <CardContent className="space-y-2">
+                                <div className="space-y-1">
+                                    <Label htmlFor="name">Name</Label>
+                                    <Input
+                                        id="name"
+                                        name="name"
+                                        value={data.name}
+                                        className="mt-1 block w-full"
+                                        autoComplete="name"
+                                        onChange={(e) =>
+                                            setData("name", e.target.value)
+                                        }
+                                        required
+                                    />
+                                </div>
+                                <div className="space-y-1">
+                                    <Label htmlFor="email">Email</Label>
+                                    <Input
+                                        id="email"
+                                        type="email"
+                                        name="email"
+                                        value={data.email}
+                                        className="mt-1 block w-full"
+                                        autoComplete="username"
+                                        onChange={(e) =>
+                                            setData("email", e.target.value)
+                                        }
+                                        required
+                                    />
+                                </div>
+                                <div className="space-y-1">
+                                    <Label htmlFor="password">Password</Label>
+                                    <Input
+                                        id="password"
+                                        type="password"
+                                        name="password"
+                                        value={data.password}
+                                        className="mt-1 block w-full"
+                                        autoComplete="new-password"
+                                        onChange={(e) =>
+                                            setData("password", e.target.value)
+                                        }
+                                        required
+                                    />
+                                </div>
+                                <div className="space-y-1">
+                                    <Label htmlFor="email">
+                                        Confirm Password
+                                    </Label>
+                                    <Input
+                                        id="password_confirmation"
+                                        type="password"
+                                        name="password_confirmation"
+                                        value={data.password_confirmation}
+                                        className="mt-1 block w-full"
+                                        autoComplete="new-password"
+                                        onChange={(e) =>
+                                            setData(
+                                                "password_confirmation",
+                                                e.target.value
+                                            )
+                                        }
+                                        required
+                                    />
+                                </div>
+                            </CardContent>
+                            <CardFooter>
+                                <Button type="submit">
+                                    Зарегистрироваться
+                                </Button>
+                            </CardFooter>
+                        </form>
                     </Card>
                 </TabsContent>
+                <Link
+                    href={route("index")}
+                    className="flex items-center justify-center mt-4"
+                >
+                    На главную
+                </Link>
             </Tabs>
         </div>
     );
 }
-// <div className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-//     <div className="container flex h-14 max-w-screen-2xl items-center">
-//         <div className="mr-4 hidden md:flex">
-//             <a href="#" className="mr-6 flex items-center space-x-2">
-//                 <span className="hidden font-bold sm:inline-block">
-//                     Текст
-//                 </span>
-//                 <nav className="flex items-center gap-4 text-sm lg:gap-6">
-//                     <a
-//                         href="#"
-//                         className="transition-colors hover:text-foreground/80 text-foreground/60"
-//                     >
-//                         Текст 1
-//                     </a>
-//                     <a
-//                         href="#"
-//                         className="transition-colors hover:text-foreground/80 text-foreground/60"
-//                     >
-//                         Текст 2
-//                     </a>
-//                     <a
-//                         href="#"
-//                         className="transition-colors hover:text-foreground/80 text-foreground/60"
-//                     >
-//                         Текст 3
-//                     </a>
-//                     <a
-//                         href="#"
-//                         className="transition-colors hover:text-foreground/80 text-foreground/60"
-//                     >
-//                         Текст 4
-//                     </a>
-//                 </nav>
-//             </a>
-//         </div>
-//         <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
-//             <nav className="flex items-center">
-//                 {auth.user ? (
-//                     <Link
-//                         href={route("dashboard")}
-//                         className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-//                     >
-//                         Dashboard
-//                     </Link>
-//                 ) : (
-//                     <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-//                         <a
-//                             href={route("login")}
-//                             className="text-sm font-semibold leading-6 text-gray-900"
-//                         >
-//                             Log in{" "}
-//                             <span aria-hidden="true">&rarr;</span>
-//                         </a>
-//                     </div>
-//                 )}
-//             </nav>
-//         </div>
-//     </div>
-// </div>
