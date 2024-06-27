@@ -1,16 +1,8 @@
-import {
-    Card,
-    CardContent,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-} from "@/shadcn/ui/card";
-import { Button } from "@/shadcn/ui/button";
-import { Label } from "@/shadcn/ui/label";
+import { Card } from "@/shadcn/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/shadcn/ui/tabs";
-import { Link, useForm } from "@inertiajs/react";
-import { Input } from "@/shadcn/ui/input";
+import { Link } from "@inertiajs/react";
 import RegisterForm from "@/Components/RegisterForm";
+import LoginForm from "@/Components/LoginForm";
 
 export default function Header() {
     return (
@@ -22,22 +14,7 @@ export default function Header() {
                 </TabsList>
                 <TabsContent value="login">
                     <Card>
-                        <CardHeader>
-                            <CardTitle>Вход</CardTitle>
-                        </CardHeader>
-                        <CardContent className="space-y-2">
-                            <div className="space-y-1">
-                                <Label htmlFor="email">Email</Label>
-                                <Input id="email" name="email" />
-                            </div>
-                            <div className="space-y-1">
-                                <Label htmlFor="password">Password</Label>
-                                <Input id="password" name="password" />
-                            </div>
-                        </CardContent>
-                        <CardFooter>
-                            <Button type="submit">Войти</Button>
-                        </CardFooter>
+                        <LoginForm />
                     </Card>
                 </TabsContent>
                 <TabsContent value="register">
