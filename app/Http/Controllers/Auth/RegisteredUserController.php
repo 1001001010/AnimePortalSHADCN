@@ -31,9 +31,17 @@ class RegisteredUserController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:255|unique:users,name',
             'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ], [
+            'name.required' => 'Имя является обязательным полем.',
+            'email.required' => 'Электронная почта является обязательным полем.',
+            'email.email' => 'Некорректный формат электронной почты.',
+            'email.unique' => 'Пользователь с такой электронной почтой уже существует.',
+            'name.unique' => 'Пользователь с таким именем уже существует.',
+            'password.required' => 'Пароль является обязательным полем.',
+            'password.confirmed' => 'Пароли не совпадают.',
         ]);
 
         $user = User::create([
