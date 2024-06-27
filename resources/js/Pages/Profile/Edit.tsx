@@ -19,7 +19,7 @@ export default function Edit({
                 </h2>
             }
         >
-            <Head title="Profile" />
+            {/* <Head title="Profile" />
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
@@ -39,7 +39,7 @@ export default function Edit({
                         <DeleteUserForm className="max-w-xl" />
                     </div>
                 </div>
-            </div>
+            </div> */}
         </AuthenticatedLayout>
     );
 }

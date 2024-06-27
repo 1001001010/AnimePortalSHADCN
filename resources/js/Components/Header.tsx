@@ -46,7 +46,7 @@ export default function Header({ auth }: PageProps<{}>) {
                         <Tooltip>
                             <TooltipTrigger asChild>
                                 <Link
-                                    href="#"
+                                    href={route("index")}
                                     className="flex h-9 w-9 items-center justify-center bg-accent text-accent-foreground rounded-lg transition-colors hover:text-foreground md:h-8 md:w-8"
                                 >
                                     <Home className="h-5 w-5" />
