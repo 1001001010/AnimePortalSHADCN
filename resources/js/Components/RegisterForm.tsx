@@ -2,7 +2,7 @@ import { useEffect, FormEventHandler } from "react";
 import { useForm } from "@inertiajs/react";
 import { Label } from "@/shadcn/ui/label";
 import { Input } from "@/shadcn/ui/input";
-import { Button } from "@/shadcn/ui/button";
+import PrimaryButton from "@/Components/PrimaryButton";
 import InputError from "@/Components/InputError";
 import {
     CardContent,
@@ -98,7 +98,7 @@ export default function RegisterForm() {
                 </div>
             </CardContent>
             <CardFooter>
-                <Button type="submit">Зарегистрироваться</Button>
+                <PrimaryButton disabled={processing}>Регистрация</PrimaryButton>
             </CardFooter>
         </form>
     );
