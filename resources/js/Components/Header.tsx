@@ -2,6 +2,7 @@ import { PageProps } from "../types";
 import { Link } from "@inertiajs/react";
 import { Button } from "@/shadcn/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/shadcn/ui/sheet";
+import { useEffect, FormEventHandler } from "react";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -32,6 +33,10 @@ import {
 export default function Header({ auth }: PageProps<{}>) {
     const handleToggleDarkMode = () => {
         document.documentElement.classList.toggle("dark");
+    };
+    const submit: FormEventHandler = (e) => {
+        e.preventDefault();
+        route("logout");
     };
     return (
         <div className="flex min-h-screen w-full flex-col bg-muted/40">
@@ -256,7 +261,17 @@ export default function Header({ auth }: PageProps<{}>) {
                                 <DropdownMenuSeparator />
                                 <DropdownMenuItem>Настройки</DropdownMenuItem>
                                 <DropdownMenuSeparator />
-                                <DropdownMenuItem>Выйти</DropdownMenuItem>
+                                <DropdownMenuItem>
+                                    <form onSubmit={submit}>
+                                        <Link
+                                            href={route("logout")}
+                                            method="post"
+                                            as="button"
+                                        >
+                                            Выход
+                                        </Link>
+                                    </form>
+                                </DropdownMenuItem>
                             </DropdownMenuContent>
                         </DropdownMenu>
                     ) : (
