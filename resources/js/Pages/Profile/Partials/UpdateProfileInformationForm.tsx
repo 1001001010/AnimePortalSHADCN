@@ -1,11 +1,12 @@
 import InputError from "@/Components/InputError";
-import InputLabel from "@/Components/InputLabel";
-import PrimaryButton from "@/Components/PrimaryButton";
-import TextInput from "@/Components/TextInput";
 import { Link, useForm, usePage } from "@inertiajs/react";
-import { Transition } from "@headlessui/react";
 import { FormEventHandler } from "react";
 import { PageProps } from "@/types";
+import { toast } from "sonner";
+import { Input } from "@/shadcn/ui/input";
+import { Label } from "@/shadcn/ui/label";
+import { Button } from "@/shadcn/ui/button";
+import { Toaster } from "@/shadcn/ui/sonner";
 
 export default function UpdateProfileInformation({
     mustVerifyEmail,
@@ -22,6 +23,7 @@ export default function UpdateProfileInformation({
         useForm({
             name: user.name,
             email: user.email,
+            updated_at: user.updated_at,
         });
 
     const submit: FormEventHandler = (e) => {
@@ -33,26 +35,18 @@ export default function UpdateProfileInformation({
     return (
         <section className={className}>
             <header>
-                <h2 className="text-lg font-medium text-gray-900">
-                    Profile Information
-                </h2>
-
-                <p className="mt-1 text-sm text-gray-600">
-                    Update your account's profile information and email address.
-                </p>
+                <h2 className="text-lg font-medium">Профиль</h2>
             </header>
 
             <form onSubmit={submit} className="mt-6 space-y-6">
                 <div>
-                    <InputLabel htmlFor="name" value="Name" />
-
-                    <TextInput
+                    <Label htmlFor="name">Name</Label>
+                    <Input
                         id="name"
                         className="mt-1 block w-full"
                         value={data.name}
                         onChange={(e) => setData("name", e.target.value)}
                         required
-                        isFocused
                         autoComplete="name"
                     />
 
@@ -60,9 +54,8 @@ export default function UpdateProfileInformation({
                 </div>
 
                 <div>
-                    <InputLabel htmlFor="email" value="Email" />
-
-                    <TextInput
+                    <Label htmlFor="email">Email</Label>
+                    <Input
                         id="email"
                         type="email"
                         className="mt-1 block w-full"
@@ -99,17 +92,21 @@ export default function UpdateProfileInformation({
                 )}
 
                 <div className="flex items-center gap-4">
-                    <PrimaryButton disabled={processing}>Save</PrimaryButton>
+                    <Button
+                        variant="outline"
+                        disabled={processing}
+                        onClick={() => {
+                            const updatedAt = new Date(data.updated_at);
+                            const formattedUpdatedAt =
+                                updatedAt.toLocaleString();
 
-                    <Transition
-                        show={recentlySuccessful}
-                        enter="transition ease-in-out"
-                        enterFrom="opacity-0"
-                        leave="transition ease-in-out"
-                        leaveTo="opacity-0"
+                            toast("Изменения успешно сохранены", {
+                                description: `Дата изменения: ${formattedUpdatedAt}`,
+                            });
+                        }}
                     >
-                        <p className="text-sm text-gray-600">Saved.</p>
-                    </Transition>
+                        Сохранить
+                    </Button>
                 </div>
             </form>
         </section>

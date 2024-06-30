@@ -1,9 +1,9 @@
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import { PageProps } from "@/types";
+import Header from "@/Components/Header";
 import DeleteUserForm from "./Partials/DeleteUserForm";
 import UpdatePasswordForm from "./Partials/UpdatePasswordForm";
 import UpdateProfileInformationForm from "./Partials/UpdateProfileInformationForm";
-import { Head } from "@inertiajs/react";
-import { PageProps } from "@/types";
+import { Toaster } from "@/shadcn/ui/sonner";
 
 export default function Edit({
     auth,
@@ -11,35 +11,34 @@ export default function Edit({
     status,
 }: PageProps<{ mustVerifyEmail: boolean; status?: string }>) {
     return (
-        <AuthenticatedLayout
-            user={auth.user}
-            header={
-                <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                    Profile
-                </h2>
-            }
-        >
-            {/* <Head title="Profile" />
-
-            <div className="py-12">
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-                    <div className="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                        <UpdateProfileInformationForm
-                            mustVerifyEmail={mustVerifyEmail}
-                            status={status}
-                            className="max-w-xl"
-                        />
+        <>
+            <Header auth={auth} />
+            <div className="ml-14 ml:ml-0">
+                <div className="m-4 border border-gray-200 rounded-lg shadow dark:border-gray-700 flex flex-wrap md:flex-nowrap">
+                    <div className="p-6 text-gray-900 dark:text-gray-100 w-full md:w-2/3">
+                        <div className="mb-4 border border-gray-200 rounded-lg shadow dark:border-gray-700 w-full p-4">
+                            <UpdateProfileInformationForm
+                                mustVerifyEmail={mustVerifyEmail}
+                                status={status}
+                                className="mb-4"
+                            />
+                        </div>
+                        <div className="mb-4 border border-gray-200 rounded-lg shadow dark:border-gray-700 w-full p-4">
+                            <UpdatePasswordForm className="mb-4" />
+                        </div>
+                        <div className="mb-4 border border-gray-200 rounded-lg shadow dark:border-gray-700 w-full p-4">
+                            <DeleteUserForm />
+                        </div>
                     </div>
-
-                    <div className="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                        <UpdatePasswordForm className="max-w-xl" />
-                    </div>
-
-                    <div className="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                        <DeleteUserForm className="max-w-xl" />
+                    <div className="p-6 text-gray-900 dark:text-gray-100 w-full md:w-1/3">
+                        <div className="mb-4 border border-gray-200 rounded-lg shadow dark:border-gray-700 w-full p-4">
+                            Список сессий
+                            <DeleteUserForm />
+                        </div>
+                        <Toaster />
                     </div>
                 </div>
-            </div> */}
-        </AuthenticatedLayout>
+            </div>
+        </>
     );
 }
