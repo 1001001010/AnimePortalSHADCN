@@ -1,6 +1,7 @@
 import { PageProps } from "@/types";
 import Header from "@/Components/Header";
 import DeleteUserForm from "./Partials/DeleteUserForm";
+import ActiveSession from "./Partials/ActiveSession";
 import UpdatePasswordForm from "./Partials/UpdatePasswordForm";
 import UpdateProfileInformationForm from "./Partials/UpdateProfileInformationForm";
 import { Toaster } from "@/shadcn/ui/sonner";
@@ -31,14 +32,16 @@ export default function Edit({
                         </div>
                     </div>
                     <div className="p-6 text-gray-900 dark:text-gray-100 w-full md:w-1/3">
+                        <h2 className="mb-4 text-lg font-medium">
+                            Активные сессии
+                        </h2>
                         <div className="mb-4 border border-gray-200 rounded-lg shadow dark:border-gray-700 w-full p-4">
-                            Список сессий
-                            <DeleteUserForm />
+                            <ActiveSession />
                         </div>
-                        <Toaster />
                     </div>
                 </div>
             </div>
+            <Toaster />
         </>
     );
 }

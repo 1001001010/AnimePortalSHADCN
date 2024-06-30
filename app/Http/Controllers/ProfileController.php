@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
+use App\Models\ActiveSession;
 
 class ProfileController extends Controller
 {
@@ -59,5 +60,17 @@ class ProfileController extends Controller
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
+    }
+
+    /**
+     * Получение активных сессий.
+     */
+    public function session()
+    {
+        $activeSessions = ActiveSession::all();
+        return Inertia::render('/profile/sessions', [
+            'activeSessions' => $activeSessions
+            
+        ]);
     }
 }
