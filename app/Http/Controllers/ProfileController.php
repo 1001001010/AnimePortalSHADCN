@@ -19,12 +19,16 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): Response
     {
+        $activeSessions = ActiveSession::where('user_id', Auth::user()->id)->get();
+        if ($activeSessions->isEmpty()) {
+            $activeSessions = [];
+        }
         return Inertia::render('Profile/Edit', [
             'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
             'status' => session('status'),
+            'activeSession' => $activeSessions,
         ]);
     }
-
     /**
      * Update the user's profile information.
      */
@@ -61,16 +65,9 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
-
-    /**
-     * Получение активных сессий.
-     */
-    public function session()
+    public function destroy_session($session_id)
     {
-        $activeSessions = ActiveSession::all();
-        return Inertia::render('/profile/sessions', [
-            'activeSessions' => $activeSessions
-            
-        ]);
+        ActiveSession::where('id', $session_id)->delete();
+        return redirect()->route('profile.edit');
     }
 }

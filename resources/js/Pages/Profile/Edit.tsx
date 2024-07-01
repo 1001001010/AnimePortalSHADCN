@@ -5,12 +5,23 @@ import ActiveSession from "./Partials/ActiveSession";
 import UpdatePasswordForm from "./Partials/UpdatePasswordForm";
 import UpdateProfileInformationForm from "./Partials/UpdateProfileInformationForm";
 import { Toaster } from "@/shadcn/ui/sonner";
+import { CalendarIcon } from "@radix-ui/react-icons";
+import {
+    HoverCard,
+    HoverCardContent,
+    HoverCardTrigger,
+} from "@/shadcn/ui/hover-card";
 
 export default function Edit({
     auth,
     mustVerifyEmail,
     status,
-}: PageProps<{ mustVerifyEmail: boolean; status?: string }>) {
+    activeSession,
+}: PageProps<{
+    mustVerifyEmail: boolean;
+    status?: string;
+    activeSession: any[];
+}>) {
     return (
         <>
             <Header auth={auth} />
@@ -32,12 +43,8 @@ export default function Edit({
                         </div>
                     </div>
                     <div className="p-6 text-gray-900 dark:text-gray-100 w-full md:w-1/3">
-                        <h2 className="mb-4 text-lg font-medium">
-                            Активные сессии
-                        </h2>
-                        <div className="mb-4 border border-gray-200 rounded-lg shadow dark:border-gray-700 w-full p-4">
-                            <ActiveSession />
-                        </div>
+                        <h2 className="mb-4 text-lg font-medium">Сессии</h2>
+                        <ActiveSession activeSessions={activeSession} />
                     </div>
                 </div>
             </div>
