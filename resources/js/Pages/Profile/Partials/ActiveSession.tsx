@@ -11,12 +11,7 @@ interface ActiveSessionProps {
 export default function ActiveSession({ activeSessions }: ActiveSessionProps) {
     const handleDestroySession = (sessionId: any) => {
         axios.delete(`/profile/session/${sessionId}`)
-         .then(() => {
-            window.location.reload();
-          })
-         .catch((error) => {
-            console.error(error);
-          });
+        window.location.reload();
       };
 
     return (

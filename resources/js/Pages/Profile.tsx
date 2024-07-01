@@ -14,11 +14,10 @@ export default function Profile({
                 <div className="m-4 border border-gray-200 rounded-lg shadow dark:border-gray-700">
                     <div className="p-6 text-gray-900 dark:text-gray-100 flex flex-col gap-4">
                         <div>
-                            Дата регистрации:{" "}
-                            {new Date(user.created_at).toLocaleDateString()}
+                            Дата регистрации: {`${new Date(auth.user.created_at).toLocaleString()}`}
                         </div>
-                        <div>Имя: {user.name}</div>
-                        <div>Email: {user.email}</div>
+                        <div>Имя: {auth.user.name}</div>
+                        <div>Email: {auth.user.email}</div>
                     </div>
                 </div>
             </div>
