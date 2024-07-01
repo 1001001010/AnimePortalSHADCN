@@ -6,11 +6,12 @@ export interface User {
     updated_at: string;
 }
 export interface ActiveSession {
-    id: number;
     user_id: number;
     ip_address: string;
     user_agent: string;
     last_activity: number;
+    payload: string;
+    id: string;
 }
 
 export type PageProps<

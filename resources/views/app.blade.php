@@ -21,12 +21,5 @@
 <body class="font-sans antialiased">
     @inertia
 </body>
-<script>
-    const toggleDarkModeButton = document.getElementById('toggle-dark-mode');
-
-    toggleDarkModeButton.addEventListener('click', () => {
-        document.documentElement.classList.toggle('dark');
-    });
-</script>
 
 </html>

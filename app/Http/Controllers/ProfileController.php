@@ -20,9 +20,7 @@ class ProfileController extends Controller
     public function edit(Request $request): Response
     {
         $activeSessions = ActiveSession::where('user_id', Auth::user()->id)->get();
-        if ($activeSessions->isEmpty()) {
-            $activeSessions = [];
-        }
+        // dd($activeSessions);
         return Inertia::render('Profile/Edit', [
             'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
             'status' => session('status'),
@@ -64,10 +62,5 @@ class ProfileController extends Controller
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
-    }
-    public function destroy_session($session_id)
-    {
-        ActiveSession::where('id', $session_id)->delete();
-        return redirect()->route('profile.edit');
     }
 }

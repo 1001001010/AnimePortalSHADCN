@@ -1,21 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "@/shadcn/ui/button";
 import type { ActiveSession } from "@/types";
+import axios from "axios";
+import { v4 as uuid } from "uuid";
 
 interface ActiveSessionProps {
     activeSessions: ActiveSession[];
 }
 
-const ActiveSession: React.FC<ActiveSessionProps> = ({ activeSessions }) => {
-    const handleDeleteSession = (sessionId: number) => {
-        fetch(`/profile/session/${sessionId}`, {
-            method: "DELETE",
-        })
-            .then((response) => response.json())
-            .then(() => {
-                console.log(`Session ${sessionId} deleted successfully`);
-            })
-            .catch((error) => console.error(error));
+export default function ActiveSession({ activeSessions }: ActiveSessionProps) {
+    const handleDestroySession = (sessionId: any) => {
+        axios.delete(`/profile/session/${sessionId}`);
     };
 
     return (
@@ -23,10 +18,14 @@ const ActiveSession: React.FC<ActiveSessionProps> = ({ activeSessions }) => {
             <ul>
                 {activeSessions.map((session) => (
                     <li
-                        key={session.id}
+                        key={uuid()}
                         className="mb-4 border border-gray-200 rounded-lg shadow dark:border-gray-700 w-full p-4"
                     >
                         <p>IP Address: {session.ip_address}</p>
+                        <meta
+                            name="csrf-token"
+                            content="{{ csrf_token() }}"
+                        ></meta>
                         <p>User Agent: {session.user_agent}</p>
                         <p>
                             Последняя активность:{" "}
@@ -34,11 +33,13 @@ const ActiveSession: React.FC<ActiveSessionProps> = ({ activeSessions }) => {
                                 session.last_activity * 1000
                             ).toLocaleString()}
                         </p>
-
+                        <p>{session.id}</p>
                         <Button
                             variant="outline"
                             className="mt-2"
-                            onClick={() => handleDeleteSession(session.id)}
+                            onClick={() =>
+                                handleDestroySession(session.payload)
+                            }
                         >
                             Завершить
                         </Button>
@@ -47,6 +48,4 @@ const ActiveSession: React.FC<ActiveSessionProps> = ({ activeSessions }) => {
             </ul>
         </div>
     );
-};
-
-export default ActiveSession;
+}
