@@ -58,11 +58,11 @@ export default function DeleteUserForm({
             </DangerButton>
 
             <Modal show={confirmingUserDeletion} onClose={closeModal}>
-                <form onSubmit={deleteUser} className="p-6">
-                    <h2 className="text-lg font-medium">
+                <form onSubmit={deleteUser} className="p-6 dark:bg-background">
+                    <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">
                         Вы уверены, что хотите удалить ваш аккаунт?
                     </h2>
-                    <div className="mt-6">
+                    <div className="mt-6 ">
                         <Label htmlFor="password" className="sr-only">
                             Подтверждение пароля
                         </Label>
@@ -87,11 +87,11 @@ export default function DeleteUserForm({
 
                     <div className="mt-6 flex justify-end">
                         <SecondaryButton onClick={closeModal}>
-                            Cancel
+                            Закрыть
                         </SecondaryButton>
 
                         <DangerButton className="ms-3" disabled={processing}>
-                            Delete Account
+                            Удалить аккаунт
                         </DangerButton>
                     </div>
                 </form>
