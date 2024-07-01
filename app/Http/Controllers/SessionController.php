@@ -17,10 +17,5 @@ class SessionController extends Controller
     public function destroy_session($session_id)
     {
         ActiveSession::where('payload', $session_id)->delete();
-        return Inertia::render('Profile/Edit', [
-            'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
-            'status' => session('status'),
-            'activeSession' => $activeSessions,
-        ]);
     }
 }
