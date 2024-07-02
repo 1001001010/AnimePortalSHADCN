@@ -90,9 +90,6 @@ export default function Header({ auth }: PageProps<{}>) {
                                     Сменить тему
                                 </TooltipContent>
                             </Tooltip>
-                            <TooltipContent side="right">
-                                Главная
-                            </TooltipContent>
                         </Tooltip>
                         <Tooltip>
                             <TooltipTrigger asChild>
@@ -198,35 +195,60 @@ export default function Header({ auth }: PageProps<{}>) {
                                     className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
                                 >
                                     <Home className="h-5 w-5" />
-                                    Dashboard
+                                    Главная
                                 </Link>
+                                    <Button
+                                        className="flex h-9 w-9 items-center justify-center rounded-lg transition-colors hover:text-foreground md:h-8 md:w-8"
+                                        onClick={handleToggleDarkMode}
+                                    >
+                                        <img
+                                            src={
+                                                document.documentElement.classList.contains(
+                                                    "dark"
+                                                )
+                                                    ? "/img/svg/moon.svg"
+                                                    : "/img/svg/sun.svg"
+                                            }
+                                            alt={
+                                                document.documentElement.classList.contains(
+                                                    "dark"
+                                                )
+                                                    ? "moon"
+                                                    : "sun"
+                                            }
+                                            className=""
+                                        />
+                                        <span className="sr-only">
+                                            Сменить тему
+                                        </span>
+                                    </Button>
                                 <Link
                                     href="#"
                                     className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
                                 >
                                     <ShoppingCart className="h-5 w-5" />
-                                    Orders
+                                    Категории
                                 </Link>
                                 <Link
                                     href="#"
                                     className="flex items-center gap-4 px-2.5 text-foreground"
                                 >
                                     <Package className="h-5 w-5" />
-                                    Products
+                                    Случайные аниме
                                 </Link>
                                 <Link
                                     href="#"
                                     className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
                                 >
                                     <Users2 className="h-5 w-5" />
-                                    Customers
+                                    Друзья
                                 </Link>
                                 <Link
                                     href="#"
                                     className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
                                 >
                                     <LineChart className="h-5 w-5" />
-                                    Settings
+                                    Analystik
                                 </Link>
                             </nav>
                         </SheetContent>

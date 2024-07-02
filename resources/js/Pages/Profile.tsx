@@ -10,7 +10,7 @@ export default function Profile({
     return (
         <>
             <Header auth={auth} />
-            <div className="ml-14">
+            <div className="ml-14 max-md:ml-0">
                 <div className="m-4 border border-gray-200 rounded-lg shadow dark:border-gray-700">
                     <div className="p-6 text-gray-900 dark:text-gray-100 flex flex-col gap-4">
                         <div>
