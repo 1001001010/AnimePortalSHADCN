@@ -1,5 +1,19 @@
 import { PageProps } from "@/types";
 import Header from "@/Components/Header";
+import { Button } from "@/shadcn/ui/button";
+import {
+    AlertDialog,
+    AlertDialogAction,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+    AlertDialogTrigger,
+} from "@/shadcn/ui/alert-dialog";
+import { Input } from "@/shadcn/ui/input";
+import { Label } from "@/shadcn/ui/label";
 
 export default function Profile({
     auth,
@@ -12,12 +26,23 @@ export default function Profile({
             <Header auth={auth} />
             <div className="ml-14 max-md:ml-0">
                 <div className="m-4 border border-gray-200 rounded-lg shadow dark:border-gray-700">
-                    <div className="p-6 text-gray-900 dark:text-gray-100 flex flex-col gap-4">
-                        <div>
-                            Дата регистрации: {`${new Date(auth.user.created_at).toLocaleString()}`}
+                    <div className="flex">
+                        <div className="w-44 h-full m-2">
+                            <img
+                                src="/img/defaultAvatar.png"
+                                className="rounded border border-gray-200"
+                            ></img>
                         </div>
-                        <div>Имя: {auth.user.name}</div>
-                        <div>Email: {auth.user.email}</div>
+                        <div className="m-2 text-gray-900 dark:text-gray-100 flex flex-col gap-4">
+                            <h3>{auth.user.name}</h3>
+                            <div>
+                                Дата регистрации:{" "}
+                                {`${new Date(
+                                    auth.user.created_at
+                                ).toLocaleString()}`}
+                            </div>
+                            <div>Email: {auth.user.email}</div>
+                        </div>
                     </div>
                 </div>
             </div>

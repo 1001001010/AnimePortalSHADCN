@@ -20,7 +20,6 @@ class ProfileController extends Controller
     public function edit(Request $request): Response
     {
         $activeSessions = ActiveSession::where('user_id', Auth::user()->id)->get();
-        // dd($activeSessions);
         return Inertia::render('Profile/Edit', [
             'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
             'status' => session('status'),
@@ -32,17 +31,30 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
+        // $validated = $request->validate([
+        //     'profile_image' => 'image|mimes:jpg,png,jpeg|max:2048'
+        // ]);
+    
         $request->user()->fill($request->validated());
-
+    
         if ($request->user()->isDirty('email')) {
             $request->user()->email_verified_at = null;
         }
 
+        $file = $request->file('profile_image');
+    
+        if ($file) {
+            dd($request->all());
+            $filename = time(). '.'. $request->file('profile_image')->extension();
+            $destination = 'public/avatars';
+            $request->file('profile_image')->storeAs($destination, $filename);
+            $request->user()->profile_image = $filename;
+        }
+    
         $request->user()->save();
-
+    
         return Redirect::route('profile.edit');
     }
-
     /**
      * Delete the user's account.
      */

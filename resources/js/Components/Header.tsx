@@ -267,18 +267,23 @@ export default function Header({ auth }: PageProps<{}>) {
                                     size="icon"
                                     className="overflow-hidden rounded-full"
                                 >
-                                    {/* <img
-                                        src="/img/defaultAvatar.png"
-                                        alt="Default Avatar"
-                                        className="w-full h-full object-cover rounded-full"
-                                    /> */}
-                                    <Avatar>
-                                        <AvatarImage
-                                            src="/img/defaultAvatar.png"
-                                            alt="@avatar"
-                                        />
-                                        <AvatarFallback>CN</AvatarFallback>
-                                    </Avatar>
+                                    {auth.user.profile_image ? (
+                                        <Avatar>
+                                            <AvatarImage
+                                                src="/img/defaultAvatar.png"
+                                                alt="@avatar"
+                                            />
+                                            <AvatarFallback>CN</AvatarFallback>
+                                        </Avatar>
+                                    ) : (
+                                        <Avatar>
+                                            <AvatarImage
+                                                src="/img/defaultAvatar.png"
+                                                alt="@avatar"
+                                            />
+                                            <AvatarFallback>CN</AvatarFallback>
+                                        </Avatar>
+                                    )}
                                 </Button>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent align="end">
