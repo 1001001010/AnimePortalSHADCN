@@ -13,6 +13,11 @@ import {
 } from "@/shadcn/ui/dropdown-menu";
 import { Input } from "@/shadcn/ui/input";
 import {
+    Avatar,
+    AvatarFallback,
+    AvatarImage,
+  } from "@/shadcn/ui/avatar"
+import {
     Tooltip,
     TooltipContent,
     TooltipProvider,
@@ -269,11 +274,15 @@ export default function Header({ auth }: PageProps<{}>) {
                                     size="icon"
                                     className="overflow-hidden rounded-full"
                                 >
-                                    <img
+                                    {/* <img
                                         src="/img/defaultAvatar.png"
                                         alt="Default Avatar"
                                         className="w-full h-full object-cover rounded-full"
-                                    />
+                                    /> */}
+                                        <Avatar>
+                                            <AvatarImage src="/img/defaultAvatar.png    " alt="@shadcn" />
+                                            <AvatarFallback>CN</AvatarFallback>
+                                        </Avatar>
                                 </Button>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent align="end">
