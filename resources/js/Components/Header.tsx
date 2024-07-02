@@ -12,11 +12,7 @@ import {
     DropdownMenuTrigger,
 } from "@/shadcn/ui/dropdown-menu";
 import { Input } from "@/shadcn/ui/input";
-import {
-    Avatar,
-    AvatarFallback,
-    AvatarImage,
-  } from "@/shadcn/ui/avatar"
+import { Avatar, AvatarFallback, AvatarImage } from "@/shadcn/ui/avatar";
 import {
     Tooltip,
     TooltipContent,
@@ -33,6 +29,8 @@ import {
     Settings,
     ShoppingCart,
     Users2,
+    MoonStar,
+    SunMedium,
 } from "lucide-react";
 
 export default function Header({ auth }: PageProps<{}>) {
@@ -65,31 +63,22 @@ export default function Header({ auth }: PageProps<{}>) {
                         <Tooltip>
                             <Tooltip>
                                 <TooltipTrigger asChild>
-                                    <Button
-                                        className="flex h-9 w-9 items-center justify-center rounded-lg transition-colors hover:text-foreground md:h-8 md:w-8"
+                                    <Link
+                                        href="#"
+                                        className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
                                         onClick={handleToggleDarkMode}
                                     >
-                                        <img
-                                            src={
-                                                document.documentElement.classList.contains(
-                                                    "dark"
-                                                )
-                                                    ? "/img/svg/moon.svg"
-                                                    : "/img/svg/sun.svg"
-                                            }
-                                            alt={
-                                                document.documentElement.classList.contains(
-                                                    "dark"
-                                                )
-                                                    ? "moon"
-                                                    : "sun"
-                                            }
-                                            className=""
-                                        />
+                                        {document.documentElement.classList.contains(
+                                            "dark"
+                                        ) ? (
+                                            <SunMedium className="h-5 w-5" />
+                                        ) : (
+                                            <MoonStar className="h-5 w-5" />
+                                        )}
                                         <span className="sr-only">
-                                            Сменить тему
+                                            Случайные аниме
                                         </span>
-                                    </Button>
+                                    </Link>
                                 </TooltipTrigger>
                                 <TooltipContent side="right">
                                     Сменить тему
@@ -154,24 +143,28 @@ export default function Header({ auth }: PageProps<{}>) {
                         </Tooltip>
                     </TooltipProvider>
                 </nav>
-                <nav className="mt-auto flex flex-col items-center gap-4 px-2 py-4">
-                    <TooltipProvider>
-                        <Tooltip>
-                            <TooltipTrigger asChild>
-                                <Link
-                                    href={route("profile.edit")}
-                                    className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
-                                >
-                                    <Settings className="h-5 w-5" />
-                                    <span className="sr-only">Настройки</span>
-                                </Link>
-                            </TooltipTrigger>
-                            <TooltipContent side="right">
-                                Настройки
-                            </TooltipContent>
-                        </Tooltip>
-                    </TooltipProvider>
-                </nav>
+                {auth.user ? (
+                    <nav className="mt-auto flex flex-col items-center gap-4 px-2 py-4">
+                        <TooltipProvider>
+                            <Tooltip>
+                                <TooltipTrigger asChild>
+                                    <Link
+                                        href={route("profile.edit")}
+                                        className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                                    >
+                                        <Settings className="h-5 w-5" />
+                                        <span className="sr-only">
+                                            Настройки
+                                        </span>
+                                    </Link>
+                                </TooltipTrigger>
+                                <TooltipContent side="right">
+                                    Настройки
+                                </TooltipContent>
+                            </Tooltip>
+                        </TooltipProvider>
+                    </nav>
+                ) : null}
             </aside>
             <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
                 <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
@@ -202,31 +195,31 @@ export default function Header({ auth }: PageProps<{}>) {
                                     <Home className="h-5 w-5" />
                                     Главная
                                 </Link>
-                                    <Button
-                                        className="flex h-9 w-9 items-center justify-center rounded-lg transition-colors hover:text-foreground md:h-8 md:w-8"
-                                        onClick={handleToggleDarkMode}
-                                    >
-                                        <img
-                                            src={
-                                                document.documentElement.classList.contains(
-                                                    "dark"
-                                                )
-                                                    ? "/img/svg/moon.svg"
-                                                    : "/img/svg/sun.svg"
-                                            }
-                                            alt={
-                                                document.documentElement.classList.contains(
-                                                    "dark"
-                                                )
-                                                    ? "moon"
-                                                    : "sun"
-                                            }
-                                            className=""
-                                        />
-                                        <span className="sr-only">
-                                            Сменить тему
-                                        </span>
-                                    </Button>
+                                <Button
+                                    className="flex h-9 w-9 items-center justify-center rounded-lg transition-colors hover:text-foreground md:h-8 md:w-8"
+                                    onClick={handleToggleDarkMode}
+                                >
+                                    <img
+                                        src={
+                                            document.documentElement.classList.contains(
+                                                "dark"
+                                            )
+                                                ? "/img/svg/moon.svg"
+                                                : "/img/svg/sun.svg"
+                                        }
+                                        alt={
+                                            document.documentElement.classList.contains(
+                                                "dark"
+                                            )
+                                                ? "moon"
+                                                : "sun"
+                                        }
+                                        className=""
+                                    />
+                                    <span className="sr-only">
+                                        Сменить тему
+                                    </span>
+                                </Button>
                                 <Link
                                     href="#"
                                     className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
@@ -279,10 +272,13 @@ export default function Header({ auth }: PageProps<{}>) {
                                         alt="Default Avatar"
                                         className="w-full h-full object-cover rounded-full"
                                     /> */}
-                                        <Avatar>
-                                            <AvatarImage src="/img/defaultAvatar.png    " alt="@shadcn" />
-                                            <AvatarFallback>CN</AvatarFallback>
-                                        </Avatar>
+                                    <Avatar>
+                                        <AvatarImage
+                                            src="/img/defaultAvatar.png"
+                                            alt="@avatar"
+                                        />
+                                        <AvatarFallback>CN</AvatarFallback>
+                                    </Avatar>
                                 </Button>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent align="end">
