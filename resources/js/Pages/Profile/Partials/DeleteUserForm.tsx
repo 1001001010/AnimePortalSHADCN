@@ -1,11 +1,12 @@
 import { useRef, useState, FormEventHandler } from "react";
-import DangerButton from "@/Components/DangerButton";
 import InputError from "@/Components/InputError";
 import Modal from "@/Components/Modal";
 import SecondaryButton from "@/Components/SecondaryButton";
 import { Input } from "@/shadcn/ui/input";
+import { Button } from "@/shadcn/ui/button";
 import { Label } from "@/shadcn/ui/label";
 import { useForm } from "@inertiajs/react";
+// import { Button } from "react-day-picker";
 
 export default function DeleteUserForm({
     className = "",
@@ -53,9 +54,15 @@ export default function DeleteUserForm({
                 <h2 className="text-lg font-medium">Удаление аккаунта</h2>
             </header>
 
-            <DangerButton onClick={confirmUserDeletion}>
+            {/* <DangerButton onClick={confirmUserDeletion}>
                 Удалить аккаунт
-            </DangerButton>
+            </DangerButton> */}
+            {/* <Button variant="outline" disabled={processing}>
+                        Сохранить
+                    </Button> */}
+            <Button variant="outline" onClick={confirmUserDeletion}>
+                Удалить аккаунт
+            </Button>
 
             <Modal show={confirmingUserDeletion} onClose={closeModal}>
                 <form onSubmit={deleteUser} className="p-6 dark:bg-background">
@@ -90,9 +97,13 @@ export default function DeleteUserForm({
                             Закрыть
                         </SecondaryButton>
 
-                        <DangerButton className="ms-3" disabled={processing}>
+                        <Button
+                            variant="outline"
+                            className="ms-3"
+                            disabled={processing}
+                        >
                             Удалить аккаунт
-                        </DangerButton>
+                        </Button>
                     </div>
                 </form>
             </Modal>

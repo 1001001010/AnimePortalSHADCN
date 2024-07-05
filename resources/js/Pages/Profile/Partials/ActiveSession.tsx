@@ -10,9 +10,9 @@ interface ActiveSessionProps {
 
 export default function ActiveSession({ activeSessions }: ActiveSessionProps) {
     const handleDestroySession = (sessionId: any) => {
-        axios.delete(`/profile/session/${sessionId}`)
+        axios.delete(`/profile/session/${sessionId}`);
         window.location.reload();
-      };
+    };
 
     return (
         <div>
@@ -22,19 +22,17 @@ export default function ActiveSession({ activeSessions }: ActiveSessionProps) {
                         key={uuid()}
                         className="mb-4 border border-gray-200 rounded-lg shadow dark:border-gray-700 w-full p-4"
                     >
-                        <p>IP Address: {session.ip_address}</p>
+                        <p>IP адрес: {session.ip_address}</p>
                         <meta
-                            name="csrf-token"   
+                            name="csrf-token"
                             content="{{ csrf_token() }}"
                         ></meta>
-                        <p>User Agent: {session.user_agent}</p>
                         <p>
                             Последняя активность:{" "}
                             {new Date(
                                 session.last_activity * 1000
                             ).toLocaleString()}
                         </p>
-                        <p>{session.id}</p>
                         <Button
                             variant="outline"
                             className="mt-2"

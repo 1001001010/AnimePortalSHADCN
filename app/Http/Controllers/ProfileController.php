@@ -14,23 +14,16 @@ use App\Models\ActiveSession;
 
 class ProfileController extends Controller
 {
-    /**
-     * Display the user's profile form.
-     */
-    public function edit(Request $request): Response
-    {
-        $activeSessions = ActiveSession::where('user_id', Auth::user()->id)->get();
-        return Inertia::render('Profile/Edit', [
-            'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
-            'status' => session('status'),
-            'activeSession' => $activeSessions,
-        ]);
+    public function edit(Request $request): Response {
+            $activeSessions = ActiveSession::where('user_id', Auth::user()->id)->get();
+            return Inertia::render('Profile/Edit', [
+                'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
+                'status' => session('status'),
+                'activeSession' => $activeSessions,
+            ]);
     }
-    /**
-     * Update the user's profile information.
-     */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
-    {
+    
+    public function update(ProfileUpdateRequest $request): RedirectResponse {
         // $validated = $request->validate([
         //     'profile_image' => 'image|mimes:jpg,png,jpeg|max:2048'
         // ]);
@@ -55,11 +48,8 @@ class ProfileController extends Controller
     
         return Redirect::route('profile.edit');
     }
-    /**
-     * Delete the user's account.
-     */
-    public function destroy(Request $request): RedirectResponse
-    {
+
+    public function destroy(Request $request): RedirectResponse {
         $request->validate([
             'password' => ['required', 'current_password'],
         ]);
