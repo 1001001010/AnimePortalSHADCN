@@ -27,9 +27,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile/session/{session_id}', [SessionController::class, 'destroy_session'])->name('profile.session.destroy');
 });
 
-// Route::get('/profile/sessions', [ProfileController::class, 'session'])->name('profile.session');
-
-Route::get('friends', [FriendsController::class, 'friends'])
-->name('friends.index');
+Route::controller(App\Http\Controllers\FriendsController::class)->group(function () { 
+    Route::get('friends','index')->name('friends.index')->middleware('auth');
+});
 
 require __DIR__.'/auth.php';

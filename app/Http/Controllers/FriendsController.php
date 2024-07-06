@@ -8,8 +8,8 @@ use Inertia\Inertia;
 
 class FriendsController extends Controller
 {
-    public function friends() {
-        $random_users = User::inRandomOrder()->limit(15)->get();
+    public function index() {
+        $random_users = User::inRandomOrder()->get();
     
         return Inertia::render('Friends', [
             'users' => $random_users,
