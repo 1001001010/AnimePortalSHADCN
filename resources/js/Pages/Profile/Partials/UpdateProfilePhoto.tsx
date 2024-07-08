@@ -38,6 +38,7 @@ export default function UpdateProfilePhoto({
                     <Input
                         id="photo"
                         type="file"
+                        className="custom-file-input text-gray-900 dark:text-gray-100"
                         onChange={(e) => {
                             const file = e.target.files?.[0];
                             if (file) {

@@ -293,7 +293,14 @@ export default function Header({ auth }: PageProps<{}>) {
                                     </Link>
                                 </DropdownMenuItem>
                                 <DropdownMenuSeparator />
-                                <DropdownMenuItem>Настройки</DropdownMenuItem>
+                                <DropdownMenuItem>
+                                    <Link
+                                        href={route("profile.edit")}
+                                        as="button"
+                                    >
+                                        Настройки
+                                    </Link>
+                                </DropdownMenuItem>
                                 <DropdownMenuSeparator />
                                 <DropdownMenuItem>
                                     <form onSubmit={submit}>

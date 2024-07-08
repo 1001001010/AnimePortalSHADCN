@@ -89,4 +89,18 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  .custom-file-input::-webkit-file-upload-button {
+    visibility: hidden;
+  }
+
+  .custom-file-input {
+    color: transparent;
+  }
+
+  .custom-file-input::before {
+    content: 'Файл не выбран';
+    display: inline-block;
+    padding: 3px 8px;
+  }
 }
