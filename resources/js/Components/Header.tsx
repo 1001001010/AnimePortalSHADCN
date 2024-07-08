@@ -287,32 +287,36 @@ export default function Header({ auth }: PageProps<{}>) {
                                 </Button>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent align="end">
-                                <DropdownMenuItem>
-                                    <Link href={route("profile")} as="button">
-                                        Профиль
-                                    </Link>
-                                </DropdownMenuItem>
+                                <Link
+                                    href={route("profile")}
+                                    as="button"
+                                    className="w-full"
+                                >
+                                    <DropdownMenuItem>Профиль</DropdownMenuItem>
+                                </Link>
                                 <DropdownMenuSeparator />
-                                <DropdownMenuItem>
-                                    <Link
-                                        href={route("profile.edit")}
-                                        as="button"
-                                    >
+                                <Link
+                                    href={route("profile.edit")}
+                                    as="button"
+                                    className="w-full"
+                                >
+                                    <DropdownMenuItem>
                                         Настройки
-                                    </Link>
-                                </DropdownMenuItem>
+                                    </DropdownMenuItem>
+                                </Link>
                                 <DropdownMenuSeparator />
-                                <DropdownMenuItem>
-                                    <form onSubmit={submit}>
-                                        <Link
-                                            href={route("logout")}
-                                            method="post"
-                                            as="button"
-                                        >
+                                <form onSubmit={submit}>
+                                    <Link
+                                        href={route("logout")}
+                                        method="post"
+                                        as="button"
+                                        className="w-full"
+                                    >
+                                        <DropdownMenuItem>
                                             Выход
-                                        </Link>
-                                    </form>
-                                </DropdownMenuItem>
+                                        </DropdownMenuItem>
+                                    </Link>
+                                </form>
                             </DropdownMenuContent>
                         </DropdownMenu>
                     ) : (

@@ -18,8 +18,10 @@ export default function Welcome({
 
     return (
         <>
-            <Head title="Welcome" />
             <Header auth={auth} />
+            <div className="ml-14 max-md:ml-0">
+                <div className="m-4 p-4 border border-gray-200 rounded-lg shadow dark:border-gray-700"></div>
+            </div>
         </>
     );
 }

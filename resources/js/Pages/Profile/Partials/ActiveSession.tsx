@@ -33,6 +33,7 @@ export default function ActiveSession({ activeSessions }: ActiveSessionProps) {
                                 session.last_activity * 1000
                             ).toLocaleString()}
                         </p>
+                        <p>{session.id}</p>
                         <Button
                             variant="outline"
                             className="mt-2"

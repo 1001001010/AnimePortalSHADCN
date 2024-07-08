@@ -19,18 +19,22 @@ interface FriendsProps {
 }
 
 const Friends: React.FC<FriendsProps> = ({ auth, users }) => {
-    const [open, setOpen] = React.useState(false);
-    const [value, setValue] = React.useState("");
-    const [filteredUsers, setFilteredUsers] = React.useState(users);
+    const [open, setOpen] = useState(false);
+    const [searchValue, setSearchValue] = useState("");
+    const [filteredUsers, setFilteredUsers] = useState(users);
 
     const handleSearch = (searchValue: string) => {
-        const filtered = users.filter((user) => {
-            const name = user.name.toLowerCase();
-            const email = user.email.toLowerCase();
-            const search = searchValue.toLowerCase();
-            return name.includes(search) || email.includes(search);
-        });
-        setFilteredUsers(filtered);
+        if (searchValue.trim() === "") {
+            setFilteredUsers(users);
+        } else {
+            const filtered = users.filter((user) => {
+                const name = user.name.toLowerCase();
+                const email = user.email.toLowerCase();
+                const search = searchValue.toLowerCase();
+                return name.includes(search) || email.includes(search);
+            });
+            setFilteredUsers(filtered);
+        }
     };
 
     return (
@@ -44,13 +48,13 @@ const Friends: React.FC<FriendsProps> = ({ auth, users }) => {
                                 <CommandInput
                                     placeholder="Поиск друзей..."
                                     className="h-9 w-full"
-                                    value={value}
+                                    value={searchValue}
                                     onValueChange={(value) => {
-                                        setValue(value);
+                                        setSearchValue(value);
                                         handleSearch(value);
                                     }}
                                 />
-                                {value && (
+                                {searchValue && (
                                     <CommandList>
                                         {filteredUsers.length > 0 ? (
                                             <CommandGroup>

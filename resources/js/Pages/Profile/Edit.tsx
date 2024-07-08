@@ -6,12 +6,6 @@ import UpdatePasswordForm from "./Partials/UpdatePasswordForm";
 import UpdateProfileInformationForm from "./Partials/UpdateProfileInformationForm";
 import UpdateProfilePhoto from "./Partials/UpdateProfilePhoto";
 import { Toaster } from "@/shadcn/ui/sonner";
-import { CalendarIcon } from "@radix-ui/react-icons";
-import {
-    HoverCard,
-    HoverCardContent,
-    HoverCardTrigger,
-} from "@/shadcn/ui/hover-card";
 
 export default function Edit({
     auth,
@@ -20,6 +14,7 @@ export default function Edit({
     activeSession,
 }: PageProps<{
     mustVerifyEmail: boolean;
+    auth: any;
     status?: string;
     activeSession: any[];
 }>) {

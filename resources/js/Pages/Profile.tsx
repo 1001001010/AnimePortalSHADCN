@@ -1,19 +1,5 @@
 import { PageProps } from "@/types";
 import Header from "@/Components/Header";
-import { Button } from "@/shadcn/ui/button";
-import {
-    AlertDialog,
-    AlertDialogAction,
-    AlertDialogCancel,
-    AlertDialogContent,
-    AlertDialogDescription,
-    AlertDialogFooter,
-    AlertDialogHeader,
-    AlertDialogTitle,
-    AlertDialogTrigger,
-} from "@/shadcn/ui/alert-dialog";
-import { Input } from "@/shadcn/ui/input";
-import { Label } from "@/shadcn/ui/label";
 
 export default function Profile({
     auth,
