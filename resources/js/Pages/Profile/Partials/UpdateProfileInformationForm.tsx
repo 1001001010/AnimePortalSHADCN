@@ -9,8 +9,6 @@ import { Button } from "@/shadcn/ui/button";
 import { Toaster } from "@/shadcn/ui/sonner";
 
 export default function UpdateProfileInformation({
-    mustVerifyEmail,
-    status,
     className = "",
 }: {
     mustVerifyEmail: boolean;
@@ -23,7 +21,6 @@ export default function UpdateProfileInformation({
         useForm({
             name: user.name,
             email: user.email,
-            profile_image: user.profile_image,
             updated_at: user.updated_at,
         });
 
@@ -39,11 +36,7 @@ export default function UpdateProfileInformation({
                 <h2 className="text-lg font-medium">Профиль</h2>
             </header>
 
-            <form
-                onSubmit={submit}
-                className="mt-6 space-y-6"
-                encType="multipart/form-data"
-            >
+            <form onSubmit={submit} className="mt-6 space-y-6">
                 <div>
                     <Label htmlFor="name">Name</Label>
                     <Input
@@ -70,30 +63,6 @@ export default function UpdateProfileInformation({
                         autoComplete="username"
                     />
 
-                    <InputError className="mt-2" message={errors.email} />
-                </div>
-
-                <div>
-                    <Label htmlFor="photo">Фото</Label>
-                    <Input
-                        id="photo"
-                        type="file"
-                        name="profile_image"
-                        className="mt-1 block w-full"
-                        onChange={(e) => {
-                            if (e.target.files && e.target.files[0]) {
-                                const file = e.target.files[0];
-                                const reader = new FileReader();
-                                reader.onload = () => {
-                                    setData(
-                                        "profile_image",
-                                        reader.result as string
-                                    );
-                                };
-                                reader.readAsDataURL(file);
-                            }
-                        }}
-                    />
                     <InputError className="mt-2" message={errors.email} />
                 </div>
 

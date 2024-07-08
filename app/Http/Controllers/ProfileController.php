@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
 use App\Models\ActiveSession;
+use App\Models\User;
 
 class ProfileController extends Controller
 {
@@ -24,29 +25,31 @@ class ProfileController extends Controller
     }
     
     public function update(ProfileUpdateRequest $request): RedirectResponse {
-        // $validated = $request->validate([
-        //     'profile_image' => 'image|mimes:jpg,png,jpeg|max:2048'
-        // ]);
-    
         $request->user()->fill($request->validated());
-    
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
-        }
-
-        $file = $request->file('profile_image');
-    
-        if ($file) {
-            dd($request->all());
-            $filename = time(). '.'. $request->file('profile_image')->extension();
-            $destination = 'public/avatars';
-            $request->file('profile_image')->storeAs($destination, $filename);
-            $request->user()->profile_image = $filename;
-        }
     
         $request->user()->save();
     
         return Redirect::route('profile.edit');
+    }
+
+    public function photo(Request $request) {
+        if ($request->hasFile('photo')) {
+            $validated = $request->validate([
+                'photo' => 'required|image|mimes:jpg,png,jpeg|max:2048'
+            ]);
+            $user = User::where('id', Auth::user()->id)->first();
+            $photoPath = $user->profile_image;
+            if (file_exists($photoPath)) {
+                // Если аватарка уже есть, то удаляем старое фото
+                unlink($photoPath);
+            }
+            $name = time(). ".". $request->file('photo')->extension();
+            $destination = 'public/avatars';
+            $path = $request->file('photo')->storeAs($destination, $name);
+            User::where('id', Auth::user()->id)->update([
+                'profile_image' => 'storage/avatars/' . $name
+            ]);
+        }
     }
 
     public function destroy(Request $request): RedirectResponse {

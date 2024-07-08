@@ -4,6 +4,7 @@ import DeleteUserForm from "./Partials/DeleteUserForm";
 import ActiveSession from "./Partials/ActiveSession";
 import UpdatePasswordForm from "./Partials/UpdatePasswordForm";
 import UpdateProfileInformationForm from "./Partials/UpdateProfileInformationForm";
+import UpdateProfilePhoto from "./Partials/UpdateProfilePhoto";
 import { Toaster } from "@/shadcn/ui/sonner";
 import { CalendarIcon } from "@radix-ui/react-icons";
 import {
@@ -34,6 +35,9 @@ export default function Edit({
                                 status={status}
                                 className="mb-4"
                             />
+                        </div>
+                        <div className="mb-4 border border-gray-200 rounded-lg shadow dark:border-gray-700 w-full p-4">
+                            <UpdateProfilePhoto className="mb-4" />
                         </div>
                         <div className="mb-4 border border-gray-200 rounded-lg shadow dark:border-gray-700 w-full p-4">
                             <UpdatePasswordForm className="mb-4" />

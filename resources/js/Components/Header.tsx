@@ -270,7 +270,7 @@ export default function Header({ auth }: PageProps<{}>) {
                                     {auth.user.profile_image ? (
                                         <Avatar>
                                             <AvatarImage
-                                                src="/img/defaultAvatar.png"
+                                                src={auth.user.profile_image}
                                                 alt="@avatar"
                                             />
                                             <AvatarFallback>CN</AvatarFallback>
