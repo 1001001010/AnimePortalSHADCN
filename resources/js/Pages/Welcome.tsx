@@ -1,6 +1,7 @@
 import { Link, Head } from "@inertiajs/react";
 import { PageProps } from "@/types";
 import Header from "@/Components/Header";
+import NewItems from "@/Components/NewItems";
 
 export default function Welcome({
     auth,
@@ -20,7 +21,9 @@ export default function Welcome({
         <>
             <Header auth={auth} />
             <div className="ml-14 max-md:ml-0">
-                <div className="m-4 p-4 border border-gray-200 rounded-lg shadow dark:border-gray-700"></div>
+                <div className="m-4 p-4 border border-gray-200 rounded-lg shadow dark:border-gray-700">
+                    <NewItems />
+                </div>
             </div>
         </>
     );
