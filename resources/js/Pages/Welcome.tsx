@@ -2,6 +2,8 @@ import { Link, Head } from "@inertiajs/react";
 import { PageProps } from "@/types";
 import Header from "@/Components/Header";
 import NewItems from "@/Components/NewItems";
+import HighestScoreItems from "@/Components/HighestScoreItems";
+import ItemsList from "@/Components/ItemsList";
 
 export default function Welcome({
     auth,
@@ -23,6 +25,8 @@ export default function Welcome({
             <div className="ml-14 ml:ml-0 max-sm:ml-0">
                 <div className="m-4 p-4 border border-gray-200 rounded-lg shadow dark:border-gray-700">
                     <NewItems />
+                    <HighestScoreItems />
+                    <ItemsList />
                 </div>
             </div>
         </>
