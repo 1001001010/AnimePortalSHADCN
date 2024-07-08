@@ -40,7 +40,7 @@ const Friends: React.FC<FriendsProps> = ({ auth, users }) => {
     return (
         <>
             <Header auth={auth} />
-            <div className="ml-14 max-md:ml-0">
+            <div className="ml-14 ml:ml-0 max-sm:ml-0">
                 <div className="m-4 border border-gray-200 rounded-lg shadow dark:border-gray-700">
                     <ul className="p-4 w-full">
                         <Popover open={open} onOpenChange={setOpen}>

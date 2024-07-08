@@ -21,7 +21,7 @@ export default function Edit({
     return (
         <>
             <Header auth={auth} />
-            <div className="ml-14 ml:ml-0">
+            <div className="ml-14 ml:ml-0 max-sm:ml-0">
                 <div className="m-4 border border-gray-200 rounded-lg shadow dark:border-gray-700 flex flex-wrap md:flex-nowrap">
                     <div className="p-6 text-gray-900 dark:text-gray-100 w-full md:w-2/3">
                         <div className="mb-4 border border-gray-200 rounded-lg shadow dark:border-gray-700 w-full p-4">
