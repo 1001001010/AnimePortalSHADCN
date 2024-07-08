@@ -15,8 +15,8 @@ export default function HighestScoreItems() {
             <div className="flex justify-around max-lg:mx-10 gap-4">
                 <div className="p-2 text-gray-900 dark:text-gray-100 w-full md:w-2/3 border border-gray-200 rounded-lg">
                     <h2 className="text-lg font-medium p-1">Список Аниме</h2>
-                    <div className="flex justify-between flex-wrap gap-2">
-                        <Card className="w-1/4">
+                    <div className="grid grid-cols-3 items-center justify-items-center">
+                        <Card className="w-11/12 m-2">
                             <CardContent className="flex aspect-square items-center justify-center p-2">
                                 <img src="/img/Poster.jpg" alt="Лого" />
                             </CardContent>
@@ -37,7 +37,7 @@ export default function HighestScoreItems() {
                                 </div>
                             </div>
                         </Card>
-                        <Card className="w-1/4">
+                        <Card className="w-11/12 m-2">
                             <CardContent className="flex aspect-square items-center justify-center p-2">
                                 <img src="/img/Poster.jpg" alt="Лого" />
                             </CardContent>
@@ -58,7 +58,7 @@ export default function HighestScoreItems() {
                                 </div>
                             </div>
                         </Card>
-                        <Card className="w-1/4">
+                        <Card className="w-11/12 m-2">
                             <CardContent className="flex aspect-square items-center justify-center p-2">
                                 <img src="/img/Poster.jpg" alt="Лого" />
                             </CardContent>
@@ -79,7 +79,7 @@ export default function HighestScoreItems() {
                                 </div>
                             </div>
                         </Card>
-                        <Card className="w-1/4">
+                        <Card className="w-11/12 m-2">
                             <CardContent className="flex aspect-square items-center justify-center p-2">
                                 <img src="/img/Poster.jpg" alt="Лого" />
                             </CardContent>
@@ -100,7 +100,7 @@ export default function HighestScoreItems() {
                                 </div>
                             </div>
                         </Card>
-                        <Card className="w-1/4">
+                        <Card className="w-11/12 m-2">
                             <CardContent className="flex aspect-square items-center justify-center p-2">
                                 <img src="/img/Poster.jpg" alt="Лого" />
                             </CardContent>
