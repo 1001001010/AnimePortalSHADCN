@@ -28,10 +28,17 @@ export default function Profile({
                 <div className="m-4 border border-gray-200 rounded-lg shadow dark:border-gray-700">
                     <div className="flex">
                         <div className="w-44 h-full m-2">
-                            <img
-                                src="/img/defaultAvatar.png"
-                                className="rounded border border-gray-200"
-                            ></img>
+                            {auth.user.profile_image ? (
+                                <img
+                                    src={auth.user.profile_image}
+                                    className="rounded"
+                                ></img>
+                            ) : (
+                                <img
+                                    src="/img/defaultAvatar.png"
+                                    className="rounded"
+                                ></img>
+                            )}
                         </div>
                         <div className="m-2 text-gray-900 dark:text-gray-100 flex flex-col gap-4">
                             <h3>{auth.user.name}</h3>
