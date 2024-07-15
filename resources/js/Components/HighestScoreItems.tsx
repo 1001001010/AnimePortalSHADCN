@@ -42,7 +42,7 @@ export default function HighestScoreItems() {
                                             </CardContent>
                                             <div className="flex items-start justify-start py-2">
                                                 <div className="w-full flex items-center justify-between px-5 max-sm:flex-col">
-                                                    <div>
+                                                    <div className="max-sm:text-center">
                                                         <p className="font-semibold">
                                                             Берсерк
                                                         </p>
