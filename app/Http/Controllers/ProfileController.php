@@ -15,6 +15,10 @@ use App\Models\User;
 
 class ProfileController extends Controller
 {
+    public function index() {
+        return Inertia::render('Profile');
+    }
+
     public function edit(Request $request): Response {
             $activeSessions = ActiveSession::where('user_id', Auth::user()->id)->get();
             return Inertia::render('Profile/Edit', [
