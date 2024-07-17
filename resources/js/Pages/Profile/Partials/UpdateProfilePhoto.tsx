@@ -1,5 +1,4 @@
-import InputError from "@/Components/InputError";
-import { Link, useForm, usePage } from "@inertiajs/react";
+import { useForm, usePage } from "@inertiajs/react";
 import { FormEventHandler } from "react";
 import { PageProps } from "@/types";
 import { toast } from "sonner";
@@ -14,7 +13,7 @@ export default function UpdateProfilePhoto({
 }) {
     const user = usePage<PageProps>().props.auth.user;
 
-    const { data, setData, post, errors, processing, recentlySuccessful } =
+    const { data, setData, post, processing } =
         useForm({
             updated_at: user.updated_at,
             photo: null as File | null,

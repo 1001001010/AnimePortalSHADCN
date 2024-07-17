@@ -14,7 +14,6 @@ export default function Edit({
     activeSession,
 }: PageProps<{
     mustVerifyEmail: boolean;
-    auth: any;
     status?: string;
     activeSession: any[];
 }>) {

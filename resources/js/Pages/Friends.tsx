@@ -13,29 +13,7 @@ import {
   CommandItem,
   CommandList,
 } from "@/shadcn/ui/command";
-
-const frameworks = [
-  {
-    value: "next.js",
-    label: "Next.js",
-  },
-  {
-    value: "sveltekit",
-    label: "SvelteKit",
-  },
-  {
-    value: "nuxt.js",
-    label: "Nuxt.js",
-  },
-  {
-    value: "remix",
-    label: "Remix",
-  },
-  {
-    value: "astro",
-    label: "Astro",
-  },
-];
+import { useForm } from "@inertiajs/react";
 
 export default function Friends({
   auth,
@@ -54,32 +32,37 @@ export default function Friends({
       <div className="ml-14 ml:ml-0 max-sm:ml-0">
         <div className="m-4 border border-gray-200 rounded-lg shadow dark:border-gray-700">
           <ul className="p-4 w-full">
-                <Command>
-                  <CommandInput placeholder="Search user..." />
-                  <CommandEmpty>No user found.</CommandEmpty>
-                  <CommandList>
-                    <CommandGroup>
-                      {users.map((user) => (
-                        <CommandItem
-                          key={user.id}
-                          value={user.id}
-                          onSelect={(currentValue) => {
-                            setValue(currentValue === value? "" : currentValue);
-                            setOpen(false);
-                          }}
-                        >
-                          <CheckIcon
-                            className={cn(
-                              "mr-2 h-4 w-4",
-                              value === user.id? "opacity-100" : "opacity-0"
-                            )}
-                          />
-                          {user.name}
-                        </CommandItem>
-                      ))}
-                    </CommandGroup>
-                  </CommandList>
-                </Command>
+            <Command>
+              <CommandInput
+                placeholder="Search user..."
+                onFocus={() => setOpen(true)}
+                onBlur={() => setOpen(false)}
+              />
+              {open && (
+                <CommandList>
+                  <CommandGroup>
+                    {users.map((user) => (
+                      <CommandItem
+                        key={user.id}
+                        value={user.id}
+                        onSelect={(currentValue) => {
+                          setValue(currentValue === value? "" : currentValue);
+                          setOpen(false);
+                        }}
+                      >
+                        <CheckIcon
+                          className={cn(
+                            "mr-2 h-4 w-4",
+                            value === user.id? "opacity-100" : "opacity-0"
+                          )}
+                        />
+                        {user.name}
+                      </CommandItem>
+                    ))}
+                  </CommandGroup>
+                </CommandList>
+              )}
+            </Command>
           </ul>
           <ul className="m-4">Ваши друзья</ul>
         </div>

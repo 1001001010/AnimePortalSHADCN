@@ -2,10 +2,16 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FriendsController;
+use App\Http\Controllers\AnalyticsController;
 use App\Http\Controllers\SessionController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\IsAdmin;
 use Inertia\Inertia;
+
+Route::middleware(IsAdmin::class)->group(function () {
+    Route::get('/analytics', [AnalyticsController::class, 'analytics'])->name('analytics.index');
+});
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -30,6 +36,12 @@ Route::middleware('auth')->group(function () {
 
 Route::controller(App\Http\Controllers\FriendsController::class)->group(function () { 
     Route::get('friends','index')->name('friends.index')->middleware('auth');
+});
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::controller(App\Http\Controllers\FriendsController::class)->group(function () {
+        Route::get('friends','index')->name('friends.index');
+    });
 });
 
 require __DIR__.'/auth.php';

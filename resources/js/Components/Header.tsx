@@ -26,6 +26,7 @@ import {
     Package2,
     PanelLeft,
     Search,
+    PencilRuler,
     Settings,
     ShoppingCart,
     Users2,
@@ -127,20 +128,42 @@ export default function Header({ auth }: PageProps<{}>) {
                             </TooltipTrigger>
                             <TooltipContent side="right">Друзья</TooltipContent>
                         </Tooltip>
-                        <Tooltip>
-                            <TooltipTrigger asChild>
-                                <Link
-                                    href="#"
-                                    className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
-                                >
-                                    <LineChart className="h-5 w-5" />
-                                    <span className="sr-only">Analytics</span>
-                                </Link>
-                            </TooltipTrigger>
-                            <TooltipContent side="right">
-                                Analytics
-                            </TooltipContent>
-                        </Tooltip>
+                        {auth.user && auth.user.is_admin == 1 ? (
+                            <div className="gap-4 flex flex-col">
+                                <Tooltip>
+                                    <TooltipTrigger asChild>
+                                        <Link
+                                            href={route("analytics.index")}
+                                            className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                                        >
+                                            <LineChart className="h-5 w-5" />
+                                            <span className="sr-only">
+                                                Analytics
+                                            </span>
+                                        </Link>
+                                    </TooltipTrigger>
+                                    <TooltipContent side="right">
+                                        Analytics
+                                    </TooltipContent>
+                                </Tooltip>
+                                <Tooltip>
+                                    <TooltipTrigger asChild>
+                                        <Link
+                                            href="#"
+                                            className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                                        >
+                                            <PencilRuler className="h-5 w-5" />
+                                            <span className="sr-only">
+                                                Admin
+                                            </span>
+                                        </Link>
+                                    </TooltipTrigger>
+                                    <TooltipContent side="right">
+                                        Admin
+                                    </TooltipContent>
+                                </Tooltip>
+                            </div>
+                        ) : null}
                     </TooltipProvider>
                 </nav>
                 {auth.user ? (
@@ -242,11 +265,18 @@ export default function Header({ auth }: PageProps<{}>) {
                                     Друзья
                                 </Link>
                                 <Link
-                                    href="#"
+                                    href={route("analytics.index")}
                                     className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
                                 >
                                     <LineChart className="h-5 w-5" />
-                                    Analystik
+                                    Analytics
+                                </Link>
+                                <Link
+                                    href="#"
+                                    className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
+                                >
+                                    <PencilRuler className="h-5 w-5" />
+                                    Admin
                                 </Link>
                             </nav>
                         </SheetContent>
