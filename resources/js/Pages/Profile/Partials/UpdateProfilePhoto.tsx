@@ -13,11 +13,10 @@ export default function UpdateProfilePhoto({
 }) {
     const user = usePage<PageProps>().props.auth.user;
 
-    const { data, setData, post, processing } =
-        useForm({
-            updated_at: user.updated_at,
-            photo: null as File | null,
-        });
+    const { data, setData, post, processing } = useForm({
+        updated_at: user.updated_at,
+        photo: null as File | null,
+    });
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();

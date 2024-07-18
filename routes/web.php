@@ -8,11 +8,13 @@ use Inertia\Inertia;
 
 Route::controller(App\Http\Controllers\MainController::class)->group(function () {
     Route::get('/','index')->name('index');
+    Route::get('/anime/{id}','anime')->name('anime');
 });
 
 Route::group(['middleware' => 'auth'], function () {
     Route::controller(App\Http\Controllers\FriendsController::class)->group(function () {
         Route::get('friends','index')->name('friends.index');
+        Route::post('friends/add','add_friends')->name('friends.add');
     });
     Route::controller(App\Http\Controllers\SessionController::class)->group(function () {
         Route::get('/profile/session/{session_id}','destroy_session')->name('profile.session.destroy');

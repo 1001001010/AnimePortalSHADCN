@@ -18,8 +18,8 @@ class FriendsController extends Controller
         ]);
     }
 
-    public function add_friends(Request $request)
-    {
-        dd($request);
+    public function add_friends(Request $request) {
+
+        dd($request->all());
     }
 }

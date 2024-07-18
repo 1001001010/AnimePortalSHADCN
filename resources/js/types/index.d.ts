@@ -15,6 +15,11 @@ export interface ActiveSession {
     last_activity: number;
     payload: string;
 }
+export interface FriendShips {
+    id: number;
+    user_id: number;
+    friend_id: number;
+}
 
 export type PageProps<
     T extends Record<string, unknown> = Record<string, unknown>
