@@ -4,19 +4,37 @@ import Header from "@/Components/Header";
 import { Star } from "lucide-react";
 import { Button } from "@/shadcn/ui/button";
 import { Badge } from "@/shadcn/ui/badge";
-import { Card, CardContent } from "@/shadcn/ui/card";
-import {
-    Carousel,
-    CarouselContent,
-    CarouselItem,
-    CarouselNext,
-    CarouselPrevious,
-} from "@/shadcn/ui/carousel";
+import Plyr from "plyr-react";
+import "plyr-react/plyr.css";
 import ScrenesCarousel from "@/Components/ScenesCarousel";
 
 export default function AnimePage({
     auth,
 }: PageProps<{ laravelVersion: string; phpVersion: string }>) {
+    const plyrProps = {
+        source: {
+            type: "video",
+            sources: [
+                {
+                    src: "/img/screnes/Berserk.mp4",
+                    type: "video/mp4",
+                    size: 1080,
+                },
+            ],
+        },
+        options: {
+            controls: [
+                "play",
+                "progress",
+                "current-time",
+                "mute",
+                "volume",
+                "settings",
+                "pip",
+                "fullscreen",
+            ],
+        },
+    };
     return (
         <>
             <Header auth={auth} />
@@ -112,6 +130,9 @@ export default function AnimePage({
                         человеческого вида в достижении мечты.
                     </div>
                     <ScrenesCarousel />
+                    <div className="plyr-container">
+                        <Plyr {...plyrProps} />
+                    </div>
                 </div>
             </div>
         </>
