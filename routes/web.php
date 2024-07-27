@@ -1,6 +1,8 @@
 <?php
 
-use App\Http\Controllers\{ProfileController, FriendsController, AnalyticsController, SessionController, MainController};
+use App\Http\Controllers\{ProfileController, FriendsController, 
+                          AnalyticsController, SessionController, 
+                          MainController, AdminController};
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\IsAdmin;
@@ -30,6 +32,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 Route::middleware(IsAdmin::class)->group(function () {
     Route::get('/analytics', [AnalyticsController::class, 'analytics'])->name('analytics.index');
+    Route::get('/admin', [AdminController::class, 'index'])->name('adminPanel.index');
 });
 
 require __DIR__.'/auth.php';

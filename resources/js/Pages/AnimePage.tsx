@@ -13,11 +13,11 @@ export default function AnimePage({
 }: PageProps<{ laravelVersion: string; phpVersion: string }>) {
     const plyrProps = {
         source: {
-            type: "video",
+            type: "video" as const,
             sources: [
                 {
                     src: "/img/screnes/Berserk.mp4",
-                    type: "video/mp4",
+                    type: "video/mp4" as const,
                     size: 1080,
                 },
             ],
@@ -94,10 +94,6 @@ export default function AnimePage({
                                 <p>Такахаси Наохито</p>
                             </div>
                             <div className="flex justify-between w-full">
-                                <p className="font-bold">Снят по манге</p>
-                                <p>Берсерк</p>
-                            </div>
-                            <div className="flex justify-between w-full">
                                 <p className="font-bold">Автор оригинала</p>
                                 <p>Кэнтаро Миура</p>
                             </div>
@@ -130,8 +126,30 @@ export default function AnimePage({
                         человеческого вида в достижении мечты.
                     </div>
                     <ScrenesCarousel />
-                    <div className="plyr-container">
-                        <Plyr {...plyrProps} />
+                    <div className="m-4 border border-gray-200 rounded-lg shadow dark:border-gray-700 flex justify-between max-md:flex-col max-md:items-center max-md:p-4">
+                        <div className="m-4 w-1/2 max-md:w-full max-md:mb-4">
+                            <div>
+                                <Plyr {...plyrProps} />
+                            </div>
+                        </div>
+                        <div className="m-4 border border-gray-200 rounded-lg shadow dark:border-gray-700 w-1/2 max-md:w-full">
+                            <div className="m-4">
+                                <h1>Серии</h1>
+                                <div className="mt-4 grid grid-cols-4 gap-4 max-sm:grid-cols-3">
+                                    <Button variant="outline">Серия 2</Button>
+                                    <Button variant="outline">Серия 3</Button>
+                                    <Button variant="outline">Серия 4</Button>
+                                    <Button variant="outline">Серия 5</Button>
+                                    <Button variant="outline">Серия 6</Button>
+                                    <Button variant="outline">Серия 7</Button>
+                                    <Button variant="outline">Серия 8</Button>
+                                    <Button variant="outline">Серия 9</Button>
+                                    <Button variant="outline">Серия 10</Button>
+                                    <Button variant="outline">Серия 11</Button>
+                                    <Button variant="outline">Серия 12</Button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
