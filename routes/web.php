@@ -33,6 +33,7 @@ Route::group(['middleware' => 'auth'], function () {
 Route::middleware(IsAdmin::class)->group(function () {
     Route::get('/analytics', [AnalyticsController::class, 'analytics'])->name('analytics.index');
     Route::get('/admin', [AdminController::class, 'index'])->name('adminPanel.index');
+    Route::post('/admin/anime/new', [AdminController::class, 'new_anime'])->name('NewAnime');
 });
 
 require __DIR__.'/auth.php';
