@@ -99,7 +99,7 @@ export default function AdminPanel({ auth }: PageProps<{}>) {
                         </DialogTrigger>
                         {/* Форма добавления аниме */}
                         <form onSubmit={submit}>
-                            <DialogContent>
+                            <DialogContent className="max-md:max-h-screen max-md:overflow-y-auto">
                                 <DialogHeader>
                                     <DialogTitle>Добавить Аниме</DialogTitle>
                                 </DialogHeader>
@@ -111,14 +111,14 @@ export default function AdminPanel({ auth }: PageProps<{}>) {
                                                 className="w-full h-full mb-2 mx-auto"
                                             />
                                         ) : (
-                                            <div className="w-full h-full border border-gray-200 rounded-lg shadow dark:border-gray-700 mb-2 mx-auto" />
+                                            <div className="w-full h-full border border-input rounded-lg mb-2 mx-auto" />
                                         )}
                                         <Input
                                             id="cover"
                                             name="cover"
                                             type="file"
                                             multiple
-                                            className="border-gray-200 dark:border-gray-700 custom-file-input2"
+                                            className=" custom-file-input2"
                                             onChange={handleFileChange}
                                         />
                                     </div>
@@ -302,7 +302,6 @@ export default function AdminPanel({ auth }: PageProps<{}>) {
                                             <CarouselItem className="md:basis-1/2 lg:basis-1/3 h-full">
                                                 <div className="p-1 max-sm:p-0">
                                                     <Card>
-                                                        {/* <CardContent className="flex aspect-ratio-1/1 items-center justify-center p-2"> */}
                                                         <Input
                                                             type="file"
                                                             multiple
@@ -311,7 +310,6 @@ export default function AdminPanel({ auth }: PageProps<{}>) {
                                                             }
                                                             className="custom-file-input2"
                                                         />
-                                                        {/* </CardContent> */}
                                                     </Card>
                                                 </div>
                                             </CarouselItem>
