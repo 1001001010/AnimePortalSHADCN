@@ -105,7 +105,13 @@ export default function NewAnimeForm() {
                                         className="w-full h-full mb-2 mx-auto"
                                     />
                                 ) : (
-                                    <div className="w-full h-full border border-input rounded-lg mb-2 mx-auto" />
+                                    <div
+                                        className={`w-full h-full border border-input rounded-lg mb-2 mx-auto ${
+                                            errors.description
+                                                ? "border-red-500"
+                                                : ""
+                                        }`}
+                                    />
                                 )}
                                 <Input
                                     id="cover"
@@ -333,7 +339,11 @@ export default function NewAnimeForm() {
                                                     onChange={
                                                         handleScreenChange
                                                     }
-                                                    className="custom-file-input2"
+                                                    className={`custom-file-input2 ${
+                                                        errors.description
+                                                            ? "border-red-500"
+                                                            : ""
+                                                    }`}
                                                 />
                                             </Card>
                                         </div>
