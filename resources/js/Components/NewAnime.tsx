@@ -29,11 +29,12 @@ import {
 } from "@/shadcn/ui/carousel";
 import { Input } from "@/shadcn/ui/input";
 import { Textarea } from "@/shadcn/ui/textarea";
+import InputError from "./InputError";
 
 export default function NewAnimeForm() {
-    const { data, setData, post, processing, reset } = useForm({
+    const { data, setData, post, processing, reset, errors } = useForm({
         age: "",
-        genre: "",
+        status: "",
         name: "",
         type: "",
         original: "",
@@ -96,7 +97,7 @@ export default function NewAnimeForm() {
                         <DialogHeader>
                             <DialogTitle>Добавить Аниме</DialogTitle>
                         </DialogHeader>
-                        <div className="flex justify-around">
+                        <div className="flex justify-around max-md:gap-2">
                             <div className="w-1/2 max-md:w-full max-md:items-center flex flex-col">
                                 {preview ? (
                                     <img
@@ -111,8 +112,10 @@ export default function NewAnimeForm() {
                                     name="cover"
                                     type="file"
                                     multiple
-                                    className=" custom-file-input2"
                                     onChange={handleFileChange}
+                                    className={`custom-file-input2 ${
+                                        errors.cover ? "border-red-500" : ""
+                                    }`}
                                 />
                             </div>
                             <div>
@@ -121,6 +124,9 @@ export default function NewAnimeForm() {
                                     name="name"
                                     type="text"
                                     placeholder="Название"
+                                    className={` ${
+                                        errors.name ? "border-red-500" : ""
+                                    }`}
                                     onChange={(e) =>
                                         setData("name", e.target.value)
                                     }
@@ -131,19 +137,34 @@ export default function NewAnimeForm() {
                                         name="type"
                                         type="text"
                                         placeholder="Тип"
+                                        className={` ${
+                                            errors.type ? "border-red-500" : ""
+                                        }`}
                                         onChange={(e) =>
                                             setData("type", e.target.value)
                                         }
                                     />
                                     <Select
                                         onValueChange={(value) =>
-                                            setData("genre", value)
+                                            setData("status", value)
                                         }
                                     >
-                                        <SelectTrigger className="w-full">
+                                        <SelectTrigger
+                                            className={`w-full ${
+                                                errors.status
+                                                    ? "border-red-500"
+                                                    : ""
+                                            }`}
+                                        >
                                             <SelectValue placeholder="Статус" />
                                         </SelectTrigger>
-                                        <SelectContent>
+                                        <SelectContent
+                                            className={` ${
+                                                errors.name
+                                                    ? "border-red-500"
+                                                    : ""
+                                            }`}
+                                        >
                                             <SelectGroup>
                                                 <SelectItem value="ongoing">
                                                     Онгоинг
@@ -165,6 +186,11 @@ export default function NewAnimeForm() {
                                         onChange={(e) =>
                                             setData("original", e.target.value)
                                         }
+                                        className={` ${
+                                            errors.original
+                                                ? "border-red-500"
+                                                : ""
+                                        }`}
                                     />
                                     <Input
                                         id="studio"
@@ -174,13 +200,24 @@ export default function NewAnimeForm() {
                                         onChange={(e) =>
                                             setData("studio", e.target.value)
                                         }
+                                        className={` ${
+                                            errors.studio
+                                                ? "border-red-500"
+                                                : ""
+                                        }`}
                                     />
                                     <Select
                                         onValueChange={(value) =>
                                             setData("age", value)
                                         }
                                     >
-                                        <SelectTrigger className="w-full">
+                                        <SelectTrigger
+                                            className={`w-full ${
+                                                errors.age
+                                                    ? "border-red-500"
+                                                    : ""
+                                            }`}
+                                        >
                                             <SelectValue placeholder="Ограничения" />
                                         </SelectTrigger>
                                         <SelectContent>
@@ -211,6 +248,9 @@ export default function NewAnimeForm() {
                                         onChange={(e) =>
                                             setData("voice", e.target.value)
                                         }
+                                        className={`${
+                                            errors.voice ? "border-red-500" : ""
+                                        }`}
                                     />
                                     <Input
                                         id="director"
@@ -220,6 +260,11 @@ export default function NewAnimeForm() {
                                         onChange={(e) =>
                                             setData("director", e.target.value)
                                         }
+                                        className={`${
+                                            errors.director
+                                                ? "border-red-500"
+                                                : ""
+                                        }`}
                                     />
                                     <Input
                                         id="autor"
@@ -229,6 +274,9 @@ export default function NewAnimeForm() {
                                         onChange={(e) =>
                                             setData("autor", e.target.value)
                                         }
+                                        className={`${
+                                            errors.autor ? "border-red-500" : ""
+                                        }`}
                                     />
                                 </div>
                             </div>
@@ -239,6 +287,9 @@ export default function NewAnimeForm() {
                             onChange={(e) =>
                                 setData("description", e.target.value)
                             }
+                            className={`${
+                                errors.description ? "border-red-500" : ""
+                            }`}
                         />
                         <div className="flex justify-center">
                             <Carousel

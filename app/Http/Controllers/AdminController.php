@@ -15,7 +15,7 @@ class AdminController extends Controller
 
         $validated = $request->validate([
             'age' => 'required|integer',
-            'genre' => 'required|string',
+            'status' => 'required|string',
             'name' => 'required|string',
             'type' => 'required|string',
             'original' => 'required|string',
