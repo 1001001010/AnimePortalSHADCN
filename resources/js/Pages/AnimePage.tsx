@@ -7,10 +7,22 @@ import { Badge } from "@/shadcn/ui/badge";
 import Plyr from "plyr-react";
 import "plyr-react/plyr.css";
 import ScrenesCarousel from "@/Components/ScenesCarousel";
+import type { Anime } from "@/types";
+import { Link } from "@inertiajs/react";
 
 export default function AnimePage({
     auth,
-}: PageProps<{ laravelVersion: string; phpVersion: string }>) {
+    Anime,
+}: PageProps<{ Anime: Anime }>) {
+    // Статус
+    const status = [
+        { status: "ongoing", text: "Онгоинг" },
+        { status: "came_out", text: "Вышел" },
+        { status: "preview", text: "Анонс" },
+    ];
+    const statusText = status.find((s) => s.status === Anime.status)?.text;
+
+    // Параметры плеера
     const plyrProps = {
         source: {
             type: "video" as const,
@@ -43,25 +55,27 @@ export default function AnimePage({
                     <div className="flex flex-row max-md:flex-col ">
                         <div className="w-2/12 max-md:w-full py-2 px-2 max-md:items-center">
                             <img
-                                src="/img/Poster.jpg"
+                                src={Anime.cover}
                                 className="rounded mb-2 mx-auto"
                             ></img>
-                            <Button
-                                variant="outline"
-                                className="w-full border-gray-200 dark:border-gray-700"
-                            >
-                                Смотреть
-                            </Button>
+                            <Link href="#player">
+                                <Button
+                                    variant="outline"
+                                    className="w-full border-gray-200 dark:border-gray-700"
+                                >
+                                    Смотреть
+                                </Button>
+                            </Link>
                         </div>
                         <div className="text-gray-900 dark:text-gray-100 flex flex-col w-3/12 max-md:w-full gap-2 p-4">
-                            <h1 className="text-2xl">Берсерк</h1>
+                            <h1 className="text-2xl">{Anime.name}</h1>
                             <div className="flex items-center gap-2">
                                 <Star />
-                                <p className="text-xl">5/5</p>
+                                <p className="text-xl">{Anime.grade}/5</p>
                             </div>
                             <div className="flex justify-between w-full">
                                 <p className="font-bold">Тип</p>
-                                <p>ТВ Сериал</p>
+                                <p>{Anime.type}</p>
                             </div>
                             <div className="flex justify-between w-full">
                                 <p className="font-bold">Эпизоды</p>
@@ -69,66 +83,45 @@ export default function AnimePage({
                             </div>
                             <div className="flex justify-between w-full">
                                 <p className="font-bold">Статус</p>
-                                <p>Вышел</p>
+                                <p>{statusText}</p>
                             </div>
                             <div className="flex justify-between w-full">
                                 <p className="font-bold">Первоисточник</p>
-                                <p>Манга</p>
+                                <p>{Anime.original}</p>
                             </div>
                             <div className="flex justify-between w-full">
                                 <p className="font-bold">Студия</p>
-                                <p>Oriental Light and Magic</p>
+                                <p>{Anime.studio}</p>
                             </div>
                             <div className="flex justify-between w-full">
                                 <p className="font-bold">
                                     Возрастные ограничения
                                 </p>
-                                <Badge>18+</Badge>
+                                <Badge className="font-bold">
+                                    {Anime.age}+
+                                </Badge>
                             </div>
                             <div className="flex justify-between w-full">
                                 <p className="font-bold">Озвучка</p>
-                                <p>MC Entertainment</p>
+                                <p>{Anime.voice}</p>
                             </div>
                             <div className="flex justify-between w-full">
                                 <p className="font-bold">Режиссёр</p>
-                                <p>Такахаси Наохито</p>
+                                <p>{Anime.director}</p>
                             </div>
                             <div className="flex justify-between w-full">
                                 <p className="font-bold">Автор оригинала</p>
-                                <p>Кэнтаро Миура</p>
+                                <p>{Anime.autor}</p>
                             </div>
                         </div>
                     </div>
                     <div className="description p-4 mt-5">
-                        Боль, кровь и слёзы. На престол восходит новый
-                        правитель. Его слуги, подручные демоны безнаказанно
-                        творят бесчинства в городе. Все меняется когда в город,
-                        скрытый темнотой ночи, попадает тяжёлый воин. С
-                        разнообразным вооружением для самых непредвиденных
-                        моментов, в броне, тело его все покрыто шрамами – черный
-                        мечник. Его меч настолько огромен, что может сравниться
-                        с его лютой злобой к королю и демонам.
-                        <br />
-                        <br />
-                        Эта история по сути военная драма. Происходящая в
-                        средневековье, включает в себя хоррор перемешанный с
-                        фэнтези. В центре действий Гатс, его судьба. В прошлом
-                        наёмник, а теперь он охотится за демонами. Его путь
-                        определенный свыше. Предательство, верность, магия,
-                        темные существа и эльфы.
-                        <br />
-                        <br />
-                        «Наша судьба принадлежит нам, не ей решать, как и когда
-                        нам умереть!» - вот основная идея Берсерка. Эта мысль
-                        открывается на протяжении всего сериала. И еще одно,
-                        может ли человек переступить грань дозволенного, уйти за
-                        точку невозврата и где это придел способностей
-                        человеческого вида в достижении мечты.
+                        {Anime.description}
                     </div>
-                    <ScrenesCarousel />
+                    <ScrenesCarousel Anime={Anime} auth={auth} />
                     <div className="m-4 border border-gray-200 rounded-lg shadow dark:border-gray-700 flex justify-between max-md:flex-col max-md:items-center max-md:p-4">
                         <div className="m-4 w-1/2 max-md:w-full max-md:mb-4">
-                            <div>
+                            <div id="player">
                                 <Plyr {...plyrProps} />
                             </div>
                         </div>

@@ -8,8 +8,10 @@ import {
 } from "@/shadcn/ui/carousel";
 import { Button } from "@/shadcn/ui/button";
 import { ChevronsRight } from "lucide-react";
+import { PageProps } from "@/types";
+import { Link } from "@inertiajs/react";
 
-export default function NewItems() {
+export default function NewItems({ auth, Anime }: PageProps<{ Anime: any[] }>) {
     return (
         <div>
             <header>
@@ -25,35 +27,45 @@ export default function NewItems() {
                     <CarouselPrevious className="mr-2" />
                     <div className="flex justify-center">
                         <CarouselContent>
-                            {Array.from({ length: 15 }).map((_, index) => (
+                            {Anime.map((anime) => (
                                 <CarouselItem
-                                    key={index}
+                                    key={anime}
                                     className="basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5"
                                 >
-                                    <div className="p-1 max-sm:p-0">
-                                        <Card>
-                                            <CardContent className="flex aspect-square items-center justify-center p-2">
+                                    <div className="p-1 h-full">
+                                        <Card className="h-full flex flex-col justify-between">
+                                            <CardContent className="flex w-full justify-center items-center p-2 h-full">
                                                 <img
-                                                    src="/img/Poster.jpg"
+                                                    src={anime.cover}
                                                     alt="Лого"
+                                                    className="min-w-full max-h-full object-cover"
+                                                    style={{
+                                                        width: "300px",
+                                                        height: "400px",
+                                                    }}
                                                 />
                                             </CardContent>
-                                            <div className="flex items-start justify-start py-2">
-                                                <div className="w-full flex items-center justify-between px-5 max-sm:flex-col">
+                                            <div className="py-2 max-w-full">
+                                                <div className="w-full flex flex-col items-center gap-2 px-5">
                                                     <div className="max-sm:text-center">
-                                                        <p className="font-semibold">
-                                                            Берсерк
-                                                        </p>
-                                                        <p className="text-gray-600 font-medium">
-                                                            Studio 4°C
+                                                        <p className="text-ellipsis">
+                                                            {anime.name}
                                                         </p>
                                                     </div>
-                                                    <Button
-                                                        variant="outline"
-                                                        className="max-sm:p-2"
+                                                    <Link
+                                                        href={route(
+                                                            "anime",
+                                                            anime.id
+                                                        )}
+                                                        className="min-w-full"
                                                     >
-                                                        Смотреть
-                                                    </Button>
+                                                        <Button
+                                                            variant="outline"
+                                                            className="max-sm:p-2 min-w-full"
+                                                        >
+                                                            Смотреть
+                                                        </Button>
+                                                    </Link>
                                                 </div>
                                             </div>
                                         </Card>

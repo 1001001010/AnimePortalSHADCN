@@ -7,20 +7,14 @@ import {
     CarouselPrevious,
 } from "@/shadcn/ui/carousel";
 import { Button } from "@/shadcn/ui/button";
+import { PageProps } from "@/types";
+import type { Anime } from "@/types";
 
-const imageData = [
-    { id: 1, title: "Берсерк" },
-    { id: 2, title: "Title 2" },
-    { id: 3, title: "Title 3" },
-    { id: 4, title: "Title 4" },
-    { id: 5, title: "Title 5" },
-    { id: 6, title: "Title 6" },
-    { id: 7, title: "Title 7" },
-    { id: 8, title: "Title 8" },
-    { id: 9, title: "Title 9" },
-];
-
-export default function ScrenesCarousel() {
+export default function ScrenesCarousel({
+    auth,
+    Anime,
+}: PageProps<{ Anime: Anime }>) {
+    const imageDataArray: string[] = JSON.parse(Anime.screens);
     return (
         <div>
             <header>
@@ -38,17 +32,17 @@ export default function ScrenesCarousel() {
                     </div>
                     <div className="flex justify-center">
                         <CarouselContent>
-                            {imageData.map((item) => (
+                            {imageDataArray.map((item) => (
                                 <CarouselItem
-                                    key={item.id}
+                                    key={item}
                                     className="basis-1/2 md:basis-1/2 lg:basis-1/3 xl:basis-1/4"
                                 >
                                     <div className="p-1 max-sm:p-0">
                                         <Card>
                                             <CardContent className="flex aspect-ratio-1/1 items-center justify-center p-2">
                                                 <img
-                                                    src={`/img/screnes/${item.id}.jpg`}
-                                                    alt={item.title}
+                                                    src={item}
+                                                    alt="Кадры"
                                                     className="object-cover"
                                                 />
                                             </CardContent>

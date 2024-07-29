@@ -21,6 +21,23 @@ export interface FriendShips {
     friend_id: number;
 }
 
+export interface Anime {
+    id: number;
+    age: string;
+    status: string;
+    name: string;
+    type: string;
+    original: string;
+    studio: string;
+    voice: string;
+    director: string;
+    autor: string;
+    description: string;
+    grade: number;
+    cover: string;
+    screens: string;
+}
+
 export type PageProps<
     T extends Record<string, unknown> = Record<string, unknown>
 > = T & {

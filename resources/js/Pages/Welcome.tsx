@@ -7,7 +7,8 @@ import ItemsList from "@/Components/ItemsList";
 
 export default function Welcome({
     auth,
-}: PageProps<{ laravelVersion: string; phpVersion: string }>) {
+    NewAnime,
+}: PageProps<{ NewAnime: any[] }>) {
     const handleImageError = () => {
         document
             .getElementById("screenshot-container")
@@ -24,7 +25,7 @@ export default function Welcome({
             <Header auth={auth} />
             <div className="ml-14 ml:ml-0 max-sm:ml-0">
                 <div className="m-4 p-4 border border-gray-200 rounded-lg shadow dark:border-gray-700">
-                    <NewItems />
+                    <NewItems Anime={NewAnime} auth={auth} />
                     <HighestScoreItems />
                     <ItemsList />
                 </div>

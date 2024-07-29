@@ -12,8 +12,8 @@ class AdminController extends Controller
         return Inertia::render('AdminPanel');
     }
 
-    public function new_anime(Request $request) {
-
+    public function new_anime(Request $request)
+    {
         $validated = $request->validate([
             'age' => 'required|in:0,6,12,16,18',
             'status' => 'required|in:ongoing,came_out,preview',
@@ -29,19 +29,21 @@ class AdminController extends Controller
             'screens' => 'required|array',
             'screens.*' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
-
+    
         // Работа с обложкой
-        $cover_name = time(). "." . $request->cover->extension();
+        $cover_name = time() . "." . $request->cover->extension();
         $cover_path = $request->cover->storeAs('public/covers', $cover_name);
-
+        $save_path = '/storage/covers/' . $cover_name; // убрал скобки
+    
         $screens = [];
         foreach ($request->screens as $screen) {
             $screen_name = time() . "_" . uniqid() . "." . $screen->extension();
             $screen_path = $screen->storeAs('public/screens', $screen_name);
-            $screens[] = $screen_path;
+            $save_path_screen = '/storage/screens/' . $screen_name; // исправил переменную
+            $screens[] = $save_path_screen;
         }
         $screens_json = json_encode($screens);
-
+    
         // Создание новой записи в таблице animes
         $anime = new Anime();
         $anime->age = $validated['age'];
@@ -55,10 +57,10 @@ class AdminController extends Controller
         $anime->autor = $validated['autor'];
         $anime->description = $validated['description'];
         $anime->grade = 0;
-        $anime->cover = $cover_path;
+        $anime->cover = $save_path;
         $anime->screens = $screens_json;
         $anime->save();
-
+    
         return redirect()->back()->with('success', 'Аниме успешно добавлено!');
     }
 }
