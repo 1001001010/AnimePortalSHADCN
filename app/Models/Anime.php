@@ -24,4 +24,9 @@ class Anime extends Model
         'cover',
         'screens',
     ];
+
+    public function seasons(): HasMany
+    {
+        return $this->hasMany(Season::class);
+    }
 }

@@ -127,19 +127,156 @@ export default function AnimePage({
                         </div>
                         <div className="m-4 border border-gray-200 rounded-lg shadow dark:border-gray-700 w-1/2 max-md:w-full">
                             <div className="m-4">
-                                <h1>Серии</h1>
-                                <div className="mt-4 grid grid-cols-4 gap-4 max-sm:grid-cols-3">
-                                    <Button variant="outline">Серия 2</Button>
-                                    <Button variant="outline">Серия 3</Button>
-                                    <Button variant="outline">Серия 4</Button>
-                                    <Button variant="outline">Серия 5</Button>
-                                    <Button variant="outline">Серия 6</Button>
-                                    <Button variant="outline">Серия 7</Button>
-                                    <Button variant="outline">Серия 8</Button>
-                                    <Button variant="outline">Серия 9</Button>
-                                    <Button variant="outline">Серия 10</Button>
-                                    <Button variant="outline">Серия 11</Button>
-                                    <Button variant="outline">Серия 12</Button>
+                                <div className="mb-4">
+                                    <h1 className="text-center">1 Сезон</h1>
+                                    <div className="mt-4 grid grid-cols-4 gap-4 max-sm:grid-cols-3">
+                                        <Button variant="outline">
+                                            Серия 1
+                                        </Button>
+                                        <Button variant="outline">
+                                            Серия 2
+                                        </Button>
+                                        <Button variant="outline">
+                                            Серия 3
+                                        </Button>
+                                        <Button variant="outline">
+                                            Серия 4
+                                        </Button>
+                                        <Button variant="outline">
+                                            Серия 5
+                                        </Button>
+                                        <Button variant="outline">
+                                            Серия 6
+                                        </Button>
+                                        <Button variant="outline">
+                                            Серия 7
+                                        </Button>
+                                        <Button variant="outline">
+                                            Серия 8
+                                        </Button>
+                                        <Button variant="outline">
+                                            Серия 9
+                                        </Button>
+                                        <Button variant="outline">
+                                            Серия 10
+                                        </Button>
+                                        <Button variant="outline">
+                                            Серия 11
+                                        </Button>
+                                        <Button variant="outline">
+                                            Серия 12
+                                        </Button>
+                                        <Button variant="outline">
+                                            Серия 13
+                                        </Button>
+                                        <Button variant="outline">
+                                            Серия 14
+                                        </Button>
+                                        <Button variant="outline">
+                                            Серия 15
+                                        </Button>
+                                        <Button variant="outline">
+                                            Серия 16
+                                        </Button>
+                                        <Button variant="outline">
+                                            Серия 17
+                                        </Button>
+                                        <Button variant="outline">
+                                            Серия 18
+                                        </Button>
+                                        <Button variant="outline">
+                                            Серия 19
+                                        </Button>
+                                        <Button variant="outline">
+                                            Серия 20
+                                        </Button>
+                                        <Button variant="outline">
+                                            Серия 21
+                                        </Button>
+                                        <Button variant="outline">
+                                            Серия 22
+                                        </Button>
+                                        <Button variant="outline">
+                                            Серия 23
+                                        </Button>
+                                        <Button variant="outline">
+                                            Серия 24
+                                        </Button>
+                                    </div>
+                                </div>
+                                <div className="mb-4">
+                                    <h1 className="text-center">2 Сезон</h1>
+                                    <div className="mt-4 grid grid-cols-4 gap-4 max-sm:grid-cols-3">
+                                        <Button variant="outline">
+                                            Серия 1
+                                        </Button>
+                                        <Button variant="outline">
+                                            Серия 2
+                                        </Button>
+                                        <Button variant="outline">
+                                            Серия 3
+                                        </Button>
+                                        <Button variant="outline">
+                                            Серия 4
+                                        </Button>
+                                        <Button variant="outline">
+                                            Серия 5
+                                        </Button>
+                                        <Button variant="outline">
+                                            Серия 6
+                                        </Button>
+                                        <Button variant="outline">
+                                            Серия 7
+                                        </Button>
+                                        <Button variant="outline">
+                                            Серия 8
+                                        </Button>
+                                        <Button variant="outline">
+                                            Серия 9
+                                        </Button>
+                                        <Button variant="outline">
+                                            Серия 10
+                                        </Button>
+                                        <Button variant="outline">
+                                            Серия 11
+                                        </Button>
+                                        <Button variant="outline">
+                                            Серия 12
+                                        </Button>
+                                        <Button variant="outline">
+                                            Серия 13
+                                        </Button>
+                                        <Button variant="outline">
+                                            Серия 14
+                                        </Button>
+                                        <Button variant="outline">
+                                            Серия 15
+                                        </Button>
+                                        <Button variant="outline">
+                                            Серия 16
+                                        </Button>
+                                        <Button variant="outline">
+                                            Серия 17
+                                        </Button>
+                                        <Button variant="outline">
+                                            Серия 18
+                                        </Button>
+                                        <Button variant="outline">
+                                            Серия 19
+                                        </Button>
+                                        <Button variant="outline">
+                                            Серия 20
+                                        </Button>
+                                        <Button variant="outline">
+                                            Серия 21
+                                        </Button>
+                                        <Button variant="outline">
+                                            Серия 22
+                                        </Button>
+                                        <Button variant="outline">
+                                            Серия 23
+                                        </Button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
