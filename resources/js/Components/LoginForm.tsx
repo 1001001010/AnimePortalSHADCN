@@ -2,7 +2,6 @@ import { useEffect, FormEventHandler } from "react";
 import { useForm } from "@inertiajs/react";
 import { Label } from "@/shadcn/ui/label";
 import { Input } from "@/shadcn/ui/input";
-import PrimaryButton from "@/Components/PrimaryButton";
 import InputError from "@/Components/InputError";
 import {
     CardContent,
@@ -10,6 +9,7 @@ import {
     CardHeader,
     CardTitle,
 } from "@/shadcn/ui/card";
+import { Button } from "@/shadcn/ui/button";
 
 export default function LoginForm() {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -63,8 +63,8 @@ export default function LoginForm() {
                     <InputError message={errors.password} className="mt-2" />
                 </div>
             </CardContent>
-            <CardFooter>
-                <PrimaryButton disabled={processing}>Войти</PrimaryButton>
+            <CardFooter className="flex justify-end">
+                <Button disabled={processing}>Войти</Button>
             </CardFooter>
         </form>
     );

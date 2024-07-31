@@ -17,6 +17,7 @@ return new class extends Migration
             $table->enum('status', ['ongoing', 'came_out', 'preview']);
             $table->string('type');
             $table->string('name');
+            $table->integer('unix');
             $table->string('original');
             $table->string('studio');
             $table->string('voice');

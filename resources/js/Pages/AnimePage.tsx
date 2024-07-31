@@ -6,14 +6,16 @@ import { Button } from "@/shadcn/ui/button";
 import { Badge } from "@/shadcn/ui/badge";
 import Plyr from "plyr-react";
 import "plyr-react/plyr.css";
-import ScrenesCarousel from "@/Components/ScenesCarousel";
-import type { Anime } from "@/types";
 import { Link } from "@inertiajs/react";
+import ScrenesCarousel from "@/Components/ScenesCarousel";
+import type { Anime, Season, Episode } from "@/types";
+import NewSeasonForm from "@/Components/NewSeasonForm";
 
 export default function AnimePage({
     auth,
     Anime,
-}: PageProps<{ Anime: Anime }>) {
+    seasons,
+}: PageProps<{ Anime: Anime; seasons: Season[] }>) {
     // Статус
     const status = [
         { status: "ongoing", text: "Онгоинг" },
@@ -125,160 +127,41 @@ export default function AnimePage({
                                 <Plyr {...plyrProps} />
                             </div>
                         </div>
-                        <div className="m-4 border border-gray-200 rounded-lg shadow dark:border-gray-700 w-1/2 max-md:w-full">
-                            <div className="m-4">
-                                <div className="mb-4">
-                                    <h1 className="text-center">1 Сезон</h1>
-                                    <div className="mt-4 grid grid-cols-4 gap-4 max-sm:grid-cols-3">
-                                        <Button variant="outline">
-                                            Серия 1
-                                        </Button>
-                                        <Button variant="outline">
-                                            Серия 2
-                                        </Button>
-                                        <Button variant="outline">
-                                            Серия 3
-                                        </Button>
-                                        <Button variant="outline">
-                                            Серия 4
-                                        </Button>
-                                        <Button variant="outline">
-                                            Серия 5
-                                        </Button>
-                                        <Button variant="outline">
-                                            Серия 6
-                                        </Button>
-                                        <Button variant="outline">
-                                            Серия 7
-                                        </Button>
-                                        <Button variant="outline">
-                                            Серия 8
-                                        </Button>
-                                        <Button variant="outline">
-                                            Серия 9
-                                        </Button>
-                                        <Button variant="outline">
-                                            Серия 10
-                                        </Button>
-                                        <Button variant="outline">
-                                            Серия 11
-                                        </Button>
-                                        <Button variant="outline">
-                                            Серия 12
-                                        </Button>
-                                        <Button variant="outline">
-                                            Серия 13
-                                        </Button>
-                                        <Button variant="outline">
-                                            Серия 14
-                                        </Button>
-                                        <Button variant="outline">
-                                            Серия 15
-                                        </Button>
-                                        <Button variant="outline">
-                                            Серия 16
-                                        </Button>
-                                        <Button variant="outline">
-                                            Серия 17
-                                        </Button>
-                                        <Button variant="outline">
-                                            Серия 18
-                                        </Button>
-                                        <Button variant="outline">
-                                            Серия 19
-                                        </Button>
-                                        <Button variant="outline">
-                                            Серия 20
-                                        </Button>
-                                        <Button variant="outline">
-                                            Серия 21
-                                        </Button>
-                                        <Button variant="outline">
-                                            Серия 22
-                                        </Button>
-                                        <Button variant="outline">
-                                            Серия 23
-                                        </Button>
-                                        <Button variant="outline">
-                                            Серия 24
-                                        </Button>
-                                    </div>
+                        <div className="m-4 p-4 w-1/2 border border-gray-200 rounded-lg shadow dark:border-gray-700 max-md:flex-col max-md:items-center max-md:p-4 max-md:w-full">
+                            {auth.user && auth.user.is_admin == 1 ? (
+                                <div className="flex justify-between gap-4 pb-3">
+                                    <NewSeasonForm Anime={Anime} auth={auth} />
+                                    <Button
+                                        variant={"outline"}
+                                        className="w-1/2"
+                                    >
+                                        Добавить Серию
+                                    </Button>
                                 </div>
-                                <div className="mb-4">
-                                    <h1 className="text-center">2 Сезон</h1>
-                                    <div className="mt-4 grid grid-cols-4 gap-4 max-sm:grid-cols-3">
-                                        <Button variant="outline">
-                                            Серия 1
-                                        </Button>
-                                        <Button variant="outline">
-                                            Серия 2
-                                        </Button>
-                                        <Button variant="outline">
-                                            Серия 3
-                                        </Button>
-                                        <Button variant="outline">
-                                            Серия 4
-                                        </Button>
-                                        <Button variant="outline">
-                                            Серия 5
-                                        </Button>
-                                        <Button variant="outline">
-                                            Серия 6
-                                        </Button>
-                                        <Button variant="outline">
-                                            Серия 7
-                                        </Button>
-                                        <Button variant="outline">
-                                            Серия 8
-                                        </Button>
-                                        <Button variant="outline">
-                                            Серия 9
-                                        </Button>
-                                        <Button variant="outline">
-                                            Серия 10
-                                        </Button>
-                                        <Button variant="outline">
-                                            Серия 11
-                                        </Button>
-                                        <Button variant="outline">
-                                            Серия 12
-                                        </Button>
-                                        <Button variant="outline">
-                                            Серия 13
-                                        </Button>
-                                        <Button variant="outline">
-                                            Серия 14
-                                        </Button>
-                                        <Button variant="outline">
-                                            Серия 15
-                                        </Button>
-                                        <Button variant="outline">
-                                            Серия 16
-                                        </Button>
-                                        <Button variant="outline">
-                                            Серия 17
-                                        </Button>
-                                        <Button variant="outline">
-                                            Серия 18
-                                        </Button>
-                                        <Button variant="outline">
-                                            Серия 19
-                                        </Button>
-                                        <Button variant="outline">
-                                            Серия 20
-                                        </Button>
-                                        <Button variant="outline">
-                                            Серия 21
-                                        </Button>
-                                        <Button variant="outline">
-                                            Серия 22
-                                        </Button>
-                                        <Button variant="outline">
-                                            Серия 23
-                                        </Button>
+                            ) : null}
+                            {seasons &&
+                                seasons.map((season: Season) => (
+                                    <div key={season.id}>
+                                        <h1 className="font-bold text-center">
+                                            {season.name
+                                                ? `Сезон ${season.number} (${season.name})`
+                                                : `Сезон ${season.number}`}
+                                        </h1>
+                                        <div className="mt-4 grid grid-cols-4 gap-4 max-sm:grid-cols-3">
+                                            {season.episodes &&
+                                                season.episodes.map(
+                                                    (episode: Episode) => (
+                                                        <Button
+                                                            variant="outline"
+                                                            key={episode.id}
+                                                        >
+                                                            {episode.name}
+                                                        </Button>
+                                                    )
+                                                )}
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
+                                ))}
                         </div>
                     </div>
                 </div>

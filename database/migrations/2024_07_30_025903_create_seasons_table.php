@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('anime_id');
             $table->foreign('anime_id')->references('id')->on('animes')->onDelete('cascade');
             $table->integer('number');
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->timestamps();
         });
     }

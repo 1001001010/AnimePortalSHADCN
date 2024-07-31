@@ -13,7 +13,7 @@ export default function AdminPanel({
             <div className="ml-14 ml:ml-0 max-sm:ml-0">
                 <div className="m-4 border border-gray-200 rounded-lg shadow dark:border-gray-700 flex justify-between p-4">
                     <NewAnimeForm />
-                    <NewEpisodes Anime={Anime} auth={auth} />
+                    {/* <NewEpisodes Anime={Anime} auth={auth} /> */}
                 </div>
             </div>
         </>

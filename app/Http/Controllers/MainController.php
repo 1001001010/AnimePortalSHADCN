@@ -15,10 +15,14 @@ class MainController extends Controller
             ]);
     }
 
-    public function anime($id): \Inertia\Response {
-        $anime = Anime::findOrFail($id);
+    public function anime($anime_id): \Inertia\Response
+    {
+        $anime = Anime::where('unix', $anime_id)->firstOrFail();
+        $seasons = $anime->seasons;
+    
         return Inertia::render('AnimePage', [
-            'Anime' => $anime 
+            'Anime' => $anime,
+            'seasons' => $seasons,
         ]);
     }
 }

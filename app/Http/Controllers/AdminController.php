@@ -18,6 +18,7 @@ class AdminController extends Controller
 
     public function new_anime(Request $request)
     {
+        
         $validated = $request->validate([
             'age' => 'required|in:0,6,12,16,18',
             'status' => 'required|in:ongoing,came_out,preview',
@@ -33,7 +34,7 @@ class AdminController extends Controller
             'screens' => 'required|array',
             'screens.*' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
-    
+        
         // Работа с обложкой
         $cover_name = time() . "." . $request->cover->extension();
         $cover_path = $request->cover->storeAs('public/covers', $cover_name);
@@ -47,12 +48,13 @@ class AdminController extends Controller
             $screens[] = $save_path_screen;
         }
         $screens_json = json_encode($screens);
-    
+        
         // Создание новой записи в таблице animes
         $anime = new Anime();
         $anime->age = $validated['age'];
         $anime->status = $validated['status'];
         $anime->name = $validated['name'];
+        $anime->unix = time();
         $anime->type = $validated['type'];
         $anime->original = $validated['original'];
         $anime->studio = $validated['studio'];
@@ -65,6 +67,21 @@ class AdminController extends Controller
         $anime->screens = $screens_json;
         $anime->save();
     
-        return redirect()->back()->with('success', 'Аниме успешно добавлено!');
+        return redirect()->back();
+    }
+
+    public function new_season($anime_id, Request $request)
+    {
+        $last_season_number = Season::where('anime_id', $anime_id)->max('number');
+        if (is_null($last_season_number)) {
+            $last_season_number = 0;
+        }
+        Season::create([
+            'anime_id' => $anime_id,
+            'number' => $last_season_number + 1,
+            'name' => $request->input('name'),
+        ]);
+
+        return redirect()->back();
     }
 }

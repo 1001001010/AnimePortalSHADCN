@@ -35,7 +35,25 @@ export interface Anime {
     description: string;
     grade: number;
     cover: string;
+    unix: number;
     screens: string;
+}
+
+export interface Season {
+    id: number;
+    name: string;
+    number: number;
+    episodes: { id: number; name: string }[];
+}
+
+export interface Episode {
+    id: number;
+    name: string;
+}
+
+export interface AnimePageProps {
+    Anime: Anime;
+    seasons: Season[];
 }
 
 export type PageProps<
