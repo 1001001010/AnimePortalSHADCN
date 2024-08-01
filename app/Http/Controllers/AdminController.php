@@ -84,4 +84,7 @@ class AdminController extends Controller
 
         return redirect()->back();
     }
+    public function new_episode(Request $request) {
+        dd($request->all());
+    }
 }

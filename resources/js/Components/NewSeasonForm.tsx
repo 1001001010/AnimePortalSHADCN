@@ -15,7 +15,7 @@ import { useForm } from "@inertiajs/react";
 import { FormEventHandler } from "react";
 import { useState } from "react";
 
-export default function NewSeasonFor({
+export default function NewEpisodeForm({
     auth,
     Anime,
 }: PageProps<{ Anime: Anime }>) {

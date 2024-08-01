@@ -10,7 +10,7 @@ use Inertia\Inertia;
 
 Route::controller(App\Http\Controllers\MainController::class)->group(function () {
     Route::get('/','index')->name('index');
-    Route::get('/anime/{anime_id}','anime')->name('anime');
+    Route::get('/anime/view/{anime_id}','anime')->name('anime');
 });
 
 Route::group(['middleware' => 'auth'], function () {
@@ -35,6 +35,7 @@ Route::middleware(IsAdmin::class)->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('adminPanel.index');
     Route::post('/admin/anime/new', [AdminController::class, 'new_anime'])->name('NewAnime');
     Route::post('/admin/{anime_id}/season', [AdminController::class, 'new_season'])->name('NewSeason');
+    Route::post('/admin/new/episode', [AdminController::class, 'new_episode'])->name('NewEpisode');
 });
 
 require __DIR__.'/auth.php';

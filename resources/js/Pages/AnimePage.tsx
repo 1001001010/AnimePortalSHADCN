@@ -10,6 +10,7 @@ import { Link } from "@inertiajs/react";
 import ScrenesCarousel from "@/Components/ScenesCarousel";
 import type { Anime, Season, Episode } from "@/types";
 import NewSeasonForm from "@/Components/NewSeasonForm";
+import NewEpisodeForm from "@/Components/NewEpisodeForm";
 
 export default function AnimePage({
     auth,
@@ -131,12 +132,11 @@ export default function AnimePage({
                             {auth.user && auth.user.is_admin == 1 ? (
                                 <div className="flex justify-between gap-4 pb-3">
                                     <NewSeasonForm Anime={Anime} auth={auth} />
-                                    <Button
-                                        variant={"outline"}
-                                        className="w-1/2"
-                                    >
-                                        Добавить Серию
-                                    </Button>
+                                    <NewEpisodeForm
+                                        Anime={Anime}
+                                        Season={seasons}
+                                        auth={auth}
+                                    />
                                 </div>
                             ) : null}
                             {seasons &&

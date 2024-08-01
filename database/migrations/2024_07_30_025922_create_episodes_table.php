@@ -16,8 +16,6 @@ return new class extends Migration
             $table->unsignedBigInteger('season_id');
             $table->foreign('season_id')->references('id')->on('seasons')->onDelete('cascade');
             $table->integer('number');
-            $table->string('name');
-            $table->text('description');
             $table->string('video');
             $table->timestamps();
         });
