@@ -1,5 +1,5 @@
 import { useForm, usePage } from "@inertiajs/react";
-import { FormEventHandler } from "react";
+import React, { FormEventHandler } from "react";
 import { PageProps } from "@/types";
 import { toast } from "sonner";
 import { Input } from "@/shadcn/ui/input";
@@ -13,10 +13,26 @@ export default function UpdateProfilePhoto({
 }) {
     const user = usePage<PageProps>().props.auth.user;
 
-    const { data, setData, post, processing } = useForm({
+    const { data, setData, post, processing, errors } = useForm({
         updated_at: user.updated_at,
         photo: null as File | null,
     });
+    const [selectedFile, setSelectedFile] = React.useState<null | File>(null);
+    const [preview, setPreview] = React.useState<null | string>(null);
+
+    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        if (event.target.files && event.target.files[0]) {
+            setSelectedFile(event.target.files[0]);
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                if (typeof reader.result === "string") {
+                    setPreview(reader.result);
+                }
+            };
+            reader.readAsDataURL(event.target.files[0]);
+            setData("photo", event.target.files[0]);
+        }
+    };
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
@@ -37,13 +53,11 @@ export default function UpdateProfilePhoto({
                         id="photo"
                         type="file"
                         className="custom-file-input text-gray-900 dark:text-gray-100"
-                        onChange={(e) => {
-                            const file = e.target.files?.[0];
-                            if (file) {
-                                setData("photo", file);
-                            }
-                        }}
+                        onChange={handleFileChange}
                     />
+                    {preview ? (
+                        <img src={preview} className="w-24 h-24 m-2" />
+                    ) : null}
                 </div>
 
                 <div className="flex items-center gap-4">
