@@ -35,8 +35,6 @@ export default function NewEpisodeForm({
         file: null as File | null,
     });
     const [isOpen, setIsOpen] = useState(false);
-    const [selectedFile, setSelectedFile] = React.useState<null | File>(null);
-    const [preview, setPreview] = React.useState<null | string>(null);
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.files && event.target.files[0]) {
