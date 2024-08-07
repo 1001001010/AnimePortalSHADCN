@@ -22,7 +22,6 @@ import {
 import {
     Home,
     LineChart,
-    Package,
     Package2,
     PanelLeft,
     Search,
@@ -32,6 +31,8 @@ import {
     Users2,
     MoonStar,
     SunMedium,
+    GitCompareArrows,
+    ListFilter,
 } from "lucide-react";
 
 export default function Header({ auth }: PageProps<{}>) {
@@ -62,6 +63,77 @@ export default function Header({ auth }: PageProps<{}>) {
                             </TooltipContent>
                         </Tooltip>
                         <Tooltip>
+                            <TooltipTrigger asChild>
+                                <Link
+                                    href="#"
+                                    className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                                >
+                                    <ListFilter className="h-5 w-5" />
+                                </Link>
+                            </TooltipTrigger>
+                            <TooltipContent side="right">
+                                Категории
+                            </TooltipContent>
+                        </Tooltip>
+                        <Tooltip>
+                            <TooltipTrigger asChild>
+                                <Link
+                                    href="#"
+                                    className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                                >
+                                    <GitCompareArrows className="h-5 w-5" />
+                                </Link>
+                            </TooltipTrigger>
+                            <TooltipContent side="right">
+                                Случайные аниме
+                            </TooltipContent>
+                        </Tooltip>
+                        <Tooltip>
+                            <TooltipTrigger asChild>
+                                <Link
+                                    href={route("friends.index")}
+                                    className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                                >
+                                    <Users2 className="h-5 w-5" />
+                                </Link>
+                            </TooltipTrigger>
+                            <TooltipContent side="right">Друзья</TooltipContent>
+                        </Tooltip>
+                        {auth.user && auth.user.is_admin == 1 ? (
+                            <div className="gap-4 flex flex-col">
+                                <Tooltip>
+                                    <TooltipTrigger asChild>
+                                        <Link
+                                            href={route("analytics.index")}
+                                            className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                                        >
+                                            <LineChart className="h-5 w-5" />
+                                        </Link>
+                                    </TooltipTrigger>
+                                    <TooltipContent side="right">
+                                        Статистика
+                                    </TooltipContent>
+                                </Tooltip>
+                                <Tooltip>
+                                    <TooltipTrigger asChild>
+                                        <Link
+                                            href={route("adminPanel.index")}
+                                            className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                                        >
+                                            <PencilRuler className="h-5 w-5" />
+                                        </Link>
+                                    </TooltipTrigger>
+                                    <TooltipContent side="right">
+                                        Админка
+                                    </TooltipContent>
+                                </Tooltip>
+                            </div>
+                        ) : null}
+                    </TooltipProvider>
+                </nav>
+                <nav className="mt-auto flex flex-col items-center gap-4 px-2 py-4">
+                    <TooltipProvider>
+                        <Tooltip>
                             <Tooltip>
                                 <TooltipTrigger asChild>
                                     <Link
@@ -76,9 +148,6 @@ export default function Header({ auth }: PageProps<{}>) {
                                         ) : (
                                             <MoonStar className="h-5 w-5" />
                                         )}
-                                        <span className="sr-only">
-                                            Случайные аниме
-                                        </span>
                                     </Link>
                                 </TooltipTrigger>
                                 <TooltipContent side="right">
@@ -86,88 +155,8 @@ export default function Header({ auth }: PageProps<{}>) {
                                 </TooltipContent>
                             </Tooltip>
                         </Tooltip>
-                        <Tooltip>
-                            <TooltipTrigger asChild>
-                                <Link
-                                    href="#"
-                                    className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
-                                >
-                                    <ShoppingCart className="h-5 w-5" />
-                                    <span className="sr-only">Категории</span>
-                                </Link>
-                            </TooltipTrigger>
-                            <TooltipContent side="right">
-                                Категории
-                            </TooltipContent>
-                        </Tooltip>
-                        <Tooltip>
-                            <TooltipTrigger asChild>
-                                <Link
-                                    href="#"
-                                    className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
-                                >
-                                    <Package className="h-5 w-5" />
-                                    <span className="sr-only">
-                                        Случайные аниме
-                                    </span>
-                                </Link>
-                            </TooltipTrigger>
-                            <TooltipContent side="right">
-                                Случайные аниме
-                            </TooltipContent>
-                        </Tooltip>
-                        <Tooltip>
-                            <TooltipTrigger asChild>
-                                <Link
-                                    href={route("friends.index")}
-                                    className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
-                                >
-                                    <Users2 className="h-5 w-5" />
-                                    <span className="sr-only">Друзья</span>
-                                </Link>
-                            </TooltipTrigger>
-                            <TooltipContent side="right">Друзья</TooltipContent>
-                        </Tooltip>
-                        {auth.user && auth.user.is_admin == 1 ? (
-                            <div className="gap-4 flex flex-col">
-                                <Tooltip>
-                                    <TooltipTrigger asChild>
-                                        <Link
-                                            href={route("analytics.index")}
-                                            className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
-                                        >
-                                            <LineChart className="h-5 w-5" />
-                                            <span className="sr-only">
-                                                Analytics
-                                            </span>
-                                        </Link>
-                                    </TooltipTrigger>
-                                    <TooltipContent side="right">
-                                        Analytics
-                                    </TooltipContent>
-                                </Tooltip>
-                                <Tooltip>
-                                    <TooltipTrigger asChild>
-                                        <Link
-                                            href={route("adminPanel.index")}
-                                            className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
-                                        >
-                                            <PencilRuler className="h-5 w-5" />
-                                            <span className="sr-only">
-                                                Admin
-                                            </span>
-                                        </Link>
-                                    </TooltipTrigger>
-                                    <TooltipContent side="right">
-                                        Admin
-                                    </TooltipContent>
-                                </Tooltip>
-                            </div>
-                        ) : null}
                     </TooltipProvider>
-                </nav>
-                {auth.user ? (
-                    <nav className="mt-auto flex flex-col items-center gap-4 px-2 py-4">
+                    {auth.user ? (
                         <TooltipProvider>
                             <Tooltip>
                                 <TooltipTrigger asChild>
@@ -176,9 +165,6 @@ export default function Header({ auth }: PageProps<{}>) {
                                         className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
                                     >
                                         <Settings className="h-5 w-5" />
-                                        <span className="sr-only">
-                                            Настройки
-                                        </span>
                                     </Link>
                                 </TooltipTrigger>
                                 <TooltipContent side="right">
@@ -186,8 +172,8 @@ export default function Header({ auth }: PageProps<{}>) {
                                 </TooltipContent>
                             </Tooltip>
                         </TooltipProvider>
-                    </nav>
-                ) : null}
+                    ) : null}
+                </nav>
             </aside>
             <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
                 <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
@@ -199,7 +185,6 @@ export default function Header({ auth }: PageProps<{}>) {
                                 className="sm:hidden"
                             >
                                 <PanelLeft className="h-5 w-5" />
-                                <span className="sr-only">Toggle Menu</span>
                             </Button>
                         </SheetTrigger>
                         <SheetContent side="left" className="sm:max-w-xs">
@@ -209,52 +194,26 @@ export default function Header({ auth }: PageProps<{}>) {
                                     className="group flex h-10 w-10 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:text-base"
                                 >
                                     <Package2 className="h-5 w-5 transition-all group-hover:scale-110" />
-                                    <span className="sr-only">Acme Inc</span>
                                 </Link>
                                 <Link
-                                    href="#"
+                                    href={route("index")}
                                     className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
                                 >
                                     <Home className="h-5 w-5" />
                                     Главная
                                 </Link>
-                                <Button
-                                    className="flex h-9 w-9 items-center justify-center rounded-lg transition-colors hover:text-foreground md:h-8 md:w-8"
-                                    onClick={handleToggleDarkMode}
-                                >
-                                    <img
-                                        src={
-                                            document.documentElement.classList.contains(
-                                                "dark"
-                                            )
-                                                ? "/img/svg/moon.svg"
-                                                : "/img/svg/sun.svg"
-                                        }
-                                        alt={
-                                            document.documentElement.classList.contains(
-                                                "dark"
-                                            )
-                                                ? "moon"
-                                                : "sun"
-                                        }
-                                        className=""
-                                    />
-                                    <span className="sr-only">
-                                        Сменить тему
-                                    </span>
-                                </Button>
                                 <Link
                                     href="#"
                                     className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
                                 >
-                                    <ShoppingCart className="h-5 w-5" />
+                                    <ListFilter className="h-5 w-5" />
                                     Категории
                                 </Link>
                                 <Link
                                     href="#"
-                                    className="flex items-center gap-4 px-2.5 text-foreground"
+                                    className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
                                 >
-                                    <Package className="h-5 w-5" />
+                                    <GitCompareArrows className="h-5 w-5" />
                                     Случайные аниме
                                 </Link>
                                 <Link
@@ -269,14 +228,35 @@ export default function Header({ auth }: PageProps<{}>) {
                                     className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
                                 >
                                     <LineChart className="h-5 w-5" />
-                                    Analytics
+                                    Статистика
                                 </Link>
                                 <Link
                                     href="#"
                                     className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
                                 >
                                     <PencilRuler className="h-5 w-5" />
-                                    Admin
+                                    Админка
+                                </Link>
+                                <Link
+                                    href="#"
+                                    className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
+                                    onClick={handleToggleDarkMode}
+                                >
+                                    {document.documentElement.classList.contains(
+                                        "dark"
+                                    ) ? (
+                                        <SunMedium className="h-5 w-5" />
+                                    ) : (
+                                        <MoonStar className="h-5 w-5" />
+                                    )}
+                                    Сменить тему
+                                </Link>
+                                <Link
+                                    href="#"
+                                    className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
+                                >
+                                    <Settings className="h-5 w-5" />
+                                    Настройки
                                 </Link>
                             </nav>
                         </SheetContent>

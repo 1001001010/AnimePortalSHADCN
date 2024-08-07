@@ -32,24 +32,26 @@ export default function ScrenesCarousel({
                     </div>
                     <div className="flex justify-center">
                         <CarouselContent>
-                            {imageDataArray.map((item) => (
-                                <CarouselItem
-                                    key={item}
-                                    className="basis-1/2 md:basis-1/2 lg:basis-1/3 xl:basis-1/4"
-                                >
-                                    <div className="p-1 max-sm:p-0">
-                                        <Card>
-                                            <CardContent className="flex aspect-ratio-1/1 items-center justify-center p-2">
-                                                <img
-                                                    src={item}
-                                                    alt="Кадры"
-                                                    className="object-cover"
-                                                />
-                                            </CardContent>
-                                        </Card>
-                                    </div>
-                                </CarouselItem>
-                            ))}
+                            {[...imageDataArray]
+                                .sort(() => Math.random() - 0.5)
+                                .map((item) => (
+                                    <CarouselItem
+                                        key={item}
+                                        className="basis-1/2 md:basis-1/2 lg:basis-1/3 xl:basis-1/4"
+                                    >
+                                        <div className="p-1 max-sm:p-0">
+                                            <Card>
+                                                <CardContent className="flex aspect-ratio-1/1 items-center justify-center p-2">
+                                                    <img
+                                                        src={item}
+                                                        alt="Кадры"
+                                                        className="object-cover"
+                                                    />
+                                                </CardContent>
+                                            </Card>
+                                        </div>
+                                    </CarouselItem>
+                                ))}
                         </CarouselContent>
                     </div>
                     <div className="block max-lg:hidden">
