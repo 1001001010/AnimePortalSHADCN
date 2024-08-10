@@ -18,7 +18,7 @@ class MainController extends Controller
     public function anime($anime_id): \Inertia\Response
     {
         $anime = Anime::where('unix', $anime_id)->firstOrFail();
-        $seasons = $anime->seasons;
+        $seasons = $anime->seasons()->with('episodes')->get();
     
         return Inertia::render('AnimePage', [
             'Anime' => $anime,

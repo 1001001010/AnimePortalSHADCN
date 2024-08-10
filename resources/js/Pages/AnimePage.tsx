@@ -147,7 +147,7 @@ export default function AnimePage({
                                                 ? `Сезон ${season.number} (${season.name})`
                                                 : `Сезон ${season.number}`}
                                         </h1>
-                                        <div className="mt-4 grid grid-cols-4 gap-4 max-sm:grid-cols-3">
+                                        <div className="mt-4 grid grid-cols-5 gap-4 max-sm:grid-cols-3 mb-4">
                                             {season.episodes &&
                                                 season.episodes.map(
                                                     (episode: Episode) => (
@@ -155,7 +155,7 @@ export default function AnimePage({
                                                             variant="outline"
                                                             key={episode.id}
                                                         >
-                                                            {episode.name}
+                                                            {episode.number}
                                                         </Button>
                                                     )
                                                 )}

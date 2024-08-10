@@ -20,8 +20,9 @@ class Season extends Model
         return $this->belongsTo(Anime::class);
     }
 
-    public function episodes(): HasMany
+    public function episodes()
     {
         return $this->hasMany(Episode::class);
     }
+    
 }

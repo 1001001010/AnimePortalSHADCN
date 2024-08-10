@@ -9,6 +9,12 @@ class Episode extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'season_id',
+        'number',
+        'video',
+    ];
+
     public function season(): BelongsTo
     {
         return $this->belongsTo(Season::class);

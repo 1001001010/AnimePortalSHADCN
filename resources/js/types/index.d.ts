@@ -43,12 +43,12 @@ export interface Season {
     id: number;
     name: string;
     number: number;
-    episodes: { id: number; name: string }[];
+    episodes: { id: number; number: number }[];
 }
 
 export interface Episode {
     id: number;
-    name: string;
+    number: number;
 }
 
 export interface AnimePageProps {

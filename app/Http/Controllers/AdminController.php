@@ -85,6 +85,35 @@ class AdminController extends Controller
         return redirect()->back();
     }
     public function new_episode(Request $request) {
-        dd($request->all());
+        $validated = $request->validate([
+            'season_id' => 'required|integer|exists:seasons,id',
+            'file' => 'required|mimes:mp4'
+        ]);
+    
+        $name = time(). "." . $request->file->extension();
+        $destination = 'public/episode';
+        $path = $request->file->storeAs($destination, $name);
+    
+        if (!$path) {
+            return redirect()->back()->withErrors(['file' => 'Файл не был сохранен']);
+        }
+    
+        $season = Season::find($request->season_id);
+        $episodeCount = Episode::where('season_id', $request->season_id)->count();
+        $episodeNumber = $episodeCount + 1;
+    
+        $video = [
+            'season_id' => $request->season_id,
+            'video' => $path,
+            'number' => $episodeNumber
+        ];
+    
+        $episode = Episode::create($video);
+    
+        if (!$episode) {
+            return redirect()->back()->withErrors(['episode' => 'Эпизод не был создан']);
+        }
+    
+        return redirect()->back();
     }
 }
