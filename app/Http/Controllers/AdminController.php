@@ -92,6 +92,7 @@ class AdminController extends Controller
     
         $name = time(). "." . $request->file->extension();
         $destination = 'public/episode';
+        $save_path = '/storage/episode/' . $name;
         $path = $request->file->storeAs($destination, $name);
     
         if (!$path) {
@@ -104,7 +105,7 @@ class AdminController extends Controller
     
         $video = [
             'season_id' => $request->season_id,
-            'video' => $path,
+            'video' => $save_path,
             'number' => $episodeNumber
         ];
     

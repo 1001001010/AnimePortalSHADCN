@@ -22,7 +22,7 @@ export default function AnimePage({
     Anime: Anime;
     seasons: Season[];
     episode: Episode;
-    currentEpisode: Episode;
+    currentEpisode?: Episode;
 }>) {
     // Статус
     const status = [
@@ -32,15 +32,13 @@ export default function AnimePage({
     ];
     const statusText = status.find((s) => s.status === Anime.status)?.text;
 
-    console.log(currentEpisode.video);
-    console.log(Anime.cover);
     // Параметры плеера
     const plyrProps = {
         source: {
             type: "video" as const,
             sources: [
                 {
-                    src: currentEpisode.video,
+                    src: currentEpisode ? currentEpisode.video : "",
                     type: "video/mp4" as const,
                     size: 1080,
                 },
@@ -159,20 +157,34 @@ export default function AnimePage({
                                         <div className="mt-4 grid grid-cols-5 gap-4 max-sm:grid-cols-3 mb-4">
                                             {season.episodes &&
                                                 season.episodes.map((episode) =>
+                                                    currentEpisode &&
                                                     episode.id ===
-                                                    currentEpisode.id ? (
+                                                        currentEpisode.id ? (
                                                         <Button
                                                             key={episode.id}
                                                         >
                                                             {episode.number}
                                                         </Button>
                                                     ) : (
-                                                        <Button
-                                                            variant="outline"
-                                                            key={episode.id}
+                                                        <Link
+                                                            href={route(
+                                                                "anime",
+                                                                [
+                                                                    Anime.unix,
+                                                                    season.number,
+                                                                    episode.number,
+                                                                ]
+                                                            )}
+                                                            preserveScroll
                                                         >
-                                                            {episode.number}
-                                                        </Button>
+                                                            <Button
+                                                                className="w-full"
+                                                                variant="outline"
+                                                                key={episode.id}
+                                                            >
+                                                                {episode.number}
+                                                            </Button>
+                                                        </Link>
                                                     )
                                                 )}
                                         </div>

@@ -53,10 +53,9 @@ export default function NewItems({ auth, Anime }: PageProps<{ Anime: any[] }>) {
                                                         </p>
                                                     </div>
                                                     <Link
-                                                        href={route(
-                                                            "anime",
-                                                            anime.unix
-                                                        )}
+                                                        href={route("anime", [
+                                                            anime.unix,
+                                                        ])}
                                                         className="min-w-full"
                                                     >
                                                         <Button
