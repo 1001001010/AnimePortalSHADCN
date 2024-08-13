@@ -10,7 +10,7 @@ use Inertia\Inertia;
 
 Route::controller(App\Http\Controllers\MainController::class)->group(function () {
     Route::get('/','index')->name('index');
-    Route::get('/anime/view/{anime_id}','anime')->name('anime');
+    Route::get('/anime/view/{anime_id}/season/{season_id}/episode/{episode_id}','anime')->name('anime');
 });
 
 Route::group(['middleware' => 'auth'], function () {

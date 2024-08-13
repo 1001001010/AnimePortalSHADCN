@@ -16,7 +16,14 @@ export default function AnimePage({
     auth,
     Anime,
     seasons,
-}: PageProps<{ Anime: Anime; seasons: Season[] }>) {
+    episode,
+    currentEpisode,
+}: PageProps<{
+    Anime: Anime;
+    seasons: Season[];
+    episode: Episode;
+    currentEpisode: Episode;
+}>) {
     // Статус
     const status = [
         { status: "ongoing", text: "Онгоинг" },
@@ -25,13 +32,15 @@ export default function AnimePage({
     ];
     const statusText = status.find((s) => s.status === Anime.status)?.text;
 
+    console.log(currentEpisode.video);
+    console.log(Anime.cover);
     // Параметры плеера
     const plyrProps = {
         source: {
             type: "video" as const,
             sources: [
                 {
-                    src: "/img/screnes/Berserk.mp4",
+                    src: currentEpisode.video,
                     type: "video/mp4" as const,
                     size: 1080,
                 },
@@ -149,8 +158,15 @@ export default function AnimePage({
                                         </h1>
                                         <div className="mt-4 grid grid-cols-5 gap-4 max-sm:grid-cols-3 mb-4">
                                             {season.episodes &&
-                                                season.episodes.map(
-                                                    (episode: Episode) => (
+                                                season.episodes.map((episode) =>
+                                                    episode.id ===
+                                                    currentEpisode.id ? (
+                                                        <Button
+                                                            key={episode.id}
+                                                        >
+                                                            {episode.number}
+                                                        </Button>
+                                                    ) : (
                                                         <Button
                                                             variant="outline"
                                                             key={episode.id}

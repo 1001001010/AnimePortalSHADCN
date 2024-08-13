@@ -49,6 +49,7 @@ export interface Season {
 export interface Episode {
     id: number;
     number: number;
+    video: string;
 }
 
 export interface AnimePageProps {
