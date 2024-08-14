@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Anime;
 use Inertia\Inertia;
+use auth;
 
 class MainController extends Controller
 {
@@ -15,8 +16,7 @@ class MainController extends Controller
             ]);
     }
 
-    public function anime($anime_id, $season_id = null, $episode_id = null): \Inertia\Response
-    {
+    public function anime($anime_id, $season_id = null, $episode_id = null): \Inertia\Response {
         $anime = Anime::where('unix', $anime_id)->firstOrFail();
         $seasons = $anime->seasons()->with('episodes')->get();
     
@@ -34,5 +34,9 @@ class MainController extends Controller
             'seasons' => $seasons,
             'currentEpisode' => $currentEpisode,
         ]);
+    }
+
+    public function favorites($anime_id) {
+        dd($anime_id);
     }
 }

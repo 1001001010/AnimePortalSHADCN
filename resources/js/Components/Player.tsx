@@ -42,6 +42,10 @@ export default function Player({
                 "pip",
                 "fullscreen",
             ],
+            seeking: {
+                enabled: true,
+                skip: true, // Включите перемотку к конкретному времени
+            },
         },
     };
     return (

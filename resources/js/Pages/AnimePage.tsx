@@ -46,7 +46,7 @@ export default function AnimePage({
                                     variant="outline"
                                     className="w-full border-gray-200 dark:border-gray-700"
                                 >
-                                    Смотреть
+                                    В избранное
                                 </Button>
                             </Link>
                         </div>
