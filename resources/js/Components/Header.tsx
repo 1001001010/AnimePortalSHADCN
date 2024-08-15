@@ -1,4 +1,4 @@
-import { PageProps } from "../types";
+import { FriendShips, PageProps } from "../types";
 import { Link } from "@inertiajs/react";
 import { Button } from "@/shadcn/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/shadcn/ui/sheet";
@@ -35,7 +35,10 @@ import {
     ListFilter,
 } from "lucide-react";
 
-export default function Header({ auth }: PageProps<{}>) {
+export default function Header({
+    auth,
+    friendship,
+}: PageProps<{ friendship: FriendShips }>) {
     const handleToggleDarkMode = () => {
         document.documentElement.classList.toggle("dark");
     };
@@ -43,6 +46,9 @@ export default function Header({ auth }: PageProps<{}>) {
         e.preventDefault();
         route("logout");
     };
+
+    console.log(friendship);
+
     return (
         <div className="flex w-full flex-col bg-muted/40">
             <aside className="fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex">
@@ -275,25 +281,28 @@ export default function Header({ auth }: PageProps<{}>) {
                                 <Button
                                     variant="outline"
                                     size="icon"
-                                    className="overflow-hidden rounded-full"
+                                    className="rounded-full relative"
                                 >
-                                    {auth.user.profile_image ? (
-                                        <Avatar>
+                                    <Avatar>
+                                        {auth.user.profile_image ? (
                                             <AvatarImage
                                                 src={auth.user.profile_image}
                                                 alt="@avatar"
                                             />
-                                            <AvatarFallback>CN</AvatarFallback>
-                                        </Avatar>
-                                    ) : (
-                                        <Avatar>
+                                        ) : (
                                             <AvatarImage
                                                 src="/img/defaultAvatar.png"
                                                 alt="@avatar"
                                             />
-                                            <AvatarFallback>CN</AvatarFallback>
-                                        </Avatar>
-                                    )}
+                                        )}
+                                        <AvatarFallback>AV</AvatarFallback>
+                                    </Avatar>
+                                    {friendship ? (
+                                        <span className="absolute bottom-7 left-6 flex h-3 w-3">
+                                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+                                            <span className="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>
+                                        </span>
+                                    ) : null}
                                 </Button>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent align="end">

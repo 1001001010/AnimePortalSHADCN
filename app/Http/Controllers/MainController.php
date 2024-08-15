@@ -3,16 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Anime;
+use App\Models\{Anime, Friendship};
 use Inertia\Inertia;
-use auth;
+use Auth;
 
 class MainController extends Controller
 {
     public function index(): \Inertia\Response {
         $NewsItem = Anime::latest('updated_at')->take(15)->get();
         return Inertia::render('Welcome', [
-            'NewAnime' => $NewsItem
+            'NewAnime' => $NewsItem,
             ]);
     }
 

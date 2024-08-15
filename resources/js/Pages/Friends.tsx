@@ -1,74 +1,112 @@
-import { PageProps } from "@/types";
+"use client";
+
+import { FriendShips, PageProps } from "@/types";
+import React, { FormEventHandler } from "react";
+import { useForm } from "@inertiajs/react";
 import Header from "@/Components/Header";
-import { CheckIcon } from "@radix-ui/react-icons";
-import cn from "classnames";
-import { useCallback, useState } from "react";
 import {
     Command,
+    CommandEmpty,
     CommandGroup,
     CommandInput,
     CommandItem,
     CommandList,
 } from "@/shadcn/ui/command";
-import { useForm } from "@inertiajs/react";
+import { Check } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { toast } from "sonner";
 
 export default function Friends({
     auth,
     users,
+    request,
+    friendship,
 }: PageProps<{
-    user: { name: string; email: string; created_at: string };
     users: any[];
+    request: FriendShips[];
+    friendship: FriendShips;
 }>) {
-    const [open, setOpen] = useState(false);
-    const [value, setValue] = useState("");
+    const [open, setOpen] = React.useState(false);
+    const [value, setValue] = React.useState("");
     const { data, setData, post, processing, errors } = useForm({
         friend_id: null,
     });
 
-    const handleSubmit = (friendId: any) => {
-        setData("friend_id", friendId);
-        console.log(friendId);
+    const submit: FormEventHandler = (e) => {
+        e.preventDefault();
+
         post(route("friends.add"));
     };
 
     return (
         <>
-            <Header auth={auth} />
+            <Header friendship={friendship} auth={auth} />
             <div className="ml-14 ml:ml-0 max-sm:ml-0">
                 <div className="m-4 border border-gray-200 rounded-lg shadow dark:border-gray-700">
                     <ul className="p-4 w-full">
                         <Command>
                             <CommandInput
-                                placeholder="Поиск пользователя..."
-                                onFocus={() => setOpen(true)}
-                                onBlur={() => setOpen(false)}
+                                placeholder="Введите имя"
+                                className="min-w-full"
                             />
-                            {open && (
-                                <CommandList>
-                                    <CommandGroup>
-                                        {users.map((user) => (
-                                            <CommandItem
-                                                key={user.id}
-                                                value={user.id}
-                                                onSelect={(currentValue) => {
-                                                    handleSubmit(currentValue);
-                                                    setOpen(false);
-                                                }}
+                            <CommandList>
+                                <CommandEmpty>
+                                    Пользователь не найден
+                                </CommandEmpty>
+                                <CommandGroup>
+                                    <form onSubmit={submit}>
+                                        {users.map((user, index) => (
+                                            <button
+                                                type="submit"
+                                                className="w-full"
+                                                key={index}
                                             >
-                                                <CheckIcon
-                                                    className={cn(
-                                                        "mr-2 h-4 w-4",
-                                                        value === user.id
-                                                            ? "opacity-100"
-                                                            : "opacity-0"
+                                                <CommandItem
+                                                    value={user.name}
+                                                    onSelect={(
+                                                        currentValue
+                                                    ) => {
+                                                        setValue(
+                                                            currentValue ===
+                                                                value
+                                                                ? ""
+                                                                : currentValue
+                                                        );
+                                                        setOpen(false);
+                                                        setData({
+                                                            friend_id: user.id,
+                                                        });
+                                                    }}
+                                                >
+                                                    <Check
+                                                        className={cn(
+                                                            "mr-2 h-4 w-4",
+                                                            value === user.id
+                                                                ? "opacity-100"
+                                                                : "opacity-0"
+                                                        )}
+                                                    />
+                                                    {request.some(
+                                                        (req) =>
+                                                            req.friend_id ===
+                                                            user.id
+                                                    ) ? (
+                                                        <div className="flex flex-wrap flex-row justify-between w-full">
+                                                            <p>{user.name}</p>
+                                                            <p className="text-gray-500">
+                                                                Заявка уже
+                                                                отправлена
+                                                            </p>
+                                                        </div>
+                                                    ) : (
+                                                        user.name
                                                     )}
-                                                />
-                                                {user.name}
-                                            </CommandItem>
+                                                </CommandItem>
+                                            </button>
                                         ))}
-                                    </CommandGroup>
-                                </CommandList>
-                            )}
+                                    </form>
+                                </CommandGroup>
+                            </CommandList>
                         </Command>
                     </ul>
                     <ul className="m-4">Ваши друзья</ul>

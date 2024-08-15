@@ -1,15 +1,17 @@
-import { PageProps } from "@/types";
+import { FriendShips, PageProps } from "@/types";
 import Header from "@/Components/Header";
 
 export default function Profile({
     auth,
     user,
+    friendship,
 }: PageProps<{
     user: { name: string; email: string; created_at: string };
+    friendship: FriendShips;
 }>) {
     return (
         <>
-            <Header auth={auth} />
+            <Header friendship={friendship} auth={auth} />
             <div className="ml-14 ml:ml-0 max-sm:ml-0">
                 <div className="m-4 border border-gray-200 rounded-lg shadow dark:border-gray-700">
                     <div className="flex">

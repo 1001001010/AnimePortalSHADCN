@@ -16,13 +16,15 @@ import {
     ChartTooltipContent,
 } from "@/shadcn/ui/chart";
 import Header from "@/Components/Header";
-import { PageProps } from "@/types";
+import { FriendShips, PageProps } from "@/types";
 
 export default function Friends({
     auth,
+    friendship,
 }: PageProps<{
     user: { name: string; email: string; created_at: string };
     users: any[];
+    friendship: FriendShips;
 }>) {
     const chartData = [
         { month: "January", desktop: 186, mobile: 80 },
@@ -52,7 +54,7 @@ export default function Friends({
 
     return (
         <>
-            <Header auth={auth} />
+            <Header auth={auth} friendship={friendship} />
             <div className="ml-14 ml:ml-0 max-sm:ml-0 w-1/3 max-lg:w-11/12 max-sm:w-full">
                 <div className="m-4 border border-gray-200 rounded-lg shadow dark:border-gray-700">
                     <Card>

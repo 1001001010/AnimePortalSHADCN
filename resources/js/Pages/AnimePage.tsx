@@ -7,7 +7,7 @@ import { Badge } from "@/shadcn/ui/badge";
 import "plyr-react/plyr.css";
 import { Link } from "@inertiajs/react";
 import ScrenesCarousel from "@/Components/ScenesCarousel";
-import type { Anime, Season, Episode } from "@/types";
+import type { Anime, Season, Episode, FriendShips } from "@/types";
 import Player from "@/Components/Player";
 
 export default function AnimePage({
@@ -15,11 +15,13 @@ export default function AnimePage({
     Anime,
     seasons,
     episode,
+    friendship,
     currentEpisode,
 }: PageProps<{
     Anime: Anime;
     seasons: Season[];
     episode: Episode;
+    friendship: FriendShips;
     currentEpisode?: Episode;
 }>) {
     // Статус
@@ -32,7 +34,7 @@ export default function AnimePage({
 
     return (
         <>
-            <Header auth={auth} />
+            <Header auth={auth} friendship={friendship} />
             <div className="ml-14 ml:ml-0 max-sm:ml-0">
                 <div className="m-4 border border-gray-200 rounded-lg shadow dark:border-gray-700">
                     <div className="flex flex-row max-md:flex-col ">

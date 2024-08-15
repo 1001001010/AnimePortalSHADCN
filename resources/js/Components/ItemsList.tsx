@@ -11,6 +11,16 @@ import {
     PaginationNext,
     PaginationPrevious,
 } from "@/shadcn/ui/pagination";
+import { Label } from "@/shadcn/ui/label";
+import {
+    Select,
+    SelectContent,
+    SelectGroup,
+    SelectItem,
+    SelectLabel,
+    SelectTrigger,
+    SelectValue,
+} from "@/shadcn/ui/select";
 
 export default function HighestScoreItems() {
     const data = [
@@ -20,6 +30,13 @@ export default function HighestScoreItems() {
         { title: "Атака титанов", studio: "Wit Studio" },
         { title: "Хеллсинг", studio: "Gonzo" },
     ];
+
+    const status = [
+        { status: "ongoing", text: "Онгоинг" },
+        { status: "came_out", text: "Вышел" },
+        { status: "preview", text: "Анонс" },
+    ];
+
     return (
         <div className="mt-4">
             <div className="flex justify-around max-lg:mx-10 gap-4 max-md:flex-col-reverse max-md:w-full max-md:mx-0">
@@ -81,8 +98,35 @@ export default function HighestScoreItems() {
                     </Pagination>
                 </div>
                 <div className="p-2 text-gray-900 dark:text-gray-100 w-full md:w-1/3 border border-gray-700 rounded-lg">
-                    <h2 className="text-lg font-medium p-1 py-4">Критерии</h2>
-                    <Input type="text" placeholder="Поиск" />
+                    <div className="grid w-full items-center gap-2 p-2">
+                        <Label htmlFor="anime_name">Название</Label>
+                        <Input
+                            className="w-full"
+                            type="text"
+                            id="anime_name"
+                            placeholder="Введите ключевое слово"
+                        />
+                    </div>
+                    <div className="grid w-full items-center gap-2 p-2">
+                        <Label htmlFor="status">Статус</Label>
+                        <Select>
+                            <SelectTrigger className="w-full">
+                                <SelectValue placeholder="Выберите статус" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectGroup>
+                                    {status.map((item, index) => (
+                                        <SelectItem
+                                            key={index}
+                                            value={item.status}
+                                        >
+                                            {item.text}
+                                        </SelectItem>
+                                    ))}
+                                </SelectGroup>
+                            </SelectContent>
+                        </Select>
+                    </div>
                 </div>
             </div>
         </div>
