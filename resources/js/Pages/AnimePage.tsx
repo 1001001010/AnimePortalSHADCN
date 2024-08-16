@@ -6,9 +6,9 @@ import { Button } from "@/shadcn/ui/button";
 import { Badge } from "@/shadcn/ui/badge";
 import "plyr-react/plyr.css";
 import { Link } from "@inertiajs/react";
-import ScrenesCarousel from "@/Components/ScenesCarousel";
+import ScrenesCarousel from "@/Components/Anime/ScenesCarousel";
 import type { Anime, Season, Episode, FriendShips } from "@/types";
-import Player from "@/Components/Player";
+import Player from "@/Components/Anime/Player";
 
 export default function AnimePage({
     auth,
