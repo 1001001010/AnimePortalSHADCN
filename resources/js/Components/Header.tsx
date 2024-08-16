@@ -47,8 +47,6 @@ export default function Header({
         route("logout");
     };
 
-    console.log(friendship);
-
     return (
         <div className="flex w-full flex-col bg-muted/40">
             <aside className="fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex">
@@ -312,6 +310,23 @@ export default function Header({
                                     className="w-full"
                                 >
                                     <DropdownMenuItem>Профиль</DropdownMenuItem>
+                                </Link>
+                                <DropdownMenuSeparator />
+                                <Link
+                                    href={route("notifications")}
+                                    as="button"
+                                    className="w-full"
+                                >
+                                    <DropdownMenuItem className="flex items-center">
+                                        <span className="mr-2">
+                                            Уведомления
+                                        </span>
+                                        {friendship ? (
+                                            <span className="relative inline-flex h-2 w-2">
+                                                <span className="relative inline-flex rounded-full h-2 w-2 bg-sky-500"></span>
+                                            </span>
+                                        ) : null}
+                                    </DropdownMenuItem>
                                 </Link>
                                 <DropdownMenuSeparator />
                                 <Link

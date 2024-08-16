@@ -1,8 +1,8 @@
 import { Card } from "@/shadcn/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/shadcn/ui/tabs";
 import { Link } from "@inertiajs/react";
-import RegisterForm from "@/Components/RegisterForm";
-import LoginForm from "@/Components/LoginForm";
+import RegisterForm from "@/Components/Login/RegisterForm";
+import LoginForm from "@/Components/Login/LoginForm";
 
 export default function Header() {
     return (

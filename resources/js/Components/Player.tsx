@@ -4,8 +4,8 @@ import Plyr from "plyr-react";
 import "plyr-react/plyr.css";
 import { Link } from "@inertiajs/react";
 import type { Anime, Season, Episode } from "@/types";
-import NewSeasonForm from "@/Components/NewSeasonForm";
-import NewEpisodeForm from "@/Components/NewEpisodeForm";
+import NewSeasonForm from "@/Components/Admin/NewSeasonForm";
+import NewEpisodeForm from "@/Components/Admin/NewEpisodeForm";
 
 export default function Player({
     auth,

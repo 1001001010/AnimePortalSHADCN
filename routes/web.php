@@ -20,12 +20,14 @@ Route::middleware([ShareRequestMiddleware::class])->group(function () {
         Route::controller(App\Http\Controllers\FriendsController::class)->group(function () {
             Route::get('friends','index')->name('friends.index');
             Route::post('friends/add','add_friends')->name('friends.add');
+            Route::post('friends/status','edit_status')->name('friends.status');
         });
         Route::controller(App\Http\Controllers\SessionController::class)->group(function () {
             Route::get('/profile/session/{session_id}','destroy_session')->name('profile.session.destroy');
         });
         Route::controller(App\Http\Controllers\ProfileController::class)->group(function () {
             Route::get('/profile', 'index')->name('profile');
+            Route::get('/notifications', 'notifications')->name('notifications');
             Route::get('/profile/edit', 'edit')->name('profile.edit');
             Route::patch('/profile', 'update')->name('profile.update');
             Route::post('/profile/photo', 'photo')->name('profile.photo');

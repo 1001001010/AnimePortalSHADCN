@@ -1,6 +1,6 @@
 import { FriendShips, PageProps } from "@/types";
 import Header from "@/Components/Header";
-import NewAnimeForm from "@/Components/NewAnime";
+import NewAnimeForm from "@/Components/Admin/NewAnime";
 
 export default function AdminPanel({
     auth,

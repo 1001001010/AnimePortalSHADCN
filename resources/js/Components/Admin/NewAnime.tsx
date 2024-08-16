@@ -29,7 +29,6 @@ import {
 } from "@/shadcn/ui/carousel";
 import { Input } from "@/shadcn/ui/input";
 import { Textarea } from "@/shadcn/ui/textarea";
-import InputError from "./InputError";
 
 export default function NewAnimeForm() {
     const { data, setData, post, processing, reset, errors } = useForm({

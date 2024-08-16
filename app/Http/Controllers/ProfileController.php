@@ -4,14 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
-use Inertia\Inertia;
-use Inertia\Response;
-use App\Models\ActiveSession;
-use App\Models\User;
+use Illuminate\Http\{RedirectResponse, Request};
+use Illuminate\Support\Facades\{Auth, Redirect};
+use Inertia\{Inertia, Response};
+use App\Models\{ActiveSession, Friendship, User};
 
 class ProfileController extends Controller
 {
@@ -20,12 +16,12 @@ class ProfileController extends Controller
     }
 
     public function edit(Request $request): Response {
-            $activeSessions = ActiveSession::where('user_id', Auth::user()->id)->get();
-            return Inertia::render('Profile/Edit', [
-                'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
-                'status' => session('status'),
-                'activeSession' => $activeSessions,
-            ]);
+        $activeSessions = ActiveSession::where('user_id', Auth::user()->id)->get();
+        return Inertia::render('Profile/Edit', [
+            'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
+            'status' => session('status'),
+            'activeSession' => $activeSessions,
+        ]);
     }
     
     public function update(ProfileUpdateRequest $request): RedirectResponse {
@@ -71,5 +67,12 @@ class ProfileController extends Controller
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
+    }
+
+    public function notifications() {
+        $friend_info = Friendship::with('user')->where('friend_id', Auth::user()->id)->get();
+        return Inertia::render('Profile/Notifications', [
+            'friend_info' => $friend_info,
+        ]);
     }
 }

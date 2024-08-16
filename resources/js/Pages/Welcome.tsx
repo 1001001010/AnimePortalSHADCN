@@ -1,9 +1,9 @@
 import { Link, Head } from "@inertiajs/react";
 import { FriendShips, PageProps } from "@/types";
 import Header from "@/Components/Header";
-import NewItems from "@/Components/NewItems";
-import HighestScoreItems from "@/Components/HighestScoreItems";
-import ItemsList from "@/Components/ItemsList";
+import NewItems from "@/Components/Welcome/NewItems";
+import HighestScoreItems from "@/Components/Welcome/HighestScoreItems";
+import ItemsList from "@/Components/Welcome/ItemsList";
 
 export default function Welcome({
     auth,

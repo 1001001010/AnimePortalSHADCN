@@ -15,10 +15,26 @@ export interface ActiveSession {
     last_activity: number;
     payload: string;
 }
+export interface Friends {
+    id: number;
+    user_id: number;
+    friend_id: number;
+    user: {
+        name: string;
+    };
+    friend: {
+        id: number;
+        name: string;
+    };
+}
+
 export interface FriendShips {
     id: number;
     user_id: number;
     friend_id: number;
+    user: {
+        name: string;
+    };
 }
 
 export interface Anime {
