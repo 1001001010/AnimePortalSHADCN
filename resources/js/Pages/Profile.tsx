@@ -1,12 +1,11 @@
-import { FriendShips, PageProps } from "@/types";
+import { FriendShips, PageProps, User } from "@/types";
 import Header from "@/Components/Header";
 
 export default function Profile({
     auth,
-    user,
     friendship,
 }: PageProps<{
-    user: { name: string; email: string; created_at: string };
+    user: User;
     friendship: FriendShips;
 }>) {
     return (

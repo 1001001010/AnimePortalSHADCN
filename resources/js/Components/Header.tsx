@@ -2,12 +2,11 @@ import { FriendShips, PageProps } from "../types";
 import { Link } from "@inertiajs/react";
 import { Button } from "@/shadcn/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/shadcn/ui/sheet";
-import { useEffect, FormEventHandler } from "react";
+import { FormEventHandler } from "react";
 import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
-    DropdownMenuLabel,
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/shadcn/ui/dropdown-menu";
@@ -27,7 +26,6 @@ import {
     Search,
     PencilRuler,
     Settings,
-    ShoppingCart,
     Users2,
     MoonStar,
     SunMedium,

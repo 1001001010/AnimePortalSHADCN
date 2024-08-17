@@ -6,12 +6,10 @@ import {
     CarouselNext,
     CarouselPrevious,
 } from "@/shadcn/ui/carousel";
-import { Button } from "@/shadcn/ui/button";
 import { PageProps } from "@/types";
 import type { Anime } from "@/types";
 
 export default function ScrenesCarousel({
-    auth,
     Anime,
 }: PageProps<{ Anime: Anime }>) {
     const imageDataArray: string[] = JSON.parse(Anime.screens);
@@ -34,9 +32,9 @@ export default function ScrenesCarousel({
                         <CarouselContent>
                             {[...imageDataArray]
                                 .sort(() => Math.random() - 0.5)
-                                .map((item) => (
+                                .map((item, index) => (
                                     <CarouselItem
-                                        key={item}
+                                        key={index}
                                         className="basis-1/2 md:basis-1/2 lg:basis-1/3 xl:basis-1/4"
                                     >
                                         <div className="p-1 max-sm:p-0">

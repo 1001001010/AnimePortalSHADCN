@@ -1,12 +1,11 @@
-import { FriendShips, PageProps } from "@/types";
+import { Anime, FriendShips, PageProps } from "@/types";
 import Header from "@/Components/Header";
 import NewAnimeForm from "@/Components/Admin/NewAnime";
 
 export default function AdminPanel({
     auth,
-    Anime,
     friendship,
-}: PageProps<{ Anime: any[]; friendship: FriendShips }>) {
+}: PageProps<{ friendship: FriendShips }>) {
     return (
         <>
             <Header auth={auth} friendship={friendship} />

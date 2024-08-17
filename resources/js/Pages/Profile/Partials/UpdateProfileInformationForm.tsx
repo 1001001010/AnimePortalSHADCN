@@ -6,7 +6,6 @@ import { toast } from "sonner";
 import { Input } from "@/shadcn/ui/input";
 import { Label } from "@/shadcn/ui/label";
 import { Button } from "@/shadcn/ui/button";
-import { Toaster } from "@/shadcn/ui/sonner";
 
 export default function UpdateProfileInformation({
     className = "",

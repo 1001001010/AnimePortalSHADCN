@@ -14,8 +14,6 @@ export default function Edit({
     friendship: FriendShips;
     friend_info: FriendShips[];
 }>) {
-    console.log(friend_info);
-
     const { data, setData, post, processing, reset, errors } = useForm({
         user_id: null as number | null,
         friend_id: null as number | null,

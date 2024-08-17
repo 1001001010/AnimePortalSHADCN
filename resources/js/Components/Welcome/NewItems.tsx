@@ -8,10 +8,10 @@ import {
 } from "@/shadcn/ui/carousel";
 import { Button } from "@/shadcn/ui/button";
 import { ChevronsRight } from "lucide-react";
-import { PageProps } from "@/types";
+import { Anime, PageProps } from "@/types";
 import { Link } from "@inertiajs/react";
 
-export default function NewItems({ auth, Anime }: PageProps<{ Anime: any[] }>) {
+export default function NewItems({ Anime }: PageProps<{ Anime: Anime[] }>) {
     return (
         <div>
             <header>
@@ -27,9 +27,9 @@ export default function NewItems({ auth, Anime }: PageProps<{ Anime: any[] }>) {
                     <CarouselPrevious className="mr-2" />
                     <div className="flex justify-center">
                         <CarouselContent>
-                            {Anime.map((anime) => (
+                            {Anime.map((anime, index) => (
                                 <CarouselItem
-                                    key={anime}
+                                    key={index}
                                     className="basis-full md:basis-1/3 lg:basis-1/4 xl:basis-1/5 min-w-72 min-h-96"
                                 >
                                     <div className="p-1 h-full">

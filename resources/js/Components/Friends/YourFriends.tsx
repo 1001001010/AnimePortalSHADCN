@@ -16,7 +16,7 @@ export default function YourFriends({
             <ul className="m-4">Ваши друзья</ul>
             <div className="grid grid-cols-4 gap-4 m-4">
                 {friend_list.map((friend, index) => (
-                    <Alert className="truncate overflow-hidden">
+                    <Alert className="truncate overflow-hidden" key={index}>
                         <UserRoundCheck className="h-4 w-4 " />
                         {friend.user_id === auth.user.id ? (
                             <AlertTitle>{friend.friend.name}</AlertTitle>

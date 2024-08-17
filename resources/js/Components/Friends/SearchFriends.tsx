@@ -1,8 +1,8 @@
 "use client";
 
 import React, { FormEventHandler } from "react";
-import { Link, useForm } from "@inertiajs/react";
-import { Friends, FriendShips, PageProps } from "@/types";
+import { useForm } from "@inertiajs/react";
+import { FriendShips, PageProps } from "@/types";
 import {
     Command,
     CommandEmpty,
@@ -11,7 +11,7 @@ import {
     CommandItem,
     CommandList,
 } from "@/shadcn/ui/command";
-import { Check, UserRoundCheck } from "lucide-react";
+import { Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export default function SearchFriends({

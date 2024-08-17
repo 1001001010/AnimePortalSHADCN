@@ -20,14 +20,11 @@ import {
     SelectContent,
     SelectGroup,
     SelectItem,
-    SelectLabel,
     SelectTrigger,
     SelectValue,
 } from "@/shadcn/ui/select";
 
 export default function NewEpisodeForm({
-    auth,
-    Anime,
     Season,
 }: PageProps<{ Anime: Anime; Season: Season[] }>) {
     const { data, setData, post, processing, errors, reset } = useForm({

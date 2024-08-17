@@ -1,6 +1,6 @@
 "use client";
 
-import { Friends, FriendShips, PageProps } from "@/types";
+import { Friends, FriendShips, PageProps, User } from "@/types";
 import Header from "@/Components/Header";
 import YourFriends from "@/Components/Friends/YourFriends";
 import SearchFriends from "@/Components/Friends/SearchFriends";
@@ -12,7 +12,7 @@ export default function Friend({
     friendship,
     friend_list,
 }: PageProps<{
-    users: any[];
+    users: User[];
     request: FriendShips[];
     friendship: FriendShips;
     friend_list: Friends[];

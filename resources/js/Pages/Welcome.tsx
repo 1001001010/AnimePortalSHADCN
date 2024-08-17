@@ -1,5 +1,5 @@
 import { Link, Head } from "@inertiajs/react";
-import { FriendShips, PageProps } from "@/types";
+import { Anime, FriendShips, PageProps } from "@/types";
 import Header from "@/Components/Header";
 import NewItems from "@/Components/Welcome/NewItems";
 import HighestScoreItems from "@/Components/Welcome/HighestScoreItems";
@@ -9,7 +9,7 @@ export default function Welcome({
     auth,
     NewAnime,
     friendship,
-}: PageProps<{ NewAnime: any[]; friendship: any }>) {
+}: PageProps<{ NewAnime: Anime[]; friendship: FriendShips }>) {
     const handleImageError = () => {
         document
             .getElementById("screenshot-container")

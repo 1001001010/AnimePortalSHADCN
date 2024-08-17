@@ -15,10 +15,7 @@ import { useForm } from "@inertiajs/react";
 import { FormEventHandler } from "react";
 import { useState } from "react";
 
-export default function NewEpisodeForm({
-    auth,
-    Anime,
-}: PageProps<{ Anime: Anime }>) {
+export default function NewEpisodeForm({ Anime }: PageProps<{ Anime: Anime }>) {
     const { data, setData, post, processing, errors, reset } = useForm({
         name: "",
     });

@@ -22,8 +22,6 @@ export default function Friends({
     auth,
     friendship,
 }: PageProps<{
-    user: { name: string; email: string; created_at: string };
-    users: any[];
     friendship: FriendShips;
 }>) {
     const chartData = [

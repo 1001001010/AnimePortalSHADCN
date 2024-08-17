@@ -11,7 +11,6 @@ export default function Player({
     auth,
     Anime,
     seasons,
-    episode,
     currentEpisode,
 }: PageProps<{
     Anime: Anime;
@@ -69,8 +68,8 @@ export default function Player({
                             </div>
                         ) : null}
                         {seasons &&
-                            seasons.map((season: Season) => (
-                                <div key={season.id}>
+                            seasons.map((season: Season, index) => (
+                                <div key={index}>
                                     <h1 className="font-bold text-center">
                                         {season.name
                                             ? `Сезон ${season.number} (${season.name})`
@@ -78,31 +77,35 @@ export default function Player({
                                     </h1>
                                     <div className="mt-4 grid grid-cols-5 gap-4 max-sm:grid-cols-3 mb-4">
                                         {season.episodes &&
-                                            season.episodes.map((episode) =>
-                                                currentEpisode &&
-                                                episode.id ===
-                                                    currentEpisode.id ? (
-                                                    <Button key={episode.id}>
-                                                        {episode.number}
-                                                    </Button>
-                                                ) : (
-                                                    <Link
-                                                        href={route("anime", [
-                                                            Anime.unix,
-                                                            season.number,
-                                                            episode.number,
-                                                        ])}
-                                                        key={episode.id}
-                                                        preserveScroll
-                                                    >
-                                                        <Button
-                                                            className="w-full"
-                                                            variant="outline"
-                                                        >
+                                            season.episodes.map(
+                                                (episode, index) =>
+                                                    currentEpisode &&
+                                                    episode.id ===
+                                                        currentEpisode.id ? (
+                                                        <Button key={index}>
                                                             {episode.number}
                                                         </Button>
-                                                    </Link>
-                                                )
+                                                    ) : (
+                                                        <Link
+                                                            href={route(
+                                                                "anime",
+                                                                [
+                                                                    Anime.unix,
+                                                                    season.number,
+                                                                    episode.number,
+                                                                ]
+                                                            )}
+                                                            key={episode.id}
+                                                            preserveScroll
+                                                        >
+                                                            <Button
+                                                                className="w-full"
+                                                                variant="outline"
+                                                            >
+                                                                {episode.number}
+                                                            </Button>
+                                                        </Link>
+                                                    )
                                             )}
                                     </div>
                                 </div>
@@ -122,8 +125,8 @@ export default function Player({
                         </div>
                     ) : null}
                     {seasons &&
-                        seasons.map((season: Season) => (
-                            <div key={season.id}>
+                        seasons.map((season: Season, index) => (
+                            <div key={index}>
                                 <h1 className="font-bold text-center">
                                     {season.name
                                         ? `Сезон ${season.number} (${season.name})`
@@ -131,24 +134,27 @@ export default function Player({
                                 </h1>
                                 <div className="mt-4 grid grid-cols-10 gap-4 max-sm:grid-cols-3 mb-4">
                                     {season.episodes &&
-                                        season.episodes.map((episode) => (
-                                            <Link
-                                                href={route("anime", [
-                                                    Anime.unix,
-                                                    season.number,
-                                                    episode.number,
-                                                ])}
-                                                preserveScroll
-                                            >
-                                                <Button
-                                                    className="w-full"
-                                                    variant="outline"
-                                                    key={episode.id}
+                                        season.episodes.map(
+                                            (episode, index) => (
+                                                <Link
+                                                    href={route("anime", [
+                                                        Anime.unix,
+                                                        season.number,
+                                                        episode.number,
+                                                    ])}
+                                                    preserveScroll
+                                                    key={index}
                                                 >
-                                                    {episode.number}
-                                                </Button>
-                                            </Link>
-                                        ))}
+                                                    <Button
+                                                        className="w-full"
+                                                        variant="outline"
+                                                        key={episode.id}
+                                                    >
+                                                        {episode.number}
+                                                    </Button>
+                                                </Link>
+                                            )
+                                        )}
                                 </div>
                             </div>
                         ))}

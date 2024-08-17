@@ -54,12 +54,6 @@ export default function DeleteUserForm({
                 <h2 className="text-lg font-medium">Удаление аккаунта</h2>
             </header>
 
-            {/* <DangerButton onClick={confirmUserDeletion}>
-                Удалить аккаунт
-            </DangerButton> */}
-            {/* <Button variant="outline" disabled={processing}>
-                        Сохранить
-                    </Button> */}
             <Button variant="outline" onClick={confirmUserDeletion}>
                 Удалить аккаунт
             </Button>

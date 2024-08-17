@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Button } from "@/shadcn/ui/button";
 import type { ActiveSession } from "@/types";
 import axios from "axios";
-import { v4 as uuid } from "uuid";
 
 interface ActiveSessionProps {
     activeSessions: ActiveSession[];
@@ -17,9 +16,9 @@ export default function ActiveSession({ activeSessions }: ActiveSessionProps) {
     return (
         <div>
             <ul>
-                {activeSessions.map((session) => (
+                {activeSessions.map((session, index) => (
                     <li
-                        key={uuid()}
+                        key={index}
                         className="mb-4 border border-gray-200 rounded-lg shadow dark:border-gray-700 w-full p-4"
                     >
                         <p>IP адрес: {session.ip_address}</p>
