@@ -1,6 +1,6 @@
 "use client";
 import { TrendingUp } from "lucide-react";
-import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
+import { Bar, BarChart, XAxis, YAxis } from "recharts";
 import {
     Card,
     CardContent,
@@ -15,38 +15,48 @@ import {
     ChartTooltip,
     ChartTooltipContent,
 } from "@/shadcn/ui/chart";
-import Header from "@/Components/Header";
 import { FriendShips, PageProps } from "@/types";
+import Header from "@/Components/Header";
 
 export default function Friends({
     auth,
     friendship,
 }: PageProps<{
+    user: { name: string; email: string; created_at: string };
+    users: any[];
     friendship: FriendShips;
 }>) {
     const chartData = [
-        { month: "January", desktop: 186, mobile: 80 },
-        { month: "February", desktop: 305, mobile: 200 },
-        { month: "March", desktop: 237, mobile: 120 },
-        { month: "April", desktop: 73, mobile: 190 },
-        { month: "May", desktop: 209, mobile: 130 },
-        { month: "June", desktop: 214, mobile: 140 },
-        { month: "July", desktop: 251, mobile: 160 },
-        { month: "August", desktop: 192, mobile: 110 },
-        { month: "September", desktop: 220, mobile: 150 },
-        { month: "October", desktop: 198, mobile: 180 },
-        { month: "November", desktop: 242, mobile: 120 },
-        { month: "December", desktop: 278, mobile: 200 },
+        { browser: "chrome", visitors: 1, fill: "var(--color-chrome)" },
+        { browser: "safari", visitors: 0, fill: "var(--color-safari)" },
+        { browser: "firefox", visitors: 0, fill: "var(--color-firefox)" },
+        { browser: "edge", visitors: 0, fill: "var(--color-edge)" },
+        { browser: "other", visitors: 0, fill: "var(--color-other)" },
     ];
 
     const chartConfig = {
-        desktop: {
-            label: "Desktop",
+        visitors: {
+            label: "Visitors",
+        },
+        chrome: {
+            label: "Chrome",
             color: "hsl(var(--chart-1))",
         },
-        mobile: {
-            label: "Mobile",
+        safari: {
+            label: "Safari",
             color: "hsl(var(--chart-2))",
+        },
+        firefox: {
+            label: "Firefox",
+            color: "hsl(var(--chart-3))",
+        },
+        edge: {
+            label: "Edge",
+            color: "hsl(var(--chart-4))",
+        },
+        other: {
+            label: "Other",
+            color: "hsl(var(--chart-5))",
         },
     } satisfies ChartConfig;
 
@@ -57,52 +67,50 @@ export default function Friends({
                 <div className="m-4 border border-gray-200 rounded-lg shadow dark:border-gray-700">
                     <Card>
                         <CardHeader>
-                            <CardTitle>Bar Chart - Multiple</CardTitle>
-                            <CardDescription>
-                                January - June 2024
-                            </CardDescription>
+                            <CardTitle>Статистика посещения</CardTitle>
+                            <CardDescription>За все время</CardDescription>
                         </CardHeader>
                         <CardContent>
                             <ChartContainer config={chartConfig}>
-                                <BarChart accessibilityLayer data={chartData}>
-                                    <CartesianGrid vertical={false} />
-                                    <XAxis
-                                        dataKey="month"
+                                <BarChart
+                                    accessibilityLayer
+                                    data={chartData}
+                                    layout="vertical"
+                                    margin={{
+                                        left: 0,
+                                    }}
+                                >
+                                    <YAxis
+                                        dataKey="browser"
+                                        type="category"
                                         tickLine={false}
                                         tickMargin={10}
                                         axisLine={false}
                                         tickFormatter={(value) =>
-                                            value.slice(0, 3)
+                                            chartConfig[
+                                                value as keyof typeof chartConfig
+                                            ]?.label
                                         }
+                                    />
+                                    <XAxis
+                                        dataKey="visitors"
+                                        type="number"
+                                        hide
                                     />
                                     <ChartTooltip
                                         cursor={false}
                                         content={
-                                            <ChartTooltipContent indicator="dashed" />
+                                            <ChartTooltipContent hideLabel />
                                         }
                                     />
                                     <Bar
-                                        dataKey="desktop"
-                                        fill="var(--color-desktop)"
-                                        radius={4}
-                                    />
-                                    <Bar
-                                        dataKey="mobile"
-                                        fill="var(--color-mobile)"
-                                        radius={4}
+                                        dataKey="visitors"
+                                        layout="vertical"
+                                        radius={5}
                                     />
                                 </BarChart>
                             </ChartContainer>
                         </CardContent>
-                        <CardFooter className="flex-col items-start gap-2 text-sm">
-                            <div className="flex gap-2 font-medium leading-none">
-                                Trending up by 5.2% this month{" "}
-                                <TrendingUp className="h-4 w-4" />
-                            </div>
-                            <div className="leading-none text-muted-foreground">
-                                Showing total visitors for the last 6 months
-                            </div>
-                        </CardFooter>
                     </Card>
                 </div>
             </div>

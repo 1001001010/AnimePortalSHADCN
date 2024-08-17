@@ -21,7 +21,6 @@ class Anime extends Model
         'director',
         'autor',
         'description',
-        'grade',
         'cover',
         'screens',
     ];

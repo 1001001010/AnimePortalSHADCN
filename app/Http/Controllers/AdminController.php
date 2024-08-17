@@ -62,7 +62,6 @@ class AdminController extends Controller
         $anime->director = $validated['director'];
         $anime->autor = $validated['autor'];
         $anime->description = $validated['description'];
-        $anime->grade = 0;
         $anime->cover = $save_path;
         $anime->screens = $screens_json;
         $anime->save();

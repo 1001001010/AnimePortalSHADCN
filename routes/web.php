@@ -13,8 +13,9 @@ Route::middleware([ShareRequestMiddleware::class])->group(function () {
         Route::get('/','index')->name('index');
         Route::get('/anime/view/{anime_id}/{season_id?}/{episode_id?}','anime')->name('anime');
         Route::get('anime/{anime_id}/favorites','favorites')->name('favorites')->middleware('auth');
+        Route::post('anime/grade','grade')->name('anime.grade')->middleware('auth');
     });
-    
+      
     
     Route::group(['middleware' => 'auth'], function () {
         Route::controller(App\Http\Controllers\FriendsController::class)->group(function () {

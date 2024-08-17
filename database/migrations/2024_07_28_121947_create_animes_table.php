@@ -26,7 +26,6 @@ return new class extends Migration
             $table->text('description');
             $table->string('cover');
             $table->json('screens');
-            $table->float('grade');
             $table->timestamps();
         });
     }

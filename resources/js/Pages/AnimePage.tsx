@@ -2,13 +2,14 @@ import * as React from "react";
 import { PageProps } from "@/types";
 import Header from "@/Components/Header";
 import { Star } from "lucide-react";
-import { Button } from "@/shadcn/ui/button";
 import { Badge } from "@/shadcn/ui/badge";
 import "plyr-react/plyr.css";
-import { Link } from "@inertiajs/react";
 import ScrenesCarousel from "@/Components/Anime/ScenesCarousel";
-import type { Anime, Season, Episode, FriendShips } from "@/types";
+import type { Anime, Season, Episode, FriendShips, Ratings } from "@/types";
 import Player from "@/Components/Anime/Player";
+import { Link } from "@inertiajs/react";
+import { Button } from "@/shadcn/ui/button";
+import Rating from "@/Components/Anime/Rating";
 
 export default function AnimePage({
     auth,
@@ -17,12 +18,16 @@ export default function AnimePage({
     episode,
     friendship,
     currentEpisode,
+    userRating,
+    averageRating,
 }: PageProps<{
     Anime: Anime;
     seasons: Season[];
     episode: Episode;
     friendship: FriendShips;
     currentEpisode?: Episode;
+    userRating: Ratings;
+    averageRating: number;
 }>) {
     // Статус
     const status = [
@@ -31,6 +36,8 @@ export default function AnimePage({
         { status: "preview", text: "Анонс" },
     ];
     const statusText = status.find((s) => s.status === Anime.status)?.text;
+
+    console.log(averageRating);
 
     return (
         <>
@@ -43,20 +50,27 @@ export default function AnimePage({
                                 src={Anime.cover}
                                 className="rounded mb-2 mx-auto"
                             ></img>
-                            <Link href="#player">
-                                <Button
-                                    variant="outline"
-                                    className="w-full border-gray-200 dark:border-gray-700"
-                                >
-                                    В избранное
-                                </Button>
-                            </Link>
+                            <div className="flex flex-col gap-2">
+                                <Link href="#player">
+                                    <Button
+                                        variant="outline"
+                                        className="w-full"
+                                    >
+                                        В избранное
+                                    </Button>
+                                </Link>
+                                <Rating
+                                    Anime={Anime}
+                                    auth={auth}
+                                    rating={userRating}
+                                />
+                            </div>
                         </div>
                         <div className="text-gray-900 dark:text-gray-100 flex flex-col w-3/12 max-md:w-full gap-2 p-4">
                             <h1 className="text-2xl">{Anime.name}</h1>
                             <div className="flex items-center gap-2">
                                 <Star />
-                                <p className="text-xl">{Anime.grade}/5</p>
+                                <p className="text-xl">{averageRating}/5</p>
                             </div>
                             <div className="flex justify-between w-full">
                                 <p className="font-bold">Тип</p>

@@ -15,6 +15,9 @@ export interface ActiveSession {
     last_activity: number;
     payload: string;
 }
+export interface Ratings {
+    rating: number | string;
+}
 export interface Friends {
     id: number;
     user_id: number;
