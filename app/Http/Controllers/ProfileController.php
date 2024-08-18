@@ -22,11 +22,10 @@ class ProfileController extends Controller
     }
 
     public function edit(Request $request): Response {
-        $activeSessions = ActiveSession::where('user_id', Auth::user()->id)->get();
         return Inertia::render('Profile/Edit', [
             'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
             'status' => session('status'),
-            'activeSession' => $activeSessions,
+            'activeSession' => ActiveSession::where('user_id', Auth::user()->id)->get(),
         ]);
     }
     
@@ -76,9 +75,8 @@ class ProfileController extends Controller
     }
 
     public function notifications() {
-        $friend_info = Friendship::with('user')->where('friend_id', Auth::user()->id)->get();
         return Inertia::render('Profile/Notifications', [
-            'friend_info' => $friend_info,
+            'friend_info' => Friendship::with('user')->where('friend_id', Auth::user()->id)->get(),
         ]);
     }
 }

@@ -15,12 +15,10 @@ class FriendsController extends Controller
         $friend_ids = $friend_list->pluck('user_id')->merge($friend_list->pluck('friend_id'))->unique()->filter(function ($value) use ($id) {
             return $value != $id;
         });
-        $random_users = User::where('id', '<>', $id)->whereNotIn('id', $friend_ids)->inRandomOrder()->get();
-        $request = Friendship::where('user_id', $id)->get();
     
         return Inertia::render('Friends', [
-            'users' => $random_users,
-            'request' => $request,
+            'users' => User::where('id', '<>', $id)->whereNotIn('id', $friend_ids)->inRandomOrder()->get(),
+            'request' => Friendship::where('user_id', $id)->get(),
             'friend_list' => $friend_list
         ]);
     }
