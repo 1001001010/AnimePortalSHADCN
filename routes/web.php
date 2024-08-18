@@ -12,12 +12,11 @@ Route::middleware([ShareRequestMiddleware::class])->group(function () {
     Route::controller(App\Http\Controllers\MainController::class)->group(function () {
         Route::get('/','index')->name('index');
         Route::get('/anime/random','random_anime')->name('anime.random');
-        Route::get('/anime/view/{anime_id}/{season_id?}/{episode_id?}','anime')->name('anime');
-        Route::get('anime/{anime_id}/favorites','favorites')->name('favorites')->middleware('auth');
+        Route::get('/anime/view/{anime_id}/{season_id?}/{episode_id?}','anime')->whereNumber(['anime_id', 'season_id', 'episode_id'])->name('anime');
+        Route::get('anime/{anime_id}/favorites','favorites')->where('anime_id', '[0-9]+')->name('favorites')->middleware('auth');
         Route::post('anime/grade','grade')->name('anime.grade')->middleware('auth');
     });
       
-    
     Route::group(['middleware' => 'auth'], function () {
         Route::controller(App\Http\Controllers\FriendsController::class)->group(function () {
             Route::get('friends','index')->name('friends.index');
@@ -28,22 +27,24 @@ Route::middleware([ShareRequestMiddleware::class])->group(function () {
             Route::get('/profile/session/{session_id}','destroy_session')->name('profile.session.destroy');
         });
         Route::controller(App\Http\Controllers\ProfileController::class)->group(function () {
-            Route::get('/profile', 'index')->name('profile');
             Route::get('/notifications', 'notifications')->name('notifications');
             Route::get('/profile/edit', 'edit')->name('profile.edit');
             Route::patch('/profile', 'update')->name('profile.update');
             Route::post('/profile/photo', 'photo')->name('profile.photo');
             Route::delete('/profile', 'destroy')->name('profile.destroy');
+            Route::get('/profile/{user_id?}', 'index')->whereNumber('user_id')->name('profile');
         });
     });
     
     Route::middleware(IsAdmin::class)->group(function () {
         Route::get('/analytics', [AnalyticsController::class, 'analytics'])->name('analytics.index');
-        Route::get('/admin', [AdminController::class, 'index'])->name('adminPanel.index');
-        Route::post('/admin/anime/new', [AdminController::class, 'new_anime'])->name('NewAnime');
-        Route::post('/admin/anime/delete', [AdminController::class, 'del_anime'])->name('DelAnime');
-        Route::post('/admin/{anime_id}/season', [AdminController::class, 'new_season'])->name('NewSeason');
-        Route::post('/admin/new/episode', [AdminController::class, 'new_episode'])->name('NewEpisode');
+        Route::controller(App\Http\Controllers\AdminController::class)->group(function () {
+            Route::get('/admin', 'index')->name('adminPanel.index');
+            Route::post('/admin/anime/new', 'new_anime')->name('NewAnime');
+            Route::post('/admin/anime/delete', 'del_anime')->name('DelAnime');
+            Route::post('/admin/{anime_id}/season', 'new_season')->whereNumber('anime_id')->name('NewSeason');
+            Route::post('/admin/new/episode', 'new_episode')->name('NewEpisode');
+        });
     });
 });
 
