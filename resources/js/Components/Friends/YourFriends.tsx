@@ -24,9 +24,17 @@ export default function YourFriends({
                             <AlertTitle>{friend.user.name}</AlertTitle>
                         )}
                         <AlertDescription>
-                            <Link href="#" className="text-gray-600">
-                                Перейти в профиль
-                            </Link>
+                            {friend.user_id === auth.user.id ? (
+                                <Link
+                                    href={route("profile", friend.friend.unix)}
+                                >
+                                    Перейти в профиль
+                                </Link>
+                            ) : (
+                                <Link href={route("profile", friend.user.unix)}>
+                                    Перейти в профиль
+                                </Link>
+                            )}
                         </AlertDescription>
                     </Alert>
                 ))}

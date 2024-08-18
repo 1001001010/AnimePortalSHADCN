@@ -16,7 +16,7 @@ Route::middleware([ShareRequestMiddleware::class])->group(function () {
         Route::get('anime/{anime_id}/favorites','favorites')->where('anime_id', '[0-9]+')->name('favorites')->middleware('auth');
         Route::post('anime/grade','grade')->name('anime.grade')->middleware('auth');
     });
-      
+
     Route::group(['middleware' => 'auth'], function () {
         Route::controller(App\Http\Controllers\FriendsController::class)->group(function () {
             Route::get('friends','index')->name('friends.index');
@@ -35,7 +35,7 @@ Route::middleware([ShareRequestMiddleware::class])->group(function () {
             Route::get('/profile/{user_id?}', 'index')->whereNumber('user_id')->name('profile');
         });
     });
-    
+
     Route::middleware(IsAdmin::class)->group(function () {
         Route::get('/analytics', [AnalyticsController::class, 'analytics'])->name('analytics.index');
         Route::controller(App\Http\Controllers\AdminController::class)->group(function () {

@@ -1,6 +1,7 @@
 export interface User {
     id: number;
     name: string;
+    unix: number;
     email: string;
     is_admin: number;
     profile_image: string;
@@ -24,10 +25,12 @@ export interface Friends {
     friend_id: number;
     user: {
         name: string;
+        unix: number;
     };
     friend: {
         id: number;
         name: string;
+        unix: number;
     };
 }
 
@@ -37,6 +40,7 @@ export interface FriendShips {
     friend_id: number;
     user: {
         name: string;
+        unix: number;
     };
 }
 

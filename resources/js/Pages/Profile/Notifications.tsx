@@ -48,7 +48,10 @@ export default function Edit({
                                                 </AlertTitle>
                                                 <AlertDescription>
                                                     <Link
-                                                        href="#"
+                                                        href={route(
+                                                            "profile",
+                                                            friend.user.unix
+                                                        )}
                                                         className="text-gray-600"
                                                     >
                                                         Перейти в профиль

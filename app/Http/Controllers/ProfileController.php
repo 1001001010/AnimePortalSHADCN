@@ -11,8 +11,14 @@ use App\Models\{ActiveSession, Friendship, User};
 
 class ProfileController extends Controller
 {
-    public function index() {
-        return Inertia::render('Profile');
+    public function index($user_id = null) {
+        if (!empty($user_id)) {
+            return Inertia::render('Profile', [
+                'user_info' => User::where('unix', $user_id)->first()
+            ]);
+        } else {
+            return Inertia::render('Profile');
+        }
     }
 
     public function edit(Request $request): Response {
