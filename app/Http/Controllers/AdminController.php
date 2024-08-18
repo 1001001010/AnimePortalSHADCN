@@ -16,8 +16,7 @@ class AdminController extends Controller
         ]);
     }
 
-    public function new_anime(Request $request)
-    {
+    public function new_anime(Request $request) {
         
         $validated = $request->validate([
             'age' => 'required|in:0,6,12,16,18',
@@ -69,8 +68,11 @@ class AdminController extends Controller
         return redirect()->back();
     }
 
-    public function new_season($anime_id, Request $request)
-    {
+    public function new_season($anime_id, Request $request) {
+        $request->validate([
+            'name' => 'nullable|string|max:255',
+        ]);
+
         $last_season_number = Season::where('anime_id', $anime_id)->max('number');
         if (is_null($last_season_number)) {
             $last_season_number = 0;
@@ -83,6 +85,16 @@ class AdminController extends Controller
 
         return redirect()->back();
     }
+
+    public function del_anime(Request $request) {
+        $request->validate([
+            'anime_id' => 'required|integer',
+        ]);
+    
+        Anime::find($request->anime_id)->delete();
+        return redirect()->back();
+    }
+
     public function new_episode(Request $request) {
         $validated = $request->validate([
             'season_id' => 'required|integer|exists:seasons,id',

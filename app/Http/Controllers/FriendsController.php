@@ -26,6 +26,10 @@ class FriendsController extends Controller
     }
 
     public function add_friends(Request $request) {
+        $validatedData = $request->validate([
+            'friend_id' => 'required|integer',
+        ]);
+        
         $user_id = auth()->id ();
         $friend_id = $request->input('friend_id');
     

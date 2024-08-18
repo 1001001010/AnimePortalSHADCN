@@ -19,8 +19,7 @@ class MainController extends Controller
             ]);
     }
 
-    public function anime($anime_id, $season_id = null, $episode_id = null): \Inertia\Response
-    {
+    public function anime($anime_id, $season_id = null, $episode_id = null) {
         $anime = Anime::where('unix', $anime_id)->firstOrFail();
         return $this->renderAnimePage($anime, $season_id, $episode_id);
     }
@@ -31,8 +30,7 @@ class MainController extends Controller
         return $this->renderAnimePage($anime);
     }
     
-    private function renderAnimePage($anime, $season_id = null, $episode_id = null): \Inertia\Response
-    {
+    private function renderAnimePage($anime, $season_id = null, $episode_id = null) {
         $seasons = $anime->seasons()->with('episodes')->get();
         $totalEpisodes = $seasons->pluck('episodes')->collapse()->count();
     
@@ -72,13 +70,12 @@ class MainController extends Controller
     }
 
     public function grade(Request $request) {
-        $user_id = Auth::user()->id;
-    
         $request->validate([
             'anime' => 'required|exists:animes,id',
             'rating' => 'required|in:1,2,3,4,5',
         ]);
-    
+
+        $user_id = Auth::user()->id;
         $anime_id = $request->input('anime');
         $rating_value = $request->input('rating');
     
