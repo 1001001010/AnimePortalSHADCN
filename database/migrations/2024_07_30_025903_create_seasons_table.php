@@ -14,10 +14,11 @@ return new class extends Migration
         Schema::create('seasons', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('anime_id');
-            $table->foreign('anime_id')->references('id')->on('animes')->onDelete('cascade');
             $table->integer('number');
             $table->string('name')->nullable();
             $table->timestamps();
+            
+            $table->foreign('anime_id')->references('id')->on('animes')->onDelete('cascade');
         });
     }
 
