@@ -10,25 +10,41 @@ use Auth;
 class MainController extends Controller
 {
     public function index(): \Inertia\Response {
-        $NewsItem = Anime::latest('updated_at')->take(15)->get();
+        $NewsItems = Anime::latest('updated_at')->take(15)->get();
+        $AllItems = Anime::paginate(12);
+        $anime = $AllItems->items();
         return Inertia::render('Welcome', [
-            'NewAnime' => $NewsItem,
+            'NewAnime' => $NewsItems,
+            'AllItems' => $anime
             ]);
     }
 
-    public function anime($anime_id, $season_id = null, $episode_id = null): \Inertia\Response {
+    public function anime($anime_id, $season_id = null, $episode_id = null): \Inertia\Response
+    {
         $anime = Anime::where('unix', $anime_id)->firstOrFail();
+        return $this->renderAnimePage($anime, $season_id, $episode_id);
+    }
+    
+    public function random_anime(): \Inertia\Response
+    {
+        $anime = Anime::get()->random();
+        return $this->renderAnimePage($anime);
+    }
+    
+    private function renderAnimePage($anime, $season_id = null, $episode_id = null): \Inertia\Response
+    {
         $seasons = $anime->seasons()->with('episodes')->get();
-        
+        $totalEpisodes = $seasons->pluck('episodes')->collapse()->count();
+    
         $currentEpisode = null;
         if ($season_id && $episode_id) {
             $currentEpisode = $anime->seasons()->where('number', $season_id)
-            ->firstOrFail()
-            ->episodes()
-            ->where('number', $episode_id)
-            ->firstOrFail();
+                ->firstOrFail()
+                ->episodes()
+                ->where('number', $episode_id)
+                ->firstOrFail();
         }
-        
+    
         if (Auth::user()) {
             $user_id = Auth::user()->id;
             $rating = Rating::where('user_id', $user_id)
@@ -39,20 +55,18 @@ class MainController extends Controller
         }
     
         $userRating = $rating ? $rating->rating : null;
-
         $averageRating = round(Rating::where('anime_id', $anime->id)->avg('rating'), 1);
-
-        // dd($averageRating);
     
         return Inertia::render('AnimePage', [
             'Anime' => $anime,
             'seasons' => $seasons,
             'currentEpisode' => $currentEpisode,
             'userRating' => $userRating,
-            'averageRating' => $averageRating
+            'averageRating' => $averageRating,
+            'episode_count' => $totalEpisodes
         ]);
     }
-
+    
     public function favorites($anime_id) {
         dd($anime_id);
     }

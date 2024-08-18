@@ -10,8 +10,12 @@ import { Button } from "@/shadcn/ui/button";
 import { ChevronsRight } from "lucide-react";
 import { Anime, PageProps } from "@/types";
 import { Link } from "@inertiajs/react";
+import CardMore from "./CardMore";
 
-export default function NewItems({ Anime }: PageProps<{ Anime: Anime[] }>) {
+export default function NewItems({
+    auth,
+    Anime,
+}: PageProps<{ Anime: Anime[] }>) {
     return (
         <div>
             <header>
@@ -71,21 +75,7 @@ export default function NewItems({ Anime }: PageProps<{ Anime: Anime[] }>) {
                                     </div>
                                 </CarouselItem>
                             ))}
-                            <CarouselItem className="basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5 min-w-72 min-h-96">
-                                <div className="p-1 h-full">
-                                    <Card className="h-full">
-                                        <CardContent className="flex w-full justify-center items-center p-2 h-full">
-                                            <Button
-                                                variant="outline"
-                                                className="p-10 max-sm:p-2 rounded-full border-dashed border-2"
-                                            >
-                                                Больше
-                                                <ChevronsRight className="h-5 w-5 pt-0.5" />
-                                            </Button>
-                                        </CardContent>
-                                    </Card>
-                                </div>
-                            </CarouselItem>
+                            <CardMore auth={auth} />
                         </CarouselContent>
                     </div>
                     <CarouselNext className="ml-2" />

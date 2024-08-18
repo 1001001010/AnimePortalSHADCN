@@ -20,6 +20,7 @@ export default function AnimePage({
     currentEpisode,
     userRating,
     averageRating,
+    episode_count,
 }: PageProps<{
     Anime: Anime;
     seasons: Season[];
@@ -28,6 +29,7 @@ export default function AnimePage({
     currentEpisode?: Episode;
     userRating: Ratings;
     averageRating: number;
+    episode_count: number;
 }>) {
     // Статус
     const status = [
@@ -37,7 +39,20 @@ export default function AnimePage({
     ];
     const statusText = status.find((s) => s.status === Anime.status)?.text;
 
-    console.log(averageRating);
+    const animeProperties = [
+        { label: "Тип", value: Anime.type },
+        { label: "Эпизоды", value: episode_count },
+        { label: "Статус", value: statusText },
+        { label: "Первоисточник", value: Anime.original },
+        { label: "Студия", value: Anime.studio },
+        {
+            label: "Возрастные ограничения",
+            value: <Badge className="font-bold">{Anime.age}+</Badge>,
+        },
+        { label: "Озвучка", value: Anime.voice },
+        { label: "Режиссёр", value: Anime.director },
+        { label: "Автор оригинала", value: Anime.autor },
+    ];
 
     return (
         <>
@@ -72,46 +87,17 @@ export default function AnimePage({
                                 <Star />
                                 <p className="text-xl">{averageRating}/5</p>
                             </div>
-                            <div className="flex justify-between w-full">
-                                <p className="font-bold">Тип</p>
-                                <p>{Anime.type}</p>
-                            </div>
-                            <div className="flex justify-between w-full">
-                                <p className="font-bold">Эпизоды</p>
-                                <p>25</p>
-                            </div>
-                            <div className="flex justify-between w-full">
-                                <p className="font-bold">Статус</p>
-                                <p>{statusText}</p>
-                            </div>
-                            <div className="flex justify-between w-full">
-                                <p className="font-bold">Первоисточник</p>
-                                <p>{Anime.original}</p>
-                            </div>
-                            <div className="flex justify-between w-full">
-                                <p className="font-bold">Студия</p>
-                                <p>{Anime.studio}</p>
-                            </div>
-                            <div className="flex justify-between w-full">
-                                <p className="font-bold">
-                                    Возрастные ограничения
-                                </p>
-                                <Badge className="font-bold">
-                                    {Anime.age}+
-                                </Badge>
-                            </div>
-                            <div className="flex justify-between w-full">
-                                <p className="font-bold">Озвучка</p>
-                                <p>{Anime.voice}</p>
-                            </div>
-                            <div className="flex justify-between w-full">
-                                <p className="font-bold">Режиссёр</p>
-                                <p>{Anime.director}</p>
-                            </div>
-                            <div className="flex justify-between w-full">
-                                <p className="font-bold">Автор оригинала</p>
-                                <p>{Anime.autor}</p>
-                            </div>
+                            {animeProperties.map((property, index) => (
+                                <div
+                                    key={index}
+                                    className="flex justify-between w-full"
+                                >
+                                    <p className="font-bold">
+                                        {property.label}
+                                    </p>
+                                    <p>{property.value}</p>
+                                </div>
+                            ))}
                         </div>
                     </div>
                     <div className="description p-4 mt-5">

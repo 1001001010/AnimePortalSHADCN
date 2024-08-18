@@ -20,8 +20,10 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/shadcn/ui/select";
+import { Anime, PageProps } from "@/types";
+import { Link } from "@inertiajs/react";
 
-export default function HighestScoreItems() {
+export default function ItemsList({ anime }: PageProps<{ anime: Anime[] }>) {
     const data = [
         { title: "Берсерк", studio: "Studio 4°C" },
         { title: "Наруто", studio: "Studio Pierrot" },
@@ -42,34 +44,47 @@ export default function HighestScoreItems() {
                 <div className="p-2 text-gray-900 dark:text-gray-100 w-full md:w-2/3 max-md:w-3/3 border border-gray-700 rounded-lg">
                     <h2 className="text-lg font-medium p-1">Список Аниме</h2>
                     <div className="grid grid-cols-3 max-xl:grid-cols-2 max-md:grid-cols-1 items-center justify-items-center auto-rows-dense">
-                        {data.map((item, index) => (
-                            <Card
-                                key={index}
-                                className="w-9/12 m-2 max-md:w-3/5 max-sm:w-5/5"
-                            >
-                                <CardContent className="flex aspect-square items-center justify-center p-2">
-                                    <img src="/img/Poster.jpg" alt="Лого" />
-                                </CardContent>
-                                <div className="flex items-start justify-start max-2xl:justify-center py-2">
-                                    <div className="w-full flex items-center justify-between px-5 max-2xl:flex-col max-2xl:justify-center">
-                                        <div className="max-2xl:text-center">
-                                            <p className="font-semibold">
-                                                {item.title}
-                                            </p>
-                                            <p className="text-gray-600 font-medium">
-                                                {item.studio}
-                                            </p>
+                        {Array.isArray(anime) &&
+                            anime.map((item, index) => (
+                                <Card
+                                    className="h-full flex flex-col justify-between"
+                                    key={index}
+                                >
+                                    <CardContent className="flex w-full justify-center items-center p-2 h-full">
+                                        <img
+                                            src={item.cover}
+                                            alt="Лого"
+                                            className="min-w-full max-h-full object-cover"
+                                            style={{
+                                                width: "300px",
+                                                height: "400px",
+                                            }}
+                                        />
+                                    </CardContent>
+                                    <div className="py-2 max-w-full">
+                                        <div className="w-full flex flex-col items-center gap-2 px-5">
+                                            <div className="max-sm:text-center">
+                                                <p className="text-ellipsis">
+                                                    {item.name}
+                                                </p>
+                                            </div>
+                                            <Link
+                                                href={route("anime", [
+                                                    item.unix,
+                                                ])}
+                                                className="min-w-full"
+                                            >
+                                                <Button
+                                                    variant="outline"
+                                                    className="max-sm:p-2 min-w-full"
+                                                >
+                                                    Смотреть
+                                                </Button>
+                                            </Link>
                                         </div>
-                                        <Button
-                                            variant="outline"
-                                            className="max-sm:p-2"
-                                        >
-                                            Смотреть
-                                        </Button>
                                     </div>
-                                </div>
-                            </Card>
-                        ))}
+                                </Card>
+                            ))}
                     </div>
                     <Pagination className="my-4">
                         <PaginationContent>

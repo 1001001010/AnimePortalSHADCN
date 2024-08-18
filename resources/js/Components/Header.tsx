@@ -31,6 +31,7 @@ import {
     SunMedium,
     GitCompareArrows,
     ListFilter,
+    Bookmark,
 } from "lucide-react";
 
 export default function Header({
@@ -70,6 +71,19 @@ export default function Header({
                                     href="#"
                                     className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
                                 >
+                                    <Bookmark className="h-5 w-5" />
+                                </Link>
+                            </TooltipTrigger>
+                            <TooltipContent side="right">
+                                Избранное
+                            </TooltipContent>
+                        </Tooltip>
+                        <Tooltip>
+                            <TooltipTrigger asChild>
+                                <Link
+                                    href="#"
+                                    className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                                >
                                     <ListFilter className="h-5 w-5" />
                                 </Link>
                             </TooltipTrigger>
@@ -80,7 +94,7 @@ export default function Header({
                         <Tooltip>
                             <TooltipTrigger asChild>
                                 <Link
-                                    href="#"
+                                    href={route("anime.random")}
                                     className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
                                 >
                                     <GitCompareArrows className="h-5 w-5" />
@@ -208,11 +222,18 @@ export default function Header({
                                     href="#"
                                     className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
                                 >
+                                    <Bookmark className="h-5 w-5" />
+                                    Избранное
+                                </Link>
+                                <Link
+                                    href="#"
+                                    className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
+                                >
                                     <ListFilter className="h-5 w-5" />
                                     Категории
                                 </Link>
                                 <Link
-                                    href="#"
+                                    href={route("anime.random")}
                                     className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
                                 >
                                     <GitCompareArrows className="h-5 w-5" />
