@@ -40,6 +40,16 @@ class User extends Authenticatable
         return $this->hasMany(Friendship::class, 'friend_id');
     }
 
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class);
+    }
+
+    public function favourites()
+    {
+        return $this->hasMany(Favourite::class);
+    }
+
     protected $hidden = [
         'password',
         'remember_token',

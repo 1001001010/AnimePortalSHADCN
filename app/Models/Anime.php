@@ -29,4 +29,14 @@ class Anime extends Model
     {
         return $this->hasMany(Season::class);
     }
+
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class);
+    }
+
+    public function favourites()
+    {
+        return $this->hasMany(Favourite::class);
+    }
 }
