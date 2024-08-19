@@ -26,6 +26,9 @@ Route::middleware([ShareRequestMiddleware::class])->group(function () {
         Route::controller(App\Http\Controllers\SessionController::class)->group(function () {
             Route::get('/profile/session/{session_id}','destroy_session')->name('profile.session.destroy');
         });
+        Route::controller(App\Http\Controllers\FavouriteController::class)->group(function () {
+            Route::get('/favourite/add/{anime_id}','add_favourites')->name('favourite.add');
+        });
         Route::controller(App\Http\Controllers\ProfileController::class)->group(function () {
             Route::get('/notifications', 'notifications')->name('notifications');
             Route::get('/profile/edit', 'edit')->name('profile.edit');

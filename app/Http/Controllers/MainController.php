@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\{Anime, Friendship, Rating};
+use App\Models\{Anime, Friendship, Rating, Favourite};
 use Inertia\Inertia;
 use Auth;
 
@@ -45,8 +45,9 @@ class MainController extends Controller
         } else {
             $rating = null;
         }
-    
+
         return Inertia::render('AnimePage', [
+            'favourite' => Favourite::where('user_id', Auth::user()->id)->where('anime_id', $anime->id)->first(),
             'Anime' => $anime,
             'seasons' => $seasons,
             'currentEpisode' => $currentEpisode,

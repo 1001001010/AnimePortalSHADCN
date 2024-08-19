@@ -5,7 +5,14 @@ import { Star } from "lucide-react";
 import { Badge } from "@/shadcn/ui/badge";
 import "plyr-react/plyr.css";
 import ScrenesCarousel from "@/Components/Anime/ScenesCarousel";
-import type { Anime, Season, Episode, FriendShips, Ratings } from "@/types";
+import type {
+    Anime,
+    Season,
+    Episode,
+    FriendShips,
+    Ratings,
+    Favourite,
+} from "@/types";
 import Player from "@/Components/Anime/Player";
 import { Link } from "@inertiajs/react";
 import { Button } from "@/shadcn/ui/button";
@@ -21,6 +28,7 @@ export default function AnimePage({
     userRating,
     averageRating,
     episode_count,
+    favourite,
 }: PageProps<{
     Anime: Anime;
     seasons: Season[];
@@ -30,6 +38,7 @@ export default function AnimePage({
     userRating: Ratings;
     averageRating: number;
     episode_count: number;
+    favourite: Favourite;
 }>) {
     // Статус
     const status = [
@@ -66,13 +75,22 @@ export default function AnimePage({
                                 className="rounded mb-2 mx-auto"
                             ></img>
                             <div className="flex flex-col gap-2">
-                                <Link href="#player">
-                                    <Button
-                                        variant="outline"
-                                        className="w-full"
-                                    >
-                                        В избранное
-                                    </Button>
+                                <Link href={route("favourite.add", Anime.id)}>
+                                    {favourite ? (
+                                        <Button
+                                            variant="outline"
+                                            className="w-full"
+                                        >
+                                            В избранном
+                                        </Button>
+                                    ) : (
+                                        <Button
+                                            variant="outline"
+                                            className="w-full"
+                                        >
+                                            В избранное
+                                        </Button>
+                                    )}
                                 </Link>
                                 <Rating
                                     Anime={Anime}

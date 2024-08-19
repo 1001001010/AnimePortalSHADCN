@@ -19,6 +19,10 @@ export interface ActiveSession {
 export interface Ratings {
     rating: number | string;
 }
+export interface Favourite {
+    user_id: number;
+    anime_id: number;
+}
 export interface Friends {
     id: number;
     user_id: number;
