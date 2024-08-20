@@ -28,12 +28,12 @@ class ProfileController extends Controller
             'activeSession' => ActiveSession::where('user_id', Auth::user()->id)->get(),
         ]);
     }
-    
+
     public function update(ProfileUpdateRequest $request): RedirectResponse {
         $request->user()->fill($request->validated());
-    
+
         $request->user()->save();
-    
+
         return Redirect::route('profile.edit');
     }
 
@@ -74,7 +74,7 @@ class ProfileController extends Controller
         return Redirect::to('/');
     }
 
-    public function notifications() : \Inertia\Response {
+    public function notifications(): \Inertia\Response {
         return Inertia::render('Profile/Notifications', [
             'friend_info' => Friendship::with('user')->where('friend_id', Auth::user()->id)->get(),
         ]);

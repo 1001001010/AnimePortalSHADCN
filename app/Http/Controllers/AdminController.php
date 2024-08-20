@@ -17,7 +17,7 @@ class AdminController extends Controller
     }
 
     public function new_anime(Request $request) {
-        
+
         $validated = $request->validate([
             'age' => 'required|in:0,6,12,16,18',
             'status' => 'required|in:ongoing,came_out,preview',
@@ -33,12 +33,12 @@ class AdminController extends Controller
             'screens' => 'required|array',
             'screens.*' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
-        
+
         // Работа с обложкой
         $cover_name = time() . "." . $request->cover->extension();
         $cover_path = $request->cover->storeAs('public/covers', $cover_name);
         $save_path = '/storage/covers/' . $cover_name; // убрал скобки
-    
+
         $screens = [];
         foreach ($request->screens as $screen) {
             $screen_name = time() . "_" . uniqid() . "." . $screen->extension();
@@ -47,7 +47,7 @@ class AdminController extends Controller
             $screens[] = $save_path_screen;
         }
         $screens_json = json_encode($screens);
-        
+
         // Создание новой записи в таблице animes
         $anime = new Anime();
         $anime->age = $validated['age'];
@@ -64,7 +64,7 @@ class AdminController extends Controller
         $anime->cover = $save_path;
         $anime->screens = $screens_json;
         $anime->save();
-    
+
         return redirect()->back();
     }
 
@@ -90,7 +90,7 @@ class AdminController extends Controller
         $request->validate([
             'anime_id' => 'required|integer',
         ]);
-    
+
         Anime::find($request->anime_id)->delete();
         return redirect()->back();
     }
@@ -100,32 +100,32 @@ class AdminController extends Controller
             'season_id' => 'required|integer|exists:seasons,id',
             'file' => 'required|mimes:mp4'
         ]);
-    
+
         $name = time(). "." . $request->file->extension();
         $destination = 'public/episode';
         $save_path = '/storage/episode/' . $name;
         $path = $request->file->storeAs($destination, $name);
-    
+
         if (!$path) {
             return redirect()->back()->withErrors(['file' => 'Файл не был сохранен']);
         }
-    
+
         $season = Season::find($request->season_id);
         $episodeCount = Episode::where('season_id', $request->season_id)->count();
         $episodeNumber = $episodeCount + 1;
-    
+
         $video = [
             'season_id' => $request->season_id,
             'video' => $save_path,
             'number' => $episodeNumber
         ];
-    
+
         $episode = Episode::create($video);
-    
+
         if (!$episode) {
             return redirect()->back()->withErrors(['episode' => 'Эпизод не был создан']);
         }
-    
+
         return redirect()->back();
     }
 }

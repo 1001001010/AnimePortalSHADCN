@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, FormEventHandler } from "react";
 import {
     Dialog,
     DialogContent,
@@ -21,16 +21,17 @@ export default function Rating({
 }>) {
     const [ratingNumber, setRatingNumber] = useState(Number(rating));
     const [hoverIndex, setHoverIndex] = useState(-1);
-    const { data, setData, post, errors, processing, recentlySuccessful } =
-        useForm({
-            anime: Anime.id,
-            rating: null as number | null,
-        });
+    const { setData, post, reset } = useForm({
+        anime: Anime.id,
+        rating: null as number | null,
+    });
 
-    const submit: React.FormEventHandler = (e) => {
+    const submit: FormEventHandler = (e) => {
         e.preventDefault();
 
-        post(route("anime.grade"));
+        post(route("anime.grade"), {
+            onFinish: () => reset(),
+        });
     };
     return (
         <>

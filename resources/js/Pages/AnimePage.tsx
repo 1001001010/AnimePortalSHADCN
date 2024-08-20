@@ -62,19 +62,18 @@ export default function AnimePage({
         { label: "Режиссёр", value: Anime.director },
         { label: "Автор оригинала", value: Anime.autor },
     ];
-
     return (
         <>
-            <Header auth={auth} friendship={friendship} />
+            <Header friendship={friendship} auth={auth} />
             <div className="ml-14 ml:ml-0 max-sm:ml-0">
                 <div className="m-4 border rounded-lg shadow ">
-                    <div className="flex flex-row max-md:flex-col ">
-                        <div className="w-2/12 max-md:w-full py-2 px-2 max-md:items-center">
+                    <div className="flex flex-row max-md:flex-col">
+                        <div className="w-2/12 max-md:w-full py-2 px-2 max-md:items-center max-xl:w-full">
                             <img
                                 src={Anime.cover}
-                                className="rounded mb-2 mx-auto"
+                                className="rounded mb-2 mx-auto max-xl:w-full"
                             ></img>
-                            <div className="flex flex-col gap-2">
+                            <div className="flex flex-col gap-2 max-xl:w-full">
                                 <Link href={route("favourite.add", Anime.id)}>
                                     {favourite ? (
                                         <Button
@@ -99,23 +98,27 @@ export default function AnimePage({
                                 />
                             </div>
                         </div>
-                        <div className="text-gray-900 dark:text-gray-100 flex flex-col w-3/12 max-md:w-full gap-2 p-4">
+                        <div className="text-gray-900 dark:text-gray-100 flex flex-col w-3/12 max-md:w-full max-xl:w-full gap-2 p-4">
                             <h1 className="text-2xl">{Anime.name}</h1>
                             <div className="flex items-center gap-2">
                                 <Star />
                                 <p className="text-xl">{averageRating}/5</p>
                             </div>
-                            {animeProperties.map((property, index) => (
-                                <div
-                                    key={index}
-                                    className="flex justify-between w-full"
-                                >
-                                    <p className="font-bold">
-                                        {property.label}
-                                    </p>
-                                    <p>{property.value}</p>
-                                </div>
-                            ))}
+                            <div className="flex flex-col gap-4">
+                                {animeProperties.map((property, index) => (
+                                    <div
+                                        key={index}
+                                        className="flex min-w-full max-xl:w-1/2 max-md-"
+                                    >
+                                        <p className="flex-start font-bold">
+                                            {property.label}
+                                        </p>
+                                        <p className="flex-end">
+                                            {property.value}
+                                        </p>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                     </div>
                     <div className="description p-4 mt-5">

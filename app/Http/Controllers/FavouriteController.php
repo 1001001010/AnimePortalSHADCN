@@ -10,13 +10,13 @@ use Illuminate\Support\Facades\{Auth, Redirect};
 
 class FavouriteController extends Controller
 {
-    public function favourites() : \Inertia\Response {
+    public function favourites(): \Inertia\Response {
         return Inertia::render('Favourites', [
             'favourites' => Favourite::with('anime')->where('user_id', Auth::user()->id)->get()
         ]);
     }
 
-    public function add_favourites($anime_id) : RedirectResponse {
+    public function add_favourites($anime_id): RedirectResponse {
         $favourite = Favourite::where('user_id', Auth::user()->id)->where('anime_id', $anime_id)->first();
         if (is_null($favourite)) {
             Favourite::create([
@@ -29,8 +29,8 @@ class FavouriteController extends Controller
         return redirect()->back();
     }
 
-    public function destroy(Request $request) : RedirectResponse {
+    public function destroy(Request $request): RedirectResponse {
         Favourite::find($request->id)->delete();
-        return Redirect::route('favourite.index');
+        return redirect()->back();
     }
 }
