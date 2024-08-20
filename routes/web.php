@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\{ProfileController, FriendsController, 
-                          AnalyticsController, SessionController, 
+use App\Http\Controllers\{ProfileController, FriendsController,
+                          AnalyticsController, SessionController,
                           MainController, AdminController};
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -28,6 +28,7 @@ Route::middleware([ShareRequestMiddleware::class])->group(function () {
         Route::controller(App\Http\Controllers\FavouriteController::class)->group(function () {
             Route::get('/favourites','favourites')->name('favourite.index');
             Route::get('/favourite/add/{anime_id}','add_favourites')->where('anime_id', '[0-9]+')->name('favourite.add');
+            Route::delete('/favourite', 'destroy')->name('favourite.destroy');
         });
         Route::controller(App\Http\Controllers\ProfileController::class)->group(function () {
             Route::get('/notifications', 'notifications')->name('notifications');

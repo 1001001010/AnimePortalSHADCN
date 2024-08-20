@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
 use App\Models\{Anime, Favourite};
-use Auth;
+use Illuminate\Support\Facades\{Auth, Redirect};
 
 class FavouriteController extends Controller
 {
@@ -27,5 +27,10 @@ class FavouriteController extends Controller
             Favourite::find($favourite->id)->delete();
         }
         return redirect()->back();
+    }
+
+    public function destroy(Request $request) : RedirectResponse {
+        Favourite::find($request->id)->delete();
+        return Redirect::route('favourite.index');
     }
 }

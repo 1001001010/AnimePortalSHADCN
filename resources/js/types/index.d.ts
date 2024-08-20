@@ -20,6 +20,7 @@ export interface Ratings {
     rating: number | string;
 }
 export interface Favourite {
+    id: number;
     user_id: number;
     anime_id: number;
     anime: Anime;
