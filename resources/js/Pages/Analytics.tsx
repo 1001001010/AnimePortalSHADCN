@@ -64,7 +64,7 @@ export default function Friends({
         <>
             <Header auth={auth} friendship={friendship} />
             <div className="ml-14 ml:ml-0 max-sm:ml-0 w-1/3 max-lg:w-11/12 max-sm:w-full">
-                <div className="m-4 border border-gray-200 rounded-lg shadow dark:border-gray-700">
+                <div className="m-4 rounded-lg shadow w-full">
                     <Card>
                         <CardHeader>
                             <CardTitle>Статистика посещения</CardTitle>

@@ -23,22 +23,22 @@ export default function Edit({
         <>
             <Header auth={auth} friendship={friendship} />
             <div className="ml-14 ml:ml-0 max-sm:ml-0">
-                <div className="m-4 border border-gray-200 rounded-lg shadow dark:border-gray-700 flex flex-wrap md:flex-nowrap">
+                <div className="m-4 border rounded-lg shadow flex flex-wrap md:flex-nowrap">
                     <div className="p-6 text-gray-900 dark:text-gray-100 w-full md:w-2/3">
-                        <div className="mb-4 border border-gray-200 rounded-lg shadow dark:border-gray-700 w-full p-4">
+                        <div className="mb-4 border rounded-lg shadow w-full p-4">
                             <UpdateProfileInformationForm
                                 mustVerifyEmail={mustVerifyEmail}
                                 status={status}
                                 className="mb-4"
                             />
                         </div>
-                        <div className="mb-4 border border-gray-200 rounded-lg shadow dark:border-gray-700 w-full p-4">
+                        <div className="mb-4 border rounded-lg shadow w-full p-4">
                             <UpdateProfilePhoto className="mb-4" />
                         </div>
-                        <div className="mb-4 border border-gray-200 rounded-lg shadow dark:border-gray-700 w-full p-4">
+                        <div className="mb-4 border rounded-lg shadow w-full p-4">
                             <UpdatePasswordForm className="mb-4" />
                         </div>
-                        <div className="mb-4 border border-gray-200 rounded-lg shadow dark:border-gray-700 w-full p-4">
+                        <div className="mb-4 border rounded-lg shadow w-full p-4">
                             <DeleteUserForm />
                         </div>
                     </div>

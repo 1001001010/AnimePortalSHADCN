@@ -3,29 +3,29 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use App\Models\{Anime, Friendship, Rating, Favourite};
 use Inertia\Inertia;
 use Auth;
 
 class MainController extends Controller
 {
-    public function index(): \Inertia\Response {
+    public function index() : \Inertia\Response {
         return Inertia::render('Welcome', [
             'NewAnime' => Anime::latest('updated_at')->take(15)->get(),
-            'AllItems' => Anime::paginate(12)->items()
+            'AllItems' => Anime::orderBy('name', 'asc')->get()
             ]);
     }
 
-    public function anime($anime_id, $season_id = null, $episode_id = null) {
+    public function anime($anime_id, $season_id = null, $episode_id = null) :\Inertia\Response {
         return $this->renderAnimePage(Anime::where('unix', $anime_id)->firstOrFail(), $season_id, $episode_id);
     }
     
-    public function random_anime(): \Inertia\Response
-    {
+    public function random_anime() : \Inertia\Response {
         return $this->renderAnimePage(Anime::get()->random());
     }
     
-    private function renderAnimePage($anime, $season_id = null, $episode_id = null) {
+    private function renderAnimePage($anime, $season_id = null, $episode_id = null) : \Inertia\Response {
         $seasons = $anime->seasons()->with('episodes')->get();
     
         $currentEpisode = null;
@@ -56,12 +56,8 @@ class MainController extends Controller
             'episode_count' => $seasons->pluck('episodes')->collapse()->count()
         ]);
     }
-    
-    public function favorites($anime_id) {
-        dd($anime_id);
-    }
 
-    public function grade(Request $request) {
+    public function grade(Request $request) : RedirectResponse {
         $request->validate([
             'anime' => 'required|exists:animes,id',
             'rating' => 'required|in:1,2,3,4,5',

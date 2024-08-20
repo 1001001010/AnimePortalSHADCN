@@ -13,7 +13,6 @@ Route::middleware([ShareRequestMiddleware::class])->group(function () {
         Route::get('/','index')->name('index');
         Route::get('/anime/random','random_anime')->name('anime.random');
         Route::get('/anime/view/{anime_id}/{season_id?}/{episode_id?}','anime')->whereNumber(['anime_id', 'season_id', 'episode_id'])->name('anime');
-        Route::get('anime/{anime_id}/favorites','favorites')->where('anime_id', '[0-9]+')->name('favorites')->middleware('auth');
         Route::post('anime/grade','grade')->name('anime.grade')->middleware('auth');
     });
 
@@ -27,7 +26,8 @@ Route::middleware([ShareRequestMiddleware::class])->group(function () {
             Route::get('/profile/session/{session_id}','destroy_session')->name('profile.session.destroy');
         });
         Route::controller(App\Http\Controllers\FavouriteController::class)->group(function () {
-            Route::get('/favourite/add/{anime_id}','add_favourites')->name('favourite.add');
+            Route::get('/favourites','favourites')->name('favourite.index');
+            Route::get('/favourite/add/{anime_id}','add_favourites')->where('anime_id', '[0-9]+')->name('favourite.add');
         });
         Route::controller(App\Http\Controllers\ProfileController::class)->group(function () {
             Route::get('/notifications', 'notifications')->name('notifications');

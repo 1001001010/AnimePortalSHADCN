@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\{User, Friendship, Friend};
+use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
 use Auth;
 
 class FriendsController extends Controller
 {
-    public function index() {
+    public function index() : \Inertia\Response {
         $id = Auth::user()->id;
         $friend_list = Friend::with('user')->with('friend')->where('user_id', $id)->orWhere('friend_id', $id)->get();
         $friend_ids = $friend_list->pluck('user_id')->merge($friend_list->pluck('friend_id'))->unique()->filter(function ($value) use ($id) {
@@ -23,7 +24,7 @@ class FriendsController extends Controller
         ]);
     }
 
-    public function add_friends(Request $request) {
+    public function add_friends(Request $request) : RedirectResponse {
         $validatedData = $request->validate([
             'friend_id' => 'required|integer',
         ]);
@@ -43,7 +44,7 @@ class FriendsController extends Controller
         return redirect()->back();
     }
 
-    public function edit_status(Request $request) {    
+    public function edit_status(Request $request) : RedirectResponse {    
         $validatedData = $request->validate([
             'status' => 'required|in:accepted,declined',
             'user_id' => 'required|integer',

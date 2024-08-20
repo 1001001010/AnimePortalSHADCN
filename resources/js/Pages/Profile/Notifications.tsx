@@ -30,7 +30,7 @@ export default function Edit({
         <>
             <Header auth={auth} friendship={friendship} />
             <div className="ml-14 ml:ml-0 max-sm:ml-0">
-                <div className="m-4 p-2 border border-gray-200 rounded-lg shadow dark:border-gray-700 min-h-36">
+                <div className="m-4 p-2 border rounded-lg shadow min-h-36">
                     {friend_info.length > 0 ? (
                         <div>
                             <p className="text-center">Новые заявки в друзья</p>

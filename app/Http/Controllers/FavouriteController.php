@@ -3,12 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
+use Inertia\Inertia;
 use App\Models\{Anime, Favourite};
 use Auth;
 
 class FavouriteController extends Controller
 {
-    public function add_favourites($anime_id) {
+    public function favourites() : \Inertia\Response {
+        return Inertia::render('Favourites', [
+            'favourites' => Favourite::with('anime')->where('user_id', Auth::user()->id)->get()
+        ]);
+    }
+
+    public function add_favourites($anime_id) : RedirectResponse {
         $favourite = Favourite::where('user_id', Auth::user()->id)->where('anime_id', $anime_id)->first();
         if (is_null($favourite)) {
             Favourite::create([

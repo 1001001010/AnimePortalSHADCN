@@ -24,14 +24,6 @@ import { Anime, PageProps } from "@/types";
 import { Link } from "@inertiajs/react";
 
 export default function ItemsList({ anime }: PageProps<{ anime: Anime[] }>) {
-    const data = [
-        { title: "Берсерк", studio: "Studio 4°C" },
-        { title: "Наруто", studio: "Studio Pierrot" },
-        { title: "Драконий жемчуг", studio: "Toei Animation" },
-        { title: "Атака титанов", studio: "Wit Studio" },
-        { title: "Хеллсинг", studio: "Gonzo" },
-    ];
-
     const status = [
         { status: "ongoing", text: "Онгоинг" },
         { status: "came_out", text: "Вышел" },
@@ -41,9 +33,9 @@ export default function ItemsList({ anime }: PageProps<{ anime: Anime[] }>) {
     return (
         <div className="mt-4">
             <div className="flex justify-around max-lg:mx-10 gap-4 max-md:flex-col-reverse max-md:w-full max-md:mx-0">
-                <div className="p-2 text-gray-900 dark:text-gray-100 w-full md:w-2/3 max-md:w-3/3 border border-gray-700 rounded-lg">
+                <div className="p-2 text-gray-900 dark:text-gray-100 w-full md:w-2/3 max-md:w-3/3 border rounded-lg">
                     <h2 className="text-lg font-medium p-1">Список Аниме</h2>
-                    <div className="grid grid-cols-3 max-xl:grid-cols-2 max-md:grid-cols-1 items-center justify-items-center auto-rows-dense">
+                    <div className="grid grid-cols-3 max-xl:grid-cols-2 max-md:grid-cols-1 items-center justify-items-center auto-rows-dense gap-4">
                         {Array.isArray(anime) &&
                             anime.map((item, index) => (
                                 <Card
@@ -111,7 +103,7 @@ export default function ItemsList({ anime }: PageProps<{ anime: Anime[] }>) {
                         </PaginationContent>
                     </Pagination>
                 </div>
-                <div className="p-2 text-gray-900 dark:text-gray-100 w-full md:w-1/3 border border-gray-700 rounded-lg">
+                <div className="p-2 text-gray-900 dark:text-gray-100 w-full md:w-1/3 border rounded-lg">
                     <div className="grid w-full items-center gap-2 p-2">
                         <Label htmlFor="anime_name">Название</Label>
                         <Input

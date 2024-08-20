@@ -22,6 +22,7 @@ export interface Ratings {
 export interface Favourite {
     user_id: number;
     anime_id: number;
+    anime: Anime;
 }
 export interface Friends {
     id: number;
@@ -70,7 +71,10 @@ export interface Season {
     id: number;
     name: string;
     number: number;
-    episodes: { id: number; number: number }[];
+    episodes: {
+        id: number;
+        number: number;
+    }[];
 }
 
 export interface Episode {

@@ -67,7 +67,7 @@ export default function AnimePage({
         <>
             <Header auth={auth} friendship={friendship} />
             <div className="ml-14 ml:ml-0 max-sm:ml-0">
-                <div className="m-4 border border-gray-200 rounded-lg shadow dark:border-gray-700">
+                <div className="m-4 border rounded-lg shadow ">
                     <div className="flex flex-row max-md:flex-col ">
                         <div className="w-2/12 max-md:w-full py-2 px-2 max-md:items-center">
                             <img

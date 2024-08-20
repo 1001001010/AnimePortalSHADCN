@@ -19,7 +19,7 @@ export default function ActiveSession({ activeSessions }: ActiveSessionProps) {
                 {activeSessions.map((session, index) => (
                     <li
                         key={index}
-                        className="mb-4 border border-gray-200 rounded-lg shadow dark:border-gray-700 w-full p-4"
+                        className="mb-4 border rounded-lg shadow w-full p-4"
                     >
                         <p>IP адрес: {session.ip_address}</p>
                         <meta
