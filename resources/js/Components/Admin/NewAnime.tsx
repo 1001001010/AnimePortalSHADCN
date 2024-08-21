@@ -137,18 +137,44 @@ export default function NewAnimeForm() {
                                     }
                                 />
                                 <div className="flex flex-col mt-2 gap-2">
-                                    <Input
-                                        id="type"
-                                        name="type"
-                                        type="text"
-                                        placeholder="Тип"
-                                        className={` ${
-                                            errors.type ? "border-red-500" : ""
-                                        }`}
-                                        onChange={(e) =>
-                                            setData("type", e.target.value)
+                                    <Select
+                                        onValueChange={(value) =>
+                                            setData("type", value)
                                         }
-                                    />
+                                    >
+                                        <SelectTrigger
+                                            className={`w-full ${
+                                                errors.status
+                                                    ? "border-red-500"
+                                                    : ""
+                                            }`}
+                                        >
+                                            <SelectValue placeholder="Тип" />
+                                        </SelectTrigger>
+                                        <SelectContent
+                                            className={` ${
+                                                errors.name
+                                                    ? "border-red-500"
+                                                    : ""
+                                            }`}
+                                        >
+                                            <SelectGroup>
+                                                <SelectItem value="TV">
+                                                    ТВ Сериал
+                                                </SelectItem>
+                                                <SelectItem value="Film">
+                                                    Фильм
+                                                </SelectItem>
+                                                <SelectItem value="speshl">
+                                                    Спешл
+                                                </SelectItem>
+                                                <SelectItem value="OVA">
+                                                    OVA
+                                                </SelectItem>
+                                            </SelectGroup>
+                                        </SelectContent>
+                                    </Select>
+
                                     <Select
                                         onValueChange={(value) =>
                                             setData("status", value)

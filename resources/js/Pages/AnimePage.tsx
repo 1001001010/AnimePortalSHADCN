@@ -41,15 +41,23 @@ export default function AnimePage({
     favourite: Favourite;
 }>) {
     // Статус
+    const type = [
+        { status: "TV", text: "ТВ Сериал" },
+        { status: "Film", text: "Фильм" },
+        { status: "speshl", text: "Спешл" },
+        { status: "OVA", text: "OVA" },
+    ];
+
     const status = [
         { status: "ongoing", text: "Онгоинг" },
         { status: "came_out", text: "Вышел" },
         { status: "preview", text: "Анонс" },
     ];
     const statusText = status.find((s) => s.status === Anime.status)?.text;
+    const typeText = type.find((s) => s.status === Anime.type)?.text;
 
     const animeProperties = [
-        { label: "Тип", value: Anime.type },
+        { label: "Тип", value: typeText },
         { label: "Эпизоды", value: episode_count },
         { label: "Статус", value: statusText },
         { label: "Первоисточник", value: Anime.original },
