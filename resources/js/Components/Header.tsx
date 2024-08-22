@@ -38,6 +38,8 @@ export default function Header({
     auth,
     friendship,
 }: PageProps<{ friendship: FriendShips }>) {
+    console.log("Auth object:", auth);
+    console.log("Avatar URL:", auth.user.profile_image);
     const handleToggleDarkMode = () => {
         document.documentElement.classList.toggle("dark");
     };
@@ -303,7 +305,7 @@ export default function Header({
                                     <Avatar>
                                         {auth.user.profile_image ? (
                                             <AvatarImage
-                                                src={auth.user.profile_image}
+                                                src={`/../${auth.user.profile_image}`}
                                                 alt="@avatar"
                                             />
                                         ) : (

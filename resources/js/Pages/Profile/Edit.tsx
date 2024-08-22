@@ -21,7 +21,7 @@ export default function Edit({
 }>) {
     return (
         <>
-            <Header friendship={friendship} auth={auth} />
+            <Header auth={auth} friendship={friendship} />
             <div className="ml-14 ml:ml-0 max-sm:ml-0">
                 <div className="m-4 border rounded-lg shadow flex flex-wrap md:flex-nowrap">
                     <div className="p-6 text-gray-900 dark:text-gray-100 w-full md:w-2/3">

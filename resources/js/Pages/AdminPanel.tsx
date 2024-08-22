@@ -10,7 +10,7 @@ export default function AdminPanel({
 }: PageProps<{ friendship: FriendShips; Anime: Anime[] }>) {
     return (
         <>
-            <Header auth={auth} friendship={friendship} />
+            <Header friendship={friendship} auth={auth} />
             <div className="ml-14 ml:ml-0 max-sm:ml-0">
                 <div className="m-4 border  rounded-lg shadow flex justify-start gap-2 p-4">
                     <NewAnimeForm />
