@@ -42,12 +42,15 @@ class MainController extends Controller
             $rating = Rating::where('user_id', $user_id)
                 ->where('anime_id', $anime->id)
                 ->first();
+            $favourite = Favourite::where('user_id', Auth::user()->id)->where('anime_id', $anime->id)->first();
         } else {
             $rating = null;
+            $favourite = null;
         }
 
+
         return Inertia::render('AnimePage', [
-            'favourite' => Favourite::where('user_id', Auth::user()->id)->where('anime_id', $anime->id)->first(),
+            'favourite' => $favourite,
             'Anime' => $anime,
             'seasons' => $seasons,
             'currentEpisode' => $currentEpisode,

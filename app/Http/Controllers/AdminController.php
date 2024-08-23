@@ -128,4 +128,16 @@ class AdminController extends Controller
 
         return redirect()->back();
     }
+    public function edit_season(Request $request) {
+        $seasons = $request->input('seasons');
+
+        // Update the number field of each season
+        foreach ($seasons as $season) {
+            $seasonModel = Season::find($season['id']);
+            $seasonModel->number = $season['number'];
+            $seasonModel->save();
+        }
+
+        return redirect()->back();
+    }
 }

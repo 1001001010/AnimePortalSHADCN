@@ -42,6 +42,7 @@ export default function NewEpisodeForm({
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
         post(route("NewEpisode"), {
+            preserveScroll: true,
             onSuccess: () => {
                 setIsOpen(false);
                 reset();
