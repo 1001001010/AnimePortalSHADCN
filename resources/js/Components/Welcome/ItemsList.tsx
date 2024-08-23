@@ -12,6 +12,7 @@ import {
 } from "@/shadcn/ui/select";
 import { Anime, PageProps } from "@/types";
 import ItemCard from "../Anime/ItemCard";
+import { Button } from "@/shadcn/ui/button";
 
 type SliderProps = React.ComponentProps<typeof Slider>;
 
@@ -51,7 +52,7 @@ export default function ItemsList({
                             ))}
                     </div>
                 </div>
-                <div className="p-2 text-gray-900 dark:text-gray-100 w-full md:w-1/3 border rounded-lg">
+                <div className="p-2 text-gray-900 dark:text-gray-100 w-full h-min md:w-1/3 border rounded-lg">
                     <div className="grid w-full items-center gap-2 p-2">
                         <Label htmlFor="anime_name">Название</Label>
                         <Input
@@ -100,6 +101,9 @@ export default function ItemsList({
                                 </SelectGroup>
                             </SelectContent>
                         </Select>
+                    </div>
+                    <div className="flex justify-end w-full items-center gap-2 p-2">
+                        <Button>Поиск</Button>
                     </div>
                 </div>
             </div>
