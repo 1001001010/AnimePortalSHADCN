@@ -285,98 +285,94 @@ export default function Header({
                         </SheetContent>
                     </Sheet>
                     <div className="relative ml-auto flex-1 md:grow-0">
-                        <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-                        <Input
-                            type="search"
-                            placeholder="Search..."
-                            className="w-full rounded-lg bg-background pl-8 md:w-[200px] lg:w-[320px]"
-                        />
-                    </div>
-                    {auth.user ? (
-                        <DropdownMenu>
-                            <DropdownMenuTrigger asChild>
-                                <Button
-                                    variant="outline"
-                                    size="icon"
-                                    className="rounded-full relative"
-                                >
-                                    <Avatar>
-                                        {auth.user.profile_image ? (
-                                            <AvatarImage
-                                                src={`/../${auth.user.profile_image}`}
-                                                alt="@avatar"
-                                            />
-                                        ) : (
-                                            <AvatarImage
-                                                src="/img/defaultAvatar.png"
-                                                alt="@avatar"
-                                            />
-                                        )}
-                                        <AvatarFallback>AV</AvatarFallback>
-                                    </Avatar>
-                                    {friendship ? (
-                                        <span className="absolute bottom-7 left-6 flex h-3 w-3">
-                                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
-                                            <span className="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>
-                                        </span>
-                                    ) : null}
-                                </Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent align="end">
-                                <Link
-                                    href={route("profile")}
-                                    as="button"
-                                    className="w-full"
-                                >
-                                    <DropdownMenuItem>Профиль</DropdownMenuItem>
-                                </Link>
-                                <DropdownMenuSeparator />
-                                <Link
-                                    href={route("notifications")}
-                                    as="button"
-                                    className="w-full"
-                                >
-                                    <DropdownMenuItem className="flex items-center">
-                                        <span className="mr-2">
-                                            Уведомления
-                                        </span>
+                        {auth.user ? (
+                            <DropdownMenu>
+                                <DropdownMenuTrigger asChild>
+                                    <Button
+                                        variant="outline"
+                                        size="icon"
+                                        className="rounded-full relative"
+                                    >
+                                        <Avatar>
+                                            {auth.user.profile_image ? (
+                                                <AvatarImage
+                                                    src={`/../${auth.user.profile_image}`}
+                                                    alt="@avatar"
+                                                />
+                                            ) : (
+                                                <AvatarImage
+                                                    src="/img/defaultAvatar.png"
+                                                    alt="@avatar"
+                                                />
+                                            )}
+                                            <AvatarFallback>AV</AvatarFallback>
+                                        </Avatar>
                                         {friendship ? (
-                                            <span className="relative inline-flex h-2 w-2">
-                                                <span className="relative inline-flex rounded-full h-2 w-2 bg-sky-500"></span>
+                                            <span className="absolute bottom-7 left-6 flex h-3 w-3">
+                                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+                                                <span className="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>
                                             </span>
                                         ) : null}
-                                    </DropdownMenuItem>
-                                </Link>
-                                <DropdownMenuSeparator />
-                                <Link
-                                    href={route("profile.edit")}
-                                    as="button"
-                                    className="w-full"
-                                >
-                                    <DropdownMenuItem>
-                                        Настройки
-                                    </DropdownMenuItem>
-                                </Link>
-                                <DropdownMenuSeparator />
-                                <form onSubmit={submit}>
+                                    </Button>
+                                </DropdownMenuTrigger>
+                                <DropdownMenuContent align="end">
                                     <Link
-                                        href={route("logout")}
-                                        method="post"
+                                        href={route("profile")}
                                         as="button"
                                         className="w-full"
                                     >
                                         <DropdownMenuItem>
-                                            Выход
+                                            Профиль
                                         </DropdownMenuItem>
                                     </Link>
-                                </form>
-                            </DropdownMenuContent>
-                        </DropdownMenu>
-                    ) : (
-                        <Button asChild>
-                            <Link href={route("login")}>Вход</Link>
-                        </Button>
-                    )}
+                                    <DropdownMenuSeparator />
+                                    <Link
+                                        href={route("notifications")}
+                                        as="button"
+                                        className="w-full"
+                                    >
+                                        <DropdownMenuItem className="flex items-center">
+                                            <span className="mr-2">
+                                                Уведомления
+                                            </span>
+                                            {friendship ? (
+                                                <span className="relative inline-flex h-2 w-2">
+                                                    <span className="relative inline-flex rounded-full h-2 w-2 bg-sky-500"></span>
+                                                </span>
+                                            ) : null}
+                                        </DropdownMenuItem>
+                                    </Link>
+                                    <DropdownMenuSeparator />
+                                    <Link
+                                        href={route("profile.edit")}
+                                        as="button"
+                                        className="w-full"
+                                    >
+                                        <DropdownMenuItem>
+                                            Настройки
+                                        </DropdownMenuItem>
+                                    </Link>
+                                    <DropdownMenuSeparator />
+                                    <form onSubmit={submit}>
+                                        <Link
+                                            href={route("logout")}
+                                            method="post"
+                                            as="button"
+                                            className="w-full"
+                                        >
+                                            <DropdownMenuItem>
+                                                Выход
+                                            </DropdownMenuItem>
+                                        </Link>
+                                    </form>
+                                </DropdownMenuContent>
+                            </DropdownMenu>
+                        ) : (
+                            <Button asChild>
+                                <Link href={route("login")}>Вход</Link>
+                            </Button>
+                        )}
+                    </div>
                 </header>
             </div>
         </div>

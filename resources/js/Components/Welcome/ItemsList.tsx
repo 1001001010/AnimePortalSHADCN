@@ -13,6 +13,8 @@ import {
 import { Anime, PageProps } from "@/types";
 import ItemCard from "../Anime/ItemCard";
 import { Button } from "@/shadcn/ui/button";
+import { FormEventHandler } from "react";
+import { useForm } from "@inertiajs/react";
 
 type SliderProps = React.ComponentProps<typeof Slider>;
 
@@ -21,6 +23,17 @@ export default function ItemsList({
     anime,
     ...sliderProps
 }: PageProps<{ anime: Anime[] }> & SliderProps) {
+    const { data, setData, post, processing, errors, reset } = useForm({
+        name: "",
+        type: "",
+        status: "",
+    });
+
+    const filter: FormEventHandler = (e) => {
+        e.preventDefault();
+        post(route("index.filter"));
+    };
+
     const { className, ...props } = sliderProps;
     const status = [
         { status: "ongoing", text: "Онгоинг" },
@@ -52,7 +65,10 @@ export default function ItemsList({
                             ))}
                     </div>
                 </div>
-                <div className="p-2 text-gray-900 dark:text-gray-100 w-full h-min md:w-1/3 border rounded-lg">
+                <form
+                    className="p-2 text-gray-900 dark:text-gray-100 w-full h-min md:w-1/3 border rounded-lg"
+                    onSubmit={filter}
+                >
                     <div className="grid w-full items-center gap-2 p-2">
                         <Label htmlFor="anime_name">Название</Label>
                         <Input
@@ -60,11 +76,17 @@ export default function ItemsList({
                             type="text"
                             id="anime_name"
                             placeholder="Введите ключевое слово"
+                            onChange={(e) => {
+                                setData("name", e.target.value);
+                            }}
                         />
                     </div>
                     <div className="grid w-full items-center gap-2 p-2">
                         <Label htmlFor="status">Статус</Label>
-                        <Select>
+                        <Select
+                            value={data.status}
+                            onValueChange={(value) => setData("status", value)}
+                        >
                             <SelectTrigger className="w-full">
                                 <SelectValue placeholder="Выберите статус" />
                             </SelectTrigger>
@@ -82,9 +104,13 @@ export default function ItemsList({
                             </SelectContent>
                         </Select>
                     </div>
+
                     <div className="grid w-full items-center gap-2 p-2">
-                        <Label htmlFor="status">Тип</Label>
-                        <Select>
+                        <Label htmlFor="type">Тип</Label>
+                        <Select
+                            value={data.type}
+                            onValueChange={(value) => setData("type", value)}
+                        >
                             <SelectTrigger className="w-full">
                                 <SelectValue placeholder="Выберите тип" />
                             </SelectTrigger>
@@ -103,9 +129,9 @@ export default function ItemsList({
                         </Select>
                     </div>
                     <div className="flex justify-end w-full items-center gap-2 p-2">
-                        <Button>Поиск</Button>
+                        <Button type="submit">Поиск</Button>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     );
