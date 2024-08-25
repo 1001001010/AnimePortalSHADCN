@@ -77,11 +77,11 @@ class MainController extends Controller
     }
 
     public function filter(Request $request) {
-        // $request->validate([
-        //     'name' => 'string',
-        //     'type' => 'in:TV,Film,speshl,OVA',
-        //     'status' => 'in:ongoing,came_out,preview',
-        // ]);
+        $request->validate([
+            'name' => 'nullable|string',
+            'type' => 'nullable|in:TV,Film,speshl,OVA',
+            'status' => 'nullable|in:ongoing,came_out,preview',
+        ]);
 
         $anime = Anime::query();
 
