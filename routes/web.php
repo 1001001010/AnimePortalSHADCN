@@ -11,7 +11,6 @@ use Inertia\Inertia;
 Route::middleware([ShareRequestMiddleware::class])->group(function () {
     Route::controller(App\Http\Controllers\MainController::class)->group(function () {
         Route::get('/','index')->name('index');
-        Route::post('/','filter')->name('index.filter');
         Route::get('/anime/random','random_anime')->name('anime.random');
         Route::get('/anime/view/{anime_id}/{season_id?}/{episode_id?}','anime')->whereNumber(['anime_id', 'season_id', 'episode_id'])->name('anime');
         Route::post('anime/grade','grade')->name('anime.grade')->middleware('auth');

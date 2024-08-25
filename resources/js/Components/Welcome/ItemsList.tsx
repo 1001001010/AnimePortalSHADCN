@@ -13,7 +13,7 @@ import {
 import { Anime, PageProps } from "@/types";
 import ItemCard from "../Anime/ItemCard";
 import { Button } from "@/shadcn/ui/button";
-import { FormEventHandler } from "react";
+import { FormEventHandler, useState } from "react";
 import { useForm } from "@inertiajs/react";
 
 type SliderProps = React.ComponentProps<typeof Slider>;
@@ -47,14 +47,44 @@ export default function ItemsList({
         { status: "OVA", text: "OVA" },
     ];
 
+    const filters = {
+        id: "",
+        name: "",
+        type: "",
+        status: "",
+    };
+
+    const [filteredAnimeList, setFilteredAnimeList] = useState(anime);
+
+    const handleFilterChange = (
+        key: "name" | "type" | "status",
+        value: string
+    ) => {
+        filters[key] = value;
+        setData({ ...data, [key]: value }); // Update the data object with the new value
+
+        const filteredList = anime.filter((anime) => {
+            const nameMatch = filters.name
+                ? anime.name.toLowerCase().includes(filters.name.toLowerCase())
+                : true;
+            const typeMatch = filters.type ? anime.type === filters.type : true;
+            const statusMatch = filters.status
+                ? anime.status === filters.status
+                : true;
+
+            return nameMatch && typeMatch && statusMatch;
+        });
+        setFilteredAnimeList(filteredList);
+    };
+
     return (
         <div className="mt-4">
             <div className="flex justify-around max-lg:mx-10 gap-4 max-md:flex-col-reverse max-md:w-full max-md:mx-0">
                 <div className="p-2 text-gray-900 dark:text-gray-100 w-full md:w-2/3 max-md:w-3/3 border rounded-lg">
                     <h2 className="text-lg font-medium p-1">Список Аниме</h2>
                     <div className="grid grid-cols-3 max-xl:grid-cols-2 max-md:grid-cols-1 items-center justify-items-center auto-rows-dense gap-4 m-2">
-                        {Array.isArray(anime) &&
-                            anime.map((item, index) => (
+                        {Array.isArray(filteredAnimeList) &&
+                            filteredAnimeList.map((item, index) => (
                                 <ItemCard
                                     key={index}
                                     auth={auth}
@@ -77,7 +107,7 @@ export default function ItemsList({
                             id="anime_name"
                             placeholder="Введите ключевое слово"
                             onChange={(e) => {
-                                setData("name", e.target.value);
+                                handleFilterChange("name", e.target.value);
                             }}
                         />
                     </div>
@@ -85,7 +115,9 @@ export default function ItemsList({
                         <Label htmlFor="status">Статус</Label>
                         <Select
                             value={data.status}
-                            onValueChange={(value) => setData("status", value)}
+                            onValueChange={(value) =>
+                                handleFilterChange("status", value)
+                            }
                         >
                             <SelectTrigger className="w-full">
                                 <SelectValue placeholder="Выберите статус" />
@@ -109,7 +141,9 @@ export default function ItemsList({
                         <Label htmlFor="type">Тип</Label>
                         <Select
                             value={data.type}
-                            onValueChange={(value) => setData("type", value)}
+                            onValueChange={(value) =>
+                                handleFilterChange("type", value)
+                            }
                         >
                             <SelectTrigger className="w-full">
                                 <SelectValue placeholder="Выберите тип" />
@@ -127,9 +161,6 @@ export default function ItemsList({
                                 </SelectGroup>
                             </SelectContent>
                         </Select>
-                    </div>
-                    <div className="flex justify-end w-full items-center gap-2 p-2">
-                        <Button type="submit">Поиск</Button>
                     </div>
                 </form>
             </div>

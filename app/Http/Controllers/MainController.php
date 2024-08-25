@@ -75,39 +75,4 @@ class MainController extends Controller
             'anime_id' => Anime::find($request->input('anime'))->unix,
         ]);
     }
-
-    public function filter(Request $request) {
-        // $request->validate([
-        //     'name' => 'string',
-        //     'type' => 'in:TV,Film,speshl,OVA',
-        //     'status' => 'in:ongoing,came_out,preview',
-        // ]);
-
-        $anime = Anime::query();
-
-        if ($request->has('name')) {
-            $anime->when($request->input('name'), function ($query, $name) {
-                $query->where('name', 'like', '%' . $name . '%');
-            });
-        }
-
-        if ($request->has('type')) {
-            $anime->when($request->input('type'), function ($query, $type) {
-                $query->where('type', $type);
-            });
-        }
-
-        if ($request->has('status')) {
-            $anime->when($request->input('status'), function ($query, $status) {
-                $query->where('status', $status);
-            });
-        }
-
-        $results = $anime->get();
-
-        return Inertia::render('Welcome', [
-            'NewAnime' => Anime::latest('updated_at')->take(15)->get(),
-            'AllItems' => $results
-        ]);
-    }
 }
