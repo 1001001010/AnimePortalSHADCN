@@ -29,25 +29,15 @@ export interface Friends {
     id: number;
     user_id: number;
     friend_id: number;
-    user: {
-        name: string;
-        unix: number;
-    };
-    friend: {
-        id: number;
-        name: string;
-        unix: number;
-    };
+    user: User;
+    friend: Friends;
 }
 
 export interface FriendShips {
     id: number;
     user_id: number;
     friend_id: number;
-    user: {
-        name: string;
-        unix: number;
-    };
+    user: User;
 }
 
 export interface Anime {
@@ -72,16 +62,14 @@ export interface Season {
     id: number;
     name: string;
     number: number;
-    episodes: {
-        id: number;
-        number: number;
-    }[];
+    episodes: Episode[];
 }
 
 export interface Episode {
     id: number;
     number: number;
     video: string;
+    season: Season;
 }
 
 export interface AnimePageProps {

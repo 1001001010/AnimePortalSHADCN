@@ -15,7 +15,7 @@ class Episode extends Model
         'video',
     ];
 
-    public function season(): BelongsTo
+    public function season()
     {
         return $this->belongsTo(Season::class);
     }

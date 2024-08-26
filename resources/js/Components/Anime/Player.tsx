@@ -15,11 +15,15 @@ export default function Player({
     Anime,
     seasons,
     currentEpisode,
+    nextEpisode,
+    previousEpisode,
 }: PageProps<{
     Anime: Anime;
     seasons: Season[];
     episode: Episode;
     currentEpisode?: Episode;
+    nextEpisode?: Episode;
+    previousEpisode?: Episode;
 }>) {
     const [EditMode, setEditMode] = useState(false);
     // Параметры плеера
@@ -47,7 +51,7 @@ export default function Player({
             ],
             seeking: {
                 enabled: true,
-                skip: true,
+                skip: false,
             },
         },
     };
@@ -84,7 +88,6 @@ export default function Player({
     const handleSubmit = () => {
         post(route("EditSeason"), { preserveScroll: true });
     };
-
     return (
         <>
             <DragDropContext onDragEnd={onDragEnd}>
@@ -92,7 +95,59 @@ export default function Player({
                     <div className="m-4 border rounded-lg shadow flex justify-between max-md:flex-col max-md:items-center max-md:p-4">
                         <div className="m-4 w-1/2 max-md:w-full max-md:mb-4">
                             <div id="player">
-                                <Plyr {...plyrProps} />
+                                <video
+                                    controls
+                                    src={currentEpisode.video}
+                                ></video>
+                                {/* <Plyr {...plyrProps} /> */}
+                                <div className="flex flex-row justify-between pt-4">
+                                    {previousEpisode ? (
+                                        <Link
+                                            href={route("anime", [
+                                                Anime.unix,
+                                                previousEpisode?.season.number,
+                                                previousEpisode?.number,
+                                            ])}
+                                            preserveScroll
+                                        >
+                                            <Button>Предыдущая серия</Button>
+                                        </Link>
+                                    ) : (
+                                        <Button
+                                            variant={"ghost"}
+                                            className="invisible"
+                                        >
+                                            Предыдущая серия
+                                        </Button>
+                                    )}
+                                    <Link
+                                        href={route("anime", [Anime.unix])}
+                                        preserveScroll
+                                    >
+                                        <Button variant="outline">
+                                            Список всех серий
+                                        </Button>
+                                    </Link>
+                                    {nextEpisode ? (
+                                        <Link
+                                            href={route("anime", [
+                                                Anime.unix,
+                                                nextEpisode?.season.number,
+                                                nextEpisode?.number,
+                                            ])}
+                                            preserveScroll
+                                        >
+                                            <Button>Следующая серия</Button>
+                                        </Link>
+                                    ) : (
+                                        <Button
+                                            variant={"ghost"}
+                                            className="invisible"
+                                        >
+                                            Следующая серия
+                                        </Button>
+                                    )}
+                                </div>
                             </div>
                         </div>
                         <div className="m-4 p-4 w-1/2 border rounded-lg shadow max-md:flex-col max-md:items-center max-md:p-4 max-md:w-full">

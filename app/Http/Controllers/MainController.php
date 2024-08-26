@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\{Auth, Redirect};
-use App\Models\{Anime, Friendship, Rating, Favourite};
+use App\Models\{Anime, Friendship, Rating, Favourite, Episode};
 use Inertia\Inertia;
 
 class MainController extends Controller
@@ -28,6 +28,8 @@ class MainController extends Controller
     private function renderAnimePage($anime, $season_id = null, $episode_id = null): \Inertia\Response {
         $seasons = $anime->seasons()->with('episodes')->get();
 
+        $nextEpisode = null;
+        $previousEpisode = null;
         $currentEpisode = null;
         if ($season_id && $episode_id) {
             $currentEpisode = $anime->seasons()->where('number', $season_id)
@@ -35,6 +37,45 @@ class MainController extends Controller
                 ->episodes()
                 ->where('number', $episode_id)
                 ->firstOrFail();
+
+            $nextEpisodeQuery = $anime->seasons()->where('number', '>=', $season_id)
+                ->orderBy('number', 'asc')
+                ->with('episodes', 'episodes.season')
+                ->get()
+                ->flatMap(function ($season) use ($episode_id) {
+                    return $season->episodes->where('number', '>', $episode_id);
+                })
+                ->sortBy('number')
+                ->first();
+
+            $previousEpisodeQuery = $anime->seasons()->where('number', '<=', $season_id)
+                ->orderBy('number', 'desc')
+                ->with('episodes', 'episodes.season')
+                ->get()
+                ->flatMap(function ($season) use ($episode_id) {
+                    return $season->episodes->where('number', '<', $episode_id);
+                })
+                ->sortByDesc('number')
+                ->first();
+
+            $nextEpisode = $nextEpisodeQuery ? $nextEpisodeQuery : null;
+            if ($nextEpisode && $nextEpisode->season_id !== $currentEpisode->season_id ) {
+                $nextEpisode = Episode::with('season')->where('season_id', $nextEpisode->season_id)->where('number', 1)->first();
+            }
+            $previousEpisode = $previousEpisodeQuery ? $previousEpisodeQuery : null;
+            // dd($previousEpisode);
+            // dd($previousEpisode->season_id);
+            if ($currentEpisode->number == 2) {
+                $previousEpisode = Episode::with('season')->where('season_id', $currentEpisode->season_id)->where('number', 1)->first();
+            } elseif ($currentEpisode->number == 1) {
+                $previousSeason = $anime->seasons()->where('number', '<', $currentEpisode->season->number)->orderBy('number', 'desc')->first();
+                if ($previousSeason) {
+                    $maxNumber = Episode::where('season_id', $previousSeason->id)->max('number');
+                    $previousEpisode = Episode::with('season')->where('season_id', $previousSeason->id)->where('number', $maxNumber)->first();
+                } else {
+                    $previousEpisode = null;
+                }
+            }
         }
 
         if (Auth::user()) {
@@ -48,12 +89,13 @@ class MainController extends Controller
             $favourite = null;
         }
 
-
         return Inertia::render('AnimePage', [
             'favourite' => $favourite,
             'Anime' => $anime,
             'seasons' => $seasons,
             'currentEpisode' => $currentEpisode,
+            'nextEpisode' => $nextEpisode,
+            'previousEpisode' => $previousEpisode,
             'userRating' => $rating ? $rating->rating : null,
             'averageRating' => round(Rating::where('anime_id', $anime->id)->avg('rating'), 1),
             'episode_count' => $seasons->pluck('episodes')->collapse()->count()

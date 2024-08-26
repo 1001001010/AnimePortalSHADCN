@@ -29,6 +29,8 @@ export default function AnimePage({
     averageRating,
     episode_count,
     favourite,
+    nextEpisode,
+    previousEpisode,
 }: PageProps<{
     Anime: Anime;
     seasons: Season[];
@@ -39,6 +41,8 @@ export default function AnimePage({
     averageRating: number;
     episode_count: number;
     favourite: Favourite;
+    nextEpisode?: Episode;
+    previousEpisode?: Episode;
 }>) {
     // Статус
     const type = [
@@ -76,11 +80,11 @@ export default function AnimePage({
             <div className="ml-14 ml:ml-0 max-sm:ml-0">
                 <div className="m-4 border rounded-lg shadow ">
                     <div className="flex flex-row max-md:flex-col">
-                        <div className="w-2/12 max-md:w-full py-2 px-2 max-md:items-center max-xl:w-full">
+                        <div className="w-2/12 max-md:w-full py-2 px-2 max-md:items-center max-xl:w-full h-full flex flex-col justify-between">
                             <img
                                 src={Anime.cover}
-                                className="rounded mb-2 mx-auto max-xl:w-full"
-                            ></img>
+                                className="rounded mb-2 mx-auto max-xl:w-full h-full object-cover"
+                            />
                             <div className="flex flex-col gap-2 max-xl:w-full">
                                 <Link href={route("favourite.add", Anime.id)}>
                                     {favourite ? (
@@ -116,14 +120,14 @@ export default function AnimePage({
                                 {animeProperties.map((property, index) => (
                                     <div
                                         key={index}
-                                        className="flex min-w-full max-xl:w-1/2 max-md-"
+                                        className="flex flex-row justify-between w-full"
                                     >
-                                        <p className="flex-start font-bold">
+                                        <div className="font-bold justify-start">
                                             {property.label}
-                                        </p>
-                                        <p className="flex-end">
+                                        </div>
+                                        <div className="justify-end">
                                             {property.value}
-                                        </p>
+                                        </div>
                                     </div>
                                 ))}
                             </div>
@@ -139,6 +143,8 @@ export default function AnimePage({
                         seasons={seasons}
                         episode={episode}
                         currentEpisode={currentEpisode}
+                        nextEpisode={nextEpisode}
+                        previousEpisode={previousEpisode}
                     />
                 </div>
             </div>

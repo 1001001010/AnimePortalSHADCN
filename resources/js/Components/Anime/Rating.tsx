@@ -19,6 +19,7 @@ export default function Rating({
     Anime: Anime;
     rating: Ratings;
 }>) {
+    const [open, setOpen] = useState(false);
     const [ratingNumber, setRatingNumber] = useState(Number(rating));
     const [hoverIndex, setHoverIndex] = useState(-1);
     const { setData, post, reset } = useForm({
@@ -30,14 +31,22 @@ export default function Rating({
         e.preventDefault();
 
         post(route("anime.grade"), {
-            onFinish: () => reset(),
+            onFinish: () => {
+                reset();
+                setOpen(false);
+            },
         });
     };
+
     return (
         <>
-            <Dialog>
+            <Dialog open={open}>
                 <DialogTrigger>
-                    <Button variant={"outline"} className="w-full">
+                    <Button
+                        variant={"outline"}
+                        className="w-full"
+                        onClick={() => setOpen(true)}
+                    >
                         Оценить
                     </Button>
                 </DialogTrigger>

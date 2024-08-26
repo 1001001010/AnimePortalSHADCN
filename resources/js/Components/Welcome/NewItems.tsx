@@ -75,7 +75,6 @@ export default function NewItems({
                                     </div>
                                 </CarouselItem>
                             ))}
-                            <CardMore auth={auth} />
                         </CarouselContent>
                     </div>
                     <CarouselNext className="ml-2" />
