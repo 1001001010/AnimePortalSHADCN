@@ -25,6 +25,11 @@ class Anime extends Model
         'screens',
     ];
 
+    public function episodes()
+    {
+        return $this->hasManyThrough(Episode::class, Season::class);
+    }
+
     public function seasons(): HasMany
     {
         return $this->hasMany(Season::class);

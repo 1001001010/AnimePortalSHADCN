@@ -70,6 +70,10 @@ export interface Episode {
     number: number;
     video: string;
     season: Season;
+    seasonNumber?: number;
+    episode: {
+        number: number;
+    };
 }
 
 export interface AnimePageProps {

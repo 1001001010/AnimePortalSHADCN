@@ -88,6 +88,8 @@ export default function Player({
     const handleSubmit = () => {
         post(route("EditSeason"), { preserveScroll: true });
     };
+
+    console.log(previousEpisode);
     return (
         <>
             <DragDropContext onDragEnd={onDragEnd}>
@@ -95,13 +97,13 @@ export default function Player({
                     <div className="m-4 border rounded-lg shadow flex justify-between max-md:flex-col max-md:items-center max-md:p-4">
                         <div className="m-4 w-1/2 max-md:w-full max-md:mb-4">
                             <div id="player">
-                                <video
+                                {/* <video
                                     controls
                                     src={currentEpisode.video}
-                                ></video>
-                                {/* <Plyr {...plyrProps} /> */}
+                                ></video> */}
+                                <Plyr {...plyrProps} />
                                 <div className="flex flex-row justify-between pt-4">
-                                    {previousEpisode ? (
+                                    {/* {previousEpisode ? (
                                         <Link
                                             href={route("anime", [
                                                 Anime.unix,
@@ -119,6 +121,29 @@ export default function Player({
                                         >
                                             Предыдущая серия
                                         </Button>
+                                    )} */}
+                                    {previousEpisode &&
+                                    previousEpisode.seasonNumber &&
+                                    previousEpisode.episode &&
+                                    previousEpisode.episode.number ? (
+                                        <Link
+                                            href={route("anime", [
+                                                Anime.unix,
+                                                previousEpisode?.seasonNumber,
+                                                previousEpisode?.episode
+                                                    ?.number,
+                                            ])}
+                                            preserveScroll
+                                        >
+                                            <Button>Следующая серия</Button>
+                                        </Link>
+                                    ) : (
+                                        <Button
+                                            variant={"ghost"}
+                                            className="invisible"
+                                        >
+                                            Следующая серия
+                                        </Button>
                                     )}
                                     <Link
                                         href={route("anime", [Anime.unix])}
@@ -128,12 +153,15 @@ export default function Player({
                                             Список всех серий
                                         </Button>
                                     </Link>
-                                    {nextEpisode ? (
+                                    {nextEpisode &&
+                                    nextEpisode.seasonNumber &&
+                                    nextEpisode.episode &&
+                                    nextEpisode.episode.number ? (
                                         <Link
                                             href={route("anime", [
                                                 Anime.unix,
-                                                nextEpisode?.season.number,
-                                                nextEpisode?.number,
+                                                nextEpisode?.seasonNumber,
+                                                nextEpisode?.episode?.number,
                                             ])}
                                             preserveScroll
                                         >
