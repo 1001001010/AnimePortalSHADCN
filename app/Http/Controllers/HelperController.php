@@ -35,7 +35,7 @@ class HelperController extends Controller
             ];
 
             if (!$episodeInfo['next']) {
-                $nextSeason = $anime->seasons()->where('number', '>', $currentEpisodeObject->season->number)->first();
+                $nextSeason = $anime->seasons()->where('number', '>', $currentEpisodeObject->season->number)->orderBy('number', 'asc')->first();
                 if ($nextSeason) {
                     $episodeInfo['next'] = $nextSeason->episodes()->orderBy('number', 'asc')->first();
                 }
