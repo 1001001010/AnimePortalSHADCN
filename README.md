@@ -12,3 +12,7 @@
 - Создать ключ приложения `php artisan key:generate`
 - Мигрировать таблицы `php artisan migrate`
 - Запустить приложения `npm run dev` и `php artisan serve`
+
+--- 
+Необходимо подкобчение API 
+Получение и обработка данных 
