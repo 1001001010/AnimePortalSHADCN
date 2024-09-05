@@ -77,6 +77,12 @@ export interface Episode {
     };
 }
 
+export interface Analytics {
+    google: number;
+    form: number;
+    text: string;
+}
+
 export interface AnimePageProps {
     Anime: Anime;
     seasons: Season[];

@@ -1,4 +1,4 @@
-import { PageProps } from "@/types";
+import { Analytics, PageProps } from "@/types";
 ("use client");
 import { TrendingUp } from "lucide-react";
 import { Bar, BarChart, CartesianGrid, LabelList, XAxis } from "recharts";
@@ -17,17 +17,19 @@ import {
     ChartTooltipContent,
 } from "@/shadcn/ui/chart";
 
-const chartData = [
-    { method: "Google", регистраций: 1 },
-    { method: "Форма", регистраций: 0 },
-];
 const chartConfig = {
     desktop: {
         color: "hsl(var(--chart-1))",
     },
 } satisfies ChartConfig;
 
-export default function AnalyticsRegistration({}: PageProps<{}>) {
+export default function AnalyticsRegistration({
+    analystic,
+}: PageProps<{ analystic: Analytics }>) {
+    const chartData = [
+        { method: "Google", регистраций: analystic.google },
+        { method: "Логин-пароль", регистраций: analystic.form },
+    ];
     return (
         <>
             <Card className="w-full">
@@ -73,7 +75,7 @@ export default function AnalyticsRegistration({}: PageProps<{}>) {
                 </CardContent>
                 <CardFooter className="flex-col items-start gap-2 text-sm">
                     <div className="flex gap-2 font-medium leading-none">
-                        Регистраций через Google больше на 5.2%
+                        {analystic.text}
                         <TrendingUp className="h-4 w-4" />
                     </div>
                 </CardFooter>

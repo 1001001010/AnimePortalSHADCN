@@ -15,17 +15,19 @@ import {
     ChartTooltip,
     ChartTooltipContent,
 } from "@/shadcn/ui/chart";
-import { FriendShips, PageProps } from "@/types";
+import { Analytics, FriendShips, PageProps } from "@/types";
 import Header from "@/Components/Header";
 import AnalyticsRegistration from "@/Components/Admin/AnalyticRegistration";
 
-export default function Analytics({
+export default function Analytic({
     auth,
     friendship,
+    registration,
 }: PageProps<{
     user: { name: string; email: string; created_at: string };
     users: any[];
     friendship: FriendShips;
+    registration: Analytics;
 }>) {
     const chartData = [
         { browser: "chrome", visitors: 1, fill: "var(--color-chrome)" },
@@ -113,7 +115,10 @@ export default function Analytics({
                             </ChartContainer>
                         </CardContent>
                     </Card>
-                    <AnalyticsRegistration auth={auth} />
+                    <AnalyticsRegistration
+                        auth={auth}
+                        analystic={registration}
+                    />
                 </div>
             </div>
         </>
