@@ -17,8 +17,9 @@ import {
 } from "@/shadcn/ui/chart";
 import { FriendShips, PageProps } from "@/types";
 import Header from "@/Components/Header";
+import AnalyticsRegistration from "@/Components/Admin/AnalyticRegistration";
 
-export default function Friends({
+export default function Analytics({
     auth,
     friendship,
 }: PageProps<{
@@ -63,9 +64,9 @@ export default function Friends({
     return (
         <>
             <Header auth={auth} friendship={friendship} />
-            <div className="ml-14 ml:ml-0 max-sm:ml-0 w-1/3 max-lg:w-11/12 max-sm:w-full">
-                <div className="m-4 rounded-lg shadow w-full">
-                    <Card>
+            <div className="ml-14 ml:ml-0 max-sm:ml-0 w-1/2 max-lg:w-11/12 max-sm:w-full">
+                <div className="m-4 rounded-lg shadow w-full flex justify-between gap-5">
+                    <Card className="w-full">
                         <CardHeader>
                             <CardTitle>Статистика посещения</CardTitle>
                             <CardDescription>За все время</CardDescription>
@@ -112,6 +113,7 @@ export default function Friends({
                             </ChartContainer>
                         </CardContent>
                     </Card>
+                    <AnalyticsRegistration auth={auth} />
                 </div>
             </div>
         </>
