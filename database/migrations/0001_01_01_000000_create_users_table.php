@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('profile_image')->nullable();
             $table->string('password');
             $table->integer('unix');
+            $table->enum('regist_method', ['default', 'google']);
             $table->rememberToken();
             $table->timestamps();
         });

@@ -5,6 +5,7 @@ export interface User {
     email: string;
     is_admin: number;
     profile_image: string;
+    regist_method: string;
     created_at: string;
     updated_at: string;
 }

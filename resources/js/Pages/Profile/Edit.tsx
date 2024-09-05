@@ -35,9 +35,11 @@ export default function Edit({
                         <div className="mb-4 border rounded-lg shadow w-full p-4">
                             <UpdateProfilePhoto className="mb-4" />
                         </div>
-                        <div className="mb-4 border rounded-lg shadow w-full p-4">
-                            <UpdatePasswordForm className="mb-4" />
-                        </div>
+                        {auth.user.regist_method == "default" ? (
+                            <div className="mb-4 border rounded-lg shadow w-full p-4">
+                                <UpdatePasswordForm className="mb-4" />
+                            </div>
+                        ) : null}
                         <div className="mb-4 border rounded-lg shadow w-full p-4">
                             <DeleteUserForm />
                         </div>

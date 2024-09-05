@@ -17,6 +17,7 @@ class User extends Authenticatable
         'password',
         'unix',
         'profile_image',
+        'regist_method',
         'created_at',
     ];
 

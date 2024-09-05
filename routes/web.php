@@ -3,6 +3,7 @@
 use App\Http\Controllers\{ProfileController, FriendsController,
                           AnalyticsController, SessionController,
                           MainController, AdminController};
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\{IsAdmin, ShareRequestMiddleware};

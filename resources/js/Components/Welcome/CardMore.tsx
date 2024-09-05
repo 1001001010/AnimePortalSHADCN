@@ -4,7 +4,7 @@ import { CarouselItem } from "@/shadcn/ui/carousel";
 import { Card, CardContent } from "@/shadcn/ui/card";
 import { ChevronsRight } from "lucide-react";
 
-export default function CardMore({}: PageProps<{}>) {
+export default function CardMore() {
     return (
         <>
             <CarouselItem className="basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5 min-w-72 min-h-96">

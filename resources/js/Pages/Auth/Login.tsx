@@ -3,8 +3,13 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/shadcn/ui/tabs";
 import { Link } from "@inertiajs/react";
 import RegisterForm from "@/Components/Login/RegisterForm";
 import LoginForm from "@/Components/Login/LoginForm";
+import { PageProps } from "@/types";
 
-export default function Header() {
+export default function Login({
+    ErrorMsg,
+}: PageProps<{
+    ErrorMsg?: any;
+}>) {
     return (
         <div className="flex justify-center items-center h-screen">
             <Tabs defaultValue="login" className="w-[400px]">
@@ -17,6 +22,7 @@ export default function Header() {
                         <LoginForm />
                     </Card>
                 </TabsContent>
+                <div className="text-red-600 text-center">{ErrorMsg}</div>
                 <TabsContent value="register">
                     <Card>
                         <RegisterForm />
