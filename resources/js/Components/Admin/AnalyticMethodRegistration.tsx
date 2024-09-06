@@ -23,12 +23,12 @@ const chartConfig = {
     },
 } satisfies ChartConfig;
 
-export default function AnalyticsRegistration({
-    analystic,
-}: PageProps<{ analystic: Analytics }>) {
+export default function AnalyticMethodRegistration({
+    info,
+}: PageProps<{ info: Analytics }>) {
     const chartData = [
-        { method: "Google", регистраций: analystic.google },
-        { method: "Логин-пароль", регистраций: analystic.form },
+        { method: "Google", регистраций: info.registrationMethod.google },
+        { method: "Логин-пароль", регистраций: info.registrationMethod.form },
     ];
     return (
         <>
@@ -75,8 +75,11 @@ export default function AnalyticsRegistration({
                 </CardContent>
                 <CardFooter className="flex-col items-start gap-2 text-sm">
                     <div className="flex gap-2 font-medium leading-none">
-                        {analystic.text}
+                        {info.registrationMethod.text}
                         <TrendingUp className="h-4 w-4" />
+                    </div>
+                    <div className="leading-none text-muted-foreground">
+                        Способ регистрации пользователей за все время
                     </div>
                 </CardFooter>
             </Card>

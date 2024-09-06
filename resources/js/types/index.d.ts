@@ -78,9 +78,15 @@ export interface Episode {
 }
 
 export interface Analytics {
-    google: number;
-    form: number;
-    text: string;
+    registrationMethod: {
+        google: number;
+        form: number;
+        text: string;
+    };
+    registration: {
+        google: { [key: string]: number };
+        default: { [key: string]: number };
+    };
 }
 
 export interface AnimePageProps {

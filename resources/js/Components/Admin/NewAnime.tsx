@@ -31,7 +31,7 @@ import { Input } from "@/shadcn/ui/input";
 import { Textarea } from "@/shadcn/ui/textarea";
 
 export default function NewAnimeForm() {
-    const { data, setData, post, processing, reset, errors } = useForm({
+    const { data, setData, post, reset, errors } = useForm({
         age: "",
         status: "",
         name: "",
@@ -54,34 +54,53 @@ export default function NewAnimeForm() {
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.files && event.target.files[0]) {
-            setSelectedFile(event.target.files[0]);
+            const file = event.target.files[0];
+            if (!file.type.match(/^image\/(png|jpeg|jpg|webp)$/)) {
+                alert("Загрузите изображение формата: png, jpeg, jpg, webp");
+                return;
+            }
+            setSelectedFile(file);
             const reader = new FileReader();
             reader.onloadend = () => {
                 if (typeof reader.result === "string") {
                     setPreview(reader.result);
                 }
             };
-            reader.readAsDataURL(event.target.files[0]);
-            setData("cover", event.target.files[0]);
+            reader.readAsDataURL(file);
+            setData("cover", file);
         }
     };
 
     const handleScreenChange = (event: React.FormEvent<HTMLInputElement>) => {
-        const file = (event.target as HTMLInputElement).files?.[0];
-        if (file) {
-            const newBlock = {
-                id: blocks.length + 1,
+        const files = (event.target as HTMLInputElement).files;
+        if (files) {
+            const validFiles = Array.from(files).filter((file) =>
+                file.type.match(/^image\/(png|jpeg|jpg|webp)$/)
+            );
+            if (validFiles.length !== files.length) {
+                alert("Загрузите изображение формата: png, jpeg, jpg, webp");
+                return;
+            }
+            const newBlocks = validFiles.map((file, index) => ({
+                id: blocks.length + index + 1,
                 image: file,
-            };
-            setBlocks([...blocks, newBlock]);
-            setData("screens", [...data.screens, file]);
+            }));
+            setBlocks([...blocks, ...newBlocks]);
+            setData("screens", [...data.screens, ...validFiles]);
         }
     };
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
 
-        post(route("NewAnime"));
+        post(route("NewAnime"), {
+            onFinish: () => {
+                reset();
+            },
+        });
+        setBlocks([]);
+        setSelectedFile(null);
+        setPreview(null);
     };
 
     return (
@@ -117,6 +136,7 @@ export default function NewAnimeForm() {
                                     name="cover"
                                     type="file"
                                     multiple
+                                    accept="image/*"
                                     onChange={handleFileChange}
                                     className={`custom-file-input2 ${
                                         errors.cover ? "border-red-500" : ""
@@ -361,6 +381,7 @@ export default function NewAnimeForm() {
                                                 <Input
                                                     type="file"
                                                     multiple
+                                                    accept="image/*"
                                                     onChange={
                                                         handleScreenChange
                                                     }
