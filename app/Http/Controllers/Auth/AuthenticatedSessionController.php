@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Inertia\Response;
 use App\Models\User;
@@ -63,6 +64,7 @@ class AuthenticatedSessionController extends Controller
 
     public function CallbackGoogle() {
         $user = Socialite::driver('google')->user();
+        // dd($user);
         $info = $this->RegOrUser($user);
         if ($info === 'default') {
             return inertia('Auth/Login', ['ErrorMsg' => 'Пожалуйста, используйте Email и пароль для входа']);
@@ -75,15 +77,21 @@ class AuthenticatedSessionController extends Controller
         $existingUser = User::where('email', $user->email)->first();
 
         if (!$existingUser) {
-            $newUser = User::create([
-                'name'=>$user->name,
-                'email'=>$user->email,
-                'unix'=>time(),
-                'password'=>Hash::make('google'),
-                'regist_method'=>'google'
-            ]);
+            $name = time(). ".". 'png';
+            $destination = 'public/avatars/';
+            $imageData = file_get_contents($user->avatar);
+            $info = file_put_contents($destination . $name, $imageData);
+            dd($info);
+            // $newUser = User::create([
+            //     'name'=>$user->name,
+            //     'email'=>$user->email,
+            //     'unix'=>time(),
+            //     'profile_image'=>
+            //     'password'=>Hash::make(Str::uuid()),
+            //     'regist_method'=>'google'
+            // ]);
 
-            Auth::login($newUser);
+            // Auth::login($newUser);
         } else {
             if ($existingUser->regist_method!='google'){
                 return $error = 'default';

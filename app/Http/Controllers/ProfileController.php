@@ -45,7 +45,6 @@ class ProfileController extends Controller
             $user = User::where('id', Auth::user()->id)->first();
             $photoPath = $user->profile_image;
             if (file_exists($photoPath)) {
-                // Если аватарка уже есть, то удаляем старое фото
                 unlink($photoPath);
             }
             $name = time(). ".". $request->file('photo')->extension();
