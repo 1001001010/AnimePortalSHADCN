@@ -4,15 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-use App\Models\{Anime, Season, Episode};
+use App\Models\{Anime, Season, Episode, User};
 
 class AdminController extends Controller
 {
     public function index() {
         return Inertia::render('AdminPanel', [
-            'Anime' => Anime::get(),
-            'Seasons' => Season::get(),
-            'Episode' => Episode::get(),
+            'Anime'=>Anime::get(),
+            'Seasons'=>Season::get(),
+            'Episode'=>Episode::get(),
+            'user'=>User::get()
         ]);
     }
 

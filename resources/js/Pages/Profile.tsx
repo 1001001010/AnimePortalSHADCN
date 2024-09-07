@@ -23,7 +23,7 @@ export default function Profile({
                                 <div className="flex flex-col gap-4">
                                     <h3>{user_info.name}</h3>
                                     <div>
-                                        Дата регистрации:{" "}
+                                        Дата регистрации:
                                         {`${new Date(
                                             user_info.created_at
                                         ).toLocaleString()}`}
@@ -33,7 +33,7 @@ export default function Profile({
                                 <div className="flex flex-col gap-4">
                                     <h3>{auth.user.name}</h3>
                                     <div>
-                                        Дата регистрации:{" "}
+                                        Дата регистрации:
                                         {`${new Date(
                                             auth.user.created_at
                                         ).toLocaleString()}`}
