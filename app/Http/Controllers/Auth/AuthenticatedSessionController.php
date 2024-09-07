@@ -80,18 +80,17 @@ class AuthenticatedSessionController extends Controller
             $name = time(). ".". 'png';
             $destination = 'public/avatars/';
             $imageData = file_get_contents($user->avatar);
-            $info = file_put_contents($destination . $name, $imageData);
-            dd($info);
-            // $newUser = User::create([
-            //     'name'=>$user->name,
-            //     'email'=>$user->email,
-            //     'unix'=>time(),
-            //     'profile_image'=>
-            //     'password'=>Hash::make(Str::uuid()),
-            //     'regist_method'=>'google'
-            // ]);
+            $info = file_put_contents('storage/avatars/' . $name, $imageData);
+            $newUser = User::create([
+                'name'=>$user->name,
+                'email'=>$user->email,
+                'unix'=>time(),
+                'profile_image'=>'storage/avatars/' . $name,
+                'password'=>Hash::make(Str::uuid()),
+                'regist_method'=>'google'
+            ]);
 
-            // Auth::login($newUser);
+            Auth::login($newUser);
         } else {
             if ($existingUser->regist_method!='google'){
                 return $error = 'default';
