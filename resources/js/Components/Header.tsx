@@ -284,7 +284,7 @@ export default function Header({
                             </nav>
                         </SheetContent>
                     </Sheet>
-                    <div className="relative ml-auto flex-1 md:grow-0">
+                    <div className="relative ml-auto flex-1 md:grow-0 flex justify-end">
                         {auth.user ? (
                             <DropdownMenu>
                                 <DropdownMenuTrigger asChild>

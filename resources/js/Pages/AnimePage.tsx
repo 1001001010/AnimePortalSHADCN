@@ -83,7 +83,7 @@ export default function AnimePage({
                         <div className="w-2/12 max-md:w-full py-2 px-2 max-md:items-center max-xl:w-full h-full flex flex-col justify-between">
                             <img
                                 src={Anime.cover}
-                                className="rounded mb-2 mx-auto max-xl:w-full h-full object-cover"
+                                className="rounded mb-2 mx-auto max-xl:w-1/2 h-full object-cover"
                             />
                             <div className="flex flex-col gap-2 max-xl:w-full">
                                 <Link href={route("favourite.add", Anime.id)}>

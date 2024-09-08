@@ -22,8 +22,10 @@ class MainController extends Controller
         return (new HelperController)->renderAnimePage(Anime::where('unix', $anime_id)->firstOrFail(), $season_id, $episode_id);
     }
 
-    public function random_anime(): \Inertia\Response {
-        return (new HelperController)->renderAnimePage(Anime::get()->random());
+    public function random_anime() {
+        return Redirect::route('anime', [
+            'anime_id' => Anime::get()->random()->unix,
+        ]);;
     }
 
     public function grade(Request $request): RedirectResponse {
