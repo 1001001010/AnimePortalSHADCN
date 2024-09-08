@@ -21,7 +21,7 @@ export default function Friend({
         <>
             <Header friendship={friendship} auth={auth} />
             <div className="ml-14 ml:ml-0 max-sm:ml-0">
-                <div className="m-4 borderrounded-lg shadow border">
+                <div className="m-4 max-sm:m-1 max-sm:p-1 borderrounded-lg shadow border">
                     <SearchFriends
                         users={users}
                         request={request}

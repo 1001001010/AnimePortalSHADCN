@@ -28,7 +28,7 @@ export default function NewItems({
                     }}
                     className="w-full md:w-11/12 lg:w-11/12 xl:w-11/12"
                 >
-                    <CarouselPrevious className="mr-2" />
+                    {/* <CarouselPrevious className="mr-2" /> */}
                     <div className="flex justify-center">
                         <CarouselContent>
                             {Anime.map((anime, index) => (
@@ -77,7 +77,7 @@ export default function NewItems({
                             ))}
                         </CarouselContent>
                     </div>
-                    <CarouselNext className="ml-2" />
+                    {/* <CarouselNext className="ml-2" /> */}
                 </Carousel>
             </div>
         </div>

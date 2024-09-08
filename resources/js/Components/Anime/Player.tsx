@@ -102,7 +102,7 @@ export default function Player({
                         </div>
                         <div className="m-4 p-4 w-1/2 border rounded-lg shadow max-md:flex-col max-md:items-center max-md:p-4 max-md:w-full">
                             {auth.user && auth.user.is_admin === 1 ? (
-                                <div className="flex justify-between gap-4 pb-3">
+                                <div className="flex justify-between gap-4 pb-3 max-sm:justify-center max-sm:w-full">
                                     <NewSeasonForm Anime={Anime} auth={auth} />
                                     <NewEpisodeForm
                                         Anime={Anime}

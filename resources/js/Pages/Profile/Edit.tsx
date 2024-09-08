@@ -23,8 +23,8 @@ export default function Edit({
         <>
             <Header auth={auth} friendship={friendship} />
             <div className="ml-14 ml:ml-0 max-sm:ml-0">
-                <div className="m-4 border rounded-lg shadow flex flex-wrap md:flex-nowrap">
-                    <div className="p-6 text-gray-900 dark:text-gray-100 w-full md:w-2/3">
+                <div className="m-4 max-sm:m-1 max-sm:p-1 border rounded-lg shadow flex flex-wrap md:flex-nowrap">
+                    <div className="p-4 max-sm:p-1 text-gray-900 dark:text-gray-100 w-full md:w-2/3">
                         <div className="mb-4 border rounded-lg shadow w-full p-4">
                             <UpdateProfileInformationForm
                                 mustVerifyEmail={mustVerifyEmail}
@@ -44,7 +44,7 @@ export default function Edit({
                             <DeleteUserForm />
                         </div>
                     </div>
-                    <div className="p-6 text-gray-900 dark:text-gray-100 w-full md:w-1/3">
+                    <div className="p-4 text-gray-900 dark:text-gray-100 w-full md:w-1/3 max-sm:p-1">
                         <h2 className="mb-4 text-lg font-medium">Сессии</h2>
                         <ActiveSession activeSessions={activeSession} />
                     </div>

@@ -23,9 +23,9 @@ export default function SeasonEpisodeList({
     };
     return (
         <>
-            <div className="m-4 p-4 border rounded-lg shado max-md:flex-col max-md:items-center">
+            <div className="m-4 p-4 max-sm:m-1 max-sm:p-2 border rounded-lg shado max-md:flex-col max-md:items-center">
                 {auth.user && auth.user.is_admin === 1 ? (
-                    <div className="flex justify-between gap-4 pb-3">
+                    <div className="flex justify-between gap-4 pb-3 max-sm:flex-col max-sm:gap-2">
                         <NewSeasonForm Anime={Anime} auth={auth} />
                         <NewEpisodeForm
                             Anime={Anime}
@@ -34,7 +34,7 @@ export default function SeasonEpisodeList({
                         />
                         <Button
                             variant={EditMode ? "default" : "outline"}
-                            className="w-min"
+                            className="w-min max-sm:w-full"
                             onClick={handleEditModeToggle}
                         >
                             <PencilLine />

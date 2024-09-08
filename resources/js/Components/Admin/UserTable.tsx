@@ -102,12 +102,12 @@ const columns: ColumnDef<User>[] = [
     },
     {
         accessorKey: "regist_method",
-        header: "Метод регистрации",
+        header: "Метод",
         cell: ({ row }) => <div>{row.getValue("regist_method")}</div>,
     },
     {
         accessorKey: "created_at",
-        header: "Дата регистрации",
+        header: "Дата",
         cell: ({ row }) => {
             const createdAt: string = row.getValue("created_at");
             const formattedDate = moment(createdAt).format(

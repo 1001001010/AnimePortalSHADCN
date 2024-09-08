@@ -53,7 +53,9 @@ export default function ItemCard({
                 <div className="py-2 max-w-full">
                     <div className="w-full flex flex-col items-center gap-2 px-5">
                         <div className="max-sm:text-center">
-                            <p className="text-ellipsis">{info.name}</p>
+                            <p className="text-ellipsis text-justify">
+                                {info.name}
+                            </p>
                         </div>
                         <Link
                             href={route("anime", [info.unix])}

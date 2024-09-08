@@ -36,7 +36,7 @@ export default function NewEpisodeForm({ Anime }: PageProps<{ Anime: Anime }>) {
             <DialogTrigger asChild>
                 <Button
                     variant="outline"
-                    className="w-1/2"
+                    className="w-1/2 max-sm:w-full"
                     onClick={() => setIsOpen(true)}
                 >
                     Добавить Сезон

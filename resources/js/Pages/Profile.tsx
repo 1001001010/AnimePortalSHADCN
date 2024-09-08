@@ -15,7 +15,7 @@ export default function Profile({
         <>
             <Header friendship={friendship} auth={auth} />
             <div className="ml-14 ml:ml-0 max-sm:ml-0">
-                <div className="m-4 border rounded-lg shadow">
+                <div className="m-4 max-sm:m-1 max-sm:p-1 border rounded-lg shadow">
                     <div className="flex">
                         <ProfileImage auth={auth} user_info={user_info} />
                         <div className="m-2 text-gray-900 dark:text-gray-100 flex flex-col gap-4">

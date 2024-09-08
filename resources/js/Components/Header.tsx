@@ -254,7 +254,7 @@ export default function Header({
                                     Статистика
                                 </Link>
                                 <Link
-                                    href="#"
+                                    href={route("adminPanel.index")}
                                     className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
                                 >
                                     <PencilRuler className="h-5 w-5" />

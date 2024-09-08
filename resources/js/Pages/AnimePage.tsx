@@ -78,14 +78,14 @@ export default function AnimePage({
         <>
             <Header friendship={friendship} auth={auth} />
             <div className="ml-14 ml:ml-0 max-sm:ml-0">
-                <div className="m-4 border rounded-lg shadow ">
+                <div className="m-4 max-sm:m-1 max-sm:p-1 border rounded-lg shadow ">
                     <div className="flex flex-row max-md:flex-col">
                         <div className="w-2/12 max-md:w-full py-2 px-2 max-md:items-center max-xl:w-full h-full flex flex-col justify-between">
                             <img
                                 src={Anime.cover}
-                                className="rounded mb-2 mx-auto max-xl:w-1/2 h-full object-cover"
+                                className="rounded mb-2 mx-auto max-xl:w-full h-full object-cover max-sm:w-4/5"
                             />
-                            <div className="flex flex-col gap-2 max-xl:w-full">
+                            <div className="flex flex-col gap-2 max-xl:w-full max-sm:w-4/5">
                                 <Link href={route("favourite.add", Anime.id)}>
                                     {favourite ? (
                                         <Button
@@ -133,7 +133,7 @@ export default function AnimePage({
                             </div>
                         </div>
                     </div>
-                    <div className="description p-4 mt-5">
+                    <div className="description p-4 mt-5 max-md:text-center">
                         {Anime.description}
                     </div>
                     <ScrenesCarousel Anime={Anime} auth={auth} />
