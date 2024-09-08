@@ -41,7 +41,7 @@ export default function DelAnimeForm({
     return (
         <>
             <Dialog>
-                <DialogTrigger>
+                <DialogTrigger asChild>
                     <Button variant={"outline"}>Удалить аниме</Button>
                 </DialogTrigger>
                 <DialogContent>

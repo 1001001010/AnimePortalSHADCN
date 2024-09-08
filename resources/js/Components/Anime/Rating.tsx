@@ -39,7 +39,7 @@ export default function Rating({
     return (
         <>
             <Dialog>
-                <DialogTrigger>
+                <DialogTrigger asChild>
                     <Button variant={"outline"} className="w-full">
                         Оценить
                     </Button>
