@@ -50,7 +50,7 @@ export default function ItemsList({
     return (
         <div className="mt-4">
             <div className="flex justify-between gap-4 max-md:flex-col-reverse max-md:w-full max-md:mx-0">
-                <div className="p-1 text-gray-900 dark:text-gray-100 w-full md:w-2/3 max-md:w-3/3 border rounded-lg">
+                <div className="p-1 text-gray-900 dark:text-gray-100 w-full md:w-2/3 max-md:w-3/3 rounded-lg">
                     <h2 className="text-lg font-medium p-1">Список Аниме</h2>
                     <div className="grid grid-cols-3 max-xl:grid-cols-2 max-md:grid-cols-1 items-center justify-items-center auto-rows-dense gap-4 m-2">
                         {Array.isArray(anime) &&
