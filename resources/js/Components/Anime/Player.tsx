@@ -9,6 +9,7 @@ import EpisodeControls from "./EpisodeControls";
 import SeasonEpisodeList from "./SeasonEpisodeList";
 import NewSeasonForm from "@/Components/Admin/NewSeasonForm";
 import NewEpisodeForm from "@/Components/Admin/NewEpisodeForm";
+// import videoUrl from "../../../../public/storage/episode/1725701720.mp4";
 
 export default function Player({
     auth,
@@ -25,13 +26,20 @@ export default function Player({
     nextEpisode?: Episode;
     previousEpisode?: Episode;
 }>) {
+    const filePath = "/public";
+    const videoFile = currentEpisode?.video;
+    // const file = filePath + videoFile;
+    // console.log(file);
+    console.log(`/public/${videoFile}`);
+    const file = "/public/storage/episode/1725701720.mp4";
+    const videoUrl = require(file);
     // Параметры плеера
     const plyrProps = {
         source: {
             type: "video" as const,
             sources: [
                 {
-                    src: currentEpisode ? currentEpisode.video : "",
+                    src: videoUrl,
                     type: "video/mp4" as const,
                     size: 1080,
                 },
