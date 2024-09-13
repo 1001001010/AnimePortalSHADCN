@@ -104,7 +104,7 @@ class AdminController extends Controller
 
         $name = time(). "." . $request->file->extension();
         $destination = 'public/episode';
-        $save_path = '/storage/episode/' . $name;
+        $save_path = 'episode/' . $name;
         $path = $request->file->storeAs($destination, $name);
 
         if (!$path) {

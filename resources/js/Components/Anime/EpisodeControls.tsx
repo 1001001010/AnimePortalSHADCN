@@ -28,11 +28,11 @@ export default function EpisodeControls({
                         ])}
                         preserveScroll
                     >
-                        <Button>Следующая серия</Button>
+                        <Button>Предыдущая серия</Button>
                     </Link>
                 ) : (
                     <Button variant={"ghost"} className="invisible">
-                        Следующая серия
+                        Предыдущая серия
                     </Button>
                 )}
                 <Link href={route("anime", [Anime.unix])} preserveScroll>

@@ -26,13 +26,13 @@ export default function Player({
     nextEpisode?: Episode;
     previousEpisode?: Episode;
 }>) {
-    const filePath = "/public";
+    const filePath = "http://127.0.0.1:5173/storage/app/public/";
     const videoFile = currentEpisode?.video;
-    // const file = filePath + videoFile;
-    // console.log(file);
-    console.log(`/public/${videoFile}`);
-    const file = "/public/storage/episode/1725701720.mp4";
+    const file = `${filePath + videoFile}`;
+    // const file = filePath.concat(videoFile ? videoFile : "");
     const videoUrl = require(file);
+    // console.log(videoUrl);
+    // console.log(filePath + videoFile);
     // Параметры плеера
     const plyrProps = {
         source: {
