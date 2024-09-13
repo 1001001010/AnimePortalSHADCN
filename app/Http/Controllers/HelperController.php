@@ -82,7 +82,8 @@ class HelperController extends Controller
             ] : null,
             'userRating' => $userInfo ? ($userInfo['rating'] ? $userInfo['rating']->rating : null) : null,
             'averageRating' => round(Rating::where('anime_id', $anime->id)->avg('rating'), 1),
-            'episode_count' => $seasons->pluck('episodes')->collapse()->count()
+            'episode_count' => $seasons->pluck('episodes')->collapse()->count(),
+            'Host' => env('APP_URL')
         ]);
     }
 

@@ -31,6 +31,7 @@ export default function AnimePage({
     favourite,
     nextEpisode,
     previousEpisode,
+    Host,
 }: PageProps<{
     Anime: Anime;
     seasons: Season[];
@@ -43,6 +44,7 @@ export default function AnimePage({
     favourite: Favourite;
     nextEpisode?: Episode;
     previousEpisode?: Episode;
+    Host: String;
 }>) {
     // Статус
     const type = [
@@ -145,6 +147,7 @@ export default function AnimePage({
                         currentEpisode={currentEpisode}
                         nextEpisode={nextEpisode}
                         previousEpisode={previousEpisode}
+                        Host={Host}
                     />
                 </div>
             </div>

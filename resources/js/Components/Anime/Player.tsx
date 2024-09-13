@@ -18,6 +18,7 @@ export default function Player({
     currentEpisode,
     nextEpisode,
     previousEpisode,
+    Host,
 }: PageProps<{
     Anime: Anime;
     seasons: Season[];
@@ -25,14 +26,12 @@ export default function Player({
     currentEpisode?: Episode;
     nextEpisode?: Episode;
     previousEpisode?: Episode;
+    Host: String;
 }>) {
-    const filePath = "http://127.0.0.1:5173/storage/app/public/";
-    const videoFile = currentEpisode?.video;
-    const file = `${filePath + videoFile}`;
-    // const file = filePath.concat(videoFile ? videoFile : "");
+    const file = `${
+        `${Host}:5173/storage/app/public/` + currentEpisode?.video
+    }`;
     const videoUrl = require(file);
-    // console.log(videoUrl);
-    // console.log(filePath + videoFile);
     // Параметры плеера
     const plyrProps = {
         source: {
