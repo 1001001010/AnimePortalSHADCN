@@ -22,6 +22,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/shadcn/ui/popover";
 import { Anime, FriendShips, PageProps } from "@/types";
 import { useForm } from "@inertiajs/react";
 import { FormEventHandler } from "react";
+import { toast } from "sonner";
 
 export default function DelAnimeForm({
     animeList,
@@ -36,7 +37,13 @@ export default function DelAnimeForm({
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
 
-        post(route("DelAnime"));
+        post(route("DelAnime"), {
+            onFinish: () => {
+                toast("Успешно", {
+                    description: "Аниме успешно добавлено",
+                });
+            },
+        });
     };
     return (
         <>
@@ -55,7 +62,7 @@ export default function DelAnimeForm({
                                             variant="outline"
                                             role="combobox"
                                             aria-expanded={open}
-                                            className="w-[200px] justify-between"
+                                            className="w-full justify-between"
                                         >
                                             {value
                                                 ? animeList.find(
@@ -66,7 +73,7 @@ export default function DelAnimeForm({
                                             <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                                         </Button>
                                     </PopoverTrigger>
-                                    <PopoverContent className="w-[200px] p-0">
+                                    <PopoverContent className=" p-0">
                                         <Command>
                                             <CommandInput placeholder="Введите название" />
                                             <CommandList>

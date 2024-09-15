@@ -276,7 +276,7 @@ export default function UserTable({ users }: PageProps<{ users: User[] }>) {
                                     colSpan={columns.length}
                                     className="h-24 text-center"
                                 >
-                                    No results.
+                                    Ничего не найдено
                                 </TableCell>
                             </TableRow>
                         )}

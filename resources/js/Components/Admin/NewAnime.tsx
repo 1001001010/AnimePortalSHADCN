@@ -29,6 +29,7 @@ import {
 } from "@/shadcn/ui/carousel";
 import { Input } from "@/shadcn/ui/input";
 import { Textarea } from "@/shadcn/ui/textarea";
+import { toast } from "sonner";
 
 export default function NewAnimeForm() {
     const { data, setData, post, reset, errors } = useForm({
@@ -46,6 +47,7 @@ export default function NewAnimeForm() {
         screens: [] as File[],
     });
 
+    const [open, setOpen] = React.useState(false);
     const [selectedFile, setSelectedFile] = React.useState<null | File>(null);
     const [preview, setPreview] = React.useState<null | string>(null);
     const [blocks, setBlocks] = useState<{ id: number; image: File | null }[]>(
@@ -95,17 +97,20 @@ export default function NewAnimeForm() {
 
         post(route("NewAnime"), {
             onFinish: () => {
-                reset();
+                setBlocks([]);
+                setOpen(false);
+                setSelectedFile(null);
+                setPreview(null);
+                toast("Успешно", {
+                    description: "Аниме успешно добавлено",
+                });
             },
         });
-        setBlocks([]);
-        setSelectedFile(null);
-        setPreview(null);
     };
 
     return (
         <>
-            <Dialog>
+            <Dialog open={open} onOpenChange={setOpen}>
                 <DialogTrigger asChild>
                     <Button variant="outline">Добавить Аниме</Button>
                 </DialogTrigger>

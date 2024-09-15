@@ -5,7 +5,6 @@ import ActiveSession from "./Partials/ActiveSession";
 import UpdatePasswordForm from "./Partials/UpdatePasswordForm";
 import UpdateProfileInformationForm from "./Partials/UpdateProfileInformationForm";
 import UpdateProfilePhoto from "./Partials/UpdateProfilePhoto";
-import { Toaster } from "@/shadcn/ui/sonner";
 
 export default function Edit({
     auth,
@@ -50,7 +49,6 @@ export default function Edit({
                     </div>
                 </div>
             </div>
-            <Toaster />
         </>
     );
 }
