@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('profile_image')->nullable();
             $table->string('password');
             $table->integer('unix');
-            $table->enum('regist_method', ['default', 'google']);
+            $table->enum('regist_method', ['default', 'yandex']);
             $table->rememberToken();
             $table->timestamps();
         });

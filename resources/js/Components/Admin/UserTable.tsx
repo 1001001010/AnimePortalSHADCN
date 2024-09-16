@@ -148,7 +148,7 @@ const columns: ColumnDef<User>[] = [
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem>
-                            <Link href={route("profile", user.id)}>
+                            <Link href={route("profile", user.unix)}>
                                 Открыть профиль
                             </Link>
                         </DropdownMenuItem>

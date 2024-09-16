@@ -30,6 +30,8 @@ export interface Friends {
     id: number;
     user_id: number;
     friend_id: number;
+    name: string;
+    unix: string;
     user: User;
     friend: Friends;
 }

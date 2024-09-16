@@ -33,8 +33,8 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request) {
         $user = User::where('email', $request->input('email'))->first();
-        if ($user && $user->regist_method == 'google') {
-            return inertia('Auth/Login', ['ErrorMsg' => 'Пожалуйста, используйте Google для входа']);
+        if ($user && $user->regist_method == 'yandex') {
+            return inertia('Auth/Login', ['ErrorMsg' => 'Пожалуйста, используйте Yandex для входа']);
         }
 
         $request->authenticate();
@@ -58,13 +58,12 @@ class AuthenticatedSessionController extends Controller
         return redirect('/');
     }
 
-    public function RedirectGoogle(): RedirectResponse {
-        return Socialite::driver('google')->redirect();
+    public function RedirectYandex(): RedirectResponse {
+        return Socialite::driver('yandex')->redirect();
     }
 
-    public function CallbackGoogle() {
-        $user = Socialite::driver('google')->user();
-        // dd($user);
+    public function CallbackYandex() {
+        $user = Socialite::driver('yandex')->user();
         $info = $this->RegOrUser($user);
         if ($info === 'default') {
             return inertia('Auth/Login', ['ErrorMsg' => 'Пожалуйста, используйте Email и пароль для входа']);
@@ -75,7 +74,6 @@ class AuthenticatedSessionController extends Controller
 
     private function RegOrUser($user) {
         $existingUser = User::where('email', $user->email)->first();
-
         if (!$existingUser) {
             $name = time(). ".". 'png';
             $destination = 'public/avatars/';
@@ -87,12 +85,12 @@ class AuthenticatedSessionController extends Controller
                 'unix'=>time(),
                 'profile_image'=>'storage/avatars/' . $name,
                 'password'=>Hash::make(Str::uuid()),
-                'regist_method'=>'google'
+                'regist_method'=>'yandex'
             ]);
 
             Auth::login($newUser);
         } else {
-            if ($existingUser->regist_method!='google'){
+            if ($existingUser->regist_method!='yandex'){
                 return $error = 'default';
             } else {
                 Auth::login($existingUser);

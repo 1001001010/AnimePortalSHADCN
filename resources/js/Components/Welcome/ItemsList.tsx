@@ -129,6 +129,14 @@ export default function ItemsList({
                         </Select>
                     </div>
                     <div className="flex justify-end w-full items-center gap-2 p-2">
+                        <Button
+                            variant="outline"
+                            onClick={() => {
+                                setData({ name: "", status: "", type: "" });
+                            }}
+                        >
+                            Сбросить
+                        </Button>
                         <Button type="submit">Поиск</Button>
                     </div>
                 </form>
