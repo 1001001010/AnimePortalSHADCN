@@ -1,20 +1,4 @@
 "use client";
-import { TrendingUp } from "lucide-react";
-import { Bar, BarChart, XAxis, YAxis } from "recharts";
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-} from "@/shadcn/ui/card";
-import {
-    ChartConfig,
-    ChartContainer,
-    ChartTooltip,
-    ChartTooltipContent,
-} from "@/shadcn/ui/chart";
 import { Analytics, FriendShips, PageProps } from "@/types";
 import Header from "@/Components/Header";
 import AnalyticMethodRegistration from "@/Components/Admin/AnalyticMethodRegistration";

@@ -19,9 +19,9 @@ export default function NewItems({
     return (
         <div>
             <header>
-                <h2 className="text-lg font-medium pb-3 mx-10">Новинки</h2>
+                <h2 className="text-lg font-medium pb-3 max-lg:mx-10">Новинки</h2>
             </header>
-            <div className="flex justify-center max-lg:mx-10">
+            <div className="flex justify-center max-lg:mx-10 min-h-60">
                 <Carousel
                     opts={{
                         align: "start",

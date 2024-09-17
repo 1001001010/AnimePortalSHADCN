@@ -27,7 +27,7 @@ export default function AnalyticMethodRegistration({
     info,
 }: PageProps<{ info: Analytics }>) {
     const chartData = [
-        { method: "Google", регистраций: info.registrationMethod.google },
+        { method: "Yandex", регистраций: info.registrationMethod.yandex },
         { method: "Логин-пароль", регистраций: info.registrationMethod.form },
     ];
     return (

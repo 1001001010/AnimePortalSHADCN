@@ -81,12 +81,12 @@ export interface Episode {
 
 export interface Analytics {
     registrationMethod: {
-        google: number;
+        yandex: number;
         form: number;
         text: string;
     };
     registration: {
-        google: { [key: string]: number };
+        yandex: { [key: string]: number };
         default: { [key: string]: number };
     };
 }

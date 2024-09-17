@@ -14,12 +14,12 @@ class AnalyticsController extends Controller
         return Inertia::render('Analytics', [
             "analytic"=>[
                 'registrationMethod'=>[
-                    'google'=>$registrationMethod->reg_google,
+                    'yandex'=>$registrationMethod->reg_yandex,
                     'form'=>$registrationMethod->reg_form,
                     'text'=>$registrationMethod->text
                 ],
                 'registration'=>[
-                    'google'=>$registration->monthsGoogle,
+                    'yandex'=>$registration->monthsYandex,
                     'default'=>$registration->monthsDefault
                 ]
             ]
@@ -27,22 +27,22 @@ class AnalyticsController extends Controller
     }
 
     private function AnalyticsMethodRegistration() {
-        $reg_google = User::where('regist_method', 'google')->count();
+        $reg_yandex = User::where('regist_method', 'yandex')->count();
         $reg_form = User::where('regist_method', 'default')->count();
 
-        $diff = abs($reg_google - $reg_form);
-        $base = max($reg_google, $reg_form);
+        $diff = abs($reg_yandex - $reg_form);
+        $base = max($reg_yandex, $reg_form);
         $percent = round(($diff / $base) * 100, 1);
 
-        if ($reg_google > $reg_form) {
-            $text = 'Регистраций через Google больше на ' . $percent . '%';
-        } elseif ($reg_google < $reg_form) {
+        if ($reg_yandex > $reg_form) {
+            $text = 'Регистраций через Yandex больше на ' . $percent . '%';
+        } elseif ($reg_yandex < $reg_form) {
             $text = 'Регистраций через Логин-пароль больше на ' . $percent . '%';
         } else {
             $text = 'Колличество регистраций одинаковое';
         }
         return (object) [
-            'reg_google' => $reg_google,
+            'reg_yandex' => $reg_yandex,
             'reg_form' => $reg_form,
             'text' => $text
         ];
@@ -50,7 +50,7 @@ class AnalyticsController extends Controller
 
     private function AnalyticsRegistration() {
         $users = User::all();
-        $monthsGoogle = [];
+        $monthsYandex = [];
         $monthsDefault = [];
         $currentMonth = (int) date("m");
         $currentYear = (int) date("Y");
@@ -66,9 +66,9 @@ class AnalyticsController extends Controller
 
             $monthName = date("F", mktime(0, 0, 0, $month, 1));
 
-            $usersInMonthGoogle = $users->filter(function ($user) use ($monthName) {
+            $usersInMonthYandex = $users->filter(function ($user) use ($monthName) {
                 $userRegistrationDate = date("F", $user->created_at->timestamp);
-                return $userRegistrationDate == $monthName && $user->regist_method == 'google';
+                return $userRegistrationDate == $monthName && $user->regist_method == 'yandex';
             })->count();
 
             $usersInMonthDefault = $users->filter(function ($user) use ($monthName) {
@@ -76,11 +76,11 @@ class AnalyticsController extends Controller
                 return $userRegistrationDate == $monthName && $user->regist_method == 'default';
             })->count();
 
-            $monthsGoogle[$monthName] = $usersInMonthGoogle;
+            $monthsYandex[$monthName] = $usersInMonthYandex;
             $monthsDefault[$monthName] = $usersInMonthDefault;
         }
         return (object) [
-            'monthsGoogle' => $monthsGoogle,
+            'monthsYandex' => $monthsYandex,
             'monthsDefault' => $monthsDefault,
         ];
     }

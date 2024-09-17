@@ -35,21 +35,21 @@ export default function AnalyticsRegistration({
         December: "Декабрь",
     };
 
-    const chartData = Object.keys(info.registration.google)
+    const chartData = Object.keys(info.registration.yandex)
         .sort((b, a) => b.localeCompare(a))
         .map((month, index) => {
             return {
                 month: monthTranslations[
                     month as keyof typeof monthTranslations
                 ],
-                google: info.registration.google[month],
+                yandex: info.registration.yandex[month],
                 default: info.registration.default[month],
             };
         });
 
     const chartConfig = {
-        google: {
-            label: "Google",
+        yandex: {
+            label: "Yandex",
             color: "hsl(var(--chart-1))",
         },
         default: {
@@ -82,8 +82,8 @@ export default function AnalyticsRegistration({
                                 }
                             />
                             <Bar
-                                dataKey="google"
-                                fill="var(--color-google)"
+                                dataKey="yandex"
+                                fill="var(--color-yandex)"
                                 radius={4}
                             />
                             <Bar
