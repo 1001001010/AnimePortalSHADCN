@@ -1,4 +1,6 @@
+import { Button } from "@/shadcn/ui/button";
 import { PageProps, User } from "@/types";
+import { Link } from "@inertiajs/react";
 
 export default function ProfileImage({
     auth,
@@ -24,7 +26,7 @@ export default function ProfileImage({
                         )}
                     </div>
                 ) : (
-                    <div>
+                    <div className="flex flex-col gap-2">
                         {auth.user.profile_image ? (
                             <img
                                 src={auth.user.profile_image}
@@ -36,6 +38,11 @@ export default function ProfileImage({
                                 className="rounded"
                             ></img>
                         )}
+                        <Button variant={"outline"} className="w-full">
+                            <Link href={route('profile.edit')}>
+                            Редактировать
+                            </Link>
+                        </Button>
                     </div>
                 )}
             </div>

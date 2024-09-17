@@ -3,6 +3,8 @@ import Header from "@/Components/Header";
 import NewAnimeForm from "@/Components/Admin/NewAnime";
 import DelAnimeForm from "@/Components/Admin/DelAnime";
 import UserTable from "@/Components/Admin/UserTable";
+import { Button } from "@/shadcn/ui/button";
+import { Link } from "@inertiajs/react";
 
 export default function AdminPanel({
     auth,
@@ -18,6 +20,11 @@ export default function AdminPanel({
                     <div className="flex justify-start gap-2 pb-4">
                         <NewAnimeForm />
                         <DelAnimeForm auth={auth} animeList={Anime} />
+                        <Button variant={"outline"} className="ml-2">
+                            <Link href={route("DownloadsLogs")}>
+                                Получить логи
+                            </Link>
+                        </Button>
                     </div>
                     <hr />
                     <UserTable users={user} auth={auth} />

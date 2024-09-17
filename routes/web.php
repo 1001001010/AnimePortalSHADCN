@@ -51,6 +51,7 @@ Route::middleware([ShareRequestMiddleware::class])->group(function () {
             Route::post('/admin/{anime_id}/season', 'new_season')->whereNumber('anime_id')->name('NewSeason');
             Route::post('/admin/season/edit', 'edit_season')->name('EditSeason');
             Route::post('/admin/new/episode', 'new_episode')->name('NewEpisode');
+            Route::get('/admin/logs/download','download_logs')->name('DownloadsLogs');
         });
     });
 });

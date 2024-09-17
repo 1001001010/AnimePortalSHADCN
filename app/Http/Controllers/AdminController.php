@@ -132,7 +132,6 @@ class AdminController extends Controller
     public function edit_season(Request $request) {
         $seasons = $request->input('seasons');
 
-        // Update the number field of each season
         foreach ($seasons as $season) {
             $seasonModel = Season::find($season['id']);
             $seasonModel->number = $season['number'];
@@ -140,5 +139,19 @@ class AdminController extends Controller
         }
 
         return redirect()->back();
+    }
+
+    public function download_logs() {
+        /**
+        * Скачивание логов сервера
+        *
+        * return скачивание файла 'laravel.log'
+        */
+        $logfile = storage_path('logs/laravel.log');
+        if (file_exists($logfile)) {
+            return response()->download($logfile, 'laravel.log');
+        } else {
+            return redirect()->back()->with('success', 'Файл логов не найден');
+        }
     }
 }
