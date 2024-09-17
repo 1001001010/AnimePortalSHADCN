@@ -37,7 +37,7 @@ export default function RegisterForm() {
             </CardHeader>
             <CardContent className="space-y-2">
                 <div className="space-y-1">
-                    <Label htmlFor="name">Name</Label>
+                    <Label htmlFor="name">Имя</Label>
                     <Input
                         id="name"
                         name="name"
@@ -64,7 +64,7 @@ export default function RegisterForm() {
                     <InputError message={errors.email} className="mt-2" />
                 </div>
                 <div className="space-y-1">
-                    <Label htmlFor="password">Password</Label>
+                    <Label htmlFor="password">Пароль</Label>
                     <Input
                         id="password"
                         type="password"
@@ -78,7 +78,7 @@ export default function RegisterForm() {
                     <InputError message={errors.password} className="mt-2" />
                 </div>
                 <div className="space-y-1">
-                    <Label htmlFor="email">Confirm Password</Label>
+                    <Label htmlFor="email">Подтверждение пароля</Label>
                     <Input
                         id="password_confirmation"
                         type="password"
