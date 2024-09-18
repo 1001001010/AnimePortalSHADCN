@@ -37,7 +37,7 @@ export default function UpdateProfileInformation({
 
             <form onSubmit={submit} className="mt-6 space-y-6">
                 <div>
-                    <Label htmlFor="name">Name</Label>
+                    <Label htmlFor="name">Имя</Label>
                     <Input
                         id="name"
                         className="mt-1 block w-full"

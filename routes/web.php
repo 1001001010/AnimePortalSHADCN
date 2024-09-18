@@ -25,7 +25,7 @@ Route::middleware([ShareRequestMiddleware::class])->group(function () {
             Route::post('friends/status','edit_status')->name('friends.status');
         });
         Route::controller(App\Http\Controllers\SessionController::class)->group(function () {
-            Route::get('/profile/session/{session_id}','destroy_session')->name('profile.session.destroy');
+            Route::post('/profile/session/destroy','destroy_session')->name('session.destroy');
         });
         Route::controller(App\Http\Controllers\FavouriteController::class)->group(function () {
             Route::get('/favourites','favourites')->name('favourite.index');

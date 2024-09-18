@@ -14,7 +14,7 @@ use App\Models\ActiveSession;
 
 class SessionController extends Controller
 {
-    public function destroy_session($session_id) {
-        ActiveSession::where('payload', $session_id)->delete();
+    public function destroy_session(Request $request) {
+        ActiveSession::where('payload', $request->payload)->delete();
     }
 }

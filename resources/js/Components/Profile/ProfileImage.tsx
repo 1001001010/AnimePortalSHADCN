@@ -38,11 +38,11 @@ export default function ProfileImage({
                                 className="rounded"
                             ></img>
                         )}
-                        <Button variant={"outline"} className="w-full">
-                            <Link href={route('profile.edit')}>
-                            Редактировать
-                            </Link>
-                        </Button>
+                        <Link href={route("profile.edit")}>
+                            <Button variant={"outline"} className="w-full">
+                                Редактировать
+                            </Button>
+                        </Link>
                     </div>
                 )}
             </div>

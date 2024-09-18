@@ -24,7 +24,7 @@ export default function Profile({
                                     <h3>{user_info.name}</h3>
                                     <div>
                                         Дата регистрации:
-                                        {`${new Date(
+                                        {` ${new Date(
                                             user_info.created_at
                                         ).toLocaleString()}`}
                                     </div>
@@ -34,7 +34,7 @@ export default function Profile({
                                     <h3>{auth.user.name}</h3>
                                     <div>
                                         Дата регистрации:
-                                        {`${new Date(
+                                        {` ${new Date(
                                             auth.user.created_at
                                         ).toLocaleString()}`}
                                     </div>
