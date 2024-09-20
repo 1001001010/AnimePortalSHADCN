@@ -14,7 +14,7 @@ export default function EpisodeControls({
     previousEpisode?: Episode;
 }>) {
     return (
-        <div className="flex pt-4">
+        <div className="grid grid-cols-3 pt-4">
             {previousEpisode &&
             previousEpisode.seasonNumber &&
             previousEpisode.episode &&
@@ -31,9 +31,9 @@ export default function EpisodeControls({
                     <Button>Предыдущая серия</Button>
                 </Link>
             ) : (
-                <div className="mr-auto" />
+                <div className="w-full" />
             )}
-            <Link href={route("anime", [Anime.unix])} preserveScroll>
+            <Link className="justify-self-center" href={route("anime", [Anime.unix])} preserveScroll>
                 <Button variant="outline">Список всех серий</Button>
             </Link>
             {nextEpisode &&
@@ -51,9 +51,7 @@ export default function EpisodeControls({
                 >
                     <Button>Следующая серия</Button>
                 </Link>
-            ) : (
-                <div className="ml-auto" />
-            )}
+            ) : null}
         </div>
     );
 }
