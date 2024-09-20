@@ -136,7 +136,9 @@ export default function AnimePage({
                         </div>
                     </div>
                     <div className="description p-4 mt-5 max-md:text-center">
-                        {Anime.description}
+                        <p className="break-words">
+                            {Anime.description}
+                        </p>
                     </div>
                     <ScrenesCarousel Anime={Anime} auth={auth} />
                     <Player

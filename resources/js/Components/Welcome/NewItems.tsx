@@ -5,7 +5,7 @@ import {
     CarouselItem,
     CarouselNext,
     CarouselPrevious,
-} from "@/shadcn/ui/carousel";
+} from "@/shadcn/ui/carouselV2";
 import { Button } from "@/shadcn/ui/button";
 import { ChevronsRight } from "lucide-react";
 import { Anime, PageProps } from "@/types";
