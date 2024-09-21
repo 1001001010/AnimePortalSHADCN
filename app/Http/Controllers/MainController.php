@@ -23,9 +23,13 @@ class MainController extends Controller
     }
 
     public function random_anime() {
-        return Redirect::route('anime', [
-            'anime_id' => Anime::get()->random()->unix,
-        ]);;
+        if (count(Anime::get()) > 0) {
+            return Redirect::route('anime', [
+                'anime_id' => Anime::get()->random()->unix,
+            ]);
+        } else {
+            return redirect()->back();
+        }
     }
 
     public function grade(Request $request): RedirectResponse {
