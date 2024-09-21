@@ -4,6 +4,7 @@ export interface User {
     unix: number;
     email: string;
     is_admin: number;
+    email_verified_at: string;
     profile_image: string;
     regist_method: string;
     created_at: string;

@@ -2,6 +2,7 @@ import { FriendShips, PageProps } from "@/types";
 import Header from "@/Components/Header";
 import DeleteUserForm from "./Partials/DeleteUserForm";
 import ActiveSession from "./Partials/ActiveSession";
+import VerifyEmail from "./Partials/VerifiedEmail";
 import UpdatePasswordForm from "./Partials/UpdatePasswordForm";
 import UpdateProfileInformationForm from "./Partials/UpdateProfileInformationForm";
 import UpdateProfilePhoto from "./Partials/UpdateProfilePhoto";
@@ -18,6 +19,7 @@ export default function Edit({
     activeSession: any[];
     friendship: FriendShips;
 }>) {
+    console.log(auth.user.email_verified_at);
     return (
         <>
             <Header auth={auth} friendship={friendship} />
@@ -37,6 +39,11 @@ export default function Edit({
                         {auth.user.regist_method == "default" ? (
                             <div className="mb-4 border rounded-lg shadow w-full p-4">
                                 <UpdatePasswordForm className="mb-4" />
+                            </div>
+                        ) : null}
+                        {auth.user.email_verified_at == null ? (
+                            <div className="mb-4 border rounded-lg shadow w-full p-4">
+                                <VerifyEmail className="mb-4" />
                             </div>
                         ) : null}
                         <div className="mb-4 border rounded-lg shadow w-full p-4">
