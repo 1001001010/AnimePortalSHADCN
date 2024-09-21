@@ -34,7 +34,7 @@ export default function AnalyticsRegistration({
         November: "Ноябрь",
         December: "Декабрь",
     };
-
+    console.log(info);
     const chartData = Object.keys(info.registration.yandex)
         .sort((b, a) => b.localeCompare(a))
         .map((month, index) => {

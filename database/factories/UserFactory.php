@@ -26,9 +26,13 @@ class UserFactory extends Factory
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
+            'is_admin' => false,
+            'unix' => fake()->numberBetween(1682534400, 1698624799),
+            'regist_method' => fake()->randomElement(['default', 'yandex']),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
+            'created_at' => now()->subMonths(random_int(0, 6))->format('Y-m-d H:i:s'),
         ];
     }
 
