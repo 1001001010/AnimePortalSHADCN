@@ -29,8 +29,14 @@ export default function Login({
                     </Card>
                 </TabsContent>
                 <Link
+                    href={route("password.request")}
+                    className="flex items-center justify-center mt-2"
+                >
+                    Забыли пароль?
+                </Link>
+                <Link
                     href={route("index")}
-                    className="flex items-center justify-center mt-4"
+                    className="flex items-center justify-center mt-2"
                 >
                     На главную
                 </Link>
