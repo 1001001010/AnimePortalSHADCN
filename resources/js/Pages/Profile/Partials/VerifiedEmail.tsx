@@ -13,7 +13,19 @@ export default function VerifyEmail({
     const { post, processing } = useForm();
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
-        post(route("verification.send"));
+        post(route("verification.send"), {
+            onSuccess: () => {
+                toast("Проверьте свою почту", {
+                    description:
+                        "Мы отправили вам сообщения для подтверждения Email",
+                });
+            },
+            onError: () => {
+                toast("Ошибка отправки фотографии", {
+                    description: "Попробуйте еще раз позднее",
+                });
+            },
+        });
     };
     return (
         <section className={className}>
@@ -22,13 +34,7 @@ export default function VerifyEmail({
             </header>
             <form onSubmit={submit}>
                 <div className="mt-4 flex items-center justify-between">
-                    <Button
-                        variant={"outline"}
-                        disabled={processing}
-                        onClick={() => {
-                            toast("Письмо было отправлено");
-                        }}
-                    >
+                    <Button variant={"outline"} disabled={processing}>
                         Отправить письмо
                     </Button>
                 </div>

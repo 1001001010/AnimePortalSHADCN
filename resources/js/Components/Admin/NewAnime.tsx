@@ -96,14 +96,15 @@ export default function NewAnimeForm() {
         e.preventDefault();
 
         post(route("NewAnime"), {
-            onFinish: () => {
+            onSuccess: () => {
                 setBlocks([]);
                 setOpen(false);
                 setSelectedFile(null);
                 setPreview(null);
-                toast("Успешно", {
-                    description: "Аниме успешно добавлено",
-                });
+                toast("Аниме успешно добавлено");
+            },
+            onError: () => {
+                toast("Ошибка добавления аниме");
             },
         });
     };

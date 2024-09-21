@@ -13,7 +13,7 @@ export default function UpdateProfilePhoto({
 }) {
     const user = usePage<PageProps>().props.auth.user;
 
-    const { data, setData, post, processing, errors } = useForm({
+    const { data, setData, post, processing, errors, reset } = useForm({
         updated_at: user.updated_at,
         photo: null as File | null,
     });
@@ -37,7 +37,20 @@ export default function UpdateProfilePhoto({
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
 
-        post(route("profile.photo"));
+        post(route("profile.photo"), {
+            onSuccess: () => {
+                toast("Фото профиля успешно обновлено");
+            },
+            onError: (errors) => {
+                toast("Ошибка изменения фото профиля", {
+                    description: "Проверьте формат загружаемого файла!",
+                });
+
+                if (errors.password) {
+                    reset("photo");
+                }
+            },
+        });
     };
 
     return (
@@ -61,17 +74,7 @@ export default function UpdateProfilePhoto({
                 </div>
 
                 <div className="flex items-center gap-4">
-                    <Button
-                        variant="outline"
-                        disabled={processing}
-                        onClick={() => {
-                            const updatedAt = new Date(data.updated_at);
-                            const formattedUpdatedAt =
-                                updatedAt.toLocaleString();
-
-                            toast("Фото профиля успешно изменено");
-                        }}
-                    >
+                    <Button variant="outline" disabled={processing}>
                         Сохранить
                     </Button>
                 </div>

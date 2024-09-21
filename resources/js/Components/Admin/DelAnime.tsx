@@ -38,9 +38,14 @@ export default function DelAnimeForm({
         e.preventDefault();
 
         post(route("DelAnime"), {
-            onFinish: () => {
+            onSuccess: () => {
                 toast("Успешно", {
-                    description: "Аниме успешно добавлено",
+                    description: "Аниме успешно удалено",
+                });
+            },
+            onError: () => {
+                toast("ошибка удаления аниме", {
+                    description: "Ошибка! Попробуйте позже",
                 });
             },
         });

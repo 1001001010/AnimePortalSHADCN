@@ -26,7 +26,14 @@ export default function UpdateProfileInformation({
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
 
-        patch(route("profile.update"));
+        patch(route("profile.update"), {
+            onSuccess: () => {
+                toast("Данные успешно обновлены");
+            },
+            onError: () => {
+                toast("Ошибка обновления данных");
+            },
+        });
     };
 
     return (
@@ -66,19 +73,7 @@ export default function UpdateProfileInformation({
                 </div>
 
                 <div className="flex items-center gap-4">
-                    <Button
-                        variant="outline"
-                        disabled={processing}
-                        onClick={() => {
-                            const updatedAt = new Date(data.updated_at);
-                            const formattedUpdatedAt =
-                                updatedAt.toLocaleString();
-
-                            toast("Изменения успешно сохранены", {
-                                description: `Дата изменения: ${formattedUpdatedAt}`,
-                            });
-                        }}
-                    >
+                    <Button variant="outline" disabled={processing}>
                         Сохранить
                     </Button>
                 </div>
