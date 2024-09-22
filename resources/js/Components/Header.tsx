@@ -81,19 +81,6 @@ export default function Header({
                         <Tooltip>
                             <TooltipTrigger asChild>
                                 <Link
-                                    href="#"
-                                    className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
-                                >
-                                    <ListFilter className="h-5 w-5" />
-                                </Link>
-                            </TooltipTrigger>
-                            <TooltipContent side="right">
-                                Категории
-                            </TooltipContent>
-                        </Tooltip>
-                        <Tooltip>
-                            <TooltipTrigger asChild>
-                                <Link
                                     href={route("anime.random")}
                                     className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
                                 >
@@ -224,13 +211,6 @@ export default function Header({
                                 >
                                     <Bookmark className="h-5 w-5" />
                                     Избранное
-                                </Link>
-                                <Link
-                                    href="#"
-                                    className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
-                                >
-                                    <ListFilter className="h-5 w-5" />
-                                    Категории
                                 </Link>
                                 <Link
                                     href={route("anime.random")}

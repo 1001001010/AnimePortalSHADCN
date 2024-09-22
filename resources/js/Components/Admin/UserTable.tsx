@@ -103,11 +103,18 @@ const columns: ColumnDef<User>[] = [
     {
         accessorKey: "regist_method",
         header: "Метод",
-        cell: ({ row }) => <div>{row.getValue("regist_method")}</div>,
+        cell: ({ row }) => {
+            const registMethod = row.getValue("regist_method");
+            if (registMethod === "yandex") {
+                return <div>Яндекс</div>;
+            } else if (registMethod === "default") {
+                return <div>Форма</div>;
+            }
+        },
     },
     {
         accessorKey: "created_at",
-        header: "Дата",
+        header: "Регистрация",
         cell: ({ row }) => {
             const createdAt: string = row.getValue("created_at");
             const formattedDate = moment(createdAt).format(
