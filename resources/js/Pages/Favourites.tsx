@@ -17,11 +17,11 @@ export default function Favourites({
         <>
             <Header friendship={friendship} auth={auth} />
             <div className="ml-14 ml:ml-0 max-sm:ml-0">
-                <div className="m-4 max-sm:m-1 max-sm:p-1 border rounded-lg shadow">
+                <div className="m-4 p-2 max-sm:m-1 max-sm:p-1 border rounded-lg shadow min-h-36">
                     {favourites.length > 0 ? (
                         <p className="text-center pt-4">Избранные аниме</p>
                     ) : (
-                        <p className="text-center pt-4">
+                        <p className="text-center">
                             Избранные аниме не найдено
                         </p>
                     )}

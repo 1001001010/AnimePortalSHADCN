@@ -125,8 +125,12 @@ const columns: ColumnDef<User>[] = [
     },
     {
         accessorKey: "is_admin",
-        header: "Админ",
-        cell: ({ row }) => <div>{row.getValue("is_admin") ? "Да" : "Нет"}</div>,
+        header: "Роль",
+        cell: ({ row }) => (
+            <div>
+                {row.getValue("is_admin") ? "Администратор" : "Пользователь"}
+            </div>
+        ),
     },
     {
         id: "actions",
