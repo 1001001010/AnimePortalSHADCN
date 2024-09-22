@@ -21,7 +21,7 @@ export default function Profile({
         .toLocaleString("ru-RU", options)
         .replace(" г.", "")
         .replace(".", "");
-    const security = user_info.is_admin == 1 ? "Администратор" : "Пользователь";
+    console.log(user_info);
     return (
         <>
             <Header friendship={friendship} auth={auth} />
@@ -34,16 +34,19 @@ export default function Profile({
                                 <div className="flex flex-col gap-4">
                                     <h3>{user_info.name}</h3>
                                     <p>Регистрация: {formattedDate}</p>
-                                    {auth.user.is_admin === 1 ? (
+                                    {auth.user.is_admin == 1 ? (
                                         <div>
                                             <p>
                                                 <b>Email:</b> {user_info.email}
                                             </p>
                                             <p>
-                                                <b>Права:</b> {security}
+                                                <b>Права: </b>
+                                                {user_info.is_admin === 1
+                                                    ? "Администратор"
+                                                    : "Пользователь"}
                                             </p>
                                             <p>
-                                                <b>Верификация:</b>
+                                                <b>Верификация: </b>
                                                 {user_info.email_verified_at !=
                                                 null
                                                     ? ` ${new Date(
@@ -52,11 +55,11 @@ export default function Profile({
                                                     : "Не верифицирован"}
                                             </p>
                                             <p>
-                                                <b>Способ регистрации:</b>{" "}
+                                                <b>Способ регистрации: </b>
                                                 {user_info.regist_method ===
                                                 "default"
                                                     ? "Форма регистрации"
-                                                    : "Yandex"}
+                                                    : "Яндекс"}
                                             </p>
                                         </div>
                                     ) : null}
@@ -65,7 +68,35 @@ export default function Profile({
                                 <div className="flex flex-col gap-4">
                                     <h3>{auth.user.name}</h3>
                                     <p>Регистрация: {formattedDate}</p>
-                                    <p>Email: {auth.user.email}</p>
+                                    {auth.user.is_admin == 1 ? (
+                                        <div>
+                                            <p>
+                                                <b>Email:</b> {auth.user.email}
+                                            </p>
+                                            <p>
+                                                <b>Права: </b>
+                                                {auth.user.is_admin === 1
+                                                    ? "Администратор"
+                                                    : "Пользователь"}
+                                            </p>
+                                            <p>
+                                                <b>Верификация: </b>
+                                                {auth.user.email_verified_at !=
+                                                null
+                                                    ? ` ${new Date(
+                                                          auth.user.created_at
+                                                      ).toLocaleString()}`
+                                                    : "Не верифицирован"}
+                                            </p>
+                                            <p>
+                                                <b>Способ регистрации: </b>
+                                                {auth.user.regist_method ===
+                                                "default"
+                                                    ? "Форма регистрации"
+                                                    : "Яндекс"}
+                                            </p>
+                                        </div>
+                                    ) : null}
                                 </div>
                             )}
                         </div>

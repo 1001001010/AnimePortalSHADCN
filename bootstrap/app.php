@@ -22,3 +22,12 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withExceptions(function (Exceptions $exceptions) {
         //
     })->create();
+
+$app = Application::getInstance();
+
+$app->register(OwenIt\Auditing\AuditingServiceProvider::class);
+$app->withFacades();
+$app->withEloquent();
+$app->register(Irazasyed\Larasupport\Providers\ArtisanServiceProvider::class);
+$app->configure('audit');
+return $app;

@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\{Anime, Season, Episode, User};
 
-class AdminController extends Controller
-{
+class AdminController extends Controller {
+
     public function index() {
         return Inertia::render('AdminPanel', [
             'Anime'=>Anime::get(),
