@@ -9,7 +9,6 @@ import EpisodeControls from "./EpisodeControls";
 import SeasonEpisodeList from "./SeasonEpisodeList";
 import NewSeasonForm from "@/Components/Admin/NewSeasonForm";
 import NewEpisodeForm from "@/Components/Admin/NewEpisodeForm";
-// import videoUrl from "../../../../public/storage/episode/1725701720.mp4";
 
 export default function Player({
     auth,
@@ -119,65 +118,57 @@ export default function Player({
                                 </div>
                             ) : null}
                             {seasons &&
-                                seasons
-                                    .slice()
-                                    .sort((a, b) => a.number - b.number)
-                                    .map((season: Season, index) => (
-                                        <div key={index}>
-                                            <h1 className="font-bold text-center">
-                                                {season.name
-                                                    ? `Сезон ${season.number} (${season.name})`
-                                                    : `Сезон ${season.number}`}
-                                            </h1>
-                                            <div className="mt-4 grid grid-cols-5 gap-4 max-sm:grid-cols-3 mb-4">
-                                                {season.episodes &&
-                                                    season.episodes
-                                                        .slice()
-                                                        .sort(
-                                                            (a, b) =>
-                                                                a.number -
-                                                                b.number
-                                                        )
-                                                        .map((episode, index) =>
-                                                            currentEpisode &&
-                                                            episode.id ===
-                                                                currentEpisode.id ? (
-                                                                <Button
-                                                                    key={index}
-                                                                >
-                                                                    {
-                                                                        episode.number
-                                                                    }
-                                                                </Button>
-                                                            ) : (
-                                                                <Link
-                                                                    href={route(
-                                                                        "anime",
-                                                                        [
-                                                                            Anime.unix,
+                                seasons.length > 0 &&
+                                seasons.map((season, index) => (
+                                    <div key={index}>
+                                        <h1 className="font-bold text-center">
+                                            {season.name
+                                                ? `Сезон ${season.number} (${season.name})`
+                                                : `Сезон ${season.number}`}
+                                        </h1>
+                                        <div className="mt-4 grid grid-cols-5 gap-4 max-sm:grid-cols-3 mb-4">
+                                            {season.episodes &&
+                                                season.episodes.length > 0 &&
+                                                season.episodes.map(
+                                                    (episode, index) =>
+                                                        currentEpisode &&
+                                                        episode.id ===
+                                                            currentEpisode.id ? (
+                                                            <Button key={index}>
+                                                                {episode &&
+                                                                    episode.number}
+                                                            </Button>
+                                                        ) : (
+                                                            <Link
+                                                                href={route(
+                                                                    "anime",
+                                                                    [
+                                                                        Anime.unix,
+                                                                        season &&
                                                                             season.number,
+                                                                        episode &&
                                                                             episode.number,
-                                                                        ]
-                                                                    )}
-                                                                    key={
-                                                                        episode.id
-                                                                    }
-                                                                    preserveScroll
+                                                                    ]
+                                                                )}
+                                                                key={
+                                                                    episode &&
+                                                                    episode.id
+                                                                }
+                                                                preserveScroll
+                                                            >
+                                                                <Button
+                                                                    className="w-full"
+                                                                    variant="outline"
                                                                 >
-                                                                    <Button
-                                                                        className="w-full"
-                                                                        variant="outline"
-                                                                    >
-                                                                        {
-                                                                            episode.number
-                                                                        }
-                                                                    </Button>
-                                                                </Link>
-                                                            )
-                                                        )}
-                                            </div>
+                                                                    {episode &&
+                                                                        episode.number}
+                                                                </Button>
+                                                            </Link>
+                                                        )
+                                                )}
                                         </div>
-                                    ))}
+                                    </div>
+                                ))}
                         </div>
                     </div>
                 ) : (

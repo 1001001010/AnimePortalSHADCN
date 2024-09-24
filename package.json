@@ -66,6 +66,7 @@
         "sonner": "^1.5.0",
         "tailwind-merge": "^2.3.0",
         "tailwindcss-animate": "^1.0.7",
+        "tus-js-client": "^4.2.3",
         "uuid": "^10.0.0",
         "vaul": "^0.9.1",
         "vite-plugin-require": "^1.2.14",

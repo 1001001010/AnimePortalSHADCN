@@ -8,6 +8,19 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\{IsAdmin, ShareRequestMiddleware};
 use Inertia\Inertia;
+use TusPhp\Tus\Server as TusServer;
+use Illuminate\Support\Facades\Log;
+
+Route::any('/files/{any?}', function () {
+    Log::debug('Маршрут /files вызван с методом: ' . request()->method());
+    Log::debug('Параметры запроса: ' . json_encode(request()->all()));
+    Log::debug('Заголовки запроса: ' . json_encode(request()->headers->all()));
+
+    $server = new TusServer('file');
+    $server->setUploadDir(storage_path('app/ublic/episode'));
+
+    return $server->serve();
+})->where('any', '.*');
 
 Route::middleware([ShareRequestMiddleware::class])->group(function () {
     Route::controller(App\Http\Controllers\MainController::class)->group(function () {
