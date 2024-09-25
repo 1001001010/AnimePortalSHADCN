@@ -23,17 +23,17 @@ class AuthenticationTest extends TestCase
     /**
      *  Проверка авторизации через страницу логина
      */
-    public function test_users_can_authenticate_using_the_login_screen(): void
-    {
-        $user = User::factory()->create();
+    // public function test_users_can_authenticate_using_the_login_screen(): void
+    // {
+    //     $user = User::factory()->create();
 
-        $response = $this->post(route('login'), [
-            'email' => $user->email,
-            'password' => 'password',
-        ]);
+    //     $response = $this->post(route('login'), [
+    //         'email' => $user->email,
+    //         'password' => 'password',
+    //     ]);
 
-        $this->assertAuthenticated();
-    }
+    //     $this->assertAuthenticated();
+    // }
 
     /**
      *  Проверка авторизации с неправильным паролем

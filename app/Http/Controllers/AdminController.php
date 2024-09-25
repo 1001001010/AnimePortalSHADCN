@@ -65,8 +65,6 @@ class AdminController extends Controller {
         $anime->cover = $save_path;
         $anime->screens = $screens_json;
         $anime->save();
-
-        return redirect()->back();
     }
 
     public function new_season($anime_id, Request $request) {

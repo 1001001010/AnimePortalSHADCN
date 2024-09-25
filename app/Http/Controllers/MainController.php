@@ -35,7 +35,7 @@ class MainController extends Controller
     public function grade(Request $request): RedirectResponse {
         $request->validate([
             'anime' => 'required|exists:animes,id',
-            'rating' => 'required|in:1,2,3,4,5',
+            'rating' => 'required|integer|min:1|max:5',
         ]);
 
         Rating::updateOrCreate(
