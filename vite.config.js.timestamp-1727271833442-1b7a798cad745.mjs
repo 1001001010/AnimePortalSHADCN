@@ -1,0 +1,19 @@
+// vite.config.js
+import { defineConfig } from "file:///O:/Projects/AnimePortalSHADCN/node_modules/vite/dist/node/index.js";
+import laravel from "file:///O:/Projects/AnimePortalSHADCN/node_modules/laravel-vite-plugin/dist/index.js";
+import react from "file:///O:/Projects/AnimePortalSHADCN/node_modules/@vitejs/plugin-react/dist/index.mjs";
+import vitePluginRequire from "file:///O:/Projects/AnimePortalSHADCN/node_modules/vite-plugin-require/dist/index.js";
+var vite_config_default = defineConfig({
+  plugins: [
+    vitePluginRequire.default(),
+    laravel({
+      input: "resources/js/app.tsx",
+      refresh: true
+    }),
+    react()
+  ]
+});
+export {
+  vite_config_default as default
+};
+//# sourceMappingURL=data:application/json;base64,ewogICJ2ZXJzaW9uIjogMywKICAic291cmNlcyI6IFsidml0ZS5jb25maWcuanMiXSwKICAic291cmNlc0NvbnRlbnQiOiBbImNvbnN0IF9fdml0ZV9pbmplY3RlZF9vcmlnaW5hbF9kaXJuYW1lID0gXCJPOlxcXFxQcm9qZWN0c1xcXFxBbmltZVBvcnRhbFNIQURDTlwiO2NvbnN0IF9fdml0ZV9pbmplY3RlZF9vcmlnaW5hbF9maWxlbmFtZSA9IFwiTzpcXFxcUHJvamVjdHNcXFxcQW5pbWVQb3J0YWxTSEFEQ05cXFxcdml0ZS5jb25maWcuanNcIjtjb25zdCBfX3ZpdGVfaW5qZWN0ZWRfb3JpZ2luYWxfaW1wb3J0X21ldGFfdXJsID0gXCJmaWxlOi8vL086L1Byb2plY3RzL0FuaW1lUG9ydGFsU0hBRENOL3ZpdGUuY29uZmlnLmpzXCI7aW1wb3J0IHsgZGVmaW5lQ29uZmlnIH0gZnJvbSBcInZpdGVcIjtcbmltcG9ydCBsYXJhdmVsIGZyb20gXCJsYXJhdmVsLXZpdGUtcGx1Z2luXCI7XG5pbXBvcnQgcmVhY3QgZnJvbSBcIkB2aXRlanMvcGx1Z2luLXJlYWN0XCI7XG5pbXBvcnQgdml0ZVBsdWdpblJlcXVpcmUgZnJvbSBcInZpdGUtcGx1Z2luLXJlcXVpcmVcIjtcblxuZXhwb3J0IGRlZmF1bHQgZGVmaW5lQ29uZmlnKHtcbiAgICBwbHVnaW5zOiBbXG4gICAgICAgIHZpdGVQbHVnaW5SZXF1aXJlLmRlZmF1bHQoKSxcbiAgICAgICAgbGFyYXZlbCh7XG4gICAgICAgICAgICBpbnB1dDogXCJyZXNvdXJjZXMvanMvYXBwLnRzeFwiLFxuICAgICAgICAgICAgcmVmcmVzaDogdHJ1ZSxcbiAgICAgICAgfSksXG4gICAgICAgIHJlYWN0KCksXG4gICAgXSxcbn0pO1xuIl0sCiAgIm1hcHBpbmdzIjogIjtBQUErUSxTQUFTLG9CQUFvQjtBQUM1UyxPQUFPLGFBQWE7QUFDcEIsT0FBTyxXQUFXO0FBQ2xCLE9BQU8sdUJBQXVCO0FBRTlCLElBQU8sc0JBQVEsYUFBYTtBQUFBLEVBQ3hCLFNBQVM7QUFBQSxJQUNMLGtCQUFrQixRQUFRO0FBQUEsSUFDMUIsUUFBUTtBQUFBLE1BQ0osT0FBTztBQUFBLE1BQ1AsU0FBUztBQUFBLElBQ2IsQ0FBQztBQUFBLElBQ0QsTUFBTTtBQUFBLEVBQ1Y7QUFDSixDQUFDOyIsCiAgIm5hbWVzIjogW10KfQo=

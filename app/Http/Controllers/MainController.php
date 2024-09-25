@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\{Auth, Redirect};
-use App\Models\{Anime, Friendship, Rating, Favourite, Episode};
+use App\Models\{Anime, Friendship, Rating, Episode};
 use App\Http\Controllers\HelperController;
 use Inertia\Inertia;
 

@@ -121,7 +121,7 @@ export default function Player({
                                 seasons.length > 0 &&
                                 seasons.map((season, index) => (
                                     <div key={index}>
-                                        <h1 className="font-bold text-center">
+                                        <h1 className="font-bold text-center break-words">
                                             {season.name
                                                 ? `Сезон ${season.number} (${season.name})`
                                                 : `Сезон ${season.number}`}

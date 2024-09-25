@@ -14,6 +14,7 @@ import { Label } from "@/shadcn/ui/label";
 import { FormEventHandler } from "react";
 import { useState } from "react";
 import { useForm } from "@inertiajs/react";
+import { toast } from "sonner";
 import {
     Select,
     SelectContent,
@@ -33,7 +34,6 @@ export default function NewEpisodeForm({
         file: null as File | null,
     });
     const [isOpen, setIsOpen] = useState(false);
-
     const csrfToken = document
         .querySelector('meta[name="csrf-token"]')
         ?.getAttribute("content");
@@ -104,17 +104,25 @@ export default function NewEpisodeForm({
         });
     };
 
+    const handleSeasonClick = () => {
+        if (Season.length > 0) {
+            setIsOpen(true);
+        } else {
+            toast("Нет доступных сезонов!", {
+                description: "Сначала добавьте сезон, а потом епизод",
+            });
+        }
+    };
+
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
-            <DialogTrigger asChild>
-                <Button
-                    variant="outline"
-                    className="w-1/2 max-sm:w-full"
-                    onClick={() => setIsOpen(true)}
-                >
-                    Добавить Эпизод
-                </Button>
-            </DialogTrigger>
+            <Button
+                variant="outline"
+                className="w-1/2 max-sm:w-full"
+                onClick={handleSeasonClick}
+            >
+                Добавить Эпизод
+            </Button>
             <form onSubmit={submit} encType="multipart/form-data">
                 <DialogContent className="sm:max-w-[425px]">
                     <DialogHeader>

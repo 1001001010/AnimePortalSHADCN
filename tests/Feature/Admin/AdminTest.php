@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Models\User;
+use App\Models\{User, Anime};
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -88,6 +88,9 @@ class AdminTest extends TestCase
 
         $response->assertStatus(200);
     }
+    /**
+     * Создание аниме пользователем, не являющимся администратором
+     */
     public function test_user_cannot_create_new_anime(): void {
         $coverPath = UploadedFile::fake()->image('cover.jpg');
         $screens = [
@@ -116,5 +119,25 @@ class AdminTest extends TestCase
         ];
         $response = $this->actingAs($user)->post('/admin/anime/new', $payload);
         $response->assertStatus(404);
+    }
+    /**
+     * Удаление аниме с неккоректными значениями
+     */
+    public function test_admin_cannot_be_delete_invalid_anime(): void {
+        $user = User::factory()->admin()->create();
+
+        $invalidRatings = ['abc', null, '0', 0];
+
+        foreach ($invalidRatings as $rating) {
+            $response = $this
+                ->actingAs($user)
+                ->from(route('adminPanel.index'))
+                ->post(route('DelAnime'), [
+                    'anime_id'
+                ]);
+
+            $response->assertRedirect();
+            $response->assertSessionHasErrors('anime_id');
+        }
     }
 }
