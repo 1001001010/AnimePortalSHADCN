@@ -87,7 +87,7 @@ class AdminController extends Controller {
 
     public function del_anime(Request $request) {
         $request->validate([
-            'anime_id' => 'required|integer',
+            'anime_id' => 'required|integer|min:1',
         ]);
 
         Anime::find($request->anime_id)->delete();

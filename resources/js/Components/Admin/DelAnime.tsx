@@ -44,7 +44,7 @@ export default function DelAnimeForm({
                 });
             },
             onError: () => {
-                toast("ошибка удаления аниме", {
+                toast("Ошибка удаления", {
                     description: "Ошибка! Попробуйте позже",
                 });
             },
@@ -74,8 +74,10 @@ export default function DelAnimeForm({
                                                       (anime) =>
                                                           anime.name === value
                                                   )?.name
+                                                : data.anime_id
+                                                ? ""
                                                 : "Выберите аниме"}
-                                            <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                                            <ChevronsUpDown className="ml-2 h-4 w-0 shrink-0 opacity-50" />
                                         </Button>
                                     </PopoverTrigger>
                                     <PopoverContent className=" p-0">
