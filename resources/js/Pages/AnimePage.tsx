@@ -17,7 +17,7 @@ import Player from "@/Components/Anime/Player";
 import { Link } from "@inertiajs/react";
 import { Button } from "@/shadcn/ui/button";
 import Rating from "@/Components/Anime/Rating";
-import EditAnimeInfo from "@/Components/Anime/EditAnimeInfo";
+import EditAnimeInfo from "@/Components/Admin/EditAnimeInfo";
 import { type, status } from "@/app";
 
 export default function AnimePage({
