@@ -17,6 +17,8 @@ import Player from "@/Components/Anime/Player";
 import { Link } from "@inertiajs/react";
 import { Button } from "@/shadcn/ui/button";
 import Rating from "@/Components/Anime/Rating";
+import EditAnimeInfo from "@/Components/Anime/EditAnimeInfo";
+import { type, status } from "@/app";
 
 export default function AnimePage({
     auth,
@@ -46,19 +48,6 @@ export default function AnimePage({
     previousEpisode?: Episode;
     Host: String;
 }>) {
-    // Статус
-    const type = [
-        { status: "TV", text: "ТВ Сериал" },
-        { status: "Film", text: "Фильм" },
-        { status: "speshl", text: "Спешл" },
-        { status: "OVA", text: "OVA" },
-    ];
-
-    const status = [
-        { status: "ongoing", text: "Онгоинг" },
-        { status: "came_out", text: "Вышел" },
-        { status: "preview", text: "Анонс" },
-    ];
     const statusText = status.find((s) => s.status === Anime.status)?.text;
     const typeText = type.find((s) => s.status === Anime.type)?.text;
 
@@ -110,6 +99,9 @@ export default function AnimePage({
                                     auth={auth}
                                     rating={userRating}
                                 />
+                                {auth.user?.is_admin ? (
+                                    <EditAnimeInfo auth={auth} anime={Anime} />
+                                ) : null}
                             </div>
                         </div>
                         <div className="text-gray-900 dark:text-gray-100 flex flex-col w-3/12 max-md:w-full max-xl:w-full gap-2 p-4">
