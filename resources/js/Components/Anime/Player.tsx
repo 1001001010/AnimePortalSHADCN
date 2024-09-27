@@ -31,6 +31,7 @@ export default function Player({
         `${Host}:5173/storage/app/public/` + currentEpisode?.video
     }`;
     const videoUrl = require(file);
+    console.log(videoUrl);
     // Параметры плеера
     const plyrProps = {
         source: {

@@ -95,7 +95,6 @@ class AdminController extends Controller {
     }
 
     public function new_episode(Request $request) {
-        dd($request);
         // $validated = $request->validate([
         //     'season_id' => 'required|integer|exists:seasons,id',
         //     'file' => 'required|mimes:mp4'
