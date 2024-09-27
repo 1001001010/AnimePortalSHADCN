@@ -4,6 +4,7 @@ import { Link } from "@inertiajs/react";
 import type { Anime, Episode } from "@/types";
 
 export default function EpisodeControls({
+    auth,
     Anime,
     nextEpisode,
     previousEpisode,
@@ -14,44 +15,59 @@ export default function EpisodeControls({
     previousEpisode?: Episode;
 }>) {
     return (
-        <div className="grid grid-cols-3 pt-4">
-            {previousEpisode &&
-            previousEpisode.seasonNumber &&
-            previousEpisode.episode &&
-            previousEpisode.episode.number ? (
+        <>
+            <div className="grid grid-cols-3 py-4">
+                {previousEpisode &&
+                previousEpisode.seasonNumber &&
+                previousEpisode.episode &&
+                previousEpisode.episode.number ? (
+                    <Link
+                        href={route("anime", [
+                            Anime.unix,
+                            previousEpisode?.seasonNumber,
+                            previousEpisode?.episode?.number,
+                        ])}
+                        preserveScroll
+                        className="mr-auto"
+                    >
+                        <Button>Предыдущая серия</Button>
+                    </Link>
+                ) : (
+                    <div className="w-full" />
+                )}
                 <Link
-                    href={route("anime", [
-                        Anime.unix,
-                        previousEpisode?.seasonNumber,
-                        previousEpisode?.episode?.number,
-                    ])}
+                    className="justify-self-center"
+                    href={route("anime", [Anime.unix])}
                     preserveScroll
-                    className="mr-auto"
                 >
-                    <Button>Предыдущая серия</Button>
+                    <Button variant="outline">Список всех серий</Button>
                 </Link>
-            ) : (
-                <div className="w-full" />
-            )}
-            <Link className="justify-self-center" href={route("anime", [Anime.unix])} preserveScroll>
-                <Button variant="outline">Список всех серий</Button>
-            </Link>
-            {nextEpisode &&
-            nextEpisode.seasonNumber &&
-            nextEpisode.episode &&
-            nextEpisode.episode.number ? (
-                <Link
-                    href={route("anime", [
-                        Anime.unix,
-                        nextEpisode?.seasonNumber,
-                        nextEpisode?.episode?.number,
-                    ])}
-                    preserveScroll
-                    className="ml-auto"
-                >
-                    <Button>Следующая серия</Button>
-                </Link>
+                {nextEpisode &&
+                nextEpisode.seasonNumber &&
+                nextEpisode.episode &&
+                nextEpisode.episode.number ? (
+                    <Link
+                        href={route("anime", [
+                            Anime.unix,
+                            nextEpisode?.seasonNumber,
+                            nextEpisode?.episode?.number,
+                        ])}
+                        preserveScroll
+                        className="ml-auto"
+                    >
+                        <Button>Следующая серия</Button>
+                    </Link>
+                ) : null}
+            </div>
+            {auth.user?.is_admin ? (
+                <div>
+                    <hr />
+                    <div className="flex flex-start gap-4 pt-4">
+                        <Button variant="outline">Удалить эпизод</Button>
+                        <Button variant="outline">Редактировать номер</Button>
+                    </div>
+                </div>
             ) : null}
-        </div>
+        </>
     );
 }

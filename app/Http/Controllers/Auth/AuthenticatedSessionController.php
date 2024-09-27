@@ -58,10 +58,16 @@ class AuthenticatedSessionController extends Controller
         return redirect('/');
     }
 
+    /**
+     * Редирект на авторизацию яндекса.
+     */
     public function RedirectYandex(): RedirectResponse {
         return Socialite::driver('yandex')->redirect();
     }
 
+    /**
+     *получаем токен яндекса
+     */
     public function CallbackYandex() {
         $user = Socialite::driver('yandex')->user();
         $info = $this->RegOrUser($user);
@@ -72,6 +78,9 @@ class AuthenticatedSessionController extends Controller
         }
     }
 
+    /**
+     * Зареган ли юзер
+     */
     private function RegOrUser($user) {
         $existingUser = User::where('email', $user->email)->first();
         if (!$existingUser) {

@@ -30,14 +30,21 @@ export default function DelAnimeForm({
     const [open, setOpen] = React.useState(false);
     const [value, setValue] = React.useState("");
 
-    const { data, setData, post, processing, reset, errors } = useForm({
+    const {
+        data,
+        setData,
+        delete: destroy,
+        processing,
+        reset,
+        errors,
+    } = useForm({
         anime_id: 0,
     });
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
 
-        post(route("DelAnime"), {
+        destroy(route("DelAnime"), {
             onSuccess: () => {
                 toast("Успешно", {
                     description: "Аниме успешно удалено",
