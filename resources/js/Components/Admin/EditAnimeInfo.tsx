@@ -37,59 +37,63 @@ export default function EditAnimeInfo({
     auth,
     anime,
 }: PageProps<{ anime: Anime }>) {
-    const { data, setData, post, reset, errors } = useForm({
-        age: "",
-        status: "",
-        name: "",
-        type: "",
-        original: "",
-        studio: "",
-        voice: "",
-        director: "",
-        autor: "",
-        description: "",
+    const { put, setData, post, reset, errors } = useForm({
+        anime_id: anime.id,
+        age: anime.age,
+        status: anime.status,
+        name: anime.name,
+        type: anime.type,
+        original: anime.original,
+        studio: anime.studio,
+        voice: anime.voice,
+        director: anime.director,
+        autor: anime.autor,
+        description: anime.description,
         cover: null as File | null,
         screens: [] as File[],
     });
 
+    const imageDataArray: string[] = JSON.parse(anime.screens);
+
     const [open, setOpen] = React.useState(false);
     const [selectedFile, setSelectedFile] = React.useState<null | File>(null);
     const [preview, setPreview] = React.useState<null | string>(null);
-    // const [blocks, setBlocks] = useState<{ id: number; image: File | null }[]>;
 
-    // const handleFileChange = () => {
-    //     const file = anime.cover;
-    //     if (!file.type.match(/^image\/(png|jpeg|jpg|webp)$/)) {
-    //         alert("Загрузите изображение формата: png, jpeg, jpg, webp");
-    //         return;
-    //     }
-    //     setSelectedFile(file);
-    //     const reader = new FileReader();
-    //     reader.onloadend = () => {
-    //         if (typeof reader.result === "string") {
-    //             setPreview(reader.result);
-    //         }
-    //     };
-    //     reader.readAsDataURL(file);
-    //     setData("cover", file);
-    // };
+    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        if (event.target.files && event.target.files[0]) {
+            const file = event.target.files[0];
+            if (!file.type.match(/^image\/(png|jpeg|jpg|webp)$/)) {
+                alert("Загрузите изображение формата: png, jpeg, jpg, webp");
+                return;
+            }
+            setSelectedFile(file);
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                if (typeof reader.result === "string") {
+                    setPreview(reader.result);
+                }
+            };
+            reader.readAsDataURL(file);
+            setData("cover", file);
+        }
+    };
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
 
-        post(route("NewAnime"), {
+        post(route("anime.edit"), {
             onSuccess: () => {
-                // setBlocks([]);
+                setSelectedFile(null);
                 setOpen(false);
-                // setSelectedFile(null);
-                // setPreview(null);
-                toast("Аниме успешно добавлено");
+                setPreview(null);
+                toast("Аниме успешно обновлено");
             },
             onError: () => {
-                toast("Ошибка добавления аниме");
+                toast("Ошибка изменения аниме");
             },
         });
     };
+
     return (
         <>
             <Dialog>
@@ -99,26 +103,22 @@ export default function EditAnimeInfo({
                 <form onSubmit={submit}>
                     <DialogContent className="max-md:max-h-screen max-md:overflow-y-auto">
                         <DialogHeader>
-                            <DialogTitle>Добавить Аниме</DialogTitle>
+                            <DialogTitle>Редактировать Аниме</DialogTitle>
                         </DialogHeader>
                         <div className="flex justify-around max-md:gap-2">
                             <div className="w-1/2 max-md:w-full max-md:items-center flex flex-col">
-                                {/* {preview ? (
+                                {preview ? (
                                     <img
                                         src={preview}
                                         className="w-full h-full mb-2 mx-auto"
                                     />
                                 ) : (
-                                    <div
-                                        className={`w-full h-full border border-input rounded-lg mb-2 mx-auto ${
-                                            errors.description
-                                                ? "border-red-500"
-                                                : ""
-                                        }`}
+                                    <img
+                                        src={anime.cover}
+                                        className="w-full h-full mb-2 mx-auto"
                                     />
                                 )}
                                 <Input
-                                    value={anime.cover}
                                     id="cover"
                                     name="cover"
                                     type="file"
@@ -128,11 +128,11 @@ export default function EditAnimeInfo({
                                     className={`custom-file-input2 ${
                                         errors.cover ? "border-red-500" : ""
                                     }`}
-                                /> */}
+                                />
                             </div>
                             <div>
                                 <Input
-                                    value={anime.name}
+                                    defaultValue={anime.name}
                                     id="name"
                                     name="name"
                                     type="text"
@@ -146,7 +146,7 @@ export default function EditAnimeInfo({
                                 />
                                 <div className="flex flex-col mt-2 gap-2">
                                     <Select
-                                        value={anime.type}
+                                        defaultValue={anime.type}
                                         onValueChange={(value) =>
                                             setData("type", value)
                                         }
@@ -185,7 +185,7 @@ export default function EditAnimeInfo({
                                     </Select>
 
                                     <Select
-                                        value={anime.status}
+                                        defaultValue={anime.status}
                                         onValueChange={(value) =>
                                             setData("status", value)
                                         }
@@ -220,7 +220,7 @@ export default function EditAnimeInfo({
                                         </SelectContent>
                                     </Select>
                                     <Input
-                                        value={anime.original}
+                                        defaultValue={anime.original}
                                         id="original"
                                         name="original"
                                         type="text"
@@ -235,7 +235,7 @@ export default function EditAnimeInfo({
                                         }`}
                                     />
                                     <Input
-                                        value={anime.studio}
+                                        defaultValue={anime.studio}
                                         id="studio"
                                         name="studio"
                                         type="text"
@@ -250,7 +250,7 @@ export default function EditAnimeInfo({
                                         }`}
                                     />
                                     <Select
-                                        value={anime.age}
+                                        defaultValue={anime.age}
                                         onValueChange={(value) =>
                                             setData("age", value)
                                         }
@@ -285,7 +285,7 @@ export default function EditAnimeInfo({
                                         </SelectContent>
                                     </Select>
                                     <Input
-                                        value={anime.voice}
+                                        defaultValue={anime.voice}
                                         id="voice"
                                         name="voice"
                                         type="text"
@@ -298,7 +298,7 @@ export default function EditAnimeInfo({
                                         }`}
                                     />
                                     <Input
-                                        value={anime.director}
+                                        defaultValue={anime.director}
                                         id="director"
                                         name="director"
                                         type="text"
@@ -313,7 +313,7 @@ export default function EditAnimeInfo({
                                         }`}
                                     />
                                     <Input
-                                        value={anime.autor}
+                                        defaultValue={anime.autor}
                                         id="autor"
                                         name="autor"
                                         type="text"
@@ -329,7 +329,7 @@ export default function EditAnimeInfo({
                             </div>
                         </div>
                         <Textarea
-                            value={anime.description}
+                            defaultValue={anime.description}
                             placeholder="Описание"
                             name="description"
                             onChange={(e) =>
@@ -339,7 +339,7 @@ export default function EditAnimeInfo({
                                 errors.description ? "border-red-500" : ""
                             }`}
                         />
-                        {/* <div className="flex justify-center">
+                        <div className="flex justify-center">
                             <Carousel
                                 opts={{
                                     align: "start",
@@ -347,55 +347,24 @@ export default function EditAnimeInfo({
                                 className="w-full max-w-sm"
                             >
                                 <CarouselContent>
-                                    {blocks.map((block, index) => (
+                                    {imageDataArray.map((screen, index) => (
                                         <CarouselItem
-                                            key={block.id}
+                                            key={index}
                                             className="md:basis-1/2 lg:basis-1/3"
                                         >
                                             <div className="p-1">
-                                                {block.image ? (
-                                                    <img
-                                                        src={URL.createObjectURL(
-                                                            block.image
-                                                        )}
-                                                        alt="Загруженное изображение"
-                                                    />
-                                                ) : (
-                                                    <Card>
-                                                        <CardContent className="flex aspect-square items-center justify-center p-6 h-full">
-                                                            <span className="text-3xl font-semibold">
-                                                                {index + 1}
-                                                            </span>
-                                                        </CardContent>
-                                                    </Card>
-                                                )}
+                                                <img
+                                                    src={screen}
+                                                    alt="Загруженное изображение"
+                                                />
                                             </div>
                                         </CarouselItem>
                                     ))}
-                                    <CarouselItem className="md:basis-1/2 lg:basis-1/3 h-full">
-                                        <div className="p-1 max-sm:p-0">
-                                            <Card>
-                                                <Input
-                                                    type="file"
-                                                    multiple
-                                                    accept="image/*"
-                                                    onChange={
-                                                        handleScreenChange
-                                                    }
-                                                    className={`custom-file-input2 ${
-                                                        errors.description
-                                                            ? "border-red-500"
-                                                            : ""
-                                                    }`}
-                                                />
-                                            </Card>
-                                        </div>
-                                    </CarouselItem>
                                 </CarouselContent>
                                 <CarouselPrevious />
                                 <CarouselNext />
                             </Carousel>
-                        </div> */}
+                        </div>
                         <DialogFooter>
                             <Button onClick={submit}>Сохранить</Button>
                         </DialogFooter>

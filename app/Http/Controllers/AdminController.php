@@ -152,4 +152,60 @@ class AdminController extends Controller {
             return redirect()->back()->with('success', 'Файл логов не найден');
         }
     }
+
+    public function edit_anime(Request $request)
+    {
+        /**
+         * Обновление информации об аниме
+         *
+         */
+        $validated = $request->validate([
+            'anime_id' => 'required|integer|min:1',
+            'age' => 'required|in:0,6,12,16,18',
+            'status' => 'required|in:ongoing,came_out,preview',
+            'name' => 'required|string',
+            'type' => 'required|string',
+            'original' => 'required|string',
+            'studio' => 'required|string',
+            'voice' => 'required|string',
+            'director' => 'required|string',
+            'autor' => 'required|string',
+            'description' => 'required|string',
+            'cover' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+        $anime = Anime::find($validated['anime_id']);
+
+        // Обновляем поля, которые были изменены
+        $fields = [
+            'age',
+            'status',
+            'name',
+            'type',
+            'original',
+            'studio',
+            'voice',
+            'director',
+            'autor',
+            'description',
+        ];
+
+        foreach ($fields as $field) {
+            if ($request->has($field) && $request->input($field) !== $anime->{$field}) {
+                $anime->{$field} = $request->input($field);
+            }
+        }
+
+        if ($request->hasFile('cover')) {
+            $cover_name = time() . "." . $request->cover->extension();
+            $cover_path = $request->cover->storeAs('public/covers', $cover_name);
+            $save_path = '/storage/covers/' . $cover_name;
+            $anime->cover = $save_path;
+            $anime->save();
+        }
+
+        $anime->save();
+
+        return redirect()->back();
+    }
 }

@@ -51,6 +51,7 @@ Route::middleware([ShareRequestMiddleware::class])->group(function () {
         Route::controller(App\Http\Controllers\AdminController::class)->group(function () {
             Route::get('/admin', 'index')->name('adminPanel.index');
             Route::post('/admin/anime/new', 'new_anime')->name('NewAnime');
+            Route::post('/admin/anime/edit', 'edit_anime')->name('anime.edit');
             Route::delete('/admin/anime/delete', 'del_anime')->name('DelAnime');
             Route::post('/admin/{anime_id}/season', 'new_season')->whereNumber('anime_id')->name('NewSeason');
             Route::post('/admin/season/edit', 'edit_season')->name('EditSeason');
