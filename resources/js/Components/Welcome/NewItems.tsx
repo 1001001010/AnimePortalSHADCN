@@ -5,12 +5,10 @@ import {
     CarouselItem,
     CarouselNext,
     CarouselPrevious,
-} from "@/shadcn/ui/carouselV2";
+} from "@/shadcn/ui/carousel";
 import { Button } from "@/shadcn/ui/button";
-import { ChevronsRight } from "lucide-react";
 import { Anime, PageProps } from "@/types";
 import { Link } from "@inertiajs/react";
-import CardMore from "./CardMore";
 
 export default function NewItems({
     auth,
@@ -19,7 +17,9 @@ export default function NewItems({
     return (
         <div>
             <header>
-                <h2 className="text-lg font-medium pb-3 max-lg:mx-10">Новинки</h2>
+                <h2 className="text-lg font-medium pb-3 max-lg:mx-10">
+                    Новинки
+                </h2>
             </header>
             <div className="flex justify-center max-lg:mx-10 min-h-60">
                 <Carousel

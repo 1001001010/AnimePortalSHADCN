@@ -5,7 +5,7 @@ import type { Anime, Season } from "@/types";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 import { useState } from "react";
 import NewSeasonForm from "@/Components/Admin/NewSeasonForm";
-import NewEpisodeForm from "@/Components/Admin/NewEpisodeForm";
+import NewEpisodeForm from "@/Components/Admin/NewEpisode";
 import { PencilLine } from "lucide-react";
 
 export default function SeasonEpisodeList({

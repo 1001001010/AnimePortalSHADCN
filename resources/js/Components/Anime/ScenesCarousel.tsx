@@ -40,7 +40,7 @@ export default function ScrenesCarousel({
                                             <CardContent className="flex aspect-ratio-1/1 items-center justify-center p-2">
                                                 <img
                                                     src={item}
-                                                    alt="Кадры"
+                                                    alt=""
                                                     className="object-cover"
                                                 />
                                             </CardContent>

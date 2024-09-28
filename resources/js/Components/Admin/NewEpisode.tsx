@@ -51,8 +51,8 @@ export default function NewEpisodeForm({
             },
         });
     };
-
-    const handleSeasonClick = () => {
+    const handleSeasonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault();
         if (Season.length > 0) {
             setIsOpen(true);
         } else {

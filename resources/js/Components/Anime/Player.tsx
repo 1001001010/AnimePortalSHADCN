@@ -8,7 +8,7 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import EpisodeControls from "./EpisodeControls";
 import SeasonEpisodeList from "./SeasonEpisodeList";
 import NewSeasonForm from "@/Components/Admin/NewSeasonForm";
-import NewEpisodeForm from "@/Components/Admin/NewEpisodeForm";
+import NewEpisodeForm from "@/Components/Admin/NewEpisode";
 
 export default function Player({
     auth,

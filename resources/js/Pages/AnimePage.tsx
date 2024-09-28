@@ -17,8 +17,21 @@ import Player from "@/Components/Anime/Player";
 import { Link } from "@inertiajs/react";
 import { Button } from "@/shadcn/ui/button";
 import Rating from "@/Components/Anime/Rating";
-import EditAnimeInfo from "@/Components/Admin/EditAnimeInfo";
-import { type, status } from "@/app";
+import EditAnimeInfo from "@/Components/Admin/EditAnime";
+
+// Статус
+export const type = [
+    { status: "TV", text: "ТВ Сериал" },
+    { status: "Film", text: "Фильм" },
+    { status: "speshl", text: "Спешл" },
+    { status: "OVA", text: "OVA" },
+];
+
+export const status = [
+    { status: "ongoing", text: "Онгоинг" },
+    { status: "came_out", text: "Вышел" },
+    { status: "preview", text: "Анонс" },
+];
 
 export default function AnimePage({
     auth,

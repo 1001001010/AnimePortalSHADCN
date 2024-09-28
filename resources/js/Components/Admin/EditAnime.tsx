@@ -31,7 +31,20 @@ import { Textarea } from "@/shadcn/ui/textarea";
 import { toast } from "sonner";
 import { Anime, PageProps } from "@/types";
 import { useForm } from "@inertiajs/react";
-import { type, status } from "@/app";
+
+// Статус
+const type = [
+    { status: "TV", text: "ТВ Сериал" },
+    { status: "Film", text: "Фильм" },
+    { status: "speshl", text: "Спешл" },
+    { status: "OVA", text: "OVA" },
+];
+
+const status = [
+    { status: "ongoing", text: "Онгоинг" },
+    { status: "came_out", text: "Вышел" },
+    { status: "preview", text: "Анонс" },
+];
 
 export default function EditAnimeInfo({
     auth,
@@ -55,7 +68,7 @@ export default function EditAnimeInfo({
 
     const imageDataArray: string[] = JSON.parse(anime.screens);
 
-    const [open, setOpen] = React.useState(false);
+    const [isOpen, setIsOpen] = React.useState(false);
     const [selectedFile, setSelectedFile] = React.useState<null | File>(null);
     const [preview, setPreview] = React.useState<null | string>(null);
 
@@ -83,8 +96,8 @@ export default function EditAnimeInfo({
 
         post(route("anime.edit"), {
             onSuccess: () => {
+                setIsOpen(false);
                 setSelectedFile(null);
-                setOpen(false);
                 setPreview(null);
                 toast("Аниме успешно обновлено");
             },
@@ -96,9 +109,11 @@ export default function EditAnimeInfo({
 
     return (
         <>
-            <Dialog>
+            <Dialog open={isOpen} onOpenChange={setIsOpen}>
                 <DialogTrigger asChild>
-                    <Button variant="outline">Редактировать</Button>
+                    <Button variant="outline" onClick={() => setIsOpen(true)}>
+                        Редактировать
+                    </Button>
                 </DialogTrigger>
                 <form onSubmit={submit}>
                     <DialogContent className="max-md:max-h-screen max-md:overflow-y-auto">

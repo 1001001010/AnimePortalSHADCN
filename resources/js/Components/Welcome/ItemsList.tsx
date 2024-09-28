@@ -12,7 +12,6 @@ import {
 } from "@/shadcn/ui/select";
 import { Anime, PageProps } from "@/types";
 import ItemCard from "../Anime/ItemCard";
-import { Button } from "@/shadcn/ui/button";
 import { FormEventHandler, useState } from "react";
 import { useForm } from "@inertiajs/react";
 
@@ -97,7 +96,7 @@ export default function ItemsList({
                     </div>
                 </div>
                 <form
-                    className="p-2 text-gray-900 dark:text-gray-100 w-full h-min md:w-1/3 border rounded-lg"
+                    className="p-2 text-gray-900 dark:text-gray-100 w-full h-min md:w-1/3 border rounded-lg mt-11"
                     onSubmit={filter}
                 >
                     <div className="grid w-full items-center gap-2 p-2">
