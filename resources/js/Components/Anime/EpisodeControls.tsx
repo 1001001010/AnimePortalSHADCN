@@ -2,11 +2,13 @@ import { PageProps } from "@/types";
 import { Button } from "@/shadcn/ui/button";
 import { Link } from "@inertiajs/react";
 import type { Anime, Episode } from "@/types";
+import DeleteEpisode from "../Admin/DeleteEpisode";
 
 export default function EpisodeControls({
     auth,
     Anime,
     nextEpisode,
+    currentEpisode,
     previousEpisode,
 }: PageProps<{
     Anime: Anime;
@@ -63,8 +65,11 @@ export default function EpisodeControls({
                 <div>
                     <hr />
                     <div className="flex flex-start gap-4 pt-4">
-                        <Button variant="outline">Удалить эпизод</Button>
-                        <Button variant="outline">Редактировать номер</Button>
+                        <DeleteEpisode
+                            auth={auth}
+                            anime={Anime}
+                            currentEpisode={currentEpisode}
+                        />
                     </div>
                 </div>
             ) : null}

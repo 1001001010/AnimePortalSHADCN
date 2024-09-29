@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Illuminate\Http\RedirectResponse;
 use App\Models\{Anime, Season, Episode, User};
 
 class AdminController extends Controller {
@@ -153,8 +154,7 @@ class AdminController extends Controller {
         }
     }
 
-    public function edit_anime(Request $request)
-    {
+    public function edit_anime(Request $request) : RedirectResponse {
         /**
          * Обновление информации об аниме
          *
@@ -206,6 +206,24 @@ class AdminController extends Controller {
 
         $anime->save();
 
-        return redirect()->back();
+        return back();
+    }
+
+    public function episode_delete(Request $request) : RedirectResponse {
+        $episode = Episode::with('season')->findOrFail($request->episode_id);
+        $anime_info = Anime::find($episode->season->anime_id);
+        $next_episodes = Episode::where('season_id', $episode->season->id)->where('number', '>', $episode->number)->get();
+        $episode->delete();
+        if (count($next_episodes) > 0) {
+            foreach ($next_episodes as $next_episode) {
+                $next_episode->number -= 1;
+                $next_episode->save();
+            }
+            return redirect()->back();
+        } else {
+            return redirect(route('anime', [
+                'anime_id' => $anime_info->unix
+            ]));
+        }
     }
 }
