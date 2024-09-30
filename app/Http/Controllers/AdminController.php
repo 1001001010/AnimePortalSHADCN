@@ -86,7 +86,7 @@ class AdminController extends Controller {
         return redirect()->back();
     }
 
-    public function del_anime(Request $request) {
+    public function anime_delete(Request $request) {
         $request->validate([
             'anime_id' => 'required|integer|min:1',
         ]);
@@ -96,10 +96,10 @@ class AdminController extends Controller {
     }
 
     public function new_episode(Request $request) {
-        // $validated = $request->validate([
-        //     'season_id' => 'required|integer|exists:seasons,id',
-        //     'file' => 'required|mimes:mp4'
-        // ]);
+        $validated = $request->validate([
+            'season_id' => 'required|integer|exists:seasons,id',
+            'file' => 'required|mimes:mp4'
+        ]);
 
         $name = time(). "." . $request->file->extension();
         $destination = 'public/episode';
