@@ -94,8 +94,8 @@ export default function Player({
         <>
             <DragDropContext onDragEnd={onDragEnd}>
                 {currentEpisode ? (
-                    <div className="m-4 border rounded-lg shadow flex justify-between max-md:flex-col max-md:items-center max-md:p-4">
-                        <div className="m-4 w-1/2 max-md:w-full max-md:mb-4">
+                    <div className="m-4 border rounded-lg shadow flex justify-between max-xl:flex-col max-xl:items-center max-xl:p-4">
+                        <div className="m-4 w-1/2 max-xl:w-full max-xl:mb-4">
                             <div id="player">
                                 <Plyr {...plyrProps} />
                                 <EpisodeControls
@@ -107,9 +107,9 @@ export default function Player({
                                 />
                             </div>
                         </div>
-                        <div className="m-4 p-4 w-1/2 border rounded-lg shadow max-md:flex-col max-md:items-center max-md:p-4 max-md:w-full">
+                        <div className="m-4 p-4 w-1/2 border rounded-lg shadow max-xl:p-4 max-xl:w-full">
                             {auth.user && auth.user.is_admin === 1 ? (
-                                <div className="flex justify-between gap-4 pb-3 max-sm:justify-center max-sm:w-full">
+                                <div className="flex justify-between gap-4 pb-3 max-xl:justify-center">
                                     <NewSeasonForm Anime={Anime} auth={auth} />
                                     <NewEpisodeForm
                                         Anime={Anime}

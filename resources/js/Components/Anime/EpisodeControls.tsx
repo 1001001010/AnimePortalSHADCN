@@ -18,7 +18,7 @@ export default function EpisodeControls({
 }>) {
     return (
         <>
-            <div className="grid grid-cols-3 py-4">
+            <div className="grid grid-cols-3 py-4 max-md:grid-cols-1 max-md:gap-3">
                 {previousEpisode &&
                 previousEpisode.seasonNumber &&
                 previousEpisode.episode &&
@@ -30,19 +30,23 @@ export default function EpisodeControls({
                             previousEpisode?.episode?.number,
                         ])}
                         preserveScroll
-                        className="mr-auto"
+                        className="mr-auto max-md:w-full"
                     >
-                        <Button>Предыдущая серия</Button>
+                        <Button className="max-md:w-full">
+                            Предыдущая серия
+                        </Button>
                     </Link>
                 ) : (
                     <div className="w-full" />
                 )}
                 <Link
-                    className="justify-self-center"
+                    className="justify-self-center max-md:w-full"
                     href={route("anime", [Anime.unix])}
                     preserveScroll
                 >
-                    <Button variant="outline">Список всех серий</Button>
+                    <Button variant="outline" className="max-md:w-full">
+                        Список всех серий
+                    </Button>
                 </Link>
                 {nextEpisode &&
                 nextEpisode.seasonNumber &&
@@ -55,9 +59,11 @@ export default function EpisodeControls({
                             nextEpisode?.episode?.number,
                         ])}
                         preserveScroll
-                        className="ml-auto"
+                        className="ml-auto max-md:w-full"
                     >
-                        <Button>Следующая серия</Button>
+                        <Button className="max-md:w-full">
+                            Следующая серия
+                        </Button>
                     </Link>
                 ) : null}
             </div>
