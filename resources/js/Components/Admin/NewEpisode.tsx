@@ -66,7 +66,7 @@ export default function NewEpisodeForm({
             <DialogTrigger asChild>
                 <Button
                     variant="outline"
-                    className="w-1/2"
+                    className="w-1/2 max-sm:w-full"
                     onClick={handleSeasonClick}
                 >
                     Добавить Эпизод
