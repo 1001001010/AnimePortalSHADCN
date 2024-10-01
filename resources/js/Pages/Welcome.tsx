@@ -1,7 +1,9 @@
+"use client";
 import { Anime, FriendShips, PageProps } from "@/types";
 import Header from "@/Components/Header";
 import NewItems from "@/Components/Welcome/NewItems";
 import ItemsList from "@/Components/Welcome/ItemsList";
+import ChatSupport from "@/shadcn/ui/chat/chat";
 
 export default function Welcome({
     auth,
@@ -30,6 +32,7 @@ export default function Welcome({
             <div className="ml-14 ml:ml-0 max-sm:ml-0">
                 <div className="m-4 p-4 max-sm:m-1 max-sm:p-1 border rounded-lg shadow">
                     <NewItems Anime={NewAnime} auth={auth} />
+                    <ChatSupport />
                     <ItemsList auth={auth} anime={AllItems} />
                 </div>
             </div>
