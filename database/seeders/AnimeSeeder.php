@@ -13,6 +13,6 @@ class AnimeSeeder extends Seeder
      */
     public function run(): void
     {
-        Anime::factory()->create(); #Аниме
+        // Anime::factory()->create(); #Аниме
     }
 }

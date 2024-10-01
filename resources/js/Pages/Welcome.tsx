@@ -32,7 +32,6 @@ export default function Welcome({
             <div className="ml-14 ml:ml-0 max-sm:ml-0">
                 <div className="m-4 p-4 max-sm:m-1 max-sm:p-1 border rounded-lg shadow">
                     <NewItems Anime={NewAnime} auth={auth} />
-                    <ChatSupport />
                     <ItemsList auth={auth} anime={AllItems} />
                 </div>
             </div>

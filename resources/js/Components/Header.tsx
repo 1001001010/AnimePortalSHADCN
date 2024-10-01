@@ -33,6 +33,7 @@ import {
     ListFilter,
     Bookmark,
 } from "lucide-react";
+import ChatSupport from "@/shadcn/ui/chat/chat";
 
 export default function Header({
     auth,
@@ -160,21 +161,24 @@ export default function Header({
                         </Tooltip>
                     </TooltipProvider>
                     {auth.user ? (
-                        <TooltipProvider>
-                            <Tooltip>
-                                <TooltipTrigger asChild>
-                                    <Link
-                                        href={route("profile.edit")}
-                                        className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
-                                    >
-                                        <Settings className="h-5 w-5" />
-                                    </Link>
-                                </TooltipTrigger>
-                                <TooltipContent side="right">
-                                    Настройки
-                                </TooltipContent>
-                            </Tooltip>
-                        </TooltipProvider>
+                        <>
+                            <TooltipProvider>
+                                <Tooltip>
+                                    <TooltipTrigger asChild>
+                                        <Link
+                                            href={route("profile.edit")}
+                                            className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                                        >
+                                            <Settings className="h-5 w-5" />
+                                        </Link>
+                                    </TooltipTrigger>
+                                    <TooltipContent side="right">
+                                        Настройки
+                                    </TooltipContent>
+                                </Tooltip>
+                            </TooltipProvider>
+                            <ChatSupport />
+                        </>
                     ) : null}
                 </nav>
             </aside>
