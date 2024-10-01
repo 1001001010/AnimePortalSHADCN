@@ -220,6 +220,52 @@ export default function ChatSupport() {
                                 <ChatBubbleAvatar src="" fallback="👨🏽" />
                                 <ChatBubbleMessage>Бабах</ChatBubbleMessage>
                             </ChatBubble>
+                            <ChatBubble variant="received">
+                                <ChatBubbleAvatar src="" fallback="🤖" />
+                                <ChatBubbleMessage variant={"received"}>
+                                    Привет!
+                                </ChatBubbleMessage>
+                            </ChatBubble>
+                            <ChatBubble variant="sent">
+                                <ChatBubbleAvatar src="" fallback="👨🏽" />
+                                <ChatBubbleMessage>Бабах</ChatBubbleMessage>
+                            </ChatBubble>
+                            <ChatBubble variant="received">
+                                <ChatBubbleAvatar src="" fallback="🤖" />
+                                <ChatBubbleMessage variant={"received"}>
+                                    Привет!
+                                </ChatBubbleMessage>
+                            </ChatBubble>
+                            <ChatBubble variant="sent">
+                                <ChatBubbleAvatar src="" fallback="👨🏽" />
+                                <ChatBubbleMessage>Бабах</ChatBubbleMessage>
+                            </ChatBubble>
+                            <ChatBubble variant="received">
+                                <ChatBubbleAvatar src="" fallback="🤖" />
+                                <ChatBubbleMessage variant={"received"}>
+                                    Привет!
+                                </ChatBubbleMessage>
+                            </ChatBubble>
+                            <ChatBubble variant="sent">
+                                <ChatBubbleAvatar src="" fallback="👨🏽" />
+                                <ChatBubbleMessage>Бабах</ChatBubbleMessage>
+                            </ChatBubble>
+                            <ChatBubble variant="received">
+                                <ChatBubbleAvatar src="" fallback="🤖" />
+                                <ChatBubbleMessage variant={"received"}>
+                                    Привет!
+                                </ChatBubbleMessage>
+                            </ChatBubble>
+                            <ChatBubble variant="sent">
+                                <ChatBubbleAvatar src="" fallback="👨🏽" />
+                                <ChatBubbleMessage>Бабах1</ChatBubbleMessage>
+                            </ChatBubble>
+                            <ChatBubble variant="received">
+                                <ChatBubbleAvatar src="" fallback="🤖" />
+                                <ChatBubbleMessage variant={"received"}>
+                                    Привет1!
+                                </ChatBubbleMessage>
+                            </ChatBubble>
                             {/* {messages &&
                 messages.map((message, index) => (
                     <ChatBubble
