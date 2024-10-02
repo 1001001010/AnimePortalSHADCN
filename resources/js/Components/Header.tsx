@@ -46,17 +46,8 @@ export default function Header({ auth }: PageProps<{}>) {
         route("logout");
     };
 
-    // window.Echo.channel("notification-displayed")
-    //     // console.log(window.Echo.channel("notification-displayed"));
-    //     .listen("Notification.displayed", (friend_id: any) => {
-    //         console.log("Получены данные:", friend_id);
-    //         // setFriendship(true);
-    //     })
-    //     .error((error: any) => {
-    //         console.error("Ошибка:", error);
-    //     });
     window.Echo.channel("notification-displayed").listen(
-        "Notification.displayed",
+        ".Notification.displayed",
         (e: any) => {
             console.log(e);
         }

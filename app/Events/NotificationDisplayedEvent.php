@@ -9,7 +9,6 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Log;
 
 
 class NotificationDisplayedEvent implements ShouldBroadcastNow
@@ -23,7 +22,6 @@ class NotificationDisplayedEvent implements ShouldBroadcastNow
      */
     public function __construct($friend_id) {
         $this->friend_id = $friend_id;
-        Log::info('NotificationDisplayedEvent triggered with friend_id: ' . $this->friend_id);
     }
 
     /**
