@@ -41,17 +41,40 @@ export default function Header({ auth }: PageProps<{}>) {
     const handleToggleDarkMode = () => {
         document.documentElement.classList.toggle("dark");
     };
+
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
         route("logout");
     };
 
-    window.Echo.channel("notification-displayed").listen(
-        ".Notification.displayed",
-        (e: any) => {
-            console.log(e);
+    useEffect(() => {
+        // Восстановление состояния из localStorage
+        const savedFriendship = localStorage.getItem("friendship");
+        if (savedFriendship) {
+            setFriendship(JSON.parse(savedFriendship));
         }
-    );
+
+        // Подписка на канал уведомлений
+        const channel = window.Echo.channel(
+            `notification-displayed-${auth.user.id}`
+        );
+        channel.listen(".Notification.displayed", (res: any) => {
+            const friend_id: number = res.friend_id;
+            if (auth.user.id == res.friend_id) {
+                setFriendship(true);
+            }
+        });
+
+        // Очистка подписки при размонтировании компонента
+        return () => {
+            channel.stopListening(".Notification.displayed");
+        };
+    }, [auth.user.id]);
+
+    useEffect(() => {
+        // Сохранение состояния в localStorage
+        localStorage.setItem("friendship", JSON.stringify(friendship));
+    }, [friendship]);
 
     return (
         <div className="flex w-full flex-col bg-muted/40">

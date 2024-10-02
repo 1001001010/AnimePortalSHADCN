@@ -28,7 +28,7 @@ export default function Edit({
 
     return (
         <>
-            <Header auth={auth} friendship={friendship} />
+            <Header auth={auth} />
             <div className="ml-14 ml:ml-0 max-sm:ml-0">
                 <div className="m-4 p-2 max-sm:m-1 max-sm:p-1 border rounded-lg shadow min-h-36">
                     {friend_info.length > 0 ? (

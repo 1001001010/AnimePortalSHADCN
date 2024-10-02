@@ -9,6 +9,7 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use App\Models\{Friendship};
 
 
 class NotificationDisplayedEvent implements ShouldBroadcastNow
@@ -20,8 +21,9 @@ class NotificationDisplayedEvent implements ShouldBroadcastNow
     /**
      * Создание нового экземпляра событий
      */
-    public function __construct($friend_id) {
-        $this->friend_id = $friend_id;
+    public function __construct(Friendship $friendship) {
+        $this->friend_id = $friendship->friend_id;
+        $this->user_id = $friendship->user_id;
     }
 
     /**
@@ -31,7 +33,7 @@ class NotificationDisplayedEvent implements ShouldBroadcastNow
      */
     public function broadcastOn(): array {
         return [
-            new Channel('notification-displayed'),
+            new Channel('notification-displayed-' . $this->friend_id),
         ];
     }
 
