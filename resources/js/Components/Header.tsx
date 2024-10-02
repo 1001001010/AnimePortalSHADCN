@@ -2,7 +2,7 @@ import { FriendShips, PageProps } from "../types";
 import { Link } from "@inertiajs/react";
 import { Button } from "@/shadcn/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/shadcn/ui/sheet";
-import { FormEventHandler } from "react";
+import { FormEventHandler, useEffect, useState } from "react";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -35,10 +35,9 @@ import {
 } from "lucide-react";
 import ChatSupport from "@/shadcn/ui/chat/chat";
 
-export default function Header({
-    auth,
-    friendship,
-}: PageProps<{ friendship: FriendShips }>) {
+export default function Header({ auth }: PageProps<{}>) {
+    const [friendship, setFriendship] = useState(false);
+
     const handleToggleDarkMode = () => {
         document.documentElement.classList.toggle("dark");
     };
@@ -47,6 +46,16 @@ export default function Header({
         route("logout");
     };
 
+    window.Echo.channel("notification-displayed")
+        .listen(".notification-displayed", (e: any) => {
+            console.log("Получены данные:", e);
+            // Обработка полученных данных
+            setFriendship(true);
+        })
+        .error((error: any) => {
+            console.error("Ошибка:", error);
+            // Обработка ошибок
+        });
     return (
         <div className="flex w-full flex-col bg-muted/40">
             <aside className="fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex">

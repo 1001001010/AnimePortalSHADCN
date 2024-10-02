@@ -19,7 +19,7 @@ export default function Friend({
 }>) {
     return (
         <>
-            <Header friendship={friendship} auth={auth} />
+            <Header auth={auth} />
             <div className="ml-14 ml:ml-0 max-sm:ml-0">
                 <div className="m-4 max-sm:m-1 max-sm:p-1 borderrounded-lg shadow border">
                     <SearchFriends

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NotificationDisplayedEvent;
 use Illuminate\Http\Request;
 use App\Models\{User, Friendship, Friend};
 use Illuminate\Http\RedirectResponse;
@@ -24,24 +25,25 @@ class FriendsController extends Controller
         ]);
     }
 
-    public function add_friends(Request $request): RedirectResponse {
-        $validatedData = $request->validate([
-            'friend_id' => 'required|integer',
-        ]);
+    public function add_friends(Request $request) {
+        // $validatedData = $request->validate([
+        //     'friend_id' => 'required|integer',
+        // ]);
 
-        $user_id = auth()->id ();
+        $user_id = auth()->id();
         $friend_id = $request->input('friend_id');
+        event(new NotificationDisplayedEvent($friend_id));
 
-        if (Friendship::where('user_id', $user_id)->where('friend_id', $friend_id)->exists()) {
-            return redirect()->back()->with('error', 'You are already friends with this user.');
-        }
+        // if (Friendship::where('user_id', $user_id)->where('friend_id', $friend_id)->exists()) {
+        //     return redirect()->back()->with('error', 'You are already friends with this user.');
+        // }
 
-        $friendship = new Friendship();
-        $friendship->user_id = $user_id;
-        $friendship->friend_id = $friend_id;
-        $friendship->save();
+        // $friendship = new Friendship();
+        // $friendship->user_id = $user_id;
+        // $friendship->friend_id = $friend_id;
+        // $friendship->save();
 
-        return redirect()->back();
+        // return redirect()->back();
     }
 
     public function edit_status(Request $request): RedirectResponse {
