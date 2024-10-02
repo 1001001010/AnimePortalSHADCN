@@ -46,16 +46,22 @@ export default function Header({ auth }: PageProps<{}>) {
         route("logout");
     };
 
-    window.Echo.channel("notification-displayed")
-        .listen(".notification-displayed", (e: any) => {
-            console.log("Получены данные:", e);
-            // Обработка полученных данных
-            setFriendship(true);
-        })
-        .error((error: any) => {
-            console.error("Ошибка:", error);
-            // Обработка ошибок
-        });
+    // window.Echo.channel("notification-displayed")
+    //     // console.log(window.Echo.channel("notification-displayed"));
+    //     .listen("Notification.displayed", (friend_id: any) => {
+    //         console.log("Получены данные:", friend_id);
+    //         // setFriendship(true);
+    //     })
+    //     .error((error: any) => {
+    //         console.error("Ошибка:", error);
+    //     });
+    window.Echo.channel("notification-displayed").listen(
+        "Notification.displayed",
+        (e: any) => {
+            console.log(e);
+        }
+    );
+
     return (
         <div className="flex w-full flex-col bg-muted/40">
             <aside className="fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex">

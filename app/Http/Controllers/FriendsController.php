@@ -26,13 +26,12 @@ class FriendsController extends Controller
     }
 
     public function add_friends(Request $request) {
-        // $validatedData = $request->validate([
-        //     'friend_id' => 'required|integer',
-        // ]);
+        $validatedData = $request->validate([
+            'friend_id' => 'required|integer',
+        ]);
 
         $user_id = auth()->id();
         $friend_id = $request->input('friend_id');
-        event(new NotificationDisplayedEvent($friend_id));
 
         // if (Friendship::where('user_id', $user_id)->where('friend_id', $friend_id)->exists()) {
         //     return redirect()->back()->with('error', 'You are already friends with this user.');
@@ -43,7 +42,8 @@ class FriendsController extends Controller
         // $friendship->friend_id = $friend_id;
         // $friendship->save();
 
-        // return redirect()->back();
+        event(new NotificationDisplayedEvent($friend_id));
+        return redirect()->back();
     }
 
     public function edit_status(Request $request): RedirectResponse {

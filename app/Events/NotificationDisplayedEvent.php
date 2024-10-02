@@ -6,11 +6,13 @@ use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Broadcasting\PrivateChannel;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 
-class NotificationDisplayedEvent implements ShouldBroadcast
+
+class NotificationDisplayedEvent implements ShouldBroadcastNow
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -21,6 +23,7 @@ class NotificationDisplayedEvent implements ShouldBroadcast
      */
     public function __construct($friend_id) {
         $this->friend_id = $friend_id;
+        Log::info('NotificationDisplayedEvent triggered with friend_id: ' . $this->friend_id);
     }
 
     /**
@@ -38,7 +41,7 @@ class NotificationDisplayedEvent implements ShouldBroadcast
      * Задаем название трансляции
      */
     public function broadcastAs(): string {
-        return '.notification-displayed';
+        return 'Notification.displayed';
     }
 
     /**
