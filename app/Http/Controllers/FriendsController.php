@@ -40,7 +40,7 @@ class FriendsController extends Controller
         $friendship = new Friendship();
         $friendship->user_id = $user_id;
         $friendship->friend_id = $friend_id;
-        $friendship->save();
+        // $friendship->save();
 
         event(new NotificationDisplayedEvent($friendship));
         return redirect()->back();

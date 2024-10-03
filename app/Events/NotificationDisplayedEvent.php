@@ -33,7 +33,7 @@ class NotificationDisplayedEvent implements ShouldBroadcastNow
      */
     public function broadcastOn(): array {
         return [
-            new Channel('notification-displayed-' . $this->friend_id),
+            new PrivateChannel('notification-displayed-' . $this->friend_id),
         ];
     }
 

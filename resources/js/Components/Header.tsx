@@ -52,7 +52,7 @@ export default function Header({
 
     // Подписка на канал уведомлений
     if (auth && auth.user) {
-        const channel = window.Echo.channel(
+        const channel = window.Echo.private(
             `notification-displayed-${auth.user.id}`
         );
         channel.listen(".Notification.displayed", (res: any) => {
