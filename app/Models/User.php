@@ -54,6 +54,11 @@ class User extends Authenticatable implements MustVerifyEmail, Auditable
         return $this->hasMany(Favourite::class);
     }
 
+    public function groupMembers()
+    {
+        return $this->hasMany(GroupMember::class);
+    }
+
     protected $hidden = [
         'password',
         'remember_token',

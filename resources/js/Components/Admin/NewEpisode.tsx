@@ -27,9 +27,8 @@ import {
 import { toast } from "sonner";
 export default function NewEpisodeForm({
     auth,
-    Anime,
     Season,
-}: PageProps<{ Anime: Anime; Season: Season[] }>) {
+}: PageProps<{ Season: Season[] }>) {
     const { data, setData, post, processing, errors, reset } = useForm({
         season_id: "",
         file: null as File | null,

@@ -2,7 +2,8 @@
 
 use App\Http\Controllers\{ProfileController, FriendsController,
                           AnalyticsController, SessionController,
-                          MainController, AdminController};
+                          MainController, AdminController,
+                          GroupController};
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;

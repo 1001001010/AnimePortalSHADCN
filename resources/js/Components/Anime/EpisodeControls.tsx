@@ -6,12 +6,12 @@ import DeleteEpisode from "../Admin/DeleteEpisode";
 
 export default function EpisodeControls({
     auth,
-    Anime,
+    anime,
     nextEpisode,
     currentEpisode,
     previousEpisode,
 }: PageProps<{
-    Anime: Anime;
+    anime: Anime;
     currentEpisode?: Episode;
     nextEpisode?: Episode;
     previousEpisode?: Episode;
@@ -25,7 +25,7 @@ export default function EpisodeControls({
                 previousEpisode.episode.number ? (
                     <Link
                         href={route("anime", [
-                            Anime.unix,
+                            anime.unix,
                             previousEpisode?.seasonNumber,
                             previousEpisode?.episode?.number,
                         ])}
@@ -41,7 +41,7 @@ export default function EpisodeControls({
                 )}
                 <Link
                     className="justify-self-center max-md:w-full"
-                    href={route("anime", [Anime.unix])}
+                    href={route("anime", [anime.unix])}
                     preserveScroll
                 >
                     <Button variant="outline" className="max-md:w-full">
@@ -54,7 +54,7 @@ export default function EpisodeControls({
                 nextEpisode.episode.number ? (
                     <Link
                         href={route("anime", [
-                            Anime.unix,
+                            anime.unix,
                             nextEpisode?.seasonNumber,
                             nextEpisode?.episode?.number,
                         ])}
@@ -73,7 +73,7 @@ export default function EpisodeControls({
                     <div className="flex flex-start gap-4 pt-4">
                         <DeleteEpisode
                             auth={auth}
-                            anime={Anime}
+                            anime={anime}
                             currentEpisode={currentEpisode}
                         />
                     </div>

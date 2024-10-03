@@ -13,17 +13,17 @@ import { useForm } from "@inertiajs/react";
 import { Star } from "lucide-react";
 
 export default function Rating({
-    Anime,
+    anime,
     rating,
 }: PageProps<{
-    Anime: Anime;
+    anime: Anime;
     rating: Ratings;
 }>) {
     const [isOpen, setIsOpen] = useState(false);
     const [ratingNumber, setRatingNumber] = useState(Number(rating));
     const [hoverIndex, setHoverIndex] = useState(-1);
     const { setData, post, reset } = useForm({
-        anime: Anime.id,
+        anime: anime.id,
         rating: null as number | null,
     });
 

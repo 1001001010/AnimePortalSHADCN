@@ -33,7 +33,7 @@ import {
     ListFilter,
     Bookmark,
 } from "lucide-react";
-import ChatSupport from "@/shadcn/ui/chat/chat";
+// import ChatSupport from "@/shadcn/ui/chat/chat";
 
 export default function Header({
     auth,
@@ -193,7 +193,7 @@ export default function Header({
                                     </TooltipContent>
                                 </Tooltip>
                             </TooltipProvider>
-                            <ChatSupport />
+                            {/* <ChatSupport /> */}
                         </>
                     ) : null}
                 </nav>

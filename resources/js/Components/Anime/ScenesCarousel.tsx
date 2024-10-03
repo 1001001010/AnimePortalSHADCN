@@ -10,9 +10,9 @@ import { PageProps } from "@/types";
 import type { Anime } from "@/types";
 
 export default function ScrenesCarousel({
-    Anime,
-}: PageProps<{ Anime: Anime }>) {
-    const imageDataArray: string[] = JSON.parse(Anime.screens);
+    anime,
+}: PageProps<{ anime: Anime }>) {
+    const imageDataArray: string[] = JSON.parse(anime.screens);
     return (
         <div>
             <header>

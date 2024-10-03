@@ -12,14 +12,14 @@ import NewEpisodeForm from "@/Components/Admin/NewEpisode";
 
 export default function Player({
     auth,
-    Anime,
+    anime,
     seasons,
     currentEpisode,
     nextEpisode,
     previousEpisode,
     Host,
 }: PageProps<{
-    Anime: Anime;
+    anime: Anime;
     seasons: Season[];
     episode: Episode;
     currentEpisode?: Episode;
@@ -100,7 +100,7 @@ export default function Player({
                                 <Plyr {...plyrProps} />
                                 <EpisodeControls
                                     auth={auth}
-                                    Anime={Anime}
+                                    anime={anime}
                                     currentEpisode={currentEpisode}
                                     nextEpisode={nextEpisode}
                                     previousEpisode={previousEpisode}
@@ -110,9 +110,8 @@ export default function Player({
                         <div className="m-4 p-4 w-1/2 border rounded-lg shadow max-xl:p-4 max-xl:w-full">
                             {auth.user && auth.user.is_admin === 1 ? (
                                 <div className="flex justify-between gap-4 pb-3 max-xl:justify-center max-sm:flex-col max-sm:gap-1">
-                                    <NewSeasonForm Anime={Anime} auth={auth} />
+                                    <NewSeasonForm anime={anime} auth={auth} />
                                     <NewEpisodeForm
-                                        Anime={Anime}
                                         Season={seasons}
                                         auth={auth}
                                     />
@@ -144,7 +143,7 @@ export default function Player({
                                                                 href={route(
                                                                     "anime",
                                                                     [
-                                                                        Anime.unix,
+                                                                        anime.unix,
                                                                         season &&
                                                                             season.number,
                                                                         episode &&
@@ -175,7 +174,7 @@ export default function Player({
                 ) : (
                     <SeasonEpisodeList
                         auth={auth}
-                        Anime={Anime}
+                        anime={anime}
                         seasons={seasons}
                     />
                 )}

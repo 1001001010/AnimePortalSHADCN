@@ -69,7 +69,7 @@ class HelperController extends Controller
 
         return Inertia::render('AnimePage', [
             'favourite' => $userInfo ? $userInfo['favourite'] : null,
-            'Anime' => $anime,
+            'anime' => $anime,
             'seasons' => $seasons,
             'currentEpisode' => $episodeInfo ? $episodeInfo['current'] : null,
             'nextEpisode' => $episodeInfo ? [

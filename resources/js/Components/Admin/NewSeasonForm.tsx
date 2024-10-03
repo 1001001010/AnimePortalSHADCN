@@ -15,7 +15,7 @@ import { useForm } from "@inertiajs/react";
 import { FormEventHandler } from "react";
 import { useState } from "react";
 
-export default function NewEpisodeForm({ Anime }: PageProps<{ Anime: Anime }>) {
+export default function NewEpisodeForm({ anime }: PageProps<{ anime: Anime }>) {
     const { data, setData, post, processing, errors, reset } = useForm({
         name: "",
     });
@@ -23,7 +23,7 @@ export default function NewEpisodeForm({ Anime }: PageProps<{ Anime: Anime }>) {
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
-        post(route("NewSeason", Anime.id), {
+        post(route("NewSeason", anime.id), {
             onSuccess: () => {
                 setIsOpen(false);
                 reset();
