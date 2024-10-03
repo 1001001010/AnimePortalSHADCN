@@ -35,8 +35,11 @@ import {
 } from "lucide-react";
 import ChatSupport from "@/shadcn/ui/chat/chat";
 
-export default function Header({ auth }: PageProps<{}>) {
-    const [friendship, setFriendship] = useState(false);
+export default function Header({
+    auth,
+    friendship,
+}: PageProps<{ friendship: FriendShips }>) {
+    const [friendships, setFriendship] = useState(false);
 
     const handleToggleDarkMode = () => {
         document.documentElement.classList.toggle("dark");
@@ -47,14 +50,8 @@ export default function Header({ auth }: PageProps<{}>) {
         route("logout");
     };
 
-    useEffect(() => {
-        // Восстановление состояния из localStorage
-        const savedFriendship = localStorage.getItem("friendship");
-        if (savedFriendship) {
-            setFriendship(JSON.parse(savedFriendship));
-        }
-
-        // Подписка на канал уведомлений
+    // Подписка на канал уведомлений
+    if (auth && auth.user) {
         const channel = window.Echo.channel(
             `notification-displayed-${auth.user.id}`
         );
@@ -64,17 +61,7 @@ export default function Header({ auth }: PageProps<{}>) {
                 setFriendship(true);
             }
         });
-
-        // Очистка подписки при размонтировании компонента
-        return () => {
-            channel.stopListening(".Notification.displayed");
-        };
-    }, [auth.user.id]);
-
-    useEffect(() => {
-        // Сохранение состояния в localStorage
-        localStorage.setItem("friendship", JSON.stringify(friendship));
-    }, [friendship]);
+    }
 
     return (
         <div className="flex w-full flex-col bg-muted/40">
@@ -320,7 +307,7 @@ export default function Header({ auth }: PageProps<{}>) {
                                             )}
                                             <AvatarFallback>AV</AvatarFallback>
                                         </Avatar>
-                                        {friendship ? (
+                                        {friendship || friendships ? (
                                             <span className="absolute bottom-7 left-6 flex h-3 w-3">
                                                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
                                                 <span className="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>
@@ -348,7 +335,7 @@ export default function Header({ auth }: PageProps<{}>) {
                                             <span className="mr-2">
                                                 Уведомления
                                             </span>
-                                            {friendship ? (
+                                            {friendship || friendships ? (
                                                 <span className="relative inline-flex h-2 w-2">
                                                     <span className="relative inline-flex rounded-full h-2 w-2 bg-sky-500"></span>
                                                 </span>

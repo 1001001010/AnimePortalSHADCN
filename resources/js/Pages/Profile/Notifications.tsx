@@ -28,7 +28,7 @@ export default function Edit({
 
     return (
         <>
-            <Header auth={auth} />
+            <Header friendship={friendship} auth={auth} />
             <div className="ml-14 ml:ml-0 max-sm:ml-0">
                 <div className="m-4 p-2 max-sm:m-1 max-sm:p-1 border rounded-lg shadow min-h-36">
                     {friend_info.length > 0 ? (
@@ -38,7 +38,7 @@ export default function Edit({
                                 <div className="pt-4 flex flex-col gap-4 items-center">
                                     {friend_info.map((friend, index) => (
                                         <Alert
-                                            className="w-1/3 flex justify-between items-center"
+                                            className="w-1/3 max-xl:w-2/3 flex justify-between items-center"
                                             key={index}
                                         >
                                             <UserPlus className="h-4 w-4" />

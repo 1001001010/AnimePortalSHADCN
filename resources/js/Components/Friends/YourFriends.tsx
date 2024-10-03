@@ -14,7 +14,7 @@ export default function YourFriends({
     return (
         <>
             <ul className="m-4">Ваши друзья</ul>
-            <div className="grid grid-cols-4 gap-4 m-4">
+            <div className="grid grid-cols-4 gap-4 m-4 max-xl:grid-cols-2 max-md:grid-cols-1">
                 {friend_list.map((friend, index) => (
                     <Alert className="truncate overflow-hidden" key={index}>
                         <UserRoundCheck className="h-4 w-4 " />
