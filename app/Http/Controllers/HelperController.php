@@ -9,7 +9,7 @@ use Inertia\Inertia;
 
 class HelperController extends Controller
 {
-    public function renderAnimePage($anime, $season_id = null, $episode_id = null): \Inertia\Response {
+    public function renderAnimePage($anime, $season_id = null, $episode_id = null, $group_id = null): \Inertia\Response {
         $seasons = $anime->seasons()->with('episodes')->get();
 
         $episodeInfo = null;
@@ -67,6 +67,7 @@ class HelperController extends Controller
                 ->first(),
         ] : null;
 
+        $url = $this->CheackGroup($anime=$anime, $season_id=$season_id, $episode_id=$episode_id, $group_id = $group_id);
         return Inertia::render('AnimePage', [
             'favourite' => $userInfo ? $userInfo['favourite'] : null,
             'anime' => $anime,
@@ -83,8 +84,26 @@ class HelperController extends Controller
             'userRating' => $userInfo ? ($userInfo['rating'] ? $userInfo['rating']->rating : null) : null,
             'averageRating' => round(Rating::where('anime_id', $anime->id)->avg('rating'), 1),
             'episode_count' => $seasons->pluck('episodes')->collapse()->count(),
-            'Host' => env('APP_URL')
+            'Host' => env('APP_URL'),
+            'invite_link' => $url
         ]);
+    }
+
+    private function CheackGroup($anime, $season_id, $episode_id, $group_id) {
+        dd($group_id);
+        if ($group_id) {
+            $urlParams = [
+                'anime_id' => $anime->id,
+                'season_id' => $season_id,
+                'episode_id' => $episode_id,
+            ];
+            $urlParams['group_id'] = $group_id;
+            $url = route('anime', $urlParams);
+        } else {
+            $url = null;
+        }
+
+        return $url;
     }
 
 }

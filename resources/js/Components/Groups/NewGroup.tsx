@@ -21,14 +21,14 @@ export default function NewGroup({ auth, anime }: PageProps<{ anime: Anime }>) {
     const [open, setOpen] = React.useState(false);
     const { data, setData, post, reset, errors } = useForm({
         name: "",
-        passwrod: "",
-        anime: anime,
+        password: "",
+        anime: anime.id,
     });
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
 
-        post(route("NewGroup"), {
+        post(route("group.add"), {
             onSuccess: () => {
                 setOpen(false);
                 toast("Группа успешно создана");
@@ -60,7 +60,13 @@ export default function NewGroup({ auth, anime }: PageProps<{ anime: Anime }>) {
                                 <Label htmlFor="name" className="text-right">
                                     Название
                                 </Label>
-                                <Input id="name" className="col-span-3" />
+                                <Input
+                                    id="name"
+                                    className="col-span-3"
+                                    onChange={(e) =>
+                                        setData("name", e.target.value)
+                                    }
+                                />
                             </div>
                             <div className="grid grid-cols-4 items-center gap-4">
                                 <Label
@@ -69,7 +75,14 @@ export default function NewGroup({ auth, anime }: PageProps<{ anime: Anime }>) {
                                 >
                                     Пароль
                                 </Label>
-                                <Input id="password" className="col-span-3" />
+                                <Input
+                                    id="password"
+                                    className="col-span-3"
+                                    type="password"
+                                    onChange={(e) =>
+                                        setData("password", e.target.value)
+                                    }
+                                />
                             </div>
                         </div>
                         <DialogFooter>

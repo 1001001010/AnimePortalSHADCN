@@ -19,7 +19,7 @@ Route::middleware([ShareRequestMiddleware::class])->group(function () {
         Route::get('/','index')->name('index');
         Route::post('/','filter')->name('index.filter');
         Route::get('/anime/random','random_anime')->name('anime.random');
-        Route::get('/anime/view/{anime_id}/{season_id?}/{episode_id?}','anime')->whereNumber(['anime_id', 'season_id', 'episode_id'])->name('anime');
+        Route::get('/anime/view/{anime_id}/{season_id?}/{episode_id?}/{group_id?}','anime')->whereNumber(['anime_id', 'season_id', 'episode_id', 'group_id'])->name('anime');
         Route::post('anime/grade','grade')->name('anime.grade')->middleware('auth');
     });
 
@@ -44,6 +44,9 @@ Route::middleware([ShareRequestMiddleware::class])->group(function () {
             Route::post('/profile/photo', 'photo')->name('profile.photo');
             Route::delete('/profile', 'destroy')->name('profile.destroy');
             Route::get('/profile/{user_id?}', 'index')->whereNumber('user_id')->name('profile');
+        });
+        Route::controller(App\Http\Controllers\GroupController::class)->group(function () {
+            Route::post('/group', 'create')->name('group.add');
         });
 
         Route::middleware(IsAdmin::class)->group(function () {

@@ -46,7 +46,7 @@ const status = [
     { status: "preview", text: "Анонс" },
 ];
 
-export default function EditAnimeInfo({
+export default function UpdateAnimeInfo({
     auth,
     anime,
 }: PageProps<{ anime: Anime }>) {

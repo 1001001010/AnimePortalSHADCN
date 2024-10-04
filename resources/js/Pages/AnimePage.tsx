@@ -17,7 +17,7 @@ import Player from "@/Components/Anime/Player";
 import { Link } from "@inertiajs/react";
 import { Button } from "@/shadcn/ui/button";
 import Rating from "@/Components/Anime/Rating";
-import EditAnimeInfo from "@/Components/Admin/EditAnime";
+import EditAnimeInfo from "@/Components/Admin/UpdateAnime";
 import NewGroup from "@/Components/Groups/NewGroup";
 
 // Статус
@@ -48,6 +48,7 @@ export default function AnimePage({
     nextEpisode,
     previousEpisode,
     Host,
+    invite_link,
 }: PageProps<{
     anime: Anime;
     seasons: Season[];
@@ -61,6 +62,7 @@ export default function AnimePage({
     nextEpisode?: Episode;
     previousEpisode?: Episode;
     Host: String;
+    invite_link: string;
 }>) {
     const statusText = status.find((s) => s.status === anime.status)?.text;
     const typeText = type.find((s) => s.status === anime.type)?.text;
@@ -150,6 +152,7 @@ export default function AnimePage({
                     <div className="description p-4 mt-5 max-md:text-center">
                         <p className="break-words">{anime.description}</p>
                     </div>
+                    {invite_link ? <p>{invite_link}</p> : null}
                     <ScrenesCarousel anime={anime} auth={auth} />
                     <Player
                         auth={auth}
