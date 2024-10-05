@@ -10,11 +10,13 @@ export default function EpisodeControls({
     nextEpisode,
     currentEpisode,
     previousEpisode,
+    InGroup,
 }: PageProps<{
     anime: Anime;
     currentEpisode?: Episode;
     nextEpisode?: Episode;
     previousEpisode?: Episode;
+    InGroup: boolean;
 }>) {
     return (
         <>
@@ -67,7 +69,7 @@ export default function EpisodeControls({
                     </Link>
                 ) : null}
             </div>
-            {auth.user?.is_admin ? (
+            {auth.user?.is_admin && InGroup === false ? (
                 <div>
                     <hr />
                     <div className="flex flex-start gap-4 pt-4">

@@ -39,7 +39,7 @@ class GroupController extends Controller
             'anime_id' => $anime->unix,
             'season_id' => 1,
             'episode_id' => 1,
-            'group_id' => $group->id
+            'group_id' => $group->unix
         ]));
     }
 }

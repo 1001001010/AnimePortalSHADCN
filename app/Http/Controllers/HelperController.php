@@ -67,7 +67,8 @@ class HelperController extends Controller
                 ->first(),
         ] : null;
 
-        $url = $this->CheackGroup($anime=$anime, $season_id=$season_id, $episode_id=$episode_id, $group_id = $group_id);
+        $url = $this->CheackGroup($anime=$anime, $season_id=$season_id, $episode_id=$episode_id, $group_id=$group_id);
+
         return Inertia::render('AnimePage', [
             'favourite' => $userInfo ? $userInfo['favourite'] : null,
             'anime' => $anime,
@@ -90,10 +91,9 @@ class HelperController extends Controller
     }
 
     private function CheackGroup($anime, $season_id, $episode_id, $group_id) {
-        dd($group_id);
         if ($group_id) {
             $urlParams = [
-                'anime_id' => $anime->id,
+                'anime_id' => $anime->unix,
                 'season_id' => $season_id,
                 'episode_id' => $episode_id,
             ];

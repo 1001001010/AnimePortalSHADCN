@@ -18,8 +18,8 @@ class MainController extends Controller
         ]);
     }
 
-    public function anime($anime_id, $season_id = null, $episode_id = null): \Inertia\Response {
-        return (new HelperController)->renderAnimePage(Anime::where('unix', $anime_id)->firstOrFail(), $season_id, $episode_id);
+    public function anime($anime_id, $season_id = null, $episode_id = null, $group_id = null): \Inertia\Response {
+        return (new HelperController)->renderAnimePage(Anime::where('unix', $anime_id)->firstOrFail(), $season_id, $episode_id, $group_id);
     }
 
     public function random_anime() {

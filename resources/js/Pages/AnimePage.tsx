@@ -61,11 +61,16 @@ export default function AnimePage({
     favourite: Favourite;
     nextEpisode?: Episode;
     previousEpisode?: Episode;
-    Host: String;
+    Host: string;
     invite_link: string;
 }>) {
     const statusText = status.find((s) => s.status === anime.status)?.text;
     const typeText = type.find((s) => s.status === anime.type)?.text;
+
+    function CheckGroup() {
+        return invite_link ? true : false;
+    }
+    const InGroup = CheckGroup();
 
     const animeProperties = [
         { label: "Тип", value: typeText },
@@ -152,7 +157,7 @@ export default function AnimePage({
                     <div className="description p-4 mt-5 max-md:text-center">
                         <p className="break-words">{anime.description}</p>
                     </div>
-                    {invite_link ? <p>{invite_link}</p> : null}
+                    {/* {invite_link ? <p>{invite_link}</p> : null} */}
                     <ScrenesCarousel anime={anime} auth={auth} />
                     <Player
                         auth={auth}
@@ -163,6 +168,8 @@ export default function AnimePage({
                         nextEpisode={nextEpisode}
                         previousEpisode={previousEpisode}
                         Host={Host}
+                        invite_link={invite_link}
+                        InGroup={InGroup}
                     />
                 </div>
             </div>

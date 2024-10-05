@@ -6,7 +6,6 @@ import {
     ChatBubbleMessage,
 } from "@/shadcn/ui/chat/chat-bubble";
 import { ChatInput } from "@/shadcn/ui/chat/chat-input";
-import { Avatar, AvatarFallback, AvatarImage } from "@/shadcn/ui/avatar";
 import {
     ExpandableChat,
     ExpandableChatHeader,
