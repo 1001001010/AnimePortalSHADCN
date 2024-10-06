@@ -13,7 +13,7 @@ class GroupMembers extends Model
 
     public function group()
     {
-        return $this->belongsTo(Group::class);
+        return $this->belongsTo(Groups::class);
     }
 
     public function user()

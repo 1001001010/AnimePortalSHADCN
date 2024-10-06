@@ -69,6 +69,21 @@ export interface Season {
     episodes: Episode[];
 }
 
+export interface Groups {
+    id: number;
+    name: string;
+    unix: number;
+    password: string;
+    anime_id: Anime;
+}
+
+export interface GroupMembers {
+    id: number;
+    group: Groups;
+    group_id: number;
+    user_id: User;
+}
+
 export interface Episode {
     id: number;
     number: number;

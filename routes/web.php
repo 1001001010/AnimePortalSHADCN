@@ -47,6 +47,7 @@ Route::middleware([ShareRequestMiddleware::class])->group(function () {
         });
         Route::controller(App\Http\Controllers\GroupController::class)->group(function () {
             Route::post('/group', 'create')->name('group.add');
+            Route::delete('/group', 'delete')->name('group.leave');
         });
 
         Route::middleware(IsAdmin::class)->group(function () {

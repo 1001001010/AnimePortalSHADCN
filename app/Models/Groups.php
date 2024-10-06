@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Grops extends Model
+class Groups extends Model
 {
     use HasFactory;
 
@@ -18,6 +18,6 @@ class Grops extends Model
 
     public function members()
     {
-        return $this->hasMany(GroupMember::class);
+        return $this->hasMany(GroupMembers::class);
     }
 }

@@ -12,6 +12,7 @@ import type {
     FriendShips,
     Ratings,
     Favourite,
+    GroupMembers,
 } from "@/types";
 import Player from "@/Components/Anime/Player";
 import { Link } from "@inertiajs/react";
@@ -48,6 +49,7 @@ export default function AnimePage({
     nextEpisode,
     previousEpisode,
     Host,
+    user_group_info,
     invite_link,
 }: PageProps<{
     anime: Anime;
@@ -62,6 +64,7 @@ export default function AnimePage({
     nextEpisode?: Episode;
     previousEpisode?: Episode;
     Host: string;
+    user_group_info?: GroupMembers;
     invite_link: string;
 }>) {
     const statusText = status.find((s) => s.status === anime.status)?.text;
@@ -125,7 +128,11 @@ export default function AnimePage({
                                         rating={userRating}
                                     />
                                 </div>
-                                <NewGroup auth={auth} anime={anime} />
+                                <NewGroup
+                                    auth={auth}
+                                    anime={anime}
+                                    user_group_info={user_group_info}
+                                />
                                 {auth.user?.is_admin ? (
                                     <EditAnimeInfo auth={auth} anime={anime} />
                                 ) : null}

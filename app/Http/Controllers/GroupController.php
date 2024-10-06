@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\{Grops, GroupMembers, Anime};
+use App\Models\{Groups, GroupMembers, Anime};
 use Illuminate\Support\Facades\Hash;
 use Auth;
 
@@ -13,10 +13,11 @@ class GroupController extends Controller
         $request->validate([
             'name' => 'required|string',
             'password' => 'required|string|min:3',
-            'anime' => 'required|integer'
+            'anime' => 'required|integer',
+            'method' => 'required'
         ]);
 
-        $group = Grops::create([
+        $group = Groups::create([
             'name' => $request->name,
             'unix' => time(),
             'password' => Hash::make($request->password),
@@ -41,5 +42,22 @@ class GroupController extends Controller
             'episode_id' => 1,
             'group_id' => $group->unix
         ]));
+    }
+
+    public function delete(Request $request) {
+        $request->validate([
+            'group_id' => 'required|integer|min:1',
+            'method' => 'required'
+        ]);
+        $groupMember = GroupMembers::with('group')->where('id', $request->group_id)->first();
+        if ($groupMember) {
+            $groupMember->delete();
+            $remainingMembers = GroupMembers::where('id', $request->group_id)->count();
+            if ($remainingMembers == 0) {
+                Groups::find($groupMember->group->id)->delete();
+            }
+        }
+
+        return redirect()->back();
     }
 }
