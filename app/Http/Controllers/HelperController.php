@@ -11,13 +11,22 @@ use Inertia\Inertia;
 
 class HelperController extends Controller
 {
-    public function renderAnimePage($anime, $season_id = null, $episode_id = null, $group_id = null): \Inertia\Response {
+    /**
+     * Рендер страницы с аниме
+     */
+    public function renderAnimePage($anime, $season_id = null, $episode_id = null, $group_id = null) {
         $seasons = $this->getSeasonsWithEpisodes($anime);
         $episodeInfo = $this->getEpisodeInfo($anime, $season_id, $episode_id);
         $userInfo = $this->getUserInfo($anime);
         $url = $this->checkGroup($anime, $season_id, $episode_id, $group_id);
         $user_group = $this->GetUserGroup();
-
+        if ($group_id != null) {
+            $group_info = Groups::where('unix', $group_id)->first();
+            $result = $this->checkGroupMembership($anime, $season_id, $episode_id, $group_info);
+            if ($result) {
+                return $result;
+            }
+        }
         return Inertia::render('AnimePage', [
             'favourite' => $userInfo ? $userInfo['favourite'] : null,
             'anime' => $anime,
@@ -41,10 +50,16 @@ class HelperController extends Controller
         ]);
     }
 
+    /**
+     * Полученеи сезонов с эпизодами
+     */
     private function getSeasonsWithEpisodes(Anime $anime) {
         return $anime->seasons()->with('episodes')->get();
     }
 
+    /**
+     * Получение информации об эпизоде
+     */
     private function getEpisodeInfo(Anime $anime, $season_id, $episode_id) {
         if (!$season_id || !$episode_id) {
             return null;
@@ -73,6 +88,9 @@ class HelperController extends Controller
         return $episodeInfo;
     }
 
+    /**
+     * Получение предыдущего эпизода
+     */
     private function getPreviousEpisode(Anime $anime, Episode $currentEpisodeObject) {
         $previousEpisode = $anime->episodes()
             ->where('season_id', $currentEpisodeObject->season_id)
@@ -90,6 +108,9 @@ class HelperController extends Controller
         return $previousEpisode;
     }
 
+    /**
+     * Получение следующего эпизода
+     */
     private function getNextEpisode(Anime $anime, Episode $currentEpisodeObject) {
         $nextEpisode = $anime->episodes()
             ->where('season_id', $currentEpisodeObject->season_id)
@@ -107,6 +128,11 @@ class HelperController extends Controller
         return $nextEpisode;
     }
 
+    /**
+     * Получение информации о пользователе
+     *
+     * return (Оценка пользователя и наличие в избранных)
+     */
     private function getUserInfo(Anime $anime) {
         $user = Auth::user();
         if (!$user) {
@@ -123,6 +149,11 @@ class HelperController extends Controller
         ];
     }
 
+    /**
+     * Получение информации о группе
+     *
+     * return генерации ссылку на группу
+     */
     private function checkGroup(Anime $anime, $season_id, $episode_id, $group_id) {
         if (!$group_id) {
             return null;
@@ -137,8 +168,31 @@ class HelperController extends Controller
         return route('anime', $urlParams);
     }
 
+    /**
+     * Получение информации, состоит ли пользователь в группе
+     */
     private function GetUserGroup(): ?GroupMembers {
         $group = GroupMembers::with('group')->where('user_id', Auth::id())->first();
         return $group;
+    }
+
+    /**
+     * Получение информации, находится ли пользователь в группе
+     */
+    private function checkGroupMembership(Anime $anime, $season_id, $episode_id, Groups $group_info) {
+        if (!Auth::check()) {
+            return redirect()->route('index');
+        } else {
+            if (GroupMembers::where('group_id', $group_info->id)->where('user_id', Auth::id())->exists()) {
+                return true;
+            } else {
+                return Inertia::render('GroupPassword', [
+                    'anime' => $anime->unix,
+                    'season_id' => $season_id,
+                    'episode_id' => $episode_id,
+                    'group' => $group_info
+                ]);
+            }
+        }
     }
 }

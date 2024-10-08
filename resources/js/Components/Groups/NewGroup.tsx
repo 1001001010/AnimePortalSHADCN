@@ -22,7 +22,7 @@ export default function NewGroup({
     anime,
     user_group_info,
 }: PageProps<{ anime: Anime; user_group_info?: GroupMembers }>) {
-    const [open, setOpen] = React.useState(false);
+    const [isOpen, setIsOpen] = React.useState(false);
     const {
         data,
         setData,
@@ -43,13 +43,13 @@ export default function NewGroup({
         if (data.method === "delete") {
             destroy(route("group.leave"), {
                 onSuccess: () => {
-                    setOpen(false);
+                    setIsOpen(false);
                     toast("Успешно", {
                         description: "Вы успешно покинули группу",
                     });
                 },
                 onError: () => {
-                    setOpen(false);
+                    setIsOpen(false);
                     toast("Ошибка", {
                         description: "Ошибка при выходе из группы",
                     });
@@ -58,13 +58,13 @@ export default function NewGroup({
         } else {
             post(route("group.add"), {
                 onSuccess: () => {
-                    setOpen(false);
+                    setIsOpen(false);
                     toast("Успешно", {
                         description: "Новая группа успешно создана",
                     });
                 },
                 onError: () => {
-                    setOpen(false);
+                    setIsOpen(false);
                     toast("Ошибка", {
                         description: "Ошибка создания группы, попробуйте позже",
                     });
@@ -75,7 +75,7 @@ export default function NewGroup({
 
     return (
         <>
-            <Dialog>
+            <Dialog open={isOpen} onOpenChange={setIsOpen}>
                 <DialogTrigger asChild>
                     <Button>Смотреть в группе</Button>
                 </DialogTrigger>
