@@ -11,14 +11,14 @@ use Inertia\Inertia;
 
 class MainController extends Controller
 {
-    public function index(): \Inertia\Response {
+    public function index() {
         return Inertia::render('Welcome', [
             'NewAnime' => Anime::latest('updated_at')->take(15)->get(),
             'AllItems' => Anime::orderBy('name', 'asc')->get()
         ]);
     }
 
-    public function anime($anime_id, $season_id = null, $episode_id = null, $group_id = null): \Inertia\Response {
+    public function anime($anime_id, $season_id = null, $episode_id = null, $group_id = null) {
         return (new HelperController)->renderAnimePage(Anime::where('unix', $anime_id)->firstOrFail(), $season_id, $episode_id, $group_id);
     }
 

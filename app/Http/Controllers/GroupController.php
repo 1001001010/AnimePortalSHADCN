@@ -60,4 +60,32 @@ class GroupController extends Controller
 
         return redirect()->back();
     }
+
+    public function join(Request $request) {
+        $request->validate([
+            'group_id' => 'required|integer|min:1',
+            'password' => 'required'
+        ]);
+
+        $group = Groups::with('anime')->find($request->group_id);
+        if (!$group) {
+            return redirect(route('index'));
+        }
+
+        if (!Hash::check($request->password, $group->password)) {
+            return redirect()->back();
+        }
+
+        GroupMembers::create([
+            'group_id' => $group->id,
+            'user_id' => Auth::id()
+        ]);
+
+        return redirect(route('anime', [
+            'anime_id' => $group->anime->unix,
+            'season_id' => 1,
+            'episode_id' => 1,
+            'group_id' => $group->unix
+        ]));
+    }
 }

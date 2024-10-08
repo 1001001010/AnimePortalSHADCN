@@ -128,11 +128,13 @@ export default function AnimePage({
                                         rating={userRating}
                                     />
                                 </div>
-                                <NewGroup
-                                    auth={auth}
-                                    anime={anime}
-                                    user_group_info={user_group_info}
-                                />
+                                {auth?.user ? (
+                                    <NewGroup
+                                        auth={auth}
+                                        anime={anime}
+                                        user_group_info={user_group_info}
+                                    />
+                                ) : null}
                                 {auth.user?.is_admin ? (
                                     <EditAnimeInfo auth={auth} anime={anime} />
                                 ) : null}

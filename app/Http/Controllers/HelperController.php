@@ -15,18 +15,29 @@ class HelperController extends Controller
      * Рендер страницы с аниме
      */
     public function renderAnimePage($anime, $season_id = null, $episode_id = null, $group_id = null) {
-        $seasons = $this->getSeasonsWithEpisodes($anime);
-        $episodeInfo = $this->getEpisodeInfo($anime, $season_id, $episode_id);
-        $userInfo = $this->getUserInfo($anime);
-        $url = $this->checkGroup($anime, $season_id, $episode_id, $group_id);
-        $user_group = $this->GetUserGroup();
+        $seasons = $this->getSeasonsWithEpisodes($anime); #Получаем сезон с эпизодами
+        $episodeInfo = $this->getEpisodeInfo($anime, $season_id, $episode_id); #Получаем информацию о эпизоде
+        $userInfo = $this->getUserInfo($anime); #Получаем информацию о оценке и наличия в избранном
         if ($group_id != null) {
-            $group_info = Groups::where('unix', $group_id)->first();
+            $group_members = $this->GetGroupMembers($group_id);
+            $url = $this->checkGroup($anime, $season_id, $episode_id, $group_id); #Получаем ссылку на комнату
+            $user_group = $this->GetUserGroup(); #Получаем состоит ли пользователь вгруппер
+            $group_info = Groups::where('unix', $group_id)->first(); #Получаем информацию о группе
             $result = $this->checkGroupMembership($anime, $season_id, $episode_id, $group_info);
-            if ($result) {
-                return $result;
+            if ($result === 'MEMBER') {
+                return $this->renderAnimePageWithGroup($anime, $seasons, $episodeInfo, $userInfo, $user_group, $url, $group_members);
+            } elseif ($result === 'NEEDLOGIN') {
+                return redirect(route('login'));
+            } elseif ($result === 'NEEDPASSWORD') {
+                return Inertia::render('GroupPassword', [
+                    'group' => $group_info
+                ]);
             }
         }
+        return $this->renderAnimePageWithoutGroup($anime, $seasons, $episodeInfo, $userInfo);
+    }
+
+    private function renderAnimePageWithGroup($anime, $seasons, $episodeInfo, $userInfo, $user_group, $url, $group_members) {
         return Inertia::render('AnimePage', [
             'favourite' => $userInfo ? $userInfo['favourite'] : null,
             'anime' => $anime,
@@ -44,9 +55,30 @@ class HelperController extends Controller
             'averageRating' => round(Rating::where('anime_id', $anime->id)->avg('rating'), 1),
             'episode_count' => $seasons->pluck('episodes')->collapse()->count(),
             'Host' => env('APP_URL'),
-
             'user_group_info' => $user_group,
-            'invite_link' => $url
+            'invite_link' => $url,
+            'groupMembers' => $group_members
+        ]);
+    }
+
+    private function renderAnimePageWithoutGroup($anime, $seasons, $episodeInfo, $userInfo) {
+        return Inertia::render('AnimePage', [
+            'favourite' => $userInfo ? $userInfo['favourite'] : null,
+            'anime' => $anime,
+            'seasons' => $seasons,
+            'currentEpisode' => $episodeInfo ? $episodeInfo['current'] : null,
+            'nextEpisode' => $episodeInfo ? [
+                'episode' => $episodeInfo['next'],
+                'seasonNumber' => $episodeInfo['next'] ? $episodeInfo['next']->season->number : null,
+            ] : null,
+            'previousEpisode' => $episodeInfo ? [
+                'episode' => $episodeInfo['previous'],
+                'seasonNumber' => $episodeInfo['previous'] ? $episodeInfo['previous']->season->number : null,
+            ] : null,
+            'userRating' => $userInfo ? ($userInfo['rating'] ? $userInfo['rating']->rating : null) : null,
+            'averageRating' => round(Rating::where('anime_id', $anime->id)->avg('rating'), 1),
+            'episode_count' => $seasons->pluck('episodes')->collapse()->count(),
+            'Host' => env('APP_URL'),
         ]);
     }
 
@@ -150,7 +182,7 @@ class HelperController extends Controller
     }
 
     /**
-     * Получение информации о группе
+     * Получение ссылки на комнату
      *
      * return генерации ссылку на группу
      */
@@ -168,31 +200,29 @@ class HelperController extends Controller
         return route('anime', $urlParams);
     }
 
-    /**
-     * Получение информации, состоит ли пользователь в группе
-     */
-    private function GetUserGroup(): ?GroupMembers {
-        $group = GroupMembers::with('group')->where('user_id', Auth::id())->first();
-        return $group;
+    private function GetGroupMembers($group_id) {
+        return Groups::with('members')->where('unix', $group_id)->get();
     }
 
     /**
-     * Получение информации, находится ли пользователь в группе
+     * Получение информации, состоит ли пользователь в группе
+     */
+    private function GetUserGroup() {
+        return GroupMembers::with('group')->where('user_id', Auth::id())->first();
+    }
+
+    /**
+     * Получение информации, находится ли пользователь в группе + авторизация в группе
      */
     private function checkGroupMembership(Anime $anime, $season_id, $episode_id, Groups $group_info) {
         if (!Auth::check()) {
-            return redirect()->route('index');
-        } else {
-            if (GroupMembers::where('group_id', $group_info->id)->where('user_id', Auth::id())->exists()) {
-                return true;
-            } else {
-                return Inertia::render('GroupPassword', [
-                    'anime' => $anime->unix,
-                    'season_id' => $season_id,
-                    'episode_id' => $episode_id,
-                    'group' => $group_info
-                ]);
-            }
+            return 'NEEDLOGIN';
         }
+
+        if (GroupMembers::where('group_id', $group_info->id)->where('user_id', Auth::id())->exists()) {
+            return 'MEMBER';
+        }
+
+        return 'NEEDPASSWORD';
     }
 }
