@@ -25,6 +25,8 @@ import {
     SelectValue,
 } from "@/shadcn/ui/select";
 import { toast } from "sonner";
+import axios from "axios";
+
 export default function NewEpisodeForm({
     auth,
     Anime,
@@ -35,22 +37,49 @@ export default function NewEpisodeForm({
         file: null as File | null,
     });
     const [isOpen, setIsOpen] = useState(false);
-    const [selectedFile, setSelectedFile] = React.useState<null | File>(null);
-    const [preview, setPreview] = React.useState<null | string>(null);
+
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.files && event.target.files[0]) {
             setData("file", event.target.files[0]);
         }
     };
+
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
-        post(route("NewEpisode"), {
-            onSuccess: () => {
+
+        const formData = new FormData();
+        formData.append("season_id", data.season_id);
+        if (data.file) {
+            formData.append("file", data.file);
+        }
+
+        const uploadToast = toast.loading("Загрузка эпизода...");
+
+        axios
+            .post(route("NewEpisode"), formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+                onUploadProgress: (progressEvent) => {
+                    const percentCompleted = Math.round(
+                        (progressEvent.loaded * 100) / progressEvent.total!
+                    );
+                    toast.loading(`Загрузка эпизода: ${percentCompleted}%`, {
+                        id: uploadToast,
+                    });
+                },
+            })
+            .then(() => {
+                toast.success("Эпизод успешно загружен!", { id: uploadToast });
                 setIsOpen(false);
                 reset();
-            },
-        });
+            })
+            .catch((error) => {
+                console.error("Upload error:", error);
+                toast.error("Ошибка при загрузке эпизода", { id: uploadToast });
+            });
     };
+
     const handleSeasonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
         if (Season.length > 0) {
@@ -61,6 +90,7 @@ export default function NewEpisodeForm({
             });
         }
     };
+
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
