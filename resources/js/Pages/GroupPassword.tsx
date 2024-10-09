@@ -69,7 +69,9 @@ export default function GroupPassword({
                             </div>
                         </CardContent>
                         <CardFooter className="flex justify-end">
-                            <Button type="submit">Войти</Button>
+                            <Button type="submit" disabled={processing}>
+                                Войти
+                            </Button>
                         </CardFooter>
                     </form>
                 </Card>

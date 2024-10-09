@@ -3,7 +3,7 @@ import { Button } from "@/shadcn/ui/button";
 import Plyr from "plyr-react";
 import "plyr-react/plyr.css";
 import { Link } from "@inertiajs/react";
-import type { Anime, Season, Episode } from "@/types";
+import type { Anime, Season, Episode, GroupMembers } from "@/types";
 import EpisodeControls from "../EpisodeControls";
 import NewSeasonForm from "@/Components/Admin/NewSeasonForm";
 import NewEpisodeForm from "@/Components/Admin/NewEpisode";
@@ -20,6 +20,8 @@ export default function GroupPlayer({
     plyrProps,
     invite_link,
     InGroup,
+    groupMembers,
+    user_group_info,
 }: PageProps<{
     anime: Anime;
     seasons: Season[];
@@ -30,6 +32,8 @@ export default function GroupPlayer({
     plyrProps?: any;
     invite_link: string;
     InGroup: boolean;
+    groupMembers: GroupMembers[];
+    user_group_info?: GroupMembers;
 }>) {
     return (
         <>
@@ -56,6 +60,8 @@ export default function GroupPlayer({
                     auth={auth}
                     invite_link={invite_link}
                     InGroup={InGroup}
+                    groupMembers={groupMembers}
+                    user_group_info={user_group_info}
                 />
             </div>
         </>

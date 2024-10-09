@@ -75,13 +75,15 @@ export interface Groups {
     unix: number;
     password: string;
     anime_id: Anime;
+    members: GroupMembers;
 }
 
 export interface GroupMembers {
     id: number;
     group: Groups;
     group_id: number;
-    user_id: User;
+    user_id: number;
+    user: User;
 }
 
 export interface Episode {

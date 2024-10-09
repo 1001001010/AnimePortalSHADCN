@@ -3,7 +3,7 @@ import { Button } from "@/shadcn/ui/button";
 import Plyr from "plyr-react";
 import "plyr-react/plyr.css";
 import { Link, useForm } from "@inertiajs/react";
-import type { Anime, Season, Episode } from "@/types";
+import type { Anime, Season, Episode, GroupMembers } from "@/types";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import EpisodeControls from "./EpisodeControls";
 import SeasonEpisodeList from "./SeasonEpisodeList";
@@ -23,6 +23,8 @@ export default function Player({
     Host,
     invite_link,
     InGroup,
+    groupMembers,
+    user_group_info,
 }: PageProps<{
     anime: Anime;
     seasons: Season[];
@@ -33,6 +35,8 @@ export default function Player({
     Host: string;
     invite_link: string;
     InGroup: boolean;
+    groupMembers: GroupMembers[];
+    user_group_info?: GroupMembers;
 }>) {
     const file = `${
         `${Host}:5173/storage/app/public/` + currentEpisode?.video
@@ -113,6 +117,8 @@ export default function Player({
                             plyrProps={plyrProps}
                             invite_link={invite_link}
                             InGroup={InGroup}
+                            groupMembers={groupMembers}
+                            user_group_info={user_group_info}
                         />
                     ) : (
                         <SoloPlayer

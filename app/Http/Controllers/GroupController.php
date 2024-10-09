@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\{Groups, GroupMembers, Anime};
 use Illuminate\Support\Facades\Hash;
+use App\Events\JoinGroupEvent;
 use Auth;
 
 class GroupController extends Controller
@@ -35,6 +36,7 @@ class GroupController extends Controller
                 'user_id' => $user->id
             ]);
         }
+
         $anime = Anime::findOrFail($request->anime);
         return redirect(route('anime', [
             'anime_id' => $anime->unix,
@@ -58,7 +60,7 @@ class GroupController extends Controller
             }
         }
 
-        return redirect()->back();
+        return redirect(route('index'));
     }
 
     public function join(Request $request) {
@@ -80,6 +82,8 @@ class GroupController extends Controller
             'group_id' => $group->id,
             'user_id' => Auth::id()
         ]);
+
+        event(new JoinGroupEvent($group->id, Auth::id()));
 
         return redirect(route('anime', [
             'anime_id' => $group->anime->unix,

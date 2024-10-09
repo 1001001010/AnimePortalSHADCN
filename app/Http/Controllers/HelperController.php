@@ -201,7 +201,8 @@ class HelperController extends Controller
     }
 
     private function GetGroupMembers($group_id) {
-        return Groups::with('members')->where('unix', $group_id)->get();
+        $group_info = Groups::where('unix', $group_id)->first();
+        return GroupMembers::with('user')->where('group_id', $group_info->id)->get();
     }
 
     /**

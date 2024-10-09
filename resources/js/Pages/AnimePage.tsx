@@ -13,6 +13,7 @@ import type {
     Ratings,
     Favourite,
     GroupMembers,
+    User,
 } from "@/types";
 import Player from "@/Components/Anime/Player";
 import { Link } from "@inertiajs/react";
@@ -51,6 +52,7 @@ export default function AnimePage({
     Host,
     user_group_info,
     invite_link,
+    groupMembers,
 }: PageProps<{
     anime: Anime;
     seasons: Season[];
@@ -66,6 +68,7 @@ export default function AnimePage({
     Host: string;
     user_group_info?: GroupMembers;
     invite_link: string;
+    groupMembers: GroupMembers[];
 }>) {
     const statusText = status.find((s) => s.status === anime.status)?.text;
     const typeText = type.find((s) => s.status === anime.type)?.text;
@@ -179,6 +182,8 @@ export default function AnimePage({
                         Host={Host}
                         invite_link={invite_link}
                         InGroup={InGroup}
+                        groupMembers={groupMembers}
+                        user_group_info={user_group_info}
                     />
                 </div>
             </div>

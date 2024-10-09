@@ -42,7 +42,13 @@ class FriendsController extends Controller
         $friendship->friend_id = $friend_id;
         $friendship->save();
 
-        event(new NotificationDisplayedEvent($friendship));
+        try {
+            event(new NotificationDisplayedEvent($friendship));
+        } catch (\Exception $e) {
+            Log::error('Failed to dispatch event: ' . $e->getMessage());
+            return redirect()->back();
+        }
+
         return redirect()->back();
     }
 

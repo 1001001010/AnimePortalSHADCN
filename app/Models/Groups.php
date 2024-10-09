@@ -18,6 +18,6 @@ class Groups extends Model
 
     public function members()
     {
-        return $this->hasMany(GroupMembers::class);
+        return $this->hasMany(GroupMembers::class, 'group_id');
     }
 }
