@@ -44,4 +44,9 @@ class Anime extends Model
     {
         return $this->hasMany(Favourite::class);
     }
+
+    public function views()
+    {
+        return $this->hasMany(View::class);
+    }
 }

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\{Auth, Redirect};
-use App\Models\{Anime, Friendship, Rating, Episode};
+use App\Models\{Anime, Friendship, Rating, Episode, View};
 use App\Http\Controllers\HelperController;
 use Inertia\Inertia;
 
@@ -18,8 +18,34 @@ class MainController extends Controller
         ]);
     }
 
-    public function anime($anime_id, $season_id = null, $episode_id = null): \Inertia\Response {
-        return (new HelperController)->renderAnimePage(Anime::where('unix', $anime_id)->firstOrFail(), $season_id, $episode_id);
+    public function anime($anime_id, $season_id = null, $episode_id = null): \Inertia\Response
+    {
+        $anime = Anime::where('unix', $anime_id)->firstOrFail();
+        $this->recordView($anime);
+
+        return (new HelperController)->renderAnimePage($anime, $season_id, $episode_id);
+    }
+
+    protected function recordView(Anime $anime) {
+        $user = Auth::user();
+        $ipAddress = request()->ip();
+
+        // Проверяем, существует ли уже такая запись
+        $view = View::where('anime_id', $anime->id)
+            ->where(function ($query) use ($user, $ipAddress) {
+                $query->where('user_id', $user ? $user->id : null)
+                    ->orWhere('ip_address', $ipAddress);
+            })
+            ->first();
+
+        // Если запись не существует, создаем новую
+        if (!$view) {
+            View::create([
+                'anime_id' => $anime->id,
+                'user_id' => $user ? $user->id : null,
+                'ip_address' => $user ? null : $ipAddress,
+            ]);
+        }
     }
 
     public function random_anime() {

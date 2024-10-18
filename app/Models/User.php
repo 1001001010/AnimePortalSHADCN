@@ -54,6 +54,11 @@ class User extends Authenticatable implements MustVerifyEmail, Auditable
         return $this->hasMany(Favourite::class);
     }
 
+    public function views()
+    {
+        return $this->hasMany(View::class);
+    }
+
     protected $hidden = [
         'password',
         'remember_token',
