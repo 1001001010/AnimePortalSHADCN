@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
+use App\Models\{User, View};
 use Inertia\Inertia;
 
 class AnalyticsController extends Controller
@@ -11,6 +11,7 @@ class AnalyticsController extends Controller
     public function analytics() {
         $registration = $this->AnalyticsRegistration();
         $registrationMethod = $this->AnalyticsMethodRegistration();
+        $AnalyticsPopularList = $this->AnalyticsPopularList();
         return Inertia::render('Analytics', [
             "analytic"=>[
                 'registrationMethod'=>[
@@ -21,7 +22,8 @@ class AnalyticsController extends Controller
                 'registration'=>[
                     'yandex'=>$registration->monthsYandex,
                     'default'=>$registration->monthsDefault
-                ]
+                ],
+                'popularList'=> $AnalyticsPopularList
             ]
         ]);
     }
@@ -83,5 +85,14 @@ class AnalyticsController extends Controller
             'monthsYandex' => $monthsYandex,
             'monthsDefault' => $monthsDefault,
         ];
+    }
+
+    private function AnalyticsPopularList() {
+        $popularAnimes = View::select('anime_id', \DB::raw('COUNT(*) as views_count'))
+            ->with('anime')
+            ->groupBy('anime_id')
+            ->orderBy('views_count', 'desc')
+            ->limit(5)->get();
+        return $popularAnimes;
     }
 }

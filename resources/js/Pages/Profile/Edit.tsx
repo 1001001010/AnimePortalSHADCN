@@ -19,7 +19,6 @@ export default function Edit({
     activeSession: any[];
     friendship: FriendShips;
 }>) {
-    console.log(auth.user.email_verified_at);
     return (
         <>
             <Header auth={auth} friendship={friendship} />

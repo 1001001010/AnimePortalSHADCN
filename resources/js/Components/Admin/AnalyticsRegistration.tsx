@@ -34,7 +34,6 @@ export default function AnalyticsRegistration({
         November: "Ноябрь",
         December: "Декабрь",
     };
-    console.log(info);
     const chartData = Object.keys(info.registration.yandex)
         .sort((b, a) => b.localeCompare(a))
         .map((month, index) => {
@@ -59,10 +58,10 @@ export default function AnalyticsRegistration({
     } satisfies ChartConfig;
     return (
         <>
-            <Card className="w-full">
+            <Card>
                 <CardHeader>
                     <CardTitle>Регистрации</CardTitle>
-                    {/* <CardDescription>January - June 2024</CardDescription> */}
+                    <CardDescription>January - June 2024</CardDescription>
                 </CardHeader>
                 <CardContent>
                     <ChartContainer config={chartConfig}>
@@ -95,9 +94,12 @@ export default function AnalyticsRegistration({
                     </ChartContainer>
                 </CardContent>
                 <CardFooter className="flex-col items-start gap-2 text-sm">
+                    <div className="flex gap-2 font-medium leading-none">
+                        Регистрации запоследние 6 месяцев
+                        <TrendingUp className="h-4 w-4" />
+                    </div>
                     <div className="leading-none text-muted-foreground">
-                        Статистика регистраций пользователей за последние 6
-                        месяцев
+                        Способ регистрации пользователей за все время
                     </div>
                 </CardFooter>
             </Card>

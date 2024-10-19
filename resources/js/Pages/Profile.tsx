@@ -21,7 +21,6 @@ export default function Profile({
         .toLocaleString("ru-RU", options)
         .replace(" г.", "")
         .replace(".", "");
-    console.log(user_info);
     return (
         <>
             <Header friendship={friendship} auth={auth} />

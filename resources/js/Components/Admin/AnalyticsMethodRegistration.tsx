@@ -23,7 +23,7 @@ const chartConfig = {
     },
 } satisfies ChartConfig;
 
-export default function AnalyticMethodRegistration({
+export default function AnalyticsMethodRegistration({
     info,
 }: PageProps<{ info: Analytics }>) {
     const chartData = [
@@ -32,7 +32,7 @@ export default function AnalyticMethodRegistration({
     ];
     return (
         <>
-            <Card className="w-full">
+            <Card>
                 <CardHeader>
                     <CardTitle>Способ регистрации</CardTitle>
                     <CardDescription>За все время</CardDescription>

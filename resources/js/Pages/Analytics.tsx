@@ -1,8 +1,9 @@
 "use client";
 import { Analytics, FriendShips, PageProps } from "@/types";
 import Header from "@/Components/Header";
-import AnalyticMethodRegistration from "@/Components/Admin/AnalyticMethodRegistration";
+import AnalyticsMethodRegistration from "@/Components/Admin/AnalyticsMethodRegistration";
 import AnalyticsRegistration from "@/Components/Admin/AnalyticsRegistration";
+import AnalyticsPopularAnime from  "@/Components/Admin/AnalyticsPopularAnime";
 
 export default function Analytic({
     auth,
@@ -16,11 +17,12 @@ export default function Analytic({
 }>) {
     return (
         <>
-            <Header auth={auth} friendship={friendship} />
-            <div className="ml-14 ml:ml-0 max-sm:ml-0 w-1/2 max-lg:w-11/12 max-sm:w-full">
-                <div className="m-4 max-sm:m-1 max-sm:p-1 rounded-lg shadow flex justify-between gap-5 max-md:flex-col">
-                    <AnalyticsRegistration auth={auth} info={analytic} />
-                    <AnalyticMethodRegistration auth={auth} info={analytic} />
+            <Header auth={auth} friendship={friendship}/>
+            <div className="ml-14 ml:ml-0 max-sm:ml-0">
+                <div className="m-4 p-2 grid grid-cols-3 gap-5">
+                    <AnalyticsRegistration auth={auth} info={analytic}/>
+                    <AnalyticsMethodRegistration auth={auth} info={analytic}/>
+                    <AnalyticsPopularAnime auth={auth} info={analytic}/>
                 </div>
             </div>
         </>

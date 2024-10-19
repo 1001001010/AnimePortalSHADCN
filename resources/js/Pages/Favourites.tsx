@@ -12,7 +12,6 @@ export default function Favourites({
     friendship: FriendShips;
     favourites: Favourite[];
 }>) {
-    console.log(favourites);
     return (
         <>
             <Header friendship={friendship} auth={auth} />

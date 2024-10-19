@@ -32,7 +32,6 @@ export default function DeleteEpisode({
     } = useForm({
         episode_id: currentEpisode?.id,
     });
-    console.log(currentEpisode?.id);
     const [isOpen, setIsOpen] = React.useState(false);
     const deleteEpisode: FormEventHandler = (e) => {
         e.preventDefault();

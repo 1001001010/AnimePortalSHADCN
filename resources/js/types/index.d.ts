@@ -90,6 +90,10 @@ export interface Analytics {
         yandex: { [key: string]: number };
         default: { [key: string]: number };
     };
+    popularList: {
+        anime_id: Anime;
+        views_count: number;
+    }
 }
 
 export interface AnimePageProps {
