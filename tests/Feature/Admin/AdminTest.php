@@ -36,6 +36,7 @@ class AdminTest extends TestCase
     public function test_user_cannot_access_admin_panel(): void
     {
         $user = User::factory()->create();
+        $this->actingAs($user);
         $response = $this->get(route('adminPanel.index'));
 
         $response->assertStatus(404);
@@ -45,7 +46,8 @@ class AdminTest extends TestCase
      */
     public function test_user_cannot_access_analytics(): void
     {
-
+        $user = User::factory()->create();
+        $this->actingAs($user);
         $response = $this->get(route('analytics.index'));
 
         $response->assertStatus(404);
@@ -121,7 +123,7 @@ class AdminTest extends TestCase
         $response->assertStatus(404);
     }
     /**
-     * Удаление аниме с неккоректными значениями
+     * Удаление аниме с некорректными значениями
      */
     public function test_admin_cannot_be_delete_invalid_anime(): void {
         $user = User::factory()->admin()->create();
@@ -132,7 +134,7 @@ class AdminTest extends TestCase
             $response = $this
                 ->actingAs($user)
                 ->from(route('adminPanel.index'))
-                ->post(route('DelAnime'), [
+                ->delete(route('DelAnime'), [
                     'anime_id'
                 ]);
 
