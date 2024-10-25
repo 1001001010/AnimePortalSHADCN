@@ -1,6 +1,5 @@
 import { FriendShips, PageProps } from "@/types";
 import Header from "@/Components/Header";
-import DeleteUserForm from "./Partials/DeleteUserForm";
 import ActiveSession from "./Partials/ActiveSession";
 import VerifyEmail from "./Partials/VerifiedEmail";
 import UpdatePasswordForm from "./Partials/UpdatePasswordForm";
@@ -45,9 +44,6 @@ export default function Edit({
                                 <VerifyEmail className="mb-4" />
                             </div>
                         ) : null}
-                        <div className="mb-4 border rounded-lg shadow w-full p-4">
-                            <DeleteUserForm />
-                        </div>
                     </div>
                     <div className="p-4 text-gray-900 dark:text-gray-100 w-full md:w-1/3 max-sm:p-1">
                         <h2 className="mb-4 text-lg font-medium">Сессии</h2>

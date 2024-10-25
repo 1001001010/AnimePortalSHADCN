@@ -5,6 +5,7 @@ import { toast } from "sonner";
 import { Input } from "@/shadcn/ui/input";
 import { Label } from "@/shadcn/ui/label";
 import { Button } from "@/shadcn/ui/button";
+import {description} from "@/Components/Admin/AnalyticsPopularAnime";
 
 export default function UpdateProfilePhoto({
     className = "",
@@ -22,18 +23,42 @@ export default function UpdateProfilePhoto({
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.files && event.target.files[0]) {
-            setSelectedFile(event.target.files[0]);
+            const file = event.target.files[0];
+
+            // Проверка MIME типа файла
+            const validImageTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+            if (!validImageTypes.includes(file.type)) {
+                toast('Ошибка загрузки фото', {
+                    description:
+                        "Пожалуйста, выберите файл изображения с расширением JPEG, PNG, GIF или WebP."
+                });
+                return;
+            }
+
+            // Проверка расширния файла
+            const fileName = file.name.toLowerCase();
+            const validExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.webp'];
+            const fileExtension = `.${fileName.split('.').pop()}`;
+            if (!validExtensions.includes(fileExtension)) {
+                toast('Ошибка загрузки фото', {
+                    description:
+                        "Пожалуйста, выберите файл изображения с расширением JPEG, PNG, GIF или WebP."
+                });
+                // alert('Пожалуйста, выберите файл изображения с расширением JPEG, PNG, GIF или WebP.');
+                return;
+            }
+
+            setSelectedFile(file);
             const reader = new FileReader();
             reader.onloadend = () => {
                 if (typeof reader.result === "string") {
                     setPreview(reader.result);
                 }
             };
-            reader.readAsDataURL(event.target.files[0]);
-            setData("photo", event.target.files[0]);
+            reader.readAsDataURL(file);
+            setData("photo", file);
         }
     };
-
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
 
@@ -67,6 +92,7 @@ export default function UpdateProfilePhoto({
                         type="file"
                         className="custom-file-input text-gray-900 dark:text-gray-100"
                         onChange={handleFileChange}
+                        accept="image/*"
                     />
                     {preview ? (
                         <img src={preview} className="w-24 h-24 m-2" />
