@@ -25,6 +25,7 @@ import {
     PanelLeft,
     Search,
     PencilRuler,
+    Table2,
     Settings,
     Users2,
     MoonStar,
@@ -128,6 +129,19 @@ export default function Header({
                                     </TooltipTrigger>
                                     <TooltipContent side="right">
                                         Админка
+                                    </TooltipContent>
+                                </Tooltip>
+                                <Tooltip>
+                                    <TooltipTrigger asChild>
+                                        <Link
+                                            href={route("admin.exel")}
+                                            className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                                        >
+                                            <Table2 className="h-5 w-5" />
+                                        </Link>
+                                    </TooltipTrigger>
+                                    <TooltipContent side="right">
+                                        Отчёт
                                     </TooltipContent>
                                 </Tooltip>
                             </div>

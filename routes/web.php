@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\{ProfileController, FriendsController,
                           AnalyticsController, SessionController,
-                          MainController, AdminController};
+                          MainController, AdminController, ExelController};
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -47,6 +47,7 @@ Route::middleware([ShareRequestMiddleware::class])->group(function () {
     });
 
     Route::middleware(IsAdmin::class)->group(function () {
+        Route::get('/admin/exel', [ExelController::class, 'index'])->name('admin.exel');
         Route::get('/analytics', [AnalyticsController::class, 'analytics'])->name('analytics.index');
         Route::controller(App\Http\Controllers\AdminController::class)->group(function () {
             Route::get('/admin', 'index')->name('adminPanel.index');
