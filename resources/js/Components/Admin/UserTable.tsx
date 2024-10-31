@@ -1,5 +1,5 @@
-import { PageProps, User } from "@/types";
 ("use client");
+import { PageProps, User } from "@/types";
 
 import * as React from "react";
 import {
@@ -44,30 +44,6 @@ import {
 import { Link } from "@inertiajs/react";
 
 const columns: ColumnDef<User>[] = [
-    {
-        id: "select",
-        header: ({ table }) => (
-            <Checkbox
-                checked={
-                    table.getIsAllPageRowsSelected() ||
-                    (table.getIsSomePageRowsSelected() && "indeterminate")
-                }
-                onCheckedChange={(value) =>
-                    table.toggleAllPageRowsSelected(!!value)
-                }
-                aria-label="Select all"
-            />
-        ),
-        cell: ({ row }) => (
-            <Checkbox
-                checked={row.getIsSelected()}
-                onCheckedChange={(value) => row.toggleSelected(!!value)}
-                aria-label="Select row"
-            />
-        ),
-        enableSorting: false,
-        enableHiding: false,
-    },
     {
         accessorKey: "id",
         header: "ID",
@@ -294,11 +270,7 @@ export default function UserTable({ users }: PageProps<{ users: User[] }>) {
                     </TableBody>
                 </Table>
             </div>
-            <div className="flex items-center justify-end space-x-2 py-4">
-                <div className="flex-1 text-sm text-muted-foreground">
-                    {table.getFilteredSelectedRowModel().rows.length} из{" "}
-                    {table.getFilteredRowModel().rows.length} колонок выбрано.
-                </div>
+            <div className="flex items-center justify-end space-x-2 pt-4">
                 <div className="space-x-2">
                     <Button
                         variant="outline"
