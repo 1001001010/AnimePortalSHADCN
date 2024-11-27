@@ -289,19 +289,6 @@ export default function Header({ auth }: PageProps<{}>) {
                                             Профиль
                                         </DropdownMenuItem>
                                     </Link>
-                                    <DropdownMenuSeparator />
-                                    <Link
-                                        href={route("notifications")}
-                                        as="button"
-                                        className="w-full"
-                                    >
-                                        <DropdownMenuItem className="flex items-center">
-                                            <span className="mr-2">
-                                                Уведомления
-                                            </span>
-                                        </DropdownMenuItem>
-                                    </Link>
-                                    <DropdownMenuSeparator />
                                     <Link
                                         href={route("profile.edit")}
                                         as="button"

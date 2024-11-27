@@ -74,10 +74,4 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
-
-    public function notifications(): \Inertia\Response {
-        return Inertia::render('Profile/Notifications', [
-            'friend_info' => Friendship::with('user')->where('friend_id', Auth::user()->id)->get(),
-        ]);
-    }
 }

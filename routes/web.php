@@ -30,7 +30,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::delete('/favourite', 'destroy')->name('favourite.destroy');
     });
     Route::controller(App\Http\Controllers\ProfileController::class)->group(function () {
-        Route::get('/notifications', 'notifications')->name('notifications');
         Route::get('/profile/edit', 'edit')->name('profile.edit');
         Route::patch('/profile', 'update')->name('profile.update');
         Route::post('/profile/photo', 'photo')->name('profile.photo');
