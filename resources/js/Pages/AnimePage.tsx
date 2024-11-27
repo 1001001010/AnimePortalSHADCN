@@ -5,14 +5,7 @@ import { Star } from "lucide-react";
 import { Badge } from "@/shadcn/ui/badge";
 import "plyr-react/plyr.css";
 import ScrenesCarousel from "@/Components/Anime/ScenesCarousel";
-import type {
-    Anime,
-    Season,
-    Episode,
-    FriendShips,
-    Ratings,
-    Favourite,
-} from "@/types";
+import type { Anime, Season, Episode, Ratings, Favourite } from "@/types";
 import Player from "@/Components/Anime/Player";
 import { Link } from "@inertiajs/react";
 import { Button } from "@/shadcn/ui/button";
@@ -38,7 +31,6 @@ export default function AnimePage({
     Anime,
     seasons,
     episode,
-    friendship,
     currentEpisode,
     userRating,
     averageRating,
@@ -51,7 +43,6 @@ export default function AnimePage({
     Anime: Anime;
     seasons: Season[];
     episode: Episode;
-    friendship: FriendShips;
     currentEpisode?: Episode;
     userRating: Ratings;
     averageRating: number;
@@ -80,7 +71,7 @@ export default function AnimePage({
     ];
     return (
         <>
-            <Header friendship={friendship} auth={auth} />
+            <Header auth={auth} />
             <div className="ml-14 ml:ml-0 max-sm:ml-0">
                 <div className="m-4 max-sm:m-1 max-sm:p-1 border rounded-lg shadow ">
                     <div className="flex flex-row max-md:flex-col">

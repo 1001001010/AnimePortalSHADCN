@@ -1,4 +1,4 @@
-import { FriendShips, PageProps } from "../types";
+import { PageProps } from "../types";
 import { Link } from "@inertiajs/react";
 import { Button } from "@/shadcn/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/shadcn/ui/sheet";
@@ -10,7 +10,6 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/shadcn/ui/dropdown-menu";
-import { Input } from "@/shadcn/ui/input";
 import { Avatar, AvatarFallback, AvatarImage } from "@/shadcn/ui/avatar";
 import {
     Tooltip,
@@ -23,7 +22,6 @@ import {
     LineChart,
     Package2,
     PanelLeft,
-    Search,
     PencilRuler,
     Table2,
     Settings,
@@ -31,14 +29,10 @@ import {
     MoonStar,
     SunMedium,
     GitCompareArrows,
-    ListFilter,
     Bookmark,
 } from "lucide-react";
 
-export default function Header({
-    auth,
-    friendship,
-}: PageProps<{ friendship: FriendShips }>) {
+export default function Header({ auth }: PageProps<{}>) {
     const handleToggleDarkMode = () => {
         document.documentElement.classList.toggle("dark");
     };
@@ -91,17 +85,6 @@ export default function Header({
                             <TooltipContent side="right">
                                 Случайные аниме
                             </TooltipContent>
-                        </Tooltip>
-                        <Tooltip>
-                            <TooltipTrigger asChild>
-                                <Link
-                                    href={route("friends.index")}
-                                    className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
-                                >
-                                    <Users2 className="h-5 w-5" />
-                                </Link>
-                            </TooltipTrigger>
-                            <TooltipContent side="right">Друзья</TooltipContent>
                         </Tooltip>
                         {auth.user && auth.user.is_admin == 1 ? (
                             <div className="gap-4 flex flex-col">
@@ -234,13 +217,6 @@ export default function Header({
                                     Случайные аниме
                                 </Link>
                                 <Link
-                                    href={route("friends.index")}
-                                    className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
-                                >
-                                    <Users2 className="h-5 w-5" />
-                                    Друзья
-                                </Link>
-                                <Link
                                     href={route("analytics.index")}
                                     className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
                                 >
@@ -301,12 +277,6 @@ export default function Header({
                                             )}
                                             <AvatarFallback>AV</AvatarFallback>
                                         </Avatar>
-                                        {friendship ? (
-                                            <span className="absolute bottom-7 left-6 flex h-3 w-3">
-                                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
-                                                <span className="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>
-                                            </span>
-                                        ) : null}
                                     </Button>
                                 </DropdownMenuTrigger>
                                 <DropdownMenuContent align="end">
@@ -329,11 +299,6 @@ export default function Header({
                                             <span className="mr-2">
                                                 Уведомления
                                             </span>
-                                            {friendship ? (
-                                                <span className="relative inline-flex h-2 w-2">
-                                                    <span className="relative inline-flex rounded-full h-2 w-2 bg-sky-500"></span>
-                                                </span>
-                                            ) : null}
                                         </DropdownMenuItem>
                                     </Link>
                                     <DropdownMenuSeparator />

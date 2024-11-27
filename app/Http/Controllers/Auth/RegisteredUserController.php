@@ -52,7 +52,7 @@ class RegisteredUserController extends Controller
             'regist_method'=>'default',
         ]);
 
-        event(new Registered($user));
+        // event(new Registered($user));
 
         Auth::login($user);
 

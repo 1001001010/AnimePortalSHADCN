@@ -10,6 +10,7 @@ export interface User {
     created_at: string;
     updated_at: string;
 }
+
 export interface ActiveSession {
     id: string;
     user_id: number;
@@ -18,30 +19,16 @@ export interface ActiveSession {
     last_activity: number;
     payload: string;
 }
+
 export interface Ratings {
     rating: number | string;
 }
+
 export interface Favourite {
     id: number;
     user_id: number;
     anime_id: number;
     anime: Anime;
-}
-export interface Friends {
-    id: number;
-    user_id: number;
-    friend_id: number;
-    name: string;
-    unix: string;
-    user: User;
-    friend: Friends;
-}
-
-export interface FriendShips {
-    id: number;
-    user_id: number;
-    friend_id: number;
-    user: User;
 }
 
 export interface Anime {
@@ -93,7 +80,7 @@ export interface Analytics {
     popularList: {
         anime_id: Anime;
         views_count: number;
-    }
+    };
 }
 
 export interface AnimePageProps {

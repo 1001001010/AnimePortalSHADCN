@@ -1,4 +1,4 @@
-import { Anime, FriendShips, PageProps } from "@/types";
+import { Anime, PageProps } from "@/types";
 import Header from "@/Components/Header";
 import NewItems from "@/Components/Welcome/NewItems";
 import ItemsList from "@/Components/Welcome/ItemsList";
@@ -6,11 +6,9 @@ import ItemsList from "@/Components/Welcome/ItemsList";
 export default function Welcome({
     auth,
     NewAnime,
-    friendship,
     AllItems,
 }: PageProps<{
     NewAnime: Anime[];
-    friendship: FriendShips;
     AllItems: Anime[];
 }>) {
     const handleImageError = () => {
@@ -26,7 +24,7 @@ export default function Welcome({
 
     return (
         <>
-            <Header friendship={friendship} auth={auth} />
+            <Header auth={auth} />
             <div className="ml-14 ml:ml-0 max-sm:ml-0">
                 <div className="m-4 p-4 max-sm:m-1 max-sm:p-1 border rounded-lg shadow">
                     <NewItems Anime={NewAnime} auth={auth} />

@@ -1,4 +1,4 @@
-import { FriendShips, PageProps } from "@/types";
+import { PageProps } from "@/types";
 import Header from "@/Components/Header";
 import ActiveSession from "./Partials/ActiveSession";
 import VerifyEmail from "./Partials/VerifiedEmail";
@@ -11,16 +11,14 @@ export default function Edit({
     mustVerifyEmail,
     status,
     activeSession,
-    friendship,
 }: PageProps<{
     mustVerifyEmail: boolean;
     status?: string;
     activeSession: any[];
-    friendship: FriendShips;
 }>) {
     return (
         <>
-            <Header auth={auth} friendship={friendship} />
+            <Header auth={auth} />
             <div className="ml-14 ml:ml-0 max-sm:ml-0">
                 <div className="m-4 max-sm:m-1 max-sm:p-1 border rounded-lg shadow flex flex-wrap md:flex-nowrap">
                     <div className="p-4 max-sm:p-1 text-gray-900 dark:text-gray-100 w-full md:w-2/3">
@@ -37,11 +35,6 @@ export default function Edit({
                         {auth.user.regist_method == "default" ? (
                             <div className="mb-4 border rounded-lg shadow w-full p-4">
                                 <UpdatePasswordForm className="mb-4" />
-                            </div>
-                        ) : null}
-                        {auth.user.email_verified_at == null ? (
-                            <div className="mb-4 border rounded-lg shadow w-full p-4">
-                                <VerifyEmail className="mb-4" />
                             </div>
                         ) : null}
                     </div>

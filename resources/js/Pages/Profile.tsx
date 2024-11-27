@@ -1,14 +1,12 @@
-import { FriendShips, PageProps, User } from "@/types";
+import { PageProps, User } from "@/types";
 import Header from "@/Components/Header";
 import ProfileImage from "@/Components/Profile/ProfileImage";
 
 export default function Profile({
     auth,
-    friendship,
     user_info,
 }: PageProps<{
     user: User;
-    friendship: FriendShips;
     user_info: User;
 }>) {
     const date = new Date(auth.user.created_at);
@@ -23,7 +21,7 @@ export default function Profile({
         .replace(".", "");
     return (
         <>
-            <Header friendship={friendship} auth={auth} />
+            <Header auth={auth} />
             <div className="ml-14 ml:ml-0 max-sm:ml-0">
                 <div className="m-4 max-sm:m-1 max-sm:p-1 border rounded-lg shadow">
                     <div className="flex">

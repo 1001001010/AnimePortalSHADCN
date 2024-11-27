@@ -1,20 +1,18 @@
 "use client";
 
-import { Favourite, FriendShips, PageProps } from "@/types";
+import { Favourite, PageProps } from "@/types";
 import Header from "@/Components/Header";
 import ItemCard from "@/Components/Anime/ItemCard";
 
 export default function Favourites({
     auth,
-    friendship,
     favourites,
 }: PageProps<{
-    friendship: FriendShips;
     favourites: Favourite[];
 }>) {
     return (
         <>
-            <Header friendship={friendship} auth={auth} />
+            <Header auth={auth} />
             <div className="ml-14 ml:ml-0 max-sm:ml-0">
                 <div className="m-4 p-2 max-sm:m-1 max-sm:p-1 border rounded-lg shadow min-h-36">
                     {favourites.length > 0 ? (
