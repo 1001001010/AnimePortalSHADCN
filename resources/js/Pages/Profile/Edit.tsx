@@ -11,10 +11,12 @@ export default function Edit({
     mustVerifyEmail,
     status,
     activeSession,
+    userAgent,
 }: PageProps<{
     mustVerifyEmail: boolean;
     status?: string;
     activeSession: any[];
+    userAgent: string;
 }>) {
     return (
         <>
@@ -40,7 +42,10 @@ export default function Edit({
                     </div>
                     <div className="p-4 text-gray-900 dark:text-gray-100 w-full md:w-1/3 max-sm:p-1">
                         <h2 className="mb-4 text-lg font-medium">Сессии</h2>
-                        <ActiveSession activeSessions={activeSession} />
+                        <ActiveSession
+                            activeSessions={activeSession}
+                            userAgent={userAgent}
+                        />
                     </div>
                 </div>
             </div>

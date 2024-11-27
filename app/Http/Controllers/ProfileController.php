@@ -22,10 +22,12 @@ class ProfileController extends Controller
     }
 
     public function edit(Request $request): Response {
+        $userAgent = $request->header('User-Agent');
         return Inertia::render('Profile/Edit', [
             'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
             'status' => session('status'),
             'activeSession' => ActiveSession::where('user_id', Auth::user()->id)->get(),
+            'userAgent' => $userAgent,
         ]);
     }
 
