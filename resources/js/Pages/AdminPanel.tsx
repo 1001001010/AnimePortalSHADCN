@@ -19,11 +19,6 @@ export default function AdminPanel({
                     <div className="flex justify-start flex-wrap gap-2 pb-4">
                         <NewAnimeForm />
                         <DelAnimeForm auth={auth} animeList={Anime} />
-                        <Button variant={"outline"} className="ml-2">
-                            <Link href={route("DownloadsLogs")}>
-                                Получить логи
-                            </Link>
-                        </Button>
                     </div>
                     <hr />
                     <UserTable users={user} auth={auth} />

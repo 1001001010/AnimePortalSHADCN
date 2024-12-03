@@ -116,12 +116,13 @@ export default function Header({ auth }: PageProps<{}>) {
                                 </Tooltip>
                                 <Tooltip>
                                     <TooltipTrigger asChild>
-                                        <Link
+                                        <a
                                             href={route("admin.exel")}
                                             className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                                            target="_blank"
                                         >
                                             <Table2 className="h-5 w-5" />
-                                        </Link>
+                                        </a>
                                     </TooltipTrigger>
                                     <TooltipContent side="right">
                                         Отчёт

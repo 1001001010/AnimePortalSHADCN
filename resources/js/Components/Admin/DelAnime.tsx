@@ -19,7 +19,7 @@ import {
     CommandList,
 } from "@/shadcn/ui/command";
 import { Popover, PopoverContent, PopoverTrigger } from "@/shadcn/ui/popover";
-import { Anime, FriendShips, PageProps } from "@/types";
+import { Anime, PageProps } from "@/types";
 import { useForm } from "@inertiajs/react";
 import { FormEventHandler } from "react";
 import { toast } from "sonner";
@@ -49,6 +49,7 @@ export default function DelAnimeForm({
                 toast("Успешно", {
                     description: "Аниме успешно удалено",
                 });
+                window.location.reload();
             },
             onError: () => {
                 toast("Ошибка удаления", {

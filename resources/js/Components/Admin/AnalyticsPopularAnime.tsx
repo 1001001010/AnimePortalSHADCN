@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { TrendingUp } from "lucide-react"
-import { Pie, PieChart } from "recharts"
+import { TrendingUp } from "lucide-react";
+import { Pie, PieChart } from "recharts";
 
 import {
     Card,
@@ -10,18 +10,18 @@ import {
     CardFooter,
     CardHeader,
     CardTitle,
-} from "@/shadcn/ui/card"
+} from "@/shadcn/ui/card";
 import {
     ChartContainer,
     ChartTooltip,
     ChartTooltipContent,
-} from "@/shadcn/ui/chart"
-import {Analytics, PageProps} from "@/types";
+} from "@/shadcn/ui/chart";
+import { Analytics, PageProps } from "@/types";
 
-export const description = "A pie chart with no separator"
+export const description = "A pie chart with no separator";
 
-const createChartData = (popularList:any) => {
-    return popularList.map((item:any, index: number) => ({
+const createChartData = (popularList: any) => {
+    return popularList.map((item: any, index: number) => ({
         anime: item.anime.name,
         views: item.views_count,
         fill: `hsl(var(--chart-${index + 1})`,
@@ -57,16 +57,15 @@ const createChartConfig = (popularList: any): ChartConfig => {
     return config;
 };
 export default function AnalyticsPopularAnime({
-  info
-}:PageProps<{info:Analytics}>) {
+    info,
+}: PageProps<{ info: Analytics }>) {
     const chartData = createChartData(info.popularList);
     const chartConfig = createChartConfig(info.popularList);
 
     return (
         <Card className="flex flex-col">
             <CardHeader className="items-start pb-0">
-                <CardTitle>Popular Anime</CardTitle>
-                <CardDescription>January - June 2024</CardDescription>
+                <CardTitle>Популярные аниме</CardTitle>
             </CardHeader>
             <CardContent className="flex-1 pb-0">
                 <ChartContainer
@@ -87,15 +86,6 @@ export default function AnalyticsPopularAnime({
                     </PieChart>
                 </ChartContainer>
             </CardContent>
-            <CardFooter className="flex-col items-start gap-2 text-sm">
-                <div className="flex gap-2 font-medium leading-none">
-                    {info.registrationMethod.text}
-                    <TrendingUp className="h-4 w-4" />
-                </div>
-                <div className="leading-none text-muted-foreground">
-                    Способ регистрации пользователей за все время
-                </div>
-            </CardFooter>
         </Card>
-    )
+    );
 }

@@ -59,21 +59,27 @@ export default function NewAnimeForm() {
             const file = event.target.files[0];
 
             // Проверка MIME-типа файла
-            const validImageTypes = ['image/png', 'image/jpeg', 'image/jpg', 'image/webp'];
+            const validImageTypes = [
+                "image/png",
+                "image/jpeg",
+                "image/jpg",
+                "image/webp",
+            ];
             if (!validImageTypes.includes(file.type)) {
-                toast('Ошибка загрузки фото', {
-                    description: "Пожалуйста, выберите файл изображения с расширением JPEG, PNG или WebP."
-                })
+                toast("Ошибка загрузки фото", {
+                    description:
+                        "Пожалуйста, выберите файл изображения с расширением JPEG, PNG или WebP.",
+                });
                 return;
             }
             // Проверка расширния файла
             const fileName = file.name.toLowerCase();
-            const validExtensions = ['.jpg', '.jpeg', '.png', '.webp'];
-            const fileExtension = `.${fileName.split('.').pop()}`;
+            const validExtensions = [".jpg", ".jpeg", ".png", ".webp"];
+            const fileExtension = `.${fileName.split(".").pop()}`;
             if (!validExtensions.includes(fileExtension)) {
-                toast('Ошибка загрузки фото', {
+                toast("Ошибка загрузки фото", {
                     description:
-                        "Пожалуйста, выберите файл изображения с расширением JPEG, PNG или WebP."
+                        "Пожалуйста, выберите файл изображения с расширением JPEG, PNG или WebP.",
                 });
                 // alert('Пожалуйста, выберите файл изображения с расширением JPEG, PNG, GIF или WebP.');
                 return;
@@ -99,8 +105,13 @@ export default function NewAnimeForm() {
     const handleScreenChange = (event: React.FormEvent<HTMLInputElement>) => {
         const files = (event.target as HTMLInputElement).files;
         if (files) {
-            const validImageTypes = ['image/png', 'image/jpeg', 'image/jpg', 'image/webp'];
-            const validExtensions = ['.jpg', '.jpeg', '.png', '.webp'];
+            const validImageTypes = [
+                "image/png",
+                "image/jpeg",
+                "image/jpg",
+                "image/webp",
+            ];
+            const validExtensions = [".jpg", ".jpeg", ".png", ".webp"];
 
             const validFiles = Array.from(files).filter((file) => {
                 // Проверка MIME-типа
@@ -110,7 +121,7 @@ export default function NewAnimeForm() {
 
                 // Проверка расширения файла
                 const fileName = file.name.toLowerCase();
-                const fileExtension = `.${fileName.split('.').pop()}`;
+                const fileExtension = `.${fileName.split(".").pop()}`;
                 if (!validExtensions.includes(fileExtension)) {
                     return false;
                 }
@@ -119,8 +130,9 @@ export default function NewAnimeForm() {
             });
 
             if (validFiles.length !== files.length) {
-                toast('Ошибка загрузки фото', {
-                    description: "Пожалуйста, выберите файлы изображений с расширением JPEG, PNG или WebP."
+                toast("Ошибка загрузки фото", {
+                    description:
+                        "Пожалуйста, выберите файлы изображений с расширением JPEG, PNG или WebP.",
                 });
                 return;
             }

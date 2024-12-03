@@ -13,7 +13,6 @@ class ReportExport implements FromCollection, WithHeadings, WithStyles
 {
     public function collection()
     {
-        // Получаем 100 самых популярных аниме
         $popularAnimes = View::select('anime_id', \DB::raw('COUNT(*) as views_count'))
             ->with('anime')
             ->groupBy('anime_id')
@@ -21,11 +20,10 @@ class ReportExport implements FromCollection, WithHeadings, WithStyles
             ->limit(100)
             ->get();
 
-        // Преобразуем данные для экспорта
         $data = $popularAnimes->map(function ($item) {
             return [
                 'ID' => $item->anime_id,
-                'Название' => $item->anime->title, // Предполагается, что у вас есть отношение anime в модели View
+                'Название' => $item->anime->title,
                 'Просмотры' => $item->views_count,
             ];
         });
